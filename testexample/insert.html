@@ -1,0 +1,66 @@
+<html>
+
+<!--initialize jquery from js folder-->
+<script src ="js/jquery-3.3.1.min.js"></script>
+
+<!--Ajax implementation-->
+<script type="text/javascript">
+    $(document).ready(function() {
+        $("#insert").click(function() {
+            var title = $("#title").val();
+            var duration = $("#duration").val();
+            var price = $("#price").val();
+            var dataString = "title=" + title + "&duration=" + duration + "&price=" + price + "&insert=";
+            if ($.trim(title).length > 0 & $.trim(duration).length > 0 & $.trim(price).length > 0) {
+                $.ajax({
+                    type: "POST",
+                    url: "http://10.0.2.2/api/insert.php",
+                    data: dataString,
+                    success: function(data) {
+                        if (data == "success") {
+                            alert("inserted");
+                            $("#insert").val('submit');
+                        } else if (data == "error") {
+                            alert("error");
+                        }
+                    }
+                });
+            }
+            return false;
+        });
+    });
+    </script>
+
+<body>
+    <!--button layout-->
+    <div class="list">
+        <input type="hidden" id="id" value="" />
+        <div class="item">
+            <label>Title</label>
+            <input type="text" id="title" value="" />
+        </div>
+
+        <div class="item">
+            <label>Duration</label>
+            <input type="text" id="duration" value="" />
+        </div>
+
+        <div class="item">
+            <label>Price</label>
+            <input type="text" id="price" value="" />
+        </div>
+
+        <div class="item">
+            <input type="button" id="insert" value="Insert" />
+        </div>
+    </div>
+
+<br>
+<br>
+    <a href="insert.html">insert</a>
+    <a href="delete.html">delete</a>
+    <a href="index.html">show data</a>
+</body>
+
+
+</html>

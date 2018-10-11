@@ -1,0 +1,45 @@
+
+<html>
+    <head>
+        <!--initialize jquery from js folder-->
+        <script src ="js/jquery-3.3.1.min.js"></script>
+
+        <!--Implementation of jquery/ajax-->
+        <script type="text/javascript">
+            $(document).ready(function(){
+                $.ajax({
+                    url : "http://10.0.2.2/api/fetchdata.php",
+                    type : "POST",
+                    dataType : "json",
+                    data : "param=no",
+                    //on success it will call this function
+                    success : function(data){
+
+                        var DOM = $('#DOM');
+                        $.each(data, function(key, value){
+                            DOM.append("<li><h3>" + value.title + "</h3><p>" + value.duration + "<br>" + value.price +"</p></li>");
+                        });
+                        //if fail it will give this error
+                    }, error : function(e){
+                        alert("failed to work");
+                    }
+                });
+            });
+        </script>
+
+    </head>
+    <body>
+            <!--output of the json-->
+            <div>
+                    <!--set the id to DOM to show output-->
+                    <ul id="DOM">
+                                                
+                    </ul>
+            </div>
+
+            <a href="insert.html">insert</a>
+            <a href="delete.html">delete</a>
+            <a href="index.html">show data</a>
+    </body>
+
+</html>
