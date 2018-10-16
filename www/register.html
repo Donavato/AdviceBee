@@ -1,10 +1,10 @@
 <html>
     <head>
         <script src ="js/jquery-3.3.1.min.js"></script>
-        <script src ="js/jquery.validate.min.js"></script>
+        <script src ="js/jquery.validate.js"></script>
         <!--<script src ="https://cdn.jsdelivr.net/jquery.validation/1.15.1/jquery.validate.min.js"></script>-->
 
-        <!--JQEURY AJAX CALL REQUEST-->
+        <!--JQEURY AJAX CALL REQUEST
         <script type="text/javascript">
             $(document).ready(function() {
                 //changed to submit**
@@ -34,7 +34,7 @@
             }
         });
     });
-    </script>
+    </script>-->
         <!--JQUERY.VALIDATION-->
         <script type="text/javascript">
             $(document).ready(function() {
@@ -61,6 +61,29 @@
                 },
                 email: "*Please enter a valid email address"
                 },
+                submitHandler: function(form) {
+                
+                var fname = $("#fname").val();
+                var lname = $("#lname").val();
+                var email = $("#email").val();
+                var password = $("#password").val();
+
+                var dataString = "fname=" + fname + "&lname=" + lname + "&email=" + email + "&password=" + password + "&reg=";
+
+                    $.ajax({
+                        type: "POST",
+                        url: "http://localhost/register/api/register.php",
+                        data: dataString,
+                        success: function(data) {
+                            if (data == "success") {
+                                alert("Registration Completed");
+                                window.location.href = "success.html";
+                            } else if (data == "error") {
+                                alert("error failed to register");
+                        }
+                    }
+                });
+            }
         });
     });
     </script>
