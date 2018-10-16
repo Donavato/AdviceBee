@@ -7,11 +7,10 @@
 <script type="text/javascript">
     $(document).ready(function() {
         $("#insert").click(function() {
-            var title = $("#title").val();
-            var duration = $("#duration").val();
-            var price = $("#price").val();
-            var dataString = "title=" + title + "&duration=" + duration + "&price=" + price + "&insert=";
-            if ($.trim(title).length > 0 & $.trim(duration).length > 0 & $.trim(price).length > 0) {
+            var Description = $("#Description").val();
+            var Subject = $("#Subject").val();
+            var dataString = "Description=" + Description + "&Subject=" + Subject + "&insert=";
+            if ($.trim(Description).length > 0 & $.trim(Subject).length > 0) {
                 $.ajax({
                     type: "POST",
                     url: "http://10.0.2.2/api/insert.php",
@@ -33,21 +32,17 @@
 
 <body>
     <!--button layout-->
+    <h1>Ask a Question</h1>
     <div class="list">
         <input type="hidden" id="id" value="" />
         <div class="item">
-            <label>Title</label>
-            <input type="text" id="title" value="" />
+            <label>Subject</label>
+            <input type="text" id="Subject" value="" />
         </div>
 
         <div class="item">
-            <label>Duration</label>
-            <input type="text" id="duration" value="" />
-        </div>
-
-        <div class="item">
-            <label>Price</label>
-            <input type="text" id="price" value="" />
+            <label>Description</label>
+            <input type="text" id="Description" value="" />
         </div>
 
         <div class="item">
@@ -57,7 +52,7 @@
 
 <br>
 <br>
-    <a href="insert.html">insert</a>
+    <a href="insert.html">Ask a Question</a>
     <a href="delete.html">delete</a>
     <a href="index.html">show data</a>
 </body>

@@ -1,0 +1,50 @@
+<html>
+
+<!--initialize jquery from js folder-->
+<script src ="js/jquery-3.3.1.min.js"></script>
+
+
+<!--Ajax implementation-->
+<script type="text/javascript">
+    $(document).ready(function() {
+
+        $("#delete").click(function() {
+                var title = $("#title").val();
+                var dataString = "title=" + title + "&delete=";
+                $.ajax({
+                    type: "GET",
+                    url: "http://10.0.2.2/api/delete.php",
+                    data: dataString,
+                success: function(data) {
+                    if (data == "success") {
+                        alert("Deleted");
+                        $("#delete").val("Delete");
+                    } else if (data == "error") {
+                        alert("error");
+                    }
+                }
+            });
+        });
+
+});
+</script>
+
+
+<body>
+
+        <div>
+            <label>Title</label>
+            <input type="text" id="title" value="" />
+        </div>
+
+        <input type="button" id="delete" value="Delete" />
+
+<br>
+<br>
+    <a href="insert.html">insert</a>
+    <a href="delete.html">delete</a>
+    <a href="index.html">show data</a>
+</body>
+
+
+</html>
