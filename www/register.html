@@ -1,0 +1,85 @@
+<html>
+    <head>
+		<!--INITIALIZE JQUERY-->
+        <script src ="js/jquery-3.3.1.min.js"></script>
+		<!--INITIALIZE J.VALIDATION PLUGIN-->
+        <script src ="js/jquery.validate.js"></script>
+
+        <!--JQUERY.VALIDATION WITH AJAX CALL-->
+        <script type="text/javascript">
+            $(document).ready(function() {
+                $("#reg").validate({
+                rules: {
+                firstname: "required",
+                lastname: "required",
+                email: {
+                    required: true,
+                    email: true
+                },
+                password: {
+                    required: true,
+                    minlength: 5
+                    }
+                },
+                // Specify validation error messages
+                messages: {
+                firstname: "*Please provide a firstname",
+                lastname: "*Please provide a lastname",
+                password: {
+                    required: "*Please provide a password",
+                    minlength: "*Your password must be at least 5 characters long"
+                },
+                email: "*Please enter a valid email address"
+                },
+                submitHandler: function(form) {
+                
+                var fname = $("#fname").val();
+                var lname = $("#lname").val();
+                var email = $("#email").val();
+                var password = $("#password").val();
+
+                var dataString = "fname=" + fname + "&lname=" + lname + "&email=" + email + "&password=" + password + "&reg=";
+
+                    $.ajax({
+                        type: "POST",
+                        url: "http://localhost/register/api/register.php",
+                        data: dataString,
+                        success: function(data) {
+                            if (data == "success") {
+                                alert("Registration Completed");
+                                window.location.href = "success.html";
+                            } else if (data == "error") {
+                                alert("error failed to register");
+                        }
+                    }
+                });
+            }
+        });
+    });
+    </script>
+            
+    </head>
+
+<body>
+
+
+    <form action="" id="reg" method="POST">
+
+        <label for="firstname"></label>
+        <input type="text" name="firstname" id="fname" placeholder="First Name"><br>
+        
+        <label for="lastname"></label>
+        <input type="text" name="lastname" id="lname" placeholder="Last Name"><br>
+
+        <label for="Email"></label>
+        <input type="text" name="email" id="email" placeholder="E-mail"><br>
+
+        <label for="password"></label>
+        <input type="password" name="password" id="password" placeholder=""><br>
+
+        <button type="submit" name="submit">Register</button>
+
+    </form>
+
+</body>
+</html>
