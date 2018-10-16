@@ -1,41 +1,11 @@
 <html>
     <head>
+		<!--INITIALIZE JQUERY-->
         <script src ="js/jquery-3.3.1.min.js"></script>
+		<!--INITIALIZE J.VALIDATION PLUGIN-->
         <script src ="js/jquery.validate.js"></script>
-        <!--<script src ="https://cdn.jsdelivr.net/jquery.validation/1.15.1/jquery.validate.min.js"></script>-->
 
-        <!--JQEURY AJAX CALL REQUEST
-        <script type="text/javascript">
-            $(document).ready(function() {
-                //changed to submit**
-                $("#reg").submit(function() {
-
-                var fname = $("#fname").val();
-                var lname = $("#lname").val();
-                var email = $("#email").val();
-                var password = $("#password").val();
-
-                var dataString = "fname=" + fname + "&lname=" + lname + "&email=" + email + "&password=" + password + "&reg=";
-                
-                if ($.trim(fname).length > 0 & $.trim(lname).length > 0 & $.trim(email).length > 0 & $.trim(password).length >= 5) {
-                    $.ajax({
-                        type: "POST",
-                        url: "http://localhost/register/api/register.php",
-                        data: dataString,
-                        success: function(data) {
-                            if (data == "success") {
-                                alert("Registration Completed");
-                                window.location.href = "success.html";
-                            } else if (data == "error") {
-                                alert("error failed to register");
-                        }
-                    }
-                });
-            }
-        });
-    });
-    </script>-->
-        <!--JQUERY.VALIDATION-->
+        <!--JQUERY.VALIDATION WITH AJAX CALL-->
         <script type="text/javascript">
             $(document).ready(function() {
                 $("#reg").validate({
