@@ -1,25 +1,25 @@
 <html>
 
 <!--initialize jquery from js folder-->
-<script src ="js/jquery-3.3.1.min.js"></script>
+<script src="js/jquery-3.3.1.min.js"></script>
 
 <!--Ajax implementation-->
 
 
 <script type="text/javascript">
-    $(document).ready(function() {
-        $("#topics_list").change(function(){
+    $(document).ready(function () {
+        $("#topics_list").change(function () {
             $.ajax({
                 type: "POST",
                 url: "http://localhost/api/topics.php",
                 data: dataString,
-                success: function(response) {
+                success: function (response) {
                     var len = response.length;
 
-                } 
+                }
             })
         })
-        $("#insert").click(function() {
+        $("#insert").click(function () {
             var Description = $("#Description").val();
             var Subject = $("#Subject").val();
             var dataString = "Description=" + Description + "&Subject=" + Subject + "&insert=";
@@ -28,7 +28,7 @@
                     type: "POST",
                     url: "http://localhost/api/insert.php",
                     data: dataString,
-                    success: function(data) {
+                    success: function (data) {
                         if (data == "success") {
                             alert("inserted");
                             $("#insert").val('submit');
@@ -41,7 +41,7 @@
             return false;
         });
     });
-    </script>
+</script>
 
 <body>
     <!--button layout-->
@@ -69,8 +69,8 @@
         </div>
     </div>
 
-<br>
-<br>
+    <br>
+    <br>
     <a href="insert.html">Ask a Question</a>
     <a href="delete.html">delete</a>
     <a href="index.html">show data</a>

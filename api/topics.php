@@ -10,6 +10,4 @@
         echo "No topics";
     }
     echo json_encode($topics_arr);
-
-
 ?>

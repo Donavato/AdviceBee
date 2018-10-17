@@ -1,57 +1,68 @@
 <html>
-    <head>
-        <!--initialize jquery from js folder-->
-        <script src ="js/jquery-3.3.1.min.js"></script>
 
-    </head>
-    <body>
-            <!--output of the json-->
-            <div>
-                    <!--set the id to DOM to show output-->
-                    <ul id="DOM">
-                                                
-                    </ul>
-            </div>
-            <form>
-                <label><b>Email</b></label>
-                <input type="text" placeholder="Enter email" id="email" required>
-                <br/>
-                <label><b>Password</b></label>
-                <input type="text" placeholder="Enter password" id="passwrd" required>
-                <br/>
-                <button type="button" id="submit">Login</button>
-            </form>
-            <a href="insert.html">insert</a>
-            <a href="delete.html">delete</a>
-            <a href="index.html">show data</a>
-            <a href="login.html">login</a>
+<head>
+    <!--initialize jquery from js folder-->
+    <script src="js/jquery-3.3.1.min.js"></script>
 
-                    <!--Implementation of jquery/ajax-->
-        <script type="text/javascript">
-            $('#submit').on('click',function(e){
-                e.preventDefault()
-                var data = {
-                    email: $("#email").val(),
-                    passwrd: $("#passwrd").val()
-                }
-                JSON.stringify(data);
-                console.log(data);
-                $.ajax({
-                    url : "http://localhost/api/login.php",
-                    type : "POST",
-                    // dataType : "json",
-                    contentType: "application/json; charset=utf-8",
-                    data : JSON.stringify(data),
-                    //on success it will call this function
-                    success : function(data){
-                        alert(data.toString());
-                        //if fail it will give this error
-                    }, error : function(e){
-                        alert("failed to work:" +JSON.stringify(e));
-                    }
+</head>
+
+<body>
+    <!--output of the json-->
+    <div>
+        <!--set the id to DOM to show output-->
+        <ul id="DOM">
+
+        </ul>
+    </div>
+    <form>
+        <label><b>Email</b></label>
+        <input type="text" placeholder="Enter email" id="email" required>
+        <br />
+        <label><b>Password</b></label>
+        <input type="text" placeholder="Enter password" id="passwrd" required>
+        <br />
+        <button type="button" id="submit">Login</button>
+    </form>
+    <a href="insert.html">insert</a>
+    <a href="delete.html">delete</a>
+    <a href="index.html">show data</a>
+    <a href="login.html">login</a>
+
+    <!--Implementation of jquery/ajax-->
+    <script type="text/javascript">
+        $('#submit').on('click', function (e) {
+            e.preventDefault()
+            $.post('http://localhost/api/login.php', {
+                email: $("#email").val(),
+                passwrd: $("#passwrd").val()
+            },
+                function (data) {
+                    alert(data.toString());
+                }).fail(function (e) {
+                    alert(JSON.stringify(e));
                 });
-            });
-        </script>
-        </body>
-    
+            // var data = {
+            //     email: $("#email").val(),
+            //     passwrd: $("#passwrd").val()
+            // }
+            // JSON.stringify(data);
+            // console.log(data);
+            // $.ajax({
+            //     url : "http://localhost/api/login.php",
+            //     type : "POST",
+            //     // dataType : "json",
+            //     contentType: "application/json; charset=utf-8",
+            //     data : JSON.stringify(data),
+            //     //on success it will call this function
+            //     success : function(data){
+            //         alert(data.toString());
+            //         //if fail it will give this error
+            //     }, error : function(e){
+            //         alert("failed to work:" +JSON.stringify(e));
+            //     }
+            // });
+        });
+    </script>
+</body>
+
 </html>
