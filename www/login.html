@@ -27,40 +27,23 @@
     <a href="delete.html">delete</a>
     <a href="index.html">show data</a>
     <a href="login.html">login</a>
+    <a href="register.html">register</a>
+
 
     <!--Implementation of jquery/ajax-->
     <script type="text/javascript">
         $('#submit').on('click', function (e) {
             e.preventDefault()
-            $.post('http://10.0.2.2/api/login.php', {
+            $.post('http://localhost/api/login.php', {
                 email: $("#email").val(),
                 passwrd: $("#passwrd").val()
             },
-                function (data) {
-                    alert(data.toString());
-                }).fail(function (e) {
-                    alert(JSON.stringify(e));
-                });
-            // var data = {
-            //     email: $("#email").val(),
-            //     passwrd: $("#passwrd").val()
-            // }
-            // JSON.stringify(data);
-            // console.log(data);
-            // $.ajax({
-            //     url : "http://localhost/api/login.php",
-            //     type : "POST",
-            //     // dataType : "json",
-            //     contentType: "application/json; charset=utf-8",
-            //     data : JSON.stringify(data),
-            //     //on success it will call this function
-            //     success : function(data){
-            //         alert(data.toString());
-            //         //if fail it will give this error
-            //     }, error : function(e){
-            //         alert("failed to work:" +JSON.stringify(e));
-            //     }
-            // });
+            function (data) {
+                console.log(data)
+                //JSON.parse(data);
+            }).fail(function (e) {
+                alert(JSON.stringify(e));
+            });
         });
     </script>
 </body>

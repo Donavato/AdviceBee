@@ -13,7 +13,7 @@
             var dataString = "title=" + title + "&delete=";
             $.ajax({
                 type: "GET",
-                url: "http://10.0.2.2/api/delete.php",
+                url: "http://localhost/api/delete.php",
                 data: dataString,
                 success: function (data) {
                     if (data == "success") {
@@ -44,6 +44,9 @@
     <a href="insert.html">insert</a>
     <a href="delete.html">delete</a>
     <a href="index.html">show data</a>
+    <a href="login.html">login</a>
+    <a href="register.html">register</a>
+
 </body>
 
 
