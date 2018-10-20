@@ -32,7 +32,7 @@
     <script type="text/javascript">
         $('#submit').on('click', function (e) {
             e.preventDefault()
-            $.post('http://localhost/api/login.php', {
+            $.post('http://10.0.2.2/api/login.php', {
                 email: $("#email").val(),
                 passwrd: $("#passwrd").val()
             },

@@ -1,47 +1,49 @@
-
 <html>
-    <head>
-        <!--initialize jquery from js folder-->
-        <script src ="js/jquery-3.3.1.min.js"></script>
 
-        <!--Implementation of jquery/ajax-->
-        <script type="text/javascript">
-            $(document).ready(function(){
-                $.ajax({
-                    url : "http://10.0.2.2/api/fetchdata.php",
-                    type : "POST",
-                    dataType : "json",
-                    data : "param=no",
-                    //on success it will call this function
-                    success : function(data){
+<head>
+    <!--initialize jquery from js folder-->
+    <script src="js/jquery-3.3.1.min.js"></script>
 
-                        var DOM = $('#DOM');
-                        $.each(data, function(key, value){
-                            DOM.append("<li><h3>" + value.Question + "</h3><p>" + value.Description + "<br>" + value.Subject +"</p></li>");
-                        });
-                        //if fail it will give this error
-                    }, error : function(e){
-                        alert("failed to work");
-                    }
-                });
+    <!--Implementation of jquery/ajax-->
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $.ajax({
+                url: "http://10.0.2.2/api/fetchdata.php",
+                type: "POST",
+                dataType: "json",
+                data: "param=no",
+                //on success it will call this function
+                success: function (data) {
+
+                    var DOM = $('#DOM');
+                    $.each(data, function (key, value) {
+                        DOM.append("<li><h3>" + value.Question + "</h3><p>" + value.Description + "<br>" + value.Subject + "</p></li>");
+                    });
+                    //if fail it will give this error
+                }, error: function (e) {
+                    alert("failed to work");
+                }
             });
-        </script>
+        });
+    </script>
 
-    </head>
-    <body>
-            <!--output of the json-->
-            <div>
-                    <!--set the id to DOM to show output-->
-                    <ul id="DOM">
-                                                
-                    </ul>
-            </div>
+</head>
 
-            <a href="insert.html">insert</a>
-            <a href="delete.html">delete</a>
-            <a href="index.html">show data</a>
-            <a href="login.html">login</a>
+<body>
+    <!--output of the json-->
+    <div>
+        <!--set the id to DOM to show output-->
+        <ul id="DOM">
 
-    </body>
+        </ul>
+    </div>
+
+    <a href="insert.html">insert</a>
+    <a href="delete.html">delete</a>
+    <a href="index.html">show data</a>
+    <a href="login.html">login</a>
+    <a href="register.html">register</a>
+
+</body>
 
 </html>
