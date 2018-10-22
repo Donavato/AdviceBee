@@ -1,0 +1,13 @@
+Pages
+ - profile
+ - dashboard
+ - groups
+ - response
+ - topics
+
+Done (need styling)
+ - login
+ - register
+ - creation
+ - password reset
+
