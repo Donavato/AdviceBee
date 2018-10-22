@@ -23,26 +23,34 @@
         <br />
         <button type="button" id="submit">Login</button>
     </form>
+    <div id="response">
+        
+    </div>
     <a href="insert.html">insert</a>
     <a href="delete.html">delete</a>
     <a href="index.html">show data</a>
     <a href="login.html">login</a>
     <a href="register.html">register</a>
 
-
+    <!-- FIX THE SUCCESS/FAIL RESPONSE TYPE -->
     <!--Implementation of jquery/ajax-->
     <script type="text/javascript">
         $('#submit').on('click', function (e) {
             e.preventDefault()
-            $.post('http://localhost/api/login.php', {
+            $.post('http://localhost/api/login.php'{
                 email: $("#email").val(),
                 passwrd: $("#passwrd").val()
             },
-            function (data) {
-                console.log(data)
+            function (response) {
+                JSON.stringify(response);
+                var data = JSON.parse(response);
+                document.getElementById("response").innerHTML = "hello";
+                //console.log(data)
                 //JSON.parse(data);
-            }).fail(function (e) {
+            })
+            .fail(function (e) {
                 alert(JSON.stringify(e));
+                document.getElementById("response").innerHTML = e;
             });
         });
     </script>
