@@ -8,21 +8,19 @@
 
   <h1 class="h1">Please Complete the Form</h1>
 
-  <form>
-    <input type="text" name="firstname" placeholder="First name"><br>
+  <form action="/register.php">
+    <input type="text" name="firstname" placeholder="First name" required><br>
     <br>
-    <input type="text" name="lastname" placeholder="Last name"><br>
+    <input type="text" name="lastname" placeholder="Last name" required><br>
     <br>
-    <input type="text" name="email" placeholder="Email"><br>
+    <input type="email" name="email" placeholder="Email" required><br>
     <br>
-    <input type="text" name="password" placeholder="Password"><br>
+    <input type="password" name="password" placeholder="Password" required><br>
     <br>
-    <input type="text" name="confirmPassword" placeholder="Confirm Password"><br>
+    <input type="password" name="confirmPassword" placeholder="Confirm Password" required><br>
     <br>
+    <input type="submit" value="Submit">
   </form>
-
-  <button onclick="myFunction()"><image src="done.png"></button>
-  
 
  </body>
 </html>
