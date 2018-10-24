@@ -1,57 +1,50 @@
 <html>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <head>
     <!--initialize jquery from js folder-->
     <script src="js/jquery-3.3.1.min.js"></script>
-
 </head>
 
 <body>
-    <!--output of the json-->
-    <div>
-        <!--set the id to DOM to show output-->
-        <ul id="DOM">
-
-        </ul>
-    </div>
     <form>
         <label><b>Email</b></label>
         <input type="text" placeholder="Enter email" id="email" required>
         <br />
         <label><b>Password</b></label>
-        <input type="text" placeholder="Enter password" id="passwrd" required>
+        <input type="password" placeholder="Enter password" id="passwrd" required>
         <br />
         <button type="button" id="submit">Login</button>
     </form>
-    <div id="response">
-        
-    </div>
     <a href="insert.html">insert</a>
     <a href="delete.html">delete</a>
     <a href="index.html">show data</a>
     <a href="login.html">login</a>
     <a href="register.html">register</a>
 
+    <div id="response">
+
+    </div>
     <!-- FIX THE SUCCESS/FAIL RESPONSE TYPE -->
     <!--Implementation of jquery/ajax-->
     <script type="text/javascript">
         $('#submit').on('click', function (e) {
             e.preventDefault()
-            $.post('http://localhost/api/login.php'{
+            $.post('http://localhost/api/login.php', {
                 email: $("#email").val(),
                 passwrd: $("#passwrd").val()
             },
-            function (response) {
-                JSON.stringify(response);
-                var data = JSON.parse(response);
-                document.getElementById("response").innerHTML = "hello";
-                //console.log(data)
-                //JSON.parse(data);
-            })
-            .fail(function (e) {
-                alert(JSON.stringify(e));
-                document.getElementById("response").innerHTML = e;
-            });
+                function (response) {
+                    JSON.stringify(response);
+                    var data = JSON.parse(response);
+                    document.getElementById("response").innerHTML = "hello";
+                    //console.log(data)
+                    //JSON.parse(data);
+                })
+                .fail(function (response) {
+
+                    document.getElementById("response").innerHTML = JSON.stringify(response);
+                });
         });
     </script>
 </body>

@@ -1,39 +1,47 @@
 <html>
 
-		<!--INITIALIZE JQUERY-->
-        <script src ="js/jquery-3.3.1.min.js"></script>
-		<!--INITIALIZE J.VALIDATION PLUGIN-->
-        <script src ="js/jquery.validate.js"></script>
+<!--INITIALIZE JQUERY-->
+<script src="js/jquery-3.3.1.min.js"></script>
+<!--INITIALIZE J.VALIDATION PLUGIN-->
+<script src="js/jquery.validate.js"></script>
 
-        <body>
-            <form action="" id="reg" method="POST">
+<body>
+    <form action="" id="reg" method="POST">
 
-                <label for="firstname"></label>
-                <input type="text" name="firstname" id="fname" placeholder="First Name"><br>
-                
-                <label for="lastname"></label>
-                <input type="text" name="lastname" id="lname" placeholder="Last Name"><br>
-        
-                <label for="Email"></label>
-                <input type="text" name="email" id="email" placeholder="E-mail"><br>
-        
-                <label for="password"></label>
-                <input type="password" name="password" id="password" placeholder=""><br>
-        
-                <label for="confirm_password"></label>
-                <input type="password" name="confirm_password" id="confirm_password" placeholder=""><br>
-        
-                <button type="submit" name="submit">Register</button>
-        
-            </form>
-        </body>
+        <label for="firstname"></label>
+        <input type="text" name="firstname" id="fname" placeholder="First Name"><br>
 
-        <!--JQUERY.VALIDATION WITH AJAX REQUEST-->
-        <script type="text/javascript">
-            $(document).ready(function() {
-                $("#reg").validate({
-                //SPECIFY RULES
-                rules: {
+        <label for="lastname"></label>
+        <input type="text" name="lastname" id="lname" placeholder="Last Name"><br>
+
+        <label for="Email"></label>
+        <input type="text" name="email" id="email" placeholder="E-mail"><br>
+
+        <label for="password"></label>
+        <input type="password" name="password" id="password" placeholder=""><br>
+
+        <label for="confirm_password"></label>
+        <input type="password" name="confirm_password" id="confirm_password" placeholder=""><br>
+
+        <button type="submit" name="submit">Register</button>
+
+    </form>
+
+    
+    <a href="insert.html">insert</a>
+    <a href="delete.html">delete</a>
+    <a href="index.html">show data</a>
+    <a href="login.html">login</a>
+    <a href="register.html">register</a>
+
+</body>
+
+<!--JQUERY.VALIDATION WITH AJAX REQUEST-->
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#reg").validate({
+            //SPECIFY RULES
+            rules: {
                 firstname: "required",
                 lastname: "required",
                 email: {
@@ -43,13 +51,13 @@
                 password: {
                     required: true,
                     minlength: 5
-                    },
+                },
                 confirm_password: {
                     equalTo: "#password"
                 }
-                },
-                // Specify validation error messages
-                messages: {
+            },
+            // Specify validation error messages
+            messages: {
                 firstname: "*Please provide a firstname",
                 lastname: "*Please provide a lastname",
                 password: {
@@ -60,9 +68,9 @@
                     equalTo: "*Please enter the same password"
                 },
                 email: "*Please enter a valid email address"
-                },
-                submitHandler: function(form) {
-                
+            },
+            submitHandler: function (form) {
+
                 var fname = $("#fname").val();
                 var lname = $("#lname").val();
                 var email = $("#email").val();
@@ -70,22 +78,22 @@
 
                 var dataString = "fname=" + fname + "&lname=" + lname + "&email=" + email + "&password=" + password + "&reg=";
 
-                    $.ajax({
-                        type: "POST",
-                        url: "http://localhost/mobile/api/register.php",
-                        data: dataString,
-                        success: function(data) {
-                            if (data == "success") {
-                                alert("Registration Completed");
-                                window.location.href = "login.html";
-                            } else if (data == "error") {
-                                alert("error failed to register");
+                $.ajax({
+                    type: "POST",
+                    url: "http://localhost/api/register.php",
+                    data: dataString,
+                    success: function (data) {
+                        if (data == "success") {
+                            alert("Registration Completed");
+                            window.location.href = "login.html";
+                        } else if (data == "error") {
+                            alert("error failed to register");
                         }
                     }
                 });
             }
         });
     });
-    </script>
+</script>
 
 </html>

@@ -1,14 +1,38 @@
 <html>
-    <head>
+
 		<!--INITIALIZE JQUERY-->
         <script src ="js/jquery-3.3.1.min.js"></script>
 		<!--INITIALIZE J.VALIDATION PLUGIN-->
         <script src ="js/jquery.validate.js"></script>
 
-        <!--JQUERY.VALIDATION WITH AJAX CALL-->
+        <body>
+            <form action="" id="reg" method="POST">
+
+                <label for="firstname"></label>
+                <input type="text" name="firstname" id="fname" placeholder="First Name"><br>
+                
+                <label for="lastname"></label>
+                <input type="text" name="lastname" id="lname" placeholder="Last Name"><br>
+        
+                <label for="Email"></label>
+                <input type="text" name="email" id="email" placeholder="E-mail"><br>
+        
+                <label for="password"></label>
+                <input type="password" name="password" id="password" placeholder=""><br>
+        
+                <label for="confirm_password"></label>
+                <input type="password" name="confirm_password" id="confirm_password" placeholder=""><br>
+        
+                <button type="submit" name="submit">Register</button>
+        
+            </form>
+        </body>
+
+        <!--JQUERY.VALIDATION WITH AJAX REQUEST-->
         <script type="text/javascript">
             $(document).ready(function() {
                 $("#reg").validate({
+                //SPECIFY RULES
                 rules: {
                 firstname: "required",
                 lastname: "required",
@@ -19,7 +43,10 @@
                 password: {
                     required: true,
                     minlength: 5
-                    }
+                    },
+                confirm_password: {
+                    equalTo: "#password"
+                }
                 },
                 // Specify validation error messages
                 messages: {
@@ -28,6 +55,9 @@
                 password: {
                     required: "*Please provide a password",
                     minlength: "*Your password must be at least 5 characters long"
+                },
+                confirm_password: {
+                    equalTo: "*Please enter the same password"
                 },
                 email: "*Please enter a valid email address"
                 },
@@ -57,29 +87,5 @@
         });
     });
     </script>
-            
-    </head>
 
-<body>
-
-
-    <form action="" id="reg" method="POST">
-
-        <label for="firstname"></label>
-        <input type="text" name="firstname" id="fname" placeholder="First Name"><br>
-        
-        <label for="lastname"></label>
-        <input type="text" name="lastname" id="lname" placeholder="Last Name"><br>
-
-        <label for="Email"></label>
-        <input type="text" name="email" id="email" placeholder="E-mail"><br>
-
-        <label for="password"></label>
-        <input type="password" name="password" id="password" placeholder=""><br>
-
-        <button type="submit" name="submit">Register</button>
-
-    </form>
-
-</body>
 </html>

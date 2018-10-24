@@ -1,43 +1,11 @@
 <html>
-
-<!--initialize jquery from js folder-->
-<script src="js/jquery-3.3.1.min.js"></script>
-
-<!--Ajax implementation-->
-
-<body>
-    <!--button layout-->
-    <h1>Ask a Question</h1>
-    <div class="list">
-        <input type="hidden" id="id" value="" />
+    <body>
         <div class="item">
-            <label>Subject</label>
-            <input type="text" id="Subject" value="" />
+            <span id="topics_list">
+            </span>
         </div>
-
-        <div class="item">
-            <label>Description</label>
-            <input type="text" id="Description" value="" />
-        </div>
-        <br>
-        <div class="item">
-            <select id="topics_list">
-            </select>
-        </div>
-        <br>
-        <div class="item">
-            <input type="button" id="insert" value="Insert" />
-        </div>
-    </div>
-
-    <br>
-    <br>
-    <a href="insert.html">insert</a>
-    <a href="delete.html">delete</a>
-    <a href="index.html">show data</a>
-    <a href="login.html">login</a>
-    <a href="register.html">register</a>
-
+    </body>
+    <script src="js/jquery-3.3.1.min.js"></script>
     <script type="text/javascript">
         $(document).ready(function () {
             $.ajax({
@@ -46,19 +14,16 @@
                 success: function (response) {
                     var data = JSON.parse(response);
                     var text = "";
-                    text = data.reduce((acc, item) => "<option value='" + item + "'>" + item + "</option>" + acc, '')
+                    text = data.reduce((acc, item) => item +"<br>" + acc)
                     document.getElementById("topics_list").innerHTML = text;
                 }
             })
             $("#insert").click(function () {
-                var Description = $("#Description").val();
-                var Subject = $("#Subject").val();
-                var topic = $('#topics_list').val();
                 var dataString = "Description=" + Description + "&Subject=" + Subject + "&topic=" + topic + "&insert=";
                 if ($.trim(Description).length > 0 & $.trim(Subject).length > 0) {
                     $.ajax({
                         type: "POST",
-                        url: "http://localhost/api/insert.php",
+                        url: "http://localhost/api/ft_signin.php",
                         data: dataString,
                         success: function (data) {
                             if (data == "success") {
@@ -74,6 +39,4 @@
             });
         });
     </script>
-</body>
-
 </html>
