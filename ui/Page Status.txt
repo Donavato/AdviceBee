@@ -4,10 +4,11 @@ Pages
  - groups
  - response
  - topics
+ - password reset
 
-Done (need styling)
+Done
  - login
  - register
  - creation
- - password reset
+
 

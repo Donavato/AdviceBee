@@ -105,11 +105,6 @@ select {
     background-color: #eee;
 }
 
-/* On mouse-over, add a grey background color */
-.container:hover input ~ .checkmark {
-    background-color: #ccc;
-}
-
 /* When the checkbox is checked, add a blue background */
 .container input:checked ~ .checkmark {
     background-color: #2196F3;
@@ -137,3 +132,33 @@ select {
     border-width: 0 3px 3px 0;
     transform: rotate(45deg);
 }
+
+
+/* Icon Bar Styling */
+.icon-bar {
+    width: 100%;
+    background-color: #ffffff;
+    overflow: auto;
+}
+
+.icon-bar a {
+float: left;
+text-align: center;
+width: 14.25%;
+padding: 12px 0;
+}
+
+.icon-location {
+    position: absolute;
+    bottom: 5px;
+    width: 100%;
+}
+
+
+
+
+
+
+
+
+
