@@ -1,0 +1,54 @@
+<html>
+    <!--INITIALIZE JQUERY-->
+    <script src ="js/jquery-3.3.1.min.js"></script>
+    <!--INITIALIZE J.VALIDATION PLUGIN-->
+    <script src ="js/jquery.validate.js"></script>
+
+    <body>
+        <p>Just enter the email address for your account and
+             we will send you a password reset verification code. </p>
+        <form action="" id="pwreset" method="POST">
+    
+            <label for="Email"></label>
+            <input type="text" name="email" id="email" placeholder="E-mail"><br>
+
+            <button type="submit" name="submit">Send Code</button>
+    
+        </form>
+    </body>
+
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $("#pwreset").validate({
+            //SPECIFY RULES
+            rules: {
+            email: {
+                required: true,
+                email: true
+            }
+            },
+            // Specify validation error messages
+            messages: {
+            email: "*Please enter a valid Email address."
+            },
+            submitHandler: function(form) {
+            
+            var email = $("#email").val();
+
+            var dataString = "&email=" + email + "&pwreset=";
+
+                $.ajax({
+                    type: "POST",
+                    url: "http://localhost/mobile/api/pwreset.php",
+                    data: dataString,
+                    success: function(data) {
+                        alert("Password has been reset and sent");
+                        window.location.href = "login.html";
+                }
+            });
+        }
+    });
+});
+</script>
+
+</html>

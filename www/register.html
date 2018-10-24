@@ -78,17 +78,13 @@
 
                 var dataString = "fname=" + fname + "&lname=" + lname + "&email=" + email + "&password=" + password + "&reg=";
 
-                $.ajax({
-                    type: "POST",
-                    url: "http://localhost/api/register.php",
-                    data: dataString,
-                    success: function (data) {
-                        if (data == "success") {
-                            alert("Registration Completed");
+                    $.ajax({
+                        type: "POST",
+                        url: "http://localhost/mobile/api/register.php",
+                        data: dataString,
+                        success: function(data) {
+                            alert("Registration Completed. Please verify your email by clicking the activation link that has been sent.");
                             window.location.href = "login.html";
-                        } else if (data == "error") {
-                            alert("error failed to register");
-                        }
                     }
                 });
             }
