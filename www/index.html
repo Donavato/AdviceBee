@@ -4,7 +4,6 @@
     <!--initialize jquery from js folder-->
     <script src="js/jquery-3.3.1.min.js"></script>
 
-    <!--Implementation of jquery/ajax-->
     <script type="text/javascript">
         $(document).ready(function () {
             $.ajax({
@@ -14,10 +13,10 @@
                 data: "param=no",
                 //on success it will call this function
                 success: function (data) {
-
                     var DOM = $('#DOM');
                     $.each(data, function (key, value) {
-                        DOM.append("<li><h3>" + value.Question + "</h3><p>" + value.Description + "<br>" + value.Subject + "</p></li>");
+                        DOM.append("<h3>" + value.Subject + "</h3><p>" + value.Description + "</p>", $('<a href="advice.html"><button>respond</button></a>'));
+                        
                     });
                     //if fail it will give this error
                 }, error: function (e) {
@@ -33,9 +32,9 @@
     <!--output of the json-->
     <div>
         <!--set the id to DOM to show output-->
-        <ul id="DOM">
-
-        </ul>
+        <div id="DOM">
+        </div>
+        
     </div>
 
     <a href="insert.html">insert</a>

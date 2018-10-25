@@ -26,6 +26,11 @@
         </div>
         <br>
         <div class="item">
+            <select id="question_type">
+            </select>
+        </div>
+        <br>
+        <div class="item">
             <input type="button" id="insert" value="Insert" />
         </div>
     </div>
@@ -50,11 +55,23 @@
                     document.getElementById("topics_list").innerHTML = text;
                 }
             })
+            $.ajax({
+                type: "POST",
+                url: "http://localhost/api/questionType.php",
+                success: function (response) {
+                    var data = JSON.parse(response);
+                    var text = "";
+                    text = data.reduce((acc, item) => "<option value='" + item + "'>" + item + "</option>" + acc, '')
+                    document.getElementById("question_type").innerHTML = text;
+                }
+            })
             $("#insert").click(function () {
                 var Description = $("#Description").val();
                 var Subject = $("#Subject").val();
                 var topic = $('#topics_list').val();
-                var dataString = "Description=" + Description + "&Subject=" + Subject + "&topic=" + topic + "&insert=";
+                var type = $("#question_type").val();
+                var dataString = "Description=" + Description + "&Subject=" + Subject + "&topic=" + topic + "&question_type=" + type + "&insert=";
+                console.log(dataString);
                 if ($.trim(Description).length > 0 & $.trim(Subject).length > 0) {
                     $.ajax({
                         type: "POST",
