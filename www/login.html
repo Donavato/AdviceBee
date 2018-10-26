@@ -30,21 +30,35 @@
     <script type="text/javascript">
         $('#submit').on('click', function (e) {
             e.preventDefault()
-            $.post('http://localhost/api/login.php', {
-                email: $("#email").val(),
-                passwrd: $("#passwrd").val()
-            },
-                function (response) {
-                    JSON.stringify(response);
-                    var data = JSON.parse(response);
-                    document.getElementById("response").innerHTML = "hello";
-                    //console.log(data)
-                    //JSON.parse(data);
-                })
-                .fail(function (response) {
+                var email = $("#email").val();
+                var password = $("#passwrd").val();
+                var dataString = "email=" + email +"&passwrd=" + password;
+            $.ajax({
+                url: "http://localhost/api/login.php",
+                type: "POST",
+                // contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                data: dataString,
+                success: function(data){
+                    document.getElementById("response").innerHTML = JSON.stringify(data);
+                }, error: function(e){
+                    alert(JSON.stringify(e));
+                }
+            // $.post('http://localhost/api/login.php', {
+            //     email: $("#email").val(),
+            //     passwrd: $("#passwrd").val()
+            // },
+            //     function (response) {
+            //         JSON.stringify(response);
+            //         var data = JSON.parse(response);
+            //         document.getElementById("response").innerHTML = "hello";
+            //         //console.log(data)
+            //         //JSON.parse(data);
+            //     })
+            //     .fail(function (response) {
 
-                    document.getElementById("response").innerHTML = JSON.stringify(response);
-                });
+            //         document.getElementById("response").innerHTML = JSON.stringify(response);
+            });
         });
     </script>
 </body>

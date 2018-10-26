@@ -1,7 +1,7 @@
 <?php
  include "db.php";
 
- 
+ header('Content-type: application/json');
  if(isset($_POST['insert']))
  {
     $Description=$_POST['Description'];
