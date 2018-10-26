@@ -7,10 +7,8 @@
 
 <body>
 
-    <h1>YOU MADE IT</h1>
-
-    <div id="DOM">
-    </div>
+    <p id="Question"></p>
+    
     <!-- GET ID FROM URL -->
     <script type="text/javascript">
         function getQueryVariable(variable) {
@@ -34,8 +32,13 @@
                 data: dataString,
                 //on success it will call this function
                 success: function (data) {
-                    var DOM = $('#DOM');
-                    console.log("Works!");
+                    console.log(JSON.stringify(data));
+                    console.log(JSON.parse(JSON.stringify(data)));
+                    
+                    var Obj = JSON.parse(JSON.stringify(data));
+                    console.log(Obj[0].Subject);
+                    
+                    document.getElementById("Question").innerHTML = "<h3>" + Obj[0].Subject + "</h3><br>"+ Obj[0].topic+"<br>" + Obj[0].Description + "<br>" + Obj[0].question_type;
                     //if fail it will give this error
                 }, error: function (e) {
                     alert(JSON.stringify(e));
