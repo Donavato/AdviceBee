@@ -18,8 +18,6 @@
                     
                     //GET DATA AND PARSE IT
                     $.each(data, function (key, value) {
-                        console.log(value.Description);
-                        console.log(value.Question_ID);
                         //STORE QUESTION ID IN URL FOR TRANSIT TO ADVICE.HTML
                         var link = new URL("http://"+ window.location.host + "/advice.html");
                         link.searchParams.append("Question",value.Question_ID);
