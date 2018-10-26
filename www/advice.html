@@ -1,14 +1,22 @@
 <html>
 
 <head>
-        <script src="js/jquery-3.3.1.min.js"></script>
+    <script src="js/jquery-3.3.1.min.js"></script>
 
 </head>
 
 <body>
 
     <p id="Question"></p>
-    
+
+    <form>
+        <div id="advice">
+
+        </div>
+        <br>
+        <input type="submit" value="Submit">
+    </form>
+
     <!-- GET ID FROM URL -->
     <script type="text/javascript">
         function getQueryVariable(variable) {
@@ -16,15 +24,18 @@
             var vars = query.split("&");
             for (var i = 0; i < vars.length; i++) {
                 var pair = vars[i].split("=");
-                if (pair[0] == variable) { return pair[1]; }
+                if (pair[0] == variable) {
+                    return pair[1];
+                }
             }
             return (false);
         }
         var Question_ID = getQueryVariable("Question");
         console.log(Question_ID);
-        
+
+        // 
         $(document).ready(function () {
-            var dataString = "Question_ID=" + Question_ID; 
+            var dataString = "Question_ID=" + Question_ID;
             $.ajax({
                 url: "http://localhost/api/advice.php",
                 type: "POST",
@@ -32,13 +43,25 @@
                 data: dataString,
                 //on success it will call this function
                 success: function (data) {
-                    console.log(JSON.stringify(data));
-                    console.log(JSON.parse(JSON.stringify(data)));
-                    
+                    // console.log(JSON.stringify(data));
+                    // console.log(JSON.parse(JSON.stringify(data)));
+
                     var Obj = JSON.parse(JSON.stringify(data));
-                    console.log(Obj[0].Subject);
-                    
-                    document.getElementById("Question").innerHTML = "<h3>" + Obj[0].Subject + "</h3><br>"+ Obj[0].topic+"<br>" + Obj[0].Description + "<br>" + Obj[0].question_type;
+                    // console.log(Obj[0].Subject);
+
+                    document.getElementById("Question").innerHTML = "<h3>" + Obj[0].Subject + "</h3><br>" + Obj[0].topic + "<br>" + Obj[0].Description + "<br>" + Obj[0].question_type;
+
+                    // CHECK QUESTION TYPE, OUTPUT FORM ADVICE DEPENDING ON THAT TYPE
+                    if (Obj[0].question_type == "Yes or No") {
+                        document.getElementById("advice").innerHTML = "Yes: " + "<input type='radio' name='adviceYes' />" + "<br>" + "No: " + "<input type='radio' name='adviceNo' />";
+                    } else if (Obj[0].question_type == "True or False") {
+                        document.getElementById("advice").innerHTML = "True: " + "<input type='radio' name='adviceTrue' />" + "<br>" + "False: " + "<input type='radio' name='adviceFalse' />";
+                    } else if (Obj[0].question_type == "Description") {
+                        document.getElementById("advice").innerHTML = "Advice: " + "<br>" + "<textarea name='adviceDescription'>" + "</textarea>" + "<br>";
+                    } else {
+                        document.getElementById("advice").innerHTML = "Error";
+                    }
+
                     //if fail it will give this error
                 }, error: function (e) {
                     alert(JSON.stringify(e));

@@ -45,16 +45,18 @@
 
     <script type="text/javascript">
         $(document).ready(function () {
+            //PULL ALL TOPICS AND STORE THEM INTO A DROP DOWN FOR topics_list
             $.ajax({
                 type: "POST",
                 url: "http://localhost/api/topics.php",
                 success: function (response) {
-                    var data = JSON.parse(response);
+                    var data = JSON.parse(JSON.stringify(response));
                     var text = "";
                     text = data.reduce((acc, item) => "<option value='" + item + "'>" + item + "</option>" + acc, '')
                     document.getElementById("topics_list").innerHTML = text;
                 }
             })
+            //PULL ALL QUESTION TYPES AND PUT THEM INTO A DROPDOWN question_type
             $.ajax({
                 type: "POST",
                 url: "http://localhost/api/questionType.php",
@@ -65,13 +67,15 @@
                     document.getElementById("question_type").innerHTML = text;
                 }
             })
+            //WHEN INSERT BUTTON IS CLICKED, TAKE ALL FIELDS, STORE THEM INTO DATASTRING
+            //AND SEND THEM IN JSON FORM
             $("#insert").click(function () {
                 var Description = $("#Description").val();
                 var Subject = $("#Subject").val();
                 var topic = $('#topics_list').val();
                 var type = $("#question_type").val();
                 var dataString = "Description=" + Description + "&Subject=" + Subject + "&topic=" + topic + "&question_type=" + type + "&insert=";
-                console.log(dataString);
+                // console.log(dataString);
                 if ($.trim(Description).length > 0 & $.trim(Subject).length > 0) {
                     $.ajax({
                         type: "POST",
@@ -81,6 +85,8 @@
                             if (data == "success") {
                                 alert("inserted");
                                 $("#insert").val('submit');
+                                window.location.href = "login.html";
+                                
                             } else if (data == "error") {
                                 alert("error");
                             }

@@ -10,10 +10,14 @@
     $type=$_POST['question_type'];
     $q=mysqli_query($con,"INSERT INTO `Questions` (`Description`,`Subject`,`topic`,`question_type`) VALUES ('$Description','$Subject','$topic','$type')");
     
-    if($q)
-    echo "success";
-    else
-    echo "error";
-    echo(mysqli_error($con));
- }
+    if($q){
+        echo json_encode("success");
+        die();
+    }
+    else{
+        echo json_encode("error");
+        die();
+        echo(mysqli_error($con));
+    }
+}
  ?>
