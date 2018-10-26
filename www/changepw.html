@@ -1,0 +1,82 @@
+<html>
+
+<!--INITIALIZE JQUERY-->
+<script src="js/jquery-3.3.1.min.js"></script>
+<!--INITIALIZE J.VALIDATION PLUGIN-->
+<script src="js/jquery.validate.js"></script>
+
+<body>
+    <form action="" id="change" method="POST">
+
+        <label for="old_password"></label>
+        <input type="password" name="old_password" id="old_password" placeholder=""><br>
+
+        <label for="new_password"></label>
+        <input type="password" name="new_password" id="new_password" placeholder=""><br>
+
+        <label for="confirm_password"></label>
+        <input type="password" name="confirm_password" id="confirm_password" placeholder=""><br>
+
+        <button type="submit" name="submit">Done</button>
+
+    </form>
+
+
+    <a href="insert.html">insert</a>
+    <a href="delete.html">delete</a>
+    <a href="index.html">show data</a>
+    <a href="login.html">login</a>
+    <a href="register.html">register</a>
+
+</body>
+
+<!--JQUERY.VALIDATION WITH AJAX REQUEST-->
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#change").validate({
+            //SPECIFY RULES
+            rules: {
+                new_password: {
+                    required: true,
+                    minlength: 5
+                },
+                confirm_password: {
+                    equalTo: "#new_password"
+                }
+            },
+            // Specify validation error messages
+            messages: {
+                new_password: {
+                    required: "*Please provide a password",
+                    minlength: "*Your password must be at least 5 characters long"
+                },
+                confirm_password: {
+                    equalTo: "*Please enter the same password"
+                }
+
+            },
+            submitHandler: function (form) {
+
+                var old_pw = $("#old_password").val();
+                var new_password = $("#new_password").val();
+
+                var dataString = "old_password=" + old_pw + "&new_password=" + new_password + "&change=";
+
+                $.ajax({
+                    type: "POST",
+                    url: "http://localhost/api/changepw.php",
+                    data: dataString,
+                    success: function (data) {
+                        alert("Password has been changed.");
+                        //TEMPORARY DIRECT LOCATION
+                        window.location.href = "login.html";
+                    }, error: function(){
+                    //alert(JSON.stringify(data));
+                }
+                });
+            }
+        });
+    });
+</script>
+
+</html>
