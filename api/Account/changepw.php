@@ -23,7 +23,7 @@ if(isset($_POST['change']))
     }
     else{
         echo "Current password doesnt match. Password enter not valid";
-        //json_encode($error);
+        //json_encode("error");
         //die();
     }
 
