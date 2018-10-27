@@ -22,6 +22,7 @@
             $_SESSION['f_name']= $user['f_name'];
             $_SESSION['l_name']= $user['l_name'];
             $_SESSION['email']= $user['email'];
+            $_SESSION['user_ID'] = $user['user_ID'];
             // has user verified email
             //$_SESSION['authorized']= $user['authorized'];
 
@@ -29,6 +30,7 @@
             $fname = $_SESSION['f_name'];
             $lname = $_SESSION['l_name'];
             $uemail = $_SESSION['email'];
+            $uID = $_SESSION['user_ID'];
             //Will be used to check if users session is logged in/allowed to do things
             $_SESSION['logged_in'] = true;
             $response = "Login Successful!"; 

@@ -8,7 +8,9 @@
     $Subject=$_POST['Subject'];
     $topic=$_POST['topic'];
     $type=$_POST['question_type'];
-    $q=mysqli_query($con,"INSERT INTO `Questions` (`Description`,`Subject`,`topic`,`question_type`) VALUES ('$Description','$Subject','$topic','$type')");
+    $uID = $_SESSION['user_ID'];
+   
+    $q=mysqli_query($con,"INSERT INTO `Questions` (`user_id` ,`Description`,`Subject`,`topic`,`question_type`) VALUES ('$uID','$Description','$Subject','$topic','$type')");
     
     if($q){
         echo json_encode("success");

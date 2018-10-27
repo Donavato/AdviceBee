@@ -70,14 +70,9 @@
                         alert("Password has been changed.");
                         //TEMPORARY DIRECT LOCATION
                         window.location.href = "login.html";
-
-                        // if (data == "error"){
-                        // alert("Current password doesnt match. Password enter not valid.");
-
-                        // } else {
-                        
-                        // }
-                    }   
+                    }, error: function(){
+                    //alert(JSON.stringify(data));
+                }
                 });
             }
         });
