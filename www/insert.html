@@ -59,7 +59,7 @@
             //PULL ALL QUESTION TYPES AND PUT THEM INTO A DROPDOWN question_type
             $.ajax({
                 type: "POST",
-                url: "http://localhost/api/questionType.php",
+                url: "http://localhost/api/Question/questionType.php",
                 success: function (response) {
                     var data = JSON.parse(response);
                     var text = "";
@@ -79,13 +79,13 @@
                 if ($.trim(Description).length > 0 & $.trim(Subject).length > 0) {
                     $.ajax({
                         type: "POST",
-                        url: "http://localhost/api/insert.php",
+                        url: "http://localhost/api/Question/insert.php",
                         data: dataString,
                         success: function (data) {
                             if (data == "success") {
                                 alert("inserted");
                                 $("#insert").val('submit');
-                                window.location.href = "login.html";
+                                window.location.href = "index.html";
                                 
                             } else if (data == "error") {
                                 alert("error");

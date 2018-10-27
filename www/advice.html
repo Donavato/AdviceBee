@@ -13,7 +13,7 @@
 
     </div>
 
-    <form>
+    <form id="FormAdvice">
         <div id="advice">
 
         </div>
@@ -42,7 +42,7 @@
             var dataString = "Question_ID=" + Question_ID;
             //LIST ADVICES GIVEN FOR EACH PARTICULAR QUESTION
             $.ajax({
-                url: "http://localhost/api/listadvices.php",
+                url: "http://localhost/api/Advice/listadvices.php",
                 type: "POST",
                 dataType: "json",
                 data: dataString,
@@ -60,7 +60,7 @@
             });
 
             $.ajax({
-                url: "http://localhost/api/Advice.php",
+                url: "http://localhost/api/Advice/Advice.php",
                 type: "POST",
                 dataType: "json",
                 data: dataString,
@@ -90,6 +90,15 @@
                     alert(JSON.stringify(e));
                 }
             });
+            $('#FormAdvice')
+                .ajaxForm({
+                    url: '',
+                    dataType: 'json',
+                    data: dataString,
+                    success:function(response){
+                        alert("Response: " + response);
+                    }
+                })
         });
     </script>
 </body>
