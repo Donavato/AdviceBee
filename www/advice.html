@@ -10,11 +10,12 @@
     <p id="Question"></p>
 
     <div id="advices">
-
     </div>
-
-    <form id="FormAdvice">
+    
+    <form action="api/Advice/giveAdvice.php" method="POST">
         <div id="advice">
+        </div>
+        <div id="FormID">
 
         </div>
         <br>
@@ -37,7 +38,7 @@
         var Question_ID = getQueryVariable("Question");
         console.log(Question_ID);
 
-        
+
         $(document).ready(function () {
             var dataString = "Question_ID=" + Question_ID;
             //LIST ADVICES GIVEN FOR EACH PARTICULAR QUESTION
@@ -49,10 +50,10 @@
                 //on success it will call this function
                 success: function (data) {
                     var DOM = $('#advices');
-                    
-                     $.each(data, function (key, value) {
-                         DOM.append("<p>" + value.advice + "</p>");
-                     });
+
+                    $.each(data, function (key, value) {
+                        DOM.append("<p>" + value.advice + "</p>");
+                    });
 
                 }, error: function (e) {
                     alert("failed to work");
@@ -66,21 +67,20 @@
                 data: dataString,
                 //on success it will call this function
                 success: function (data) {
-                    // console.log(JSON.stringify(data));
-                    // console.log(JSON.parse(JSON.stringify(data)));
-
                     var Obj = JSON.parse(JSON.stringify(data));
-                    // console.log(Obj[0].Subject);
-
                     document.getElementById("Question").innerHTML = "<h3>" + Obj[0].Subject + "</h3><br>" + Obj[0].topic + "<br>" + Obj[0].Description + "<br>" + Obj[0].question_type;
 
                     // CHECK QUESTION TYPE, OUTPUT FORM ADVICE DEPENDING ON THAT TYPE
+                    document.getElementById("FormID").innerHTML = "<input type='hidden' name='Question_ID' value='"+ Question_ID+ "'/>";
+                    
+                    //"<input type='hidden' value='" + Question_ID +"' />"
+                    
                     if (Obj[0].question_type == "Yes or No") {
-                        document.getElementById("advice").innerHTML = "Yes: " + "<input type='radio' name='adviceYes' />" + "<br>" + "No: " + "<input type='radio' name='adviceNo' />";
+                        document.getElementById("advice").innerHTML = "Yes: " + "<input type='radio' name='advice' value='Yes' />" + "<br>" + "No: " + "<input type='radio' name='advice' value='No' />";
                     } else if (Obj[0].question_type == "True or False") {
-                        document.getElementById("advice").innerHTML = "True: " + "<input type='radio' name='adviceTrue' />" + "<br>" + "False: " + "<input type='radio' name='adviceFalse' />";
+                        document.getElementById("advice").innerHTML = "True: " + "<input type='radio' name='advice' value='True' />" + "<br>" + "False: " + "<input type='radio' name='advice' value='False' />";
                     } else if (Obj[0].question_type == "Description") {
-                        document.getElementById("advice").innerHTML = "Advice: " + "<br>" + "<textarea name='adviceDescription'>" + "</textarea>" + "<br>";
+                        document.getElementById("advice").innerHTML = "<div id='Description'" + "Advice: " + "<br>" + "<textarea name='advice' id='value'>" + "</textarea>" + "<br>" + "</div>";
                     } else {
                         document.getElementById("advice").innerHTML = "Error";
                     }
@@ -90,15 +90,6 @@
                     alert(JSON.stringify(e));
                 }
             });
-            $('#FormAdvice')
-                .ajaxForm({
-                    url: '',
-                    dataType: 'json',
-                    data: dataString,
-                    success:function(response){
-                        alert("Response: " + response);
-                    }
-                })
         });
     </script>
 </body>
