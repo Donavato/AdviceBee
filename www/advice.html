@@ -9,6 +9,10 @@
 
     <p id="Question"></p>
 
+    <div id="advices">
+
+    </div>
+
     <form>
         <div id="advice">
 
@@ -33,11 +37,30 @@
         var Question_ID = getQueryVariable("Question");
         console.log(Question_ID);
 
-        // 
+        
         $(document).ready(function () {
             var dataString = "Question_ID=" + Question_ID;
+            //LIST ADVICES GIVEN FOR EACH PARTICULAR QUESTION
             $.ajax({
-                url: "http://localhost/api/advice.php",
+                url: "http://localhost/api/listadvices.php",
+                type: "POST",
+                dataType: "json",
+                data: dataString,
+                //on success it will call this function
+                success: function (data) {
+                    var DOM = $('#advices');
+                    
+                     $.each(data, function (key, value) {
+                         DOM.append("<p>" + value.advice + "</p>");
+                     });
+
+                }, error: function (e) {
+                    alert("failed to work");
+                }
+            });
+
+            $.ajax({
+                url: "http://localhost/api/Advice.php",
                 type: "POST",
                 dataType: "json",
                 data: dataString,
