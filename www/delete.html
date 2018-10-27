@@ -13,7 +13,7 @@
             var dataString = "title=" + title + "&delete=";
             $.ajax({
                 type: "GET",
-                url: "http://localhost/api/delete.php",
+                url: "http://10.0.2.2/api/delete.php",
                 data: dataString,
                 success: function (data) {
                     if (data == "success") {

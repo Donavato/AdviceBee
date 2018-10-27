@@ -1,9 +1,9 @@
 <html>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <head>
     <!--initialize jquery from js folder-->
     <script src="js/jquery-3.3.1.min.js"></script>
-    <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
@@ -12,7 +12,7 @@
         <input type="text" placeholder="Enter email" id="email" required>
         <br />
         <label><b>Password</b></label>
-        <input type="text" placeholder="Enter password" id="passwrd" required>
+        <input type="password" placeholder="Enter password" id="passwrd" required>
         <br />
         <button type="button" id="submit">Login</button>
     </form>
@@ -23,27 +23,27 @@
     <a href="register.html">register</a>
 
     <div id="response">
-        
+
     </div>
     <!-- FIX THE SUCCESS/FAIL RESPONSE TYPE -->
     <!--Implementation of jquery/ajax-->
     <script type="text/javascript">
         $('#submit').on('click', function (e) {
             e.preventDefault()
-            $.post('http://10.0.2.2/api/login.php',{
-                email: $("#email").val(),
-                passwrd: $("#passwrd").val()
-            },
-            function (response) {
-                JSON.stringify(response);
-                var data = JSON.parse(response);
-                document.getElementById("response").innerHTML = "hello";
-                //console.log(data)
-                //JSON.parse(data);
-            })
-            .fail(function (response) {
-                
-                document.getElementById("response").innerHTML = JSON.stringify(response);
+                var email = $("#email").val();
+                var password = $("#passwrd").val();
+                var dataString = "email=" + email +"&passwrd=" + password;
+            $.ajax({
+                url: "http://10.0.2.2/api/Account/login.php",
+                type: "POST",
+                // contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                data: dataString,
+                success: function(data){
+                    document.getElementById("response").innerHTML = JSON.stringify(data);
+                }, error: function(e){
+                    alert(JSON.stringify(e));
+                }
             });
         });
     </script>
