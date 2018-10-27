@@ -1,17 +1,22 @@
 <html>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<head>
     <!--INITIALIZE JQUERY-->
     <script src ="js/jquery-3.3.1.min.js"></script>
     <!--INITIALIZE J.VALIDATION PLUGIN-->
     <script src ="js/jquery.validate.js"></script>
 
-    <body>
-        <p>Just enter the email address for your account and
-             we will send you a password reset verification code. </p>
-        <form action="" id="pwreset" method="POST">
-    
-            <label for="Email"></label>
-            <input type="text" name="email" id="email" placeholder="E-mail"><br>
+    <!--reference style sheet-->
+    <link rel="stylesheet" href="style.css">
+</head>
 
+<body>
+    <h3 class="h3">Just enter the email address for your account and
+        we will send you a password reset verification code. </h3>
+    <form action="" id="pwreset" method="POST">
+        <label for="Email"></label>
+        <input type="text" name="email" id="email" placeholder="E-mail"><br>
             <button type="submit" name="submit">Send Code</button>
     
         </form>
@@ -26,6 +31,10 @@
         <a href="pwreset.html">password reset</a>
 
     </body>
+
+        <button type="submit" name="submit" id="submit">Send Code</button>
+    </form>
+</body>
 
     <script type="text/javascript">
         $(document).ready(function() {

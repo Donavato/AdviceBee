@@ -17,6 +17,18 @@ input {
     font-size: 15px;
 }
 
+#insert {
+    width: 100%;
+    background-color: #00e600;
+    font-size: 20px;
+    color: white;
+    padding: 14px 20px;
+    margin: 15px 0;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;    
+}
+
 /* Creates submit button for forms */
 #submit {
     width: 100%;
@@ -60,6 +72,10 @@ select {
 /* Header 3 styling */
 .h3 {
     text-align: center;
+    color: rgb(121, 121, 121);
+}
+
+.label {
     color: rgb(121, 121, 121);
 }
 

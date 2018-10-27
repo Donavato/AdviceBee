@@ -1,23 +1,31 @@
 <html>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<!--INITIALIZE JQUERY-->
-<script src="js/jquery-3.3.1.min.js"></script>
-<!--INITIALIZE J.VALIDATION PLUGIN-->
-<script src="js/jquery.validate.js"></script>
+<head>
+    <!--INITIALIZE JQUERY-->
+    <script src="js/jquery-3.3.1.min.js"></script>
+
+    <!--INITIALIZE J.VALIDATION PLUGIN-->
+    <script src="js/jquery.validate.js"></script>
+
+    <!--reference style sheet-->
+    <link rel="stylesheet" href="style.css">
+</head>
 
 <body>
+    <h1 class="h1">Create a New Password</h1>
     <form action="" id="change" method="POST">
 
         <label for="old_password"></label>
-        <input type="password" name="old_password" id="old_password" placeholder=""><br>
-
+        <input type="password" name="old_password" id="old_password" placeholder="Current Password"><br>
+        <br>
         <label for="new_password"></label>
-        <input type="password" name="new_password" id="new_password" placeholder=""><br>
-
+        <input type="password" name="new_password" id="new_password" placeholder="New Password"><br>
+        <br>
         <label for="confirm_password"></label>
-        <input type="password" name="confirm_password" id="confirm_password" placeholder=""><br>
+        <input type="password" name="confirm_password" id="confirm_password" placeholder="Confirm Password"><br>
 
-        <button type="submit" name="submit">Done</button>
+        <button type="submit" name="submit" id="submit">Done</button>
 
     </form>
 

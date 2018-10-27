@@ -4,17 +4,20 @@
 <head>
     <!--initialize jquery from js folder-->
     <script src="js/jquery-3.3.1.min.js"></script>
+
+    <!--reference style sheet-->
+    <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
     <form>
-        <label><b>Email</b></label>
-        <input type="text" placeholder="Enter email" id="email" required>
+        <label class="label"><b>Email</b></label>
+        <input type="email" placeholder="Student@wayne.edu" id="email" required><br>
         <br />
-        <label><b>Password</b></label>
-        <input type="password" placeholder="Enter password" id="passwrd" required>
+        <label class="label"><b>Password</b></label>
+        <input type="password" placeholder="Password" id="passwrd" required>
         <br />
-        <button type="button" id="submit">Login</button>
+        <button type="button" name="submit" id="submit">Login</button>
     </form>
     <a href="insert.html">insert</a>
     <a href="delete.html">delete</a>
