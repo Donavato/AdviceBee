@@ -1,5 +1,4 @@
 <html>
-<<<<<<< Updated upstream
 
 <!--INITIALIZE JQUERY-->
 <script src="js/jquery-3.3.1.min.js"></script>
@@ -43,19 +42,6 @@
         $("#reg").validate({
             //SPECIFY RULES
             rules: {
-=======
-    <head>
-		<!--INITIALIZE JQUERY-->
-        <script src ="js/jquery-3.3.1.min.js"></script>
-		<!--INITIALIZE J.VALIDATION PLUGIN-->
-        <script src ="js/jquery.validate.js"></script>
-
-        <!--JQUERY.VALIDATION WITH AJAX CALL-->
-        <script type="text/javascript">
-            $(document).ready(function() {
-                $("#reg").validate({
-                rules: {
->>>>>>> Stashed changes
                 firstname: "required",
                 lastname: "required",
                 email: {
@@ -65,7 +51,6 @@
                 password: {
                     required: true,
                     minlength: 5
-<<<<<<< Updated upstream
                 },
                 confirm_password: {
                     equalTo: "#password"
@@ -73,19 +58,12 @@
             },
             // Specify validation error messages
             messages: {
-=======
-                    }
-                },
-                // Specify validation error messages
-                messages: {
->>>>>>> Stashed changes
                 firstname: "*Please provide a firstname",
                 lastname: "*Please provide a lastname",
                 password: {
                     required: "*Please provide a password",
                     minlength: "*Your password must be at least 5 characters long"
                 },
-<<<<<<< Updated upstream
                 confirm_password: {
                     equalTo: "*Please enter the same password"
                 },
@@ -93,12 +71,6 @@
             },
             submitHandler: function (form) {
 
-=======
-                email: "*Please enter a valid email address"
-                },
-                submitHandler: function(form) {
-                
->>>>>>> Stashed changes
                 var fname = $("#fname").val();
                 var lname = $("#lname").val();
                 var email = $("#email").val();
@@ -108,23 +80,11 @@
 
                     $.ajax({
                         type: "POST",
-<<<<<<< Updated upstream
                         url: "http://10.0.2.2/api/Account/register.php",
                         data: dataString,
                         success: function(data) {
                             alert("Registration Completed. Please verify your email by clicking the activation link that has been sent.");
                             window.location.href = "login.html";
-=======
-                        url: "http://localhost/register/api/register.php",
-                        data: dataString,
-                        success: function(data) {
-                            if (data == "success") {
-                                alert("Registration Completed");
-                                window.location.href = "success.html";
-                            } else if (data == "error") {
-                                alert("error failed to register");
-                        }
->>>>>>> Stashed changes
                     }
                 });
             }

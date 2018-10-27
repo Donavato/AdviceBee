@@ -8,14 +8,14 @@
 <script type="text/javascript">
     $(document).ready(function () {
 
-        $("#delete").click(function() {
-                var title = $("#title").val();
-                var dataString = "title=" + title + "&delete=";
-                $.ajax({
-                    type: "GET",
-                    url: "http://10.0.2.2/api/delete.php",
-                    data: dataString,
-                success: function(data) {
+        $("#delete").click(function () {
+            var title = $("#title").val();
+            var dataString = "title=" + title + "&delete=";
+            $.ajax({
+                type: "GET",
+                url: "http://10.0.2.2/api/delete.php",
+                data: dataString,
+                success: function (data) {
                     if (data == "success") {
                         alert("Deleted");
                         $("#delete").val("Delete");
