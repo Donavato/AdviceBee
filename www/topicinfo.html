@@ -41,8 +41,6 @@
 				var userTopics = userdata[a].topic_name;
 			}
 
-			alert(userTopics);
-
 			//call ajax
 			var ajax = new XMLHttpRequest();
 			var method = "GET";
@@ -89,7 +87,7 @@
 								break;
 							}
 							//if ran through entire user data array and no match output as unselected
-							else if ((d+1) == userdata.length || d==0) 
+							else if ((d+1) == userdata.length) 
 							{
 								html += "<br>";
 								html += "<label class='switch'>";
