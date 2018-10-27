@@ -1,0 +1,31 @@
+<html>
+    <head>
+        <title>Profile</title>
+        <link rel="stylesheet" href="css/profile.css"/>
+        <script type="text/javascript" src="js/jquery-3.3.1.min.js"></script>
+        <script type="text/javascript">
+           $(document).ready(function(){
+               //intial loadup on page
+               $("#content").load("info.html");
+
+               //menu clicks
+               $('ul#nav li a').click(function(){
+                    var page = $(this).attr('href');
+                    $('#content').load(page + '.html');
+                    return false;
+                });
+            });
+        </script>
+
+    </head>
+    <body>
+        <ul id="nav">
+            <li><a href="info">Info</a></li>
+            <li><a href="topicinfo">Topics</a></li>
+            <li><a href="groupinfo">Groups</a></li>
+        </ul>
+        <div id="content">
+            
+        </div>
+    </body>
+</html>

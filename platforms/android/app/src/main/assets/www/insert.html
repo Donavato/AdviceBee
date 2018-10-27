@@ -4,6 +4,47 @@
 <script src="js/jquery-3.3.1.min.js"></script>
 
 <!--Ajax implementation-->
+<<<<<<< Updated upstream
+=======
+
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#topics_list").change(function () {
+            $.ajax({
+                type: "POST",
+                url: "http://localhost/api/topics.php",
+                data: dataString,
+                success: function (response) {
+                    var len = response.length;
+
+                }
+            })
+        })
+        $("#insert").click(function () {
+            var Description = $("#Description").val();
+            var Subject = $("#Subject").val();
+            var dataString = "Description=" + Description + "&Subject=" + Subject + "&insert=";
+            if ($.trim(Description).length > 0 & $.trim(Subject).length > 0) {
+                $.ajax({
+                    type: "POST",
+                    url: "http://localhost/api/insert.php",
+                    data: dataString,
+                    success: function (data) {
+                        if (data == "success") {
+                            alert("inserted");
+                            $("#insert").val('submit');
+                        } else if (data == "error") {
+                            alert("error");
+                        }
+                    }
+                });
+            }
+            return false;
+        });
+    });
+</script>
+>>>>>>> Stashed changes
 
 <body>
     <!--button layout-->
@@ -33,11 +74,21 @@
         <div class="item">
             <input type="button" id="insert" value="Insert" />
         </div>
+
+        <div class="item">
+            <select id="topics_list">
+                <option value="0">- Select -</option>
+            </select>
+        </div>
     </div>
 
     <br>
     <br>
+<<<<<<< Updated upstream
     <a href="insert.html">insert</a>
+=======
+    <a href="insert.html">Ask a Question</a>
+>>>>>>> Stashed changes
     <a href="delete.html">delete</a>
     <a href="index.html">show data</a>
     <a href="login.html">login</a>

@@ -4,6 +4,7 @@
     <!--initialize jquery from js folder-->
     <script src="js/jquery-3.3.1.min.js"></script>
 
+<<<<<<< Updated upstream
 </head>
 
 <body>
@@ -28,10 +29,19 @@
                 url: "http://10.0.2.2/api/Question/fetchdata.php",
                 type: "POST",
                 contentType: "application/json; charset=utf-8",
+=======
+    <!--Implementation of jquery/ajax-->
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $.ajax({
+                url: "http://localhost/api/fetchdata.php",
+                type: "POST",
+>>>>>>> Stashed changes
                 dataType: "json",
                 data: "param=no",
                 //on success it will call this function
                 success: function (data) {
+<<<<<<< Updated upstream
                     var DOM = $('#DOM');
                     
                     //GET DATA AND PARSE IT
@@ -41,10 +51,18 @@
                         DOM.append("<h3>" + value.Subject + "</h3><p>" + value.Description + "</p>" +  "<button onclick='sendButton("+ value.Question_ID +")'>respond</button></a>");
                     });
                     
+=======
+
+                    var DOM = $('#DOM');
+                    $.each(data, function (key, value) {
+                        DOM.append("<li><h3>" + value.Question + "</h3><p>" + value.Description + "<br>" + value.Subject + "</p></li>");
+                    });
+>>>>>>> Stashed changes
                     //if fail it will give this error
                 }, error: function (e) {
                     alert("failed to work");
                 }
+<<<<<<< Updated upstream
 
             });
 
@@ -55,6 +73,30 @@
             window.location.replace("advice.html");
         }
     </script>
+=======
+            });
+        });
+    </script>
+
+</head>
+
+<body>
+    <!--output of the json-->
+    <div>
+        <!--set the id to DOM to show output-->
+        <ul id="DOM">
+
+        </ul>
+    </div>
+
+    <a href="insert.html">insert</a>
+    <a href="delete.html">delete</a>
+    <a href="index.html">show data</a>
+    <a href="login.html">login</a>
+    <a href="register.html">register</a>
+    <a href="profile.html">Profile</a>
+
+>>>>>>> Stashed changes
 </body>
 
 </html>

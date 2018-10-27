@@ -1,0 +1,39 @@
+body {
+    text-align: center;
+    background-color: #F6F6F6;
+}
+
+h1 {
+    font-size: 30;
+    font-family: 'Segoe UI';
+    text-align: center;
+    text-decoration: underline;
+    margin-top: 30px;
+    font-weight: normal;
+}
+
+form {
+    display: inline-block;
+    margin-top: 40px;
+}
+
+.button {
+    background-color: #69E26D;
+    border: #707070;
+    font-size: 20;
+    height: 54;
+    width: 158;
+    border: 1px solid black;
+}
+
+.button:hover {
+    opacity: .45;
+}
+
+.field {
+    width: 285;
+    height: 41;
+    font-size: 20;
+    border: 1px solid black;
+    opacity: 100%;
+}

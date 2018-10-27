@@ -1,0 +1,140 @@
+<head>
+		<link rel="stylesheet" href="css/topicinfo.css"/>
+</head>
+<table>
+	<tr>
+		<th>Topic Names</th>
+	<tr>
+	
+	<tbody id="gettopicinfo">
+	
+	</tbody>
+</table>
+
+<script type="text/javascript">
+	//call ajax
+	var ajax = new XMLHttpRequest();
+	var method = "GET";
+	var url = "http://10.0.2.2/api/getusertopicinfo.php"; //if running through android
+	//var url = "http://localhost/api/getusertopicinfo.php"; //if running on localhost
+	var asynchronous = true;
+	
+	ajax.open(method, url, asynchronous);
+	
+	//sending ajax request
+	ajax.send();
+	
+	//recieve response from gettopicinfo.php
+	ajax.onreadystatechange = function()
+	{
+		if(this.readyState == 4 && this.status == 200)
+		{
+			//converting json back to array
+			var userdata = JSON.parse(this.responseText);
+			
+			//html value for <tbody>
+			var html = "";
+			
+			//loop through array for the different topics
+			for(var a = 0; a < userdata.length; a++)
+			{
+				var userTopics = userdata[a].topic_name;
+			}
+
+			alert(userTopics);
+
+			//call ajax
+			var ajax = new XMLHttpRequest();
+			var method = "GET";
+			var url = "http://10.0.2.2/api/gettopicinfo.php"; //if running through android
+			//var url = "http://localhost/api/gettopicinfo.php"; //if running on localhost
+			var asynchronous = true;
+	
+			ajax.open(method, url, asynchronous);
+	
+			//sending ajax request
+			ajax.send();
+			
+			//recieve response from gettopicinfo.php
+			ajax.onreadystatechange = function()
+			{
+				if(this.readyState == 4 && this.status == 200)
+				{
+					//converting json back to array
+					var data = JSON.parse(this.responseText);
+			
+					//html value for <tbody>
+					var html = "";
+			
+					//cycle through all groups
+					for(var c = 0; c < data.length; c++)
+					{
+						//store topicName in variable to call on later
+						var topicName = data[c].topic_name;
+						//store topicID in value to use later
+						var topicID = data[c].topic_id;
+						
+						//cycle through users followed groups
+						for(var d = 0; d < userdata.length ; d++)
+						{
+							//if topic id is present in both tables select the button
+							if(data[c].topic_id == userdata[d].topic_id)
+							{
+								html += "<br>";
+								html += "<label class='switch'>";
+									html += "<input type='checkbox' name = topicid id= topicID value="+ topicID +" onchange='editTopic(this)' checked>";
+									html += "<span class='slider round'>" + topicName + "</span>";
+								html += "</label>";
+								html += "</br>";
+								break;
+							}
+							//if ran through entire user data array and no match output as unselected
+							else if ((d+1) == userdata.length || d==0) 
+							{
+								html += "<br>";
+								html += "<label class='switch'>";
+									html += "<input type='checkbox' name = topicid id= topicID value="+ topicID +" onchange='editTopic(this)'>";
+									html += "<span class='slider round'>" + topicName + "</span>";
+								html += "</label>";
+								html += "</br>";
+							}
+						}
+			
+					}
+					//replacing the tbody of table
+					document.getElementById("gettopicinfo").innerHTML = html;
+					
+				}
+			}
+		}
+	}
+</script>
+
+
+<script type="text/javascript">
+
+	function editTopic(obj) 
+	{
+		//store the clicks id into variable
+		var storeID = obj.value;
+
+		if($(obj).is(":checked"))
+		{
+			//call ajax
+			$.ajax({
+				method: "POST",
+				url: "http://10.0.2.2/api/addusertopic.php",
+				data: {topicStoreID: storeID}
+			});
+		}
+		else
+		{
+			//call ajax
+			$.ajax({
+				method: "POST",
+				url: "http://10.0.2.2/api/deletefromusertopic.php",
+				data: {topicStoreID: storeID}
+  			});
+		}
+	}
+</script>
