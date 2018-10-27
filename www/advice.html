@@ -36,6 +36,8 @@
             return (false);
         }
         var Question_ID = getQueryVariable("Question");
+        console.log(Question_ID);
+
 
         $(document).ready(function () {
             var dataString = "Question_ID=" + Question_ID;
@@ -50,7 +52,7 @@
                     var DOM = $('#advices');
 
                     $.each(data, function (key, value) {
-                        DOM.append("<p>" + value.advice + "</p>");
+                        DOM.append("<p>" + value.advice +"<br>"+ value.f_name + " " + value.l_name + "</p>");
                     });
 
                 }, error: function (e) {
@@ -71,6 +73,7 @@
                     // CHECK QUESTION TYPE, OUTPUT FORM ADVICE DEPENDING ON THAT TYPE
                     document.getElementById("FormID").innerHTML = "<input type='hidden' name='Question_ID' value='"+ Question_ID+ "'/>";
                     
+                    //"<input type='hidden' value='" + Question_ID +"' />"
                     
                     if (Obj[0].question_type == "Yes or No") {
                         document.getElementById("advice").innerHTML = "Yes: " + "<input type='radio' name='advice' value='Yes' />" + "<br>" + "No: " + "<input type='radio' name='advice' value='No' />";
