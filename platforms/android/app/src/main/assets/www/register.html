@@ -33,6 +33,9 @@
     <a href="index.html">show data</a>
     <a href="login.html">login</a>
     <a href="register.html">register</a>
+    <a href="changepw.html">change password</a>
+    <br><br>
+    <a href="pwreset.html">password reset</a>
 
 </body>
 
@@ -84,7 +87,7 @@
                         data: dataString,
                         success: function(data) {
                             alert("Registration Completed. Please verify your email by clicking the activation link that has been sent.");
-                            window.location.href = "login.html";
+                            window.location.replace("login.html");
                     }
                 });
             }

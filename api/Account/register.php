@@ -23,10 +23,10 @@
     // Our message including a link to verify email
     $message = '
     Thanks for signing up!
-    Your account has been created, you can login after you have activated your account by pressing the url below.
+    Your account has been created, you can create a question after verifying your email by pressing the url below.
     
-    Please click this link to activate your account:
-    http://localhost/mobile/api/Account/emailverify.php?email='.$email.'&hash='.$hash.'
+    Please click this link to activate your email:
+    http://localhost/api/Account/emailverify.php?email='.$email.'&hash='.$hash.'
     
     ';
 

@@ -27,6 +27,9 @@
     <a href="index.html">show data</a>
     <a href="login.html">login</a>
     <a href="register.html">register</a>
+    <a href="changepw.html">change password</a>
+    <br><br>
+    <a href="pwreset.html">password reset</a>
 
 </body>
 
@@ -67,12 +70,10 @@
                     url: "http://10.0.2.2/api/Account/changepw.php",
                     data: dataString,
                     success: function (data) {
-                        alert("Password has been changed.");
+                        alert(data);
                         //TEMPORARY DIRECT LOCATION
-                        window.location.href = "login.html";
-                    }, error: function(){
-                    //alert(JSON.stringify(data));
-                }
+                        window.location.replace("login.html");
+                    }
                 });
             }
         });
