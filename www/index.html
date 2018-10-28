@@ -1,9 +1,12 @@
 <html>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <head>
     <!--initialize jquery from js folder-->
     <script src="js/jquery-3.3.1.min.js"></script>
 
+    <!--reference style sheet-->
+    <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
@@ -13,22 +16,21 @@
         <div id="DOM">
         </div>
         
-    </div>
+    </div><br>
 
-    <a href="insert.html">insert</a>
-    <a href="delete.html">delete</a>
-    <a href="index.html">show data</a>
-    <a href="login.html">login</a>
-    <a href="register.html">register</a>
-    <a href="changepw.html">change password</a>
-    <br><br>
-    <a href="pwreset.html">password reset</a>
-
+    <footer class="footer">
+        <a href="insert.html" class="link">Insert</a> |
+        <a href="delete.html" class="link">Delete</a> |
+        <a href="index.html" class="link">Show Data</a> |
+        <a href="login.html" class="link">Login</a> |
+        <a href="register.html" class="link">Register</a> |
+        <a href="changepw.html" class="link">Change PW</a>
+    </footer>
     
     <script type="text/javascript">
         $(document).ready(function () {
             $.ajax({
-                url: "http://10.0.2.2/api/Question/fetchdata.php",
+                url: "http://localhost/api/Question/fetchdata.php",
                 type: "POST",
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
@@ -41,7 +43,7 @@
                     $.each(data, function (key, value) {
                         
                         //APPEND DATA AND DISPLAY IT
-                        DOM.append("<h3>" + value.Subject + "</h3><p>" + value.Description + "</p>" +  "<button onclick='sendButton("+ value.Question_ID +")'>respond</button></a>");
+                        DOM.append("<h3>" + value.Subject + "</h3><p>" + value.Description + "</p>" +  "<button onclick='sendButton("+ value.Question_ID +")'>respond</button></a>" + "<hr>");
                     });
                     
                     //if fail it will give this error
