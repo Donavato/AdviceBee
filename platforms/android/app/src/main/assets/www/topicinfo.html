@@ -38,7 +38,7 @@
 			//loop through array for the different topics
 			for(var a = 0; a < userdata.length; a++)
 			{
-				var userTopics = userdata[a].topic_name;
+				var userTopics = userdata[a].Topic_name;
 			}
 
 			//call ajax
@@ -68,9 +68,9 @@
 					for(var c = 0; c < data.length; c++)
 					{
 						//store topicName in variable to call on later
-						var topicName = data[c].topic_name;
+						var topicName = data[c].Topic_name;
 						//store topicID in value to use later
-						var topicID = data[c].topic_id;
+						var topicID = data[c].Topic_ID;
 						
 						//if user topic array is empty
 						if(userdata.length>0)
@@ -79,7 +79,7 @@
 							for(var d = 0; d < userdata.length ; d++)
 							{
 								//if topic id is present in both tables select the button
-								if(data[c].topic_id == userdata[d].topic_id)
+								if(data[c].Topic_ID == userdata[d].topic_id)
 								{
 									html += "<br>";
 									html += "<label class='switch'>";
