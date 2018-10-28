@@ -1,35 +1,44 @@
 <html>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<!--INITIALIZE JQUERY-->
-<script src="js/jquery-3.3.1.min.js"></script>
-<!--INITIALIZE J.VALIDATION PLUGIN-->
-<script src="js/jquery.validate.js"></script>
+<head>
+    <!--INITIALIZE JQUERY-->
+    <script src="js/jquery-3.3.1.min.js"></script>
+
+    <!--INITIALIZE J.VALIDATION PLUGIN-->
+    <script src="js/jquery.validate.js"></script>
+
+    <!--reference style sheet-->
+    <link rel="stylesheet" href="style.css">
+</head>
 
 <body>
+    <h1 class="h1">Create a New Password</h1>
     <form action="" id="change" method="POST">
 
         <label for="old_password"></label>
-        <input type="password" name="old_password" id="old_password" placeholder=""><br>
-
+        <input type="password" name="old_password" id="old_password" placeholder="Current Password"><br>
+        <br>
         <label for="new_password"></label>
-        <input type="password" name="new_password" id="new_password" placeholder=""><br>
-
+        <input type="password" name="new_password" id="new_password" placeholder="New Password"><br>
+        <br>
         <label for="confirm_password"></label>
-        <input type="password" name="confirm_password" id="confirm_password" placeholder=""><br>
+        <input type="password" name="confirm_password" id="confirm_password" placeholder="Confirm Password"><br>
 
-        <button type="submit" name="submit">Done</button>
+        <button type="submit" name="submit" id="submit">Done</button>
 
     </form>
 
 
-    <a href="insert.html">insert</a>
-    <a href="delete.html">delete</a>
-    <a href="index.html">show data</a>
-    <a href="login.html">login</a>
-    <a href="register.html">register</a>
-    <a href="changepw.html">change password</a>
-    <br><br>
-    <a href="pwreset.html">password reset</a>
+    <nav class="nav">
+        <a href="insert.html" class="link">Insert</a> |
+        <a href="delete.html" class="link">Delete</a> |
+        <a href="index.html" class="link">Show Data</a> |
+        <a href="login.html" class="link">Login</a> |
+        <a href="register.html" class="link">Register</a> |
+        <a href="changepw.html" class="link">Change PW</a> |
+        <a href="pwreset.html" class="link">Password Reset</a>
+    </nav>
 
 </body>
 
@@ -70,10 +79,12 @@
                     url: "http://10.0.2.2/api/Account/changepw.php",
                     data: dataString,
                     success: function (data) {
-                        alert(data);
+                        alert("Password has been changed.");
                         //TEMPORARY DIRECT LOCATION
-                        window.location.replace("login.html");
-                    }
+                        window.location.href = "login.html";
+                    }, error: function(){
+                    //alert(JSON.stringify(data));
+                }
                 });
             }
         });

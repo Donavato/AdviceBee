@@ -1,31 +1,26 @@
 <html>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<head>
     <!--INITIALIZE JQUERY-->
     <script src ="js/jquery-3.3.1.min.js"></script>
     <!--INITIALIZE J.VALIDATION PLUGIN-->
     <script src ="js/jquery.validate.js"></script>
 
-    <body>
-        <p>Just enter the email address for your account and
-             we will send you a password reset verification code. </p>
-        <form action="" id="pwreset" method="POST">
-    
-            <label for="Email"></label>
-            <input type="text" name="email" id="email" placeholder="E-mail"><br>
+    <!--reference style sheet-->
+    <link rel="stylesheet" href="style.css">
+</head>
 
-            <button type="submit" name="submit">Send Code</button>
-    
-        </form>
+<body>
+    <h3 class="h3">Just enter the email address for your account and
+        we will send you a password reset verification code. </h3>
+    <form action="" id="pwreset" method="POST">
+        <label for="Email"></label>
+        <input type="text" name="email" id="email" placeholder="E-mail"><br>
 
-        <a href="insert.html">insert</a>
-        <a href="delete.html">delete</a>
-        <a href="index.html">show data</a>
-        <a href="login.html">login</a>
-        <a href="register.html">register</a>
-        <a href="changepw.html">change password</a>
-        <br><br>
-        <a href="pwreset.html">password reset</a>
-
-    </body>
+        <button type="submit" name="submit" id="submit">Send Code</button>
+    </form>
+</body>
 
     <script type="text/javascript">
         $(document).ready(function() {
@@ -53,7 +48,7 @@
                     data: dataString,
                     success: function(data) {
                         alert("Password has been reset and sent");
-                        window.location.replace("login.html");
+                        window.location.href = "login.html";
                 }
             });
         }

@@ -1,31 +1,40 @@
 <html>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+<head>
 <!--initialize jquery from js folder-->
 <script src="js/jquery-3.3.1.min.js"></script>
 
 <!--Ajax implementation-->
 
+<!--reference style sheet-->
+<link rel="stylesheet" href="style.css">
+</head>
+
+
 <body>
     <!--button layout-->
-    <h1>Ask a Question</h1>
+    <h1 class="h1">Ask a Question</h1>
     <div class="list">
         <input type="hidden" id="id" value="" />
         <div class="item">
-            <label>Subject</label>
+            <label class="label">Subject</label>
             <input type="text" id="Subject" value="" />
         </div>
 
         <div class="item">
-            <label>Description</label>
+            <label class="label">Description</label>
             <input type="text" id="Description" value="" />
         </div>
         <br>
         <div class="item">
+            <label class="label">Topic</label>
             <select id="topics_list">
             </select>
         </div>
         <br>
         <div class="item">
+            <label class="label">Type</label>
             <select id="question_type">
             </select>
         </div>
@@ -37,14 +46,15 @@
 
     <br>
     <br>
-    <a href="insert.html">insert</a>
-    <a href="delete.html">delete</a>
-    <a href="index.html">show data</a>
-    <a href="login.html">login</a>
-    <a href="register.html">register</a>
-    <a href="changepw.html">change password</a>
-    <br><br>
-    <a href="pwreset.html">password reset</a>
+    <nav class="nav">
+        <a href="insert.html" class="link">Insert</a> |
+        <a href="delete.html" class="link">Delete</a> |
+        <a href="index.html" class="link">Show Data</a> |
+        <a href="login.html" class="link">Login</a> |
+        <a href="register.html" class="link">Register</a> |
+        <a href="changepw.html" class="link">Change PW</a> |
+        <a href="pwreset.html" class="link">Password Reset</a>
+    </nav>
 
     <script type="text/javascript">
         $(document).ready(function () {
@@ -88,7 +98,7 @@
                             if (data == "success") {
                                 alert("inserted");
                                 $("#insert").val('submit');
-                                window.location.replace("index.html");
+                                window.location.href = "index.html";
                                 
                             } else if (data == "error") {
                                 alert("error");
