@@ -52,7 +52,7 @@
                     var DOM = $('#advices');
 
                     $.each(data, function (key, value) {
-                        DOM.append("<p>" + value.advice +"<br>"+ value.f_name + " " + value.l_name + "</p>");
+                        DOM.append("<p>" + value.advice +"<br>" + value.name + "</p>");
                     });
 
                 }, error: function (e) {
