@@ -1,18 +1,15 @@
 <html>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <head>
     <script src="js/jquery-3.3.1.min.js"></script>
 
-    <!--reference style sheet-->
-    <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-    <p id="Question"></p><hr>
+    <p id="Question"></p>
     <div id="advices">
-    </div><br>
+    </div>
     <form>
         <div id="advice">
         </div>
@@ -20,21 +17,19 @@
         <input type="button" id="submit" value="Submit">
     </form>
 
-    <footer class="footer">
-        <a href="insert.html" class="link">Insert</a> |
-        <a href="delete.html" class="link">Delete</a> |
-        <a href="index.html" class="link">Show Data</a> |
-        <a href="login.html" class="link">Login</a> |
-        <a href="register.html" class="link">Register</a> |
-        <a href="changepw.html" class="link">Change PW</a>
-    </footer>
-
+    <a href="insert.html">insert</a>
+    <a href="delete.html">delete</a>
+    <a href="index.html">show data</a>
+    <a href="login.html">login</a>
+    <a href="register.html">register</a>
+    <a href="changepw.html">change password</a>
+    <br><br>
+    <a href="pwreset.html">password reset</a>
 
     <!-- GET ID FROM URL -->
     <script type="text/javascript">
         
         var Question_ID = sessionStorage.questionID;
-
 
         $(document).ready(function () {
             var dataString = "Question_ID=" + Question_ID;
@@ -49,7 +44,7 @@
                     var DOM = $('#advices');
 
                     $.each(data, function (key, value) {
-                        DOM.append("<p>" + value.advice +"<br>"+ value.f_name + " " + value.l_name + "</p>" + "<hr>");
+                        DOM.append("<p>" + value.advice +"<br>" + value.name + "</p>");
                     });
 
                 }, error: function (e) {
@@ -111,7 +106,7 @@
                     data: dataString,
                     success: function(data){
                         alert(JSON.stringify(data));
-                        window.location.replace("index.html");
+                        window.location.replace("index.html"); 
                     }, error: function(e){
                         alert(JSON.stringify(e));
                     }
