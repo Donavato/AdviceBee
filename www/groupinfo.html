@@ -71,6 +71,10 @@
 						var groupName = data[c].group_name;
 						//store group id in value to use later
 						var groupID = data[c].group_id;
+
+						//if user topic array is empty
+						if(userdata.length>0)
+						{
 						
 						//cycle through users followed groups
 						for(var d = 0; d < userdata.length ; d++)
@@ -97,6 +101,18 @@
 								html += "</br>";
 							}
 						}
+					}
+
+					//output all buttons as unselected 
+					else
+					{
+						html += "<br>";
+						html += "<label class='switch'>";
+							html += "<input type='checkbox' name = groupid id= groupID value="+ groupID +" onchange='editGroup(this)'>";
+							html += "<span class='slider round'>" + groupName + "</span>";
+						html += "</label>";
+						html += "</br>";
+					}
 			
 					}
 					//replacing the tbody of table

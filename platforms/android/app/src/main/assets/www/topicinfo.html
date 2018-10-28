@@ -72,33 +72,48 @@
 						//store topicID in value to use later
 						var topicID = data[c].topic_id;
 						
-						//cycle through users followed groups
-						for(var d = 0; d < userdata.length ; d++)
+						//if user topic array is empty
+						if(userdata.length>0)
 						{
-							//if topic id is present in both tables select the button
-							if(data[c].topic_id == userdata[d].topic_id)
+							//cycle through users followed groups
+							for(var d = 0; d < userdata.length ; d++)
 							{
-								html += "<br>";
-								html += "<label class='switch'>";
-									html += "<input type='checkbox' name = topicid id= topicID value="+ topicID +" onchange='editTopic(this)' checked>";
-									html += "<span class='slider round'>" + topicName + "</span>";
-								html += "</label>";
-								html += "</br>";
-								break;
-							}
-							//if ran through entire user data array and no match output as unselected
-							else if ((d+1) == userdata.length) 
-							{
-								html += "<br>";
-								html += "<label class='switch'>";
-									html += "<input type='checkbox' name = topicid id= topicID value="+ topicID +" onchange='editTopic(this)'>";
-									html += "<span class='slider round'>" + topicName + "</span>";
-								html += "</label>";
-								html += "</br>";
+								//if topic id is present in both tables select the button
+								if(data[c].topic_id == userdata[d].topic_id)
+								{
+									html += "<br>";
+									html += "<label class='switch'>";
+										html += "<input type='checkbox' name = topicid id= topicID value="+ topicID +" onchange='editTopic(this)' checked>";
+										html += "<span class='slider round'>" + topicName + "</span>";
+									html += "</label>";
+									html += "</br>";
+									break;
+								}
+								//if ran through entire user data array and no match, output as unselected
+								else if ((d+1) == userdata.length) 
+								{
+									html += "<br>";
+									html += "<label class='switch'>";
+										html += "<input type='checkbox' name = topicid id= topicID value="+ topicID +" onchange='editTopic(this)'>";
+										html += "<span class='slider round'>" + topicName + "</span>";
+									html += "</label>";
+									html += "</br>";
+								}
 							}
 						}
-			
+
+						//output all buttons as unselected 
+						else
+						{
+							html += "<br>";
+							html += "<label class='switch'>";
+								html += "<input type='checkbox' name = topicid id= topicID value="+ topicID +" onchange='editTopic(this)'>";
+								html += "<span class='slider round'>" + topicName + "</span>";
+							html += "</label>";
+							html += "</br>";
+						}			
 					}
+					
 					//replacing the tbody of table
 					document.getElementById("gettopicinfo").innerHTML = html;
 					
