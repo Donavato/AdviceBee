@@ -8,9 +8,8 @@
     //database email comparison to find if email exists
     $result = $con->query("SELECT * FROM users WHERE email='$email'");
     if($result->num_rows == 0){ //if the user doesnt exist
-        $_SESSION['message'] = "user doesnt exist";
-        $response =  "<br> user doesnt exist <br>";
-        echo json_encode($response);
+        $loggedIn =  "user doesnt exist";
+        echo json_encode($loggedIn);
         die();  
     }   
     else{ //user exists
@@ -34,15 +33,18 @@
             //Will be used to check if users session is logged in/allowed to do things
             $_SESSION['logged_in'] = true;
             $response = "Login Successful!"; 
-            echo json_encode($response);        
-            die();  
+            // echo json_encode($response);        
+            // die();  
         }
         else{
             $_SESSION['message'] = "You have entered the wrong password, please try again";
             $_SESSION['logged_in'] = false;
-            $response = "not logged in <br>";
-            echo json_encode($response);
-            die();      
+            $response = "not logged in";
+            // echo json_encode($response);
+            // die();      
         }
+        $loggedIn = $_SESSION['logged_in'];
+        echo json_encode($loggedIn);
+        die();
     }        
 ?>

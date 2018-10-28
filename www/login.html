@@ -43,8 +43,14 @@
                 dataType: "json",
                 data: dataString,
                 success: function(data){
-                    alert(data);
-                    window.location.replace("index.html");
+                    
+                    if(data==true){
+                        alert("Logged in Successfully");
+                        window.location.replace("index.html");
+                    }else{
+                        alert("Login Failed");
+                    }
+                    
                 }, error: function(e){
                     alert(JSON.stringify(e));
                 }

@@ -20,11 +20,14 @@ if(isset($_POST['change']))
     if(password_verify($oldpw, $user['passwrd'])){
         //IF VALID CHANGE THE PASSWORD
         mysqli_query($con, "UPDATE `users` SET passwrd='$hashed_newpassword' WHERE email='$uemail'") or die(mysql_error());
+        $response = "Password has been changed.";
+        echo json_encode($response);
+        die();
     }
     else{
-        echo "Current password doesnt match. Password enter not valid";
-        //json_encode($error);
-        //die();
+        $response = "Current password does not match. Password entered not valid.";
+        echo json_encode($response);
+        die();
     }
 
 
