@@ -15,16 +15,6 @@
             <button type="submit" name="submit">Send Code</button>
     
         </form>
-
-        <a href="insert.html">insert</a>
-        <a href="delete.html">delete</a>
-        <a href="index.html">show data</a>
-        <a href="login.html">login</a>
-        <a href="register.html">register</a>
-        <a href="changepw.html">change password</a>
-        <br><br>
-        <a href="pwreset.html">password reset</a>
-
     </body>
 
     <script type="text/javascript">
@@ -49,11 +39,11 @@
 
                 $.ajax({
                     type: "POST",
-                    url: "http://10.0.2.2/api/Account/pwreset.php",
+                    url: "http://localhost/api/Account/pwreset.php",
                     data: dataString,
                     success: function(data) {
                         alert("Password has been reset and sent");
-                        window.location.replace("login.html");
+                        window.location.href = "login.html";
                 }
             });
         }

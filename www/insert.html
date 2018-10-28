@@ -42,16 +42,13 @@
     <a href="index.html">show data</a>
     <a href="login.html">login</a>
     <a href="register.html">register</a>
-    <a href="changepw.html">change password</a>
-    <br><br>
-    <a href="pwreset.html">password reset</a>
 
     <script type="text/javascript">
         $(document).ready(function () {
             //PULL ALL TOPICS AND STORE THEM INTO A DROP DOWN FOR topics_list
             $.ajax({
                 type: "POST",
-                url: "http://10.0.2.2/api/topics.php",
+                url: "http://localhost/api/topics.php",
                 success: function (response) {
                     var data = JSON.parse(JSON.stringify(response));
                     var text = "";
@@ -62,7 +59,7 @@
             //PULL ALL QUESTION TYPES AND PUT THEM INTO A DROPDOWN question_type
             $.ajax({
                 type: "POST",
-                url: "http://10.0.2.2/api/Question/questionType.php",
+                url: "http://localhost/api/Question/questionType.php",
                 success: function (response) {
                     var data = JSON.parse(response);
                     var text = "";
@@ -82,13 +79,13 @@
                 if ($.trim(Description).length > 0 & $.trim(Subject).length > 0) {
                     $.ajax({
                         type: "POST",
-                        url: "http://10.0.2.2/api/Question/insert.php",
+                        url: "http://localhost/api/Question/insert.php",
                         data: dataString,
                         success: function (data) {
                             if (data == "success") {
                                 alert("inserted");
                                 $("#insert").val('submit');
-                                window.location.replace("index.html");
+                                window.location.href = "index.html";
                                 
                             } else if (data == "error") {
                                 alert("error");
