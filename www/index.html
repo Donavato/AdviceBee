@@ -25,7 +25,7 @@
     <script type="text/javascript">
         $(document).ready(function () {
             $.ajax({
-                url: "http://localhost/api/Question/fetchdata.php",
+                url: "http://10.0.2.2/api/Question/fetchdata.php",
                 type: "POST",
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
@@ -36,18 +36,24 @@
                     
                     //GET DATA AND PARSE IT
                     $.each(data, function (key, value) {
-                        //STORE QUESTION ID IN URL FOR TRANSIT TO ADVICE.HTML
-                        var link = new URL("http://"+ window.location.host + "/advice.html");
-                        link.searchParams.append("Question",value.Question_ID);
+                        
                         //APPEND DATA AND DISPLAY IT
-                        DOM.append("<h3>" + value.Subject + "</h3><p>" + value.Description + "</p>" + '<a href="'+link.toString() + '" + ><button>respond</button></a>');
+                        DOM.append("<h3>" + value.Subject + "</h3><p>" + value.Description + "</p>" +  "<button onclick='sendButton("+ value.Question_ID +")'>respond</button></a>");
                     });
+                    
                     //if fail it will give this error
                 }, error: function (e) {
                     alert("failed to work");
                 }
+
             });
+
         });
+        function sendButton(questionID){
+            sessionStorage.questionID = questionID;
+            console.log(questionID);
+            window.location.replace("advice.html");
+        }
     </script>
 </body>
 

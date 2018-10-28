@@ -22,7 +22,6 @@
         
         var Question_ID = sessionStorage.questionID;
 
-
         $(document).ready(function () {
             var dataString = "Question_ID=" + Question_ID;
             //LIST ADVICES GIVEN FOR EACH PARTICULAR QUESTION
@@ -36,7 +35,7 @@
                     var DOM = $('#advices');
 
                     $.each(data, function (key, value) {
-                        DOM.append("<p>" + value.advice +"<br>" + value.name + "</p>");
+                        DOM.append("<p>" + value.advice + "</p>");
                     });
 
                 }, error: function (e) {
