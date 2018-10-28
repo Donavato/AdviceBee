@@ -28,7 +28,7 @@
         $(document).ready(function () {
             
             $.ajax({
-                url: "http://localhost/api/Question/myQuestions.php",
+                url: "http://10.0.2.2/api/Question/myQuestions.php",
                 type: "POST",
                 //contentType: "application/json; charset=utf-8",
                 dataType: "json",
@@ -55,7 +55,7 @@
             var dataString = "Question_ID=" + Question_id;
             console.log(Question_id);
             $.ajax({
-                url: "http://localhost/api/Question/delete.php",
+                url: "http://10.0.2.2/api/Question/delete.php",
                 type: "POST",
                 //contentType: "application/json; charset=utf-8",
                 dataType: "json",
@@ -70,7 +70,7 @@
         }
         function updatelist(){
             $.ajax({
-                url: "http://localhost/api/Question/myQuestions.php",
+                url: "http://10.0.2.2/api/Question/myQuestions.php",
                 type: "POST",
                 //contentType: "application/json; charset=utf-8",
                 dataType: "json",

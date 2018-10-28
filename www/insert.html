@@ -51,7 +51,7 @@
             //PULL ALL TOPICS AND STORE THEM INTO A DROP DOWN FOR topics_list
             $.ajax({
                 type: "POST",
-                url: "http://localhost/api/topics.php",
+                url: "http://10.0.2.2/api/topics.php",
                 success: function (response) {
                     var data = JSON.parse(JSON.stringify(response));
                     var text = "";
@@ -62,7 +62,7 @@
             //PULL ALL QUESTION TYPES AND PUT THEM INTO A DROPDOWN question_type
             $.ajax({
                 type: "POST",
-                url: "http://localhost/api/Question/questionType.php",
+                url: "http://10.0.2.2/api/Question/questionType.php",
                 success: function (response) {
                     var data = JSON.parse(response);
                     var text = "";
@@ -82,7 +82,7 @@
                 if ($.trim(Description).length > 0 & $.trim(Subject).length > 0) {
                     $.ajax({
                         type: "POST",
-                        url: "http://localhost/api/Question/insert.php",
+                        url: "http://10.0.2.2/api/Question/insert.php",
                         data: dataString,
                         success: function (data) {
                             if (data == "success") {

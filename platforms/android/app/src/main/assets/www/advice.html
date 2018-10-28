@@ -17,11 +17,19 @@
         <input type="button" id="submit" value="Submit">
     </form>
 
+    <a href="insert.html">insert</a>
+    <a href="delete.html">delete</a>
+    <a href="index.html">show data</a>
+    <a href="login.html">login</a>
+    <a href="register.html">register</a>
+    <a href="changepw.html">change password</a>
+    <br><br>
+    <a href="pwreset.html">password reset</a>
+
     <!-- GET ID FROM URL -->
     <script type="text/javascript">
         
         var Question_ID = sessionStorage.questionID;
-
 
         $(document).ready(function () {
             var dataString = "Question_ID=" + Question_ID;
@@ -98,7 +106,7 @@
                     data: dataString,
                     success: function(data){
                         alert(JSON.stringify(data));
-                        window.location.replace("index.html");
+                        window.location.replace("index.html"); 
                     }, error: function(e){
                         alert(JSON.stringify(e));
                     }
