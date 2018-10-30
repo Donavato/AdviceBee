@@ -12,6 +12,9 @@
     },
     "cordova-plugin-firebase": {
       "PACKAGE_NAME": "com.Wayne.AdviceBee"
+    },
+    "cordova-plugin-camera": {
+      "PACKAGE_NAME": "com.Wayne.AdviceBee"
     }
   },
   "dependent_plugins": {}

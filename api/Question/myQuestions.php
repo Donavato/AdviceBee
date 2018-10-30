@@ -1,7 +1,7 @@
 <?php
     include "../Account/db.php";
     header('Content-Type: application/json');
-
+    //Pull all questions the current logged in user has made
     $user_ID = $_SESSION['user_ID'];
     
     $dataquery = mysqli_query($con, "SELECT * FROM Questions WHERE user_ID='$user_ID'");

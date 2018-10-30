@@ -1,6 +1,7 @@
 <?php
     include "../Account/db.php";
     header('Content-Type: application/json');
+    //FORMAT ADVICE 
     $Question_ID = $_POST["Question_ID"];
     
     $dataquery = mysqli_query($con, "SELECT * FROM Questions WHERE Question_ID='$Question_ID'");
