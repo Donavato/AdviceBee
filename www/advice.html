@@ -37,7 +37,7 @@
             var dataString = "Question_ID=" + Question_ID;
             //LIST ADVICES GIVEN FOR EACH PARTICULAR QUESTION
             $.ajax({
-                url: "http://10.0.2.2/api/Advice/listadvices.php",
+                url: "http://localhost/api/Advice/listadvices.php",
                 type: "POST",
                 dataType: "json",
                 data: dataString,
@@ -56,7 +56,7 @@
             var questionType;
 
             $.ajax({
-                url: "http://10.0.2.2/api/Advice/Advice.php",
+                url: "http://localhost/api/Advice/Advice.php",
                 type: "POST",
                 dataType: "json",
                 data: dataString,
@@ -103,7 +103,7 @@
                 var dataString = "Question_ID=" + Question_ID + "&advice=" + advice;   
                 
                 $.ajax({
-                    url: "http://10.0.2.2/api/Advice/giveAdvice.php",
+                    url: "http://localhost/api/Advice/giveAdvice.php",
                     type: "POST",
                     dataType: "json",
                     data: dataString,
