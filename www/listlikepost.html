@@ -26,15 +26,13 @@
         <a href="register.html" class="link">Register</a> |
         <a href="changepw.html" class="link">Change PW</a> |
         <a href="pwreset.html" class="link">Password Reset</a>
-        <a href="listlikepost.html" class="link">List Like post</a>
     </nav>
-    
+
     <script type="text/javascript">
         $(document).ready(function () {
             $.ajax({
-                url: "http://localhost/api/Question/fetchdata.php",
+                url: "http://localhost/api/Question/listlikequestion.php",
                 type: "POST",
-                contentType: "application/json; charset=utf-8",
                 dataType: "json",
                 data: "param=no",
                 //on success it will call this function
@@ -45,8 +43,55 @@
                     $.each(data, function (key, value) {
                         
                         //APPEND DATA AND DISPLAY IT
+                        DOM.append("<h3>" + value.Subject + "</h3><p>" + value.Description + "</p>" + "<button onclick='unlikeButton("+ value.Question_ID +")'>unlike</button></a>" + "<button onclick='sendButton("+ value.Question_ID +")'>respond</button></a>" + "<hr>");
+                    });
+                    
+                    //if fail it will give this error
+                }, error: function (e) {
+                    alert("failed to work");
+                }
+
+            });
+        });
+
+        function sendButton(questionID){
+            sessionStorage.questionID = questionID;
+            console.log(questionID);
+            window.location.replace("advice.html");
+        }
+        function unlikeButton(questionID){
+            var Question_ID = questionID;
+
+            var dataString = "Question_ID=" + Question_ID;
+            $.ajax({
+                url: "http://localhost/api/Question/unlikequestion.php",
+                type: "POST",
+                dataType: "json",
+                data: dataString,
+                //on success it will call this function
+                success: function (data) {
+                    alert(data);
+                    updatelist();
+                }
+            });
+        }
+        //UPDATES THE LIST IF A QUESTION IS UNLIKED
+        function updatelist(){
+            $.ajax({
+                url: "http://localhost/api/Question/listlikequestion.php",
+                type: "POST",
+                dataType: "json",
+                data: "param=no",
+                //on success it will call this function
+                success: function (data) {
+                    var DOM = $('#DOM');
+                    
+                    //GET DATA AND PARSE IT
+                    $.each(data, function (key, value) {
+                        document.getElementById("DOM").innerHTML = "";
+                        //APPEND DATA AND DISPLAY IT
                         DOM.append("<h3>" + value.Subject + "</h3><p>" + value.Description + "</p>" + 
-                        "<button onclick='likeButton("+ value.Question_ID +")'>Like</button></a>" + 
+                        "<button onclick='unlikeButton("+ value.Question_ID +")'>unlike</button></a>" + 
                         "<button onclick='sendButton("+ value.Question_ID +")'>respond</button></a>" + "<hr>");
                     });
                     
@@ -56,33 +101,8 @@
                 }
 
             });
-
-        });
-        function sendButton(questionID){
-            sessionStorage.questionID = questionID;
-            console.log(questionID);
-            window.location.replace("advice.html");
-        }
-        function likeButton(questionID){
-            var Question_ID = questionID;
-            //console.log(questionID);
-            //window.location.replace("register.html");
-
-            var dataString = "Question_ID=" + Question_ID;
-            $.ajax({
-                url: "http://localhost/api/Question/likequestion.php",
-                type: "POST",
-                dataType: "json",
-                data: dataString,
-                //on success it will call this function
-                success: function (data) {
-                    alert(data);
-                }
-
-            });
-
         }
     </script>
 
-    </body>
+</body>
 </html>
