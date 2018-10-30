@@ -16,8 +16,8 @@
         <div id="DOM">
         </div>
         
-    </div><br>
-
+    </div>
+    <br>
     <nav class="nav">
         <a href="insert.html" class="link">Insert</a> |
         <a href="delete.html" class="link">Delete</a> |
@@ -26,7 +26,8 @@
         <a href="register.html" class="link">Register</a> |
         <a href="changepw.html" class="link">Change PW</a> |
         <a href="pwreset.html" class="link">Password Reset</a> |
-        <a href="profileImages.html" class="link">Profile Images</a>
+        <a href="profileImages.html" class="link">Profile Images</a> |
+        <a href="logout.html" class="link">Logout</a>
     </nav>
     
     <script type="text/javascript">
@@ -45,7 +46,9 @@
                     $.each(data, function (key, value) {
                         
                         //APPEND DATA AND DISPLAY IT
-                        DOM.append("<h3>" + value.Subject + "</h3><p>" + value.Description + "</p>" +  "<button onclick='sendButton("+ value.Question_ID +")'>respond</button></a>" + "<hr>");
+                        DOM.append("<h3>" + value.Subject + "</h3><p>" + value.Description + "</p>" + 
+                        "<button onclick='likeButton("+ value.Question_ID +")'>Like</button></a>" + 
+                        "<button onclick='sendButton("+ value.Question_ID +")'>respond</button></a>" + "<hr>");
                     });
                     
                     //if fail it will give this error
@@ -60,6 +63,25 @@
             sessionStorage.questionID = questionID;
             console.log(questionID);
             window.location.replace("advice.html");
+        }
+        function likeButton(questionID){
+            var Question_ID = questionID;
+            //console.log(questionID);
+            //window.location.replace("register.html");
+
+            var dataString = "Question_ID=" + Question_ID;
+            $.ajax({
+                url: "http://10.0.2.2/api/Question/likequestion.php",
+                type: "POST",
+                dataType: "json",
+                data: dataString,
+                //on success it will call this function
+                success: function (data) {
+                    alert(data);
+                }
+
+            });
+
         }
     </script>
 

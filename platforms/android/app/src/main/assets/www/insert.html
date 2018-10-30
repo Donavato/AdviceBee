@@ -2,13 +2,13 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <head>
-<!--initialize jquery from js folder-->
-<script src="js/jquery-3.3.1.min.js"></script>
+    <!--initialize jquery from js folder-->
+    <script src="js/jquery-3.3.1.min.js"></script>
 
-<!--Ajax implementation-->
+    <!--Ajax implementation-->
 
-<!--reference style sheet-->
-<link rel="stylesheet" href="style.css">
+    <!--reference style sheet-->
+    <link rel="stylesheet" href="style.css">
 </head>
 
 
@@ -53,7 +53,8 @@
         <a href="login.html" class="link">Login</a> |
         <a href="register.html" class="link">Register</a> |
         <a href="changepw.html" class="link">Change PW</a> |
-        <a href="pwreset.html" class="link">Password Reset</a>
+        <a href="pwreset.html" class="link">Password Reset</a> |
+        <a href="logout.html" class="link">Logout</a>
     </nav>
 
     <script type="text/javascript">
@@ -99,9 +100,15 @@
                                 alert("inserted");
                                 $("#insert").val('submit');
                                 window.location.href = "index.html";
-                                
+
                             } else if (data == "error") {
                                 alert("error");
+                            }
+                            else if (data == "No account") {
+                                alert("Not signed in");
+                            }
+                            else if (data == "Not active"){
+                                alert("account not verified");
                             }
                         }
                     });

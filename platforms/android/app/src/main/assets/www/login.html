@@ -25,7 +25,8 @@
         <a href="login.html" class="link">Login</a> |
         <a href="register.html" class="link">Register</a> |
         <a href="changepw.html" class="link">Change PW</a> |
-        <a href="pwreset.html" class="link">Password Reset</a>
+        <a href="pwreset.html" class="link">Password Reset</a> |
+        <a href="logout.html" class="link">Logout</a>
     </nav>
     <br><br>
     
@@ -53,6 +54,7 @@
                         alert("Logged in Successfully");
                         window.location.replace("index.html");
                     }else{
+                        console.log(data);
                         alert("Login Failed");
                     }
                     
