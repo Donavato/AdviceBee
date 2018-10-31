@@ -20,6 +20,11 @@ body {
     font-weight: bold;
 }
 
+.hyperlink {
+    position: relative;
+    left: 30px;
+}
+
 .link {
     text-decoration: none;
     color: black;
@@ -29,31 +34,60 @@ body {
 p {
     font-family: "Segoe UI";
     padding: 0px 10px;
+    text-align: center;
 }
 
 /* Style for input forms */
 input {
-    width: 100%;
+    width: 285px;
+    height: 41px;
     padding: 15px 10px;
-    margin: 1px 0;
-    box-sizing: border-box;
-    border-radius: 5px;
+    margin: 0 auto;
+    display: block;
+    border-style: solid;
+    border-width: 1px;
+    font-size: 15px;
+    font-family: "Segoe UI";
+}
+
+#submitReg {
+    width: 158;
+    height: 54px;
+    background-color: #69e26d;
+    font-size: 20px;
+    color: white;
+    padding: 14px 20px;
+    display: block;
+    margin: 0 auto;
+    border: none;
+    cursor: pointer;    
+    font-family: "Segoe UI";
+}
+
+#Subject {
+    width: 230px;
+    height: 26px;
+    padding: 15px 10px;
+    margin: 0 auto;
+    display: block;
+    border-style: solid;
+    border-width: 1px;
     font-size: 15px;
     font-family: "Segoe UI";
 }
 
 #insert {
-    width: 100%;
-    background-color: #00e600;
+    width: 158;
+    height: 54px;
+    background-color: #69e26d;
     font-size: 20px;
     color: white;
     padding: 14px 20px;
-    margin: 15px 0;
+    display: block;
+    margin: 0 auto;
     border: none;
-    border-radius: 5px;
     cursor: pointer;    
     font-family: "Segoe UI";
-    font-weight: bold;
 }
 
 #delete {
@@ -86,14 +120,12 @@ input {
 }
 
 /* Textarea for entering questions */
-textarea {
-    width: 100%;
-    height: 150px;
-    padding: 12px 20px;
-    box-sizing: border-box;
-    border: 2px solid #ccc;
-    border-radius: 4px;
+#Description {
+    width: 292px;
+    height: 183px;
+    border: 2px solid #707070;
     font-size: 16px;
+    font-family: "Segoe UI";
     resize: none;
 }
 
@@ -116,10 +148,10 @@ hr {
 
 /* Style for drop down menus */
 select {
-    width: 100%;
+    width: 130px;
+    height: 25px;
     padding: 16px 20px;
-    border: none;
-    border-radius: 5px;
+    border: 1px solid #707070;
     font-size: 16px;
 }
 
@@ -128,6 +160,7 @@ select {
     text-align: center;
     color: rgb(121, 121, 121);
     font-family: "Segoe UI";
+    font-size: 20px;
 }
 
 /* Header 3 styling */
@@ -211,21 +244,23 @@ h3 {
     width: 100%;
     background-color: #ffffff;
     overflow: auto;
+    border-style: solid;
+    border-width: 1px;
 }
 
 .icon-bar a {
 float: left;
 text-align: center;
 width: 14.25%;
-padding: 11px 5px;
+padding: 5px 0px;
 }
 
 .icon-location {
     position: fixed;
-    bottom: 5px;
+    bottom: 0px;
+    left: 0px;
     width: 100%;
 }
-
 
 
 
