@@ -1,18 +1,20 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta http-equiv="Content-Security-Policy" 
-            content="default-src 'self' data: gap: https://ssl.gstatic.com 'unsafe-eval'; 
-            style-src 'self' 'unsafe-inline'; 
+
+<head>
+    <!--initialize jquery from js folder-->
+    <script src="js/jquery-3.3.1.min.js"></script>
+
+    <meta http-equiv="Content-Security-Policy" content=" style-src 'self' 'unsafe-inline'; 
             media-src *; 
             script-src 'self' 'unsafe-inline';
             img-src 'self' data: content:;">
-        <meta name="format-detection" content="telephone=no">
-        <meta name="msapplication-tap-highlight" content="no">
-        <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
-        <title>Take Pictures</title>
-        <style>
-            #btn{
+    <meta name="format-detection" content="telephone=no">
+    <meta name="msapplication-tap-highlight" content="no">
+    <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
+    <title>Take Pictures</title>
+    <style>
+        #btn{
                 font-size: 1.5rem;
                 line-height: 2.5rem;
                 margin: 1rem;
@@ -23,65 +25,98 @@
                 margin: 1rem;
             }
         </style>
-    </head>
-    <body>
-        <div class="page">
-            <p><img src="/ui/create.png" alt="image" id="photo" /></p>
-            <p><button id="btn">TAKE</button></p>
-            <br>
-            <p><button id="btn2">UPLOAD</button></p>
-            <p id="msg"></p>
-        </div>
-        <script type="text/javascript" src="cordova.js"></script>
-        <script>
-            let app = {
-                //wait for button to be clicked
-                init: function(){
-                    document.getElementById('btn').addEventListener('click', app.takephoto);
-                    document.getElementById('btn2').addEventListener('click', app.pullphoto);
-                },
-                //when button clicked start this function
-                takephoto: function(){
-                    //options for camera function
-                    let opts = {
-                        quality: 25,
-                        destinationType: Camera.DestinationType.FILE_URI,
-                        sourceType: Camera.PictureSourceType.CAMERA,
-                        mediaType: Camera.MediaType.PICTURE,
-                        encodingType: Camera.EncodingType.JPEG,
-                        cameraDirection: Camera.Direction.BACK,
-                        targetWidth: 100,
-                        targetHeight: 200
-                    };
-                    //navigate the page to the camera on the mobile app
-                    navigator.camera.getPicture(app.success, app.fail, opts);
-                },
-                pullphoto: function(){
-                    let opts = {
-                        quality: 25,
-                        destinationType: Camera.DestinationType.FILE_URI,
-                        sourceType: Camera.PictureSourceType.PHOTOLIBRARY,
-                        mediaType: Camera.MediaType.PICTURE,
-                        encodingType: Camera.EncodingType.JPEG,
-                        cameraDirection: Camera.Direction.BACK,
-                        targetWidth: 100,
-                        targetHeight: 200
-                    }
-                    navigator.camera.getPicture(app.success, app.fail, opts);
-                },
-                //ON SUCCESS use image URI file type. this is a string file type
-                success: function(image){
-                    document.getElementById('msg').textContent = image;
-                    document.getElementById('photo').src = image;
-                    console.log(image);
-                },
-                //FUNCTION FAILED
-                fail: function(response){
-                    document.getElementById('msg').textContent = response;
+</head>
+
+<body>
+    <div class="page">
+        <p><img alt="image" id="photo" /></p>
+        <br>
+        <p><img alt="image" id="photo2" /></p>
+        <!-- <p><img alt="image" id="photo2" /></p> -->
+        <p><button id="btn">TAKE</button></p>
+        <br>
+        <p><button id="btn2">UPLOAD</button></p>
+        <p id="msg"></p>
+        <br>
+        <button id="submit">Submit</button>
+    </div>
+    <script type="text/javascript" src="cordova.js"></script>
+    <script>
+        var image_Content;
+        let app = {
+            //wait for button to be clicked
+            init: function () {
+                document.getElementById('btn').addEventListener('click', app.takephoto);
+                document.getElementById('btn2').addEventListener('click', app.pullphoto);
+            },
+            //when button clicked start this function
+            takephoto: function () {
+                //options for camera function
+                let opts = {
+                    quality: 25,
+                    destinationType: Camera.DestinationType.DATA_URL,
+                    sourceType: Camera.PictureSourceType.CAMERA,
+                    mediaType: Camera.MediaType.PICTURE,
+                    encodingType: Camera.EncodingType.JPEG,
+                    cameraDirection: Camera.Direction.BACK,
+                    targetWidth: 100,
+                    targetHeight: 200
+                };
+                //navigate the page to the camera on the mobile app
+                navigator.camera.getPicture(app.success, app.fail, opts);
+            },
+            pullphoto: function () {
+                let opts = {
+                    quality: 25,
+                    destinationType: Camera.DestinationType.DATA_URL,
+                    sourceType: Camera.PictureSourceType.PHOTOLIBRARY,
+                    mediaType: Camera.MediaType.PICTURE,
+                    encodingType: Camera.EncodingType.JPEG,
+                    cameraDirection: Camera.Direction.BACK,
+                    targetWidth: 100,
+                    targetHeight: 200
                 }
-            };
-            
-            document.addEventListener('deviceready', app.init);
-        </script>
-    </body>
+                navigator.camera.getPicture(app.success, app.fail, opts);
+            },
+            //ON SUCCESS use image URI file type. this is a string file type
+            success: function (imageData) {
+                var image = document.getElementById('photo');
+                image.src = "data:image/jpeg;base64," + imageData;
+                document.getElementById('msg').textContent = imageData;
+                image_Content = "data:image/jpeg;base64," + imageData;
+                
+            },
+            //FUNCTION FAILED
+            fail: function (response) {
+                document.getElementById('msg').textContent = response;
+            }
+        };
+
+        document.addEventListener('deviceready', app.init);
+
+    </script>
+    <script>
+        $(document).ready(function () {
+            $("#submit").click(function () {
+                
+                $.ajax({
+                    url: "http://10.0.2.2/api/profile_image/profile.php",
+                    type: "POST",
+                    data: {
+                        base64: image_Content
+                    },
+                    success: function (data) {
+                        var imageURL = JSON.parse(data);
+                        var image = document.getElementById('photo2');
+                        
+                        image.src = imageURL;
+                    }, error: function (e) {
+                        alert("ERROR");
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+
 </html>
