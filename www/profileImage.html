@@ -14,11 +14,6 @@
     <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
     <title>Take Pictures</title>
     <style>
-        #btn{
-                font-size: 1.5rem;
-                line-height: 2.5rem;
-                margin: 1rem;
-            }
             #msg{
                 border: 1px solid #eee;
                 padding: 1rem;
@@ -40,12 +35,24 @@
         <br>
         <button id="submit">Submit</button>
     </div>
+    <nav class="nav">
+        <a href="insert.html" class="link">Insert</a> |
+        <a href="delete.html" class="link">Delete</a> |
+        <a href="index.html" class="link">Show Data</a> |
+        <a href="login.html" class="link">Login</a> |
+        <a href="register.html" class="link">Register</a> |
+        <a href="changepw.html" class="link">Change PW</a> |
+        <a href="pwreset.html" class="link">Password Reset</a> |
+        <a href="imageOption.html" class="link">Profile Images</a> |
+        <a href="logout.html" class="link">Logout</a>
+    </nav>
     <script type="text/javascript" src="cordova.js"></script>
     <script>
         var image_Content;
         let app = {
             //wait for button to be clicked
             init: function () {
+                //when one is clicked, send to option selected
                 document.getElementById('btn').addEventListener('click', app.takephoto);
                 document.getElementById('btn2').addEventListener('click', app.pullphoto);
             },
@@ -53,21 +60,22 @@
             takephoto: function () {
                 //options for camera function
                 let opts = {
-                    quality: 25,
-                    destinationType: Camera.DestinationType.DATA_URL,
-                    sourceType: Camera.PictureSourceType.CAMERA,
-                    mediaType: Camera.MediaType.PICTURE,
-                    encodingType: Camera.EncodingType.JPEG,
-                    cameraDirection: Camera.Direction.BACK,
-                    targetWidth: 100,
-                    targetHeight: 200
+                    quality: 25,                                           //Set the quality of image
+                    destinationType: Camera.DestinationType.DATA_URL,      //Set the filetype of image
+                    sourceType: Camera.PictureSourceType.CAMERA,           //Set the source of image (camera or library)
+                    mediaType: Camera.MediaType.PICTURE,                   //Declare media type as Picture
+                    encodingType: Camera.EncodingType.JPEG,                //Image type JPEG or PNG
+                    cameraDirection: Camera.Direction.BACK,                //Front or back Camera
+                    targetWidth: 100,                                      //Width by pixles
+                    targetHeight: 200                                      //Height by pixles
                 };
                 //navigate the page to the camera on the mobile app
                 navigator.camera.getPicture(app.success, app.fail, opts);
             },
             pullphoto: function () {
+                //options for Upload function
                 let opts = {
-                    quality: 25,
+                    quality: 25,                                         
                     destinationType: Camera.DestinationType.DATA_URL,
                     sourceType: Camera.PictureSourceType.PHOTOLIBRARY,
                     mediaType: Camera.MediaType.PICTURE,
@@ -80,19 +88,19 @@
             },
             //ON SUCCESS use image URI file type. this is a string file type
             success: function (imageData) {
-                var image = document.getElementById('photo');
-                image.src = "data:image/jpeg;base64," + imageData;
-                document.getElementById('msg').textContent = imageData;
-                image_Content = "data:image/jpeg;base64," + imageData;
+                var image = document.getElementById('photo');             //Take html of photo and put it in "image"
+                image.src = "data:image/jpeg;base64," + imageData;        //Make the src element of the image html tag and change it
+                document.getElementById('msg').textContent = imageData;   //display the string form of the imageData
+                image_Content = "data:image/jpeg;base64," + imageData;    //package the imagedata and string needed into the global variable
                 
             },
             //FUNCTION FAILED
             fail: function (response) {
-                document.getElementById('msg').textContent = response;
+                document.getElementById('msg').textContent = response;    //why did it fail, display it
             }
         };
 
-        document.addEventListener('deviceready', app.init);
+        document.addEventListener('deviceready', app.init);               //Another way to do document on ready
 
     </script>
     <script>
@@ -103,13 +111,14 @@
                     url: "http://10.0.2.2/api/profile_image/profile.php",
                     type: "POST",
                     data: {
-                        base64: image_Content
+                        base64: image_Content                             //Base64 data type send to API
                     },
                     success: function (data) {
-                        var imageURL = JSON.parse(data);
-                        var image = document.getElementById('photo2');
+                        //Recieve Image from API, display on "photo2" image section.
+                        var imageURL = JSON.parse(data);                  //Parse the string so remove JSON extra strings
+                        var image = document.getElementById('photo2');    //take html "photo2" and put it into image
                         
-                        image.src = imageURL;
+                        image.src = imageURL;                             //Change photo2 image src element to the image we parsed
                     }, error: function (e) {
                         alert("ERROR");
                     }

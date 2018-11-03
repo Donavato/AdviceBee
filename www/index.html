@@ -26,7 +26,7 @@
         <a href="register.html" class="link">Register</a> |
         <a href="changepw.html" class="link">Change PW</a> |
         <a href="pwreset.html" class="link">Password Reset</a> |
-        <a href="profileImages.html" class="link">Profile Images</a> |
+        <a href="imageOption.html" class="link">Profile Images</a> |
         <a href="logout.html" class="link">Logout</a>
     </nav>
 
@@ -59,7 +59,7 @@
                     $.each(data, function (key, value) {
                         
                         //APPEND DATA AND DISPLAY IT
-                        DOM.append("<h3>" + value.Subject + "</h3><p>" + value.Description + "</p>" + 
+                        DOM.append("<h3>" + value.Subject + "</h3><p>" + value.Description + "</p>" +
                         "<button onclick='likeButton("+ value.Question_ID +")'>Like</button></a>" + 
                         "<button onclick='sendButton("+ value.Question_ID +")'>respond</button></a>" + "<hr>");
                     });
