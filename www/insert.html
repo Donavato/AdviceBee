@@ -18,8 +18,7 @@
     <div class="list">
         <input type="hidden" id="id" value="" />
         <div class="item">
-            <p>Subject: <input type="text" id="Subject" value="" /></p>
-            
+            <input type="text" id="Subject" value="" placeholder="Subject"/><br>
         </div>
 
         <div class="item">
@@ -27,19 +26,19 @@
         </div>
         <br>
         <div class="item">
-            <label class="label">Topic</label>
+            <label class="label">Topic: </label>
             <select id="topics_list">
             </select>
         </div>
         <br>
         <div class="item">
-            <label class="label">Type</label>
+            <label class="label">Type: </label>
             <select id="question_type">
             </select>
         </div>
         <br>
         <div class="item">
-            <input type="button" id="insert" value="Insert" />
+            <input type="button" id="insert" value="Insert" class="submit"/>
         </div>
     </div>
 
@@ -74,7 +73,7 @@
             //PULL ALL TOPICS AND STORE THEM INTO A DROP DOWN FOR topics_list
             $.ajax({
                 type: "POST",
-                url: "http://10.0.2.2/api/topics.php",
+                url: "http://localhost/api/topics.php",
                 success: function (response) {
                     var data = JSON.parse(JSON.stringify(response));
                     var text = "";
@@ -85,7 +84,7 @@
             //PULL ALL QUESTION TYPES AND PUT THEM INTO A DROPDOWN question_type
             $.ajax({
                 type: "POST",
-                url: "http://10.0.2.2/api/Question/questionType.php",
+                url: "http://localhost/api/Question/questionType.php",
                 success: function (response) {
                     var data = JSON.parse(response);
                     var text = "";
@@ -105,7 +104,7 @@
                 if ($.trim(Description).length > 0 & $.trim(Subject).length > 0) {
                     $.ajax({
                         type: "POST",
-                        url: "http://10.0.2.2/api/Question/insert.php",
+                        url: "http://localhost/api/Question/insert.php",
                         data: dataString,
                         success: function (data) {
                             if (data == "success") {

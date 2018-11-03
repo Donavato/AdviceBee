@@ -30,6 +30,12 @@
         <a href="logout.html" class="link">Logout</a>
     </nav>
 
+    <div class="postButtonLoc">
+        <div class="postButton">
+            <a href="insert.html"><img src="create.png"></a>
+        </div>
+    </div>
+
     <!--Need to update page links. Ran into issues with img src links when in folders-->
     <div class="icon-location">
         <div class="icon-bar">
@@ -46,7 +52,7 @@
     <script type="text/javascript">
         $(document).ready(function () {
             $.ajax({
-                url: "http://10.0.2.2/api/Question/fetchdata.php",
+                url: "http://localhost/api/Question/fetchdata.php",
                 type: "POST",
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
@@ -84,7 +90,7 @@
 
             var dataString = "Question_ID=" + Question_ID;
             $.ajax({
-                url: "http://10.0.2.2/api/Question/likequestion.php",
+                url: "http://localhost/api/Question/likequestion.php",
                 type: "POST",
                 dataType: "json",
                 data: dataString,
