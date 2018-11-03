@@ -28,10 +28,22 @@
         <a href="pwreset.html" class="link">Password Reset</a>
     </nav>
 
+    <div class="icon-location">
+        <div class="icon-bar">
+            <a href="listlikepost.html"><img src="list.png"></a>
+            <a href="groups.html"><img src="groups.png"></a>
+            <a href="notification.html"><img src="notification.png"></a>
+            <a href="search.html"><img src="search.png"></a>
+            <a href="users.html"><img src="users.png"></a>
+            <a href="favorite.html"><img src="favorite.png"></a>
+            <a href="profile.html"><img src="profile.png"></a>
+        </div>
+    </div>
+
     <script type="text/javascript">
         $(document).ready(function () {
             $.ajax({
-                url: "http://10.0.2.2/api/Question/listlikequestion.php",
+                url: "http://localhost/api/Question/listlikequestion.php",
                 type: "POST",
                 dataType: "json",
                 data: "param=no",
@@ -64,7 +76,7 @@
 
             var dataString = "Question_ID=" + Question_ID;
             $.ajax({
-                url: "http://10.0.2.2/api/Question/unlikequestion.php",
+                url: "http://localhost/api/Question/unlikequestion.php",
                 type: "POST",
                 dataType: "json",
                 data: dataString,
@@ -78,7 +90,7 @@
         //UPDATES THE LIST IF A QUESTION IS UNLIKED
         function updatelist(){
             $.ajax({
-                url: "http://10.0.2.2/api/Question/listlikequestion.php",
+                url: "http://localhost/api/Question/listlikequestion.php",
                 type: "POST",
                 dataType: "json",
                 data: "param=no",

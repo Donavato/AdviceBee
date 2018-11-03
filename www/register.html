@@ -31,7 +31,7 @@
         <label for="confirm_password"></label>
         <input type="password" name="confirm_password" id="confirm_password" placeholder="Confirm Password"><br>
         <br>
-        <button type="submit" name="submit" id="submitReg">Done</button><br>
+        <button type="submit" name="submit" id="submit" class="submit">Done</button><br>
         <br>
 
     </form>
@@ -91,7 +91,7 @@
 
                     $.ajax({
                         type: "POST",
-                        url: "http://10.0.2.2/api/Account/register.php",
+                        url: "http://localhost/api/Account/register.php",
                         data: dataString,
                         success: function(data) {
                             alert("Registration Completed. Please verify your email by clicking the activation link that has been sent.");

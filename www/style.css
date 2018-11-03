@@ -23,6 +23,13 @@ body {
 .hyperlink {
     position: relative;
     left: 30px;
+    text-decoration: none;
+    font-family: "Segoe UI";
+}
+
+.reglink {
+    text-decoration: none;
+    font-family: "Segoe UI";
 }
 
 .link {
@@ -44,13 +51,13 @@ input {
     padding: 15px 10px;
     margin: 0 auto;
     display: block;
-    border-style: solid;
+    border-style: solid #707070;
     border-width: 1px;
     font-size: 15px;
     font-family: "Segoe UI";
 }
 
-#submitReg {
+.submit {
     width: 158;
     height: 54px;
     background-color: #69e26d;
@@ -59,7 +66,8 @@ input {
     padding: 14px 20px;
     display: block;
     margin: 0 auto;
-    border: none;
+    border-style: solid #707070;
+    border-width: 2px;
     cursor: pointer;    
     font-family: "Segoe UI";
 }
@@ -104,7 +112,7 @@ input {
     font-weight: bold; 
 }
 
-/* Creates submit button for forms */
+/* Creates submit button for forms 
 #submit {
     width: 100%;
     background-color: #00e600;
@@ -117,7 +125,7 @@ input {
     cursor: pointer;
     font-family: "Segoe UI";
     font-weight: bold;
-}
+}*/
 
 /* Textarea for entering questions */
 #Description {
@@ -150,9 +158,6 @@ hr {
 select {
     width: 130px;
     height: 25px;
-    padding: 16px 20px;
-    border: 1px solid #707070;
-    font-size: 16px;
 }
 
 /* Header 1 styling */
@@ -262,7 +267,42 @@ padding: 5px 0px;
     width: 100%;
 }
 
+/* Create Question and Filter button location */
+.postButtonLoc {
+    position: fixed;
+    top: 20px;
+    right: 10px;
+}
 
+.postButton {
+    width: 25%;
+}
+
+/* Facebook and Google signin buttons */
+.fb {
+    background-color: #3B5998;
+    color: white;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.google {
+    background-color: #dd4b39;
+    color: white;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+input,
+ .btn {
+    width: 285px;
+    padding: 12px;
+    border: none;
+    opacity: 0.85;
+    font-size: 17px;
+    line-height: 20px;
+    text-decoration: none;
+    display: block;
+    margin: 0 auto;
+}
 
 
 
