@@ -16,8 +16,8 @@
         <div id="DOM">
         </div>
         
-    </div>
-    <br>
+    </div><br>
+
     <nav class="nav">
         <a href="insert.html" class="link">Insert</a> |
         <a href="delete.html" class="link">Delete</a> |
@@ -65,9 +65,11 @@
                     $.each(data, function (key, value) {
                         
                         //APPEND DATA AND DISPLAY IT
-                        DOM.append("<h3>" + value.Subject + "</h3><p>" + value.Description + "</p>" +
+                        DOM.append("<h3>" + value.Subject + "</h3><p>" + value.Description + "</p>" + 
+                        "<button onclick='reportButton("+ value.Question_ID +")'>Report</button></a>" + 
+                        "<button onclick='followButton("+ value.user_ID2 +")'>Follow</button></a>" + 
                         "<button onclick='likeButton("+ value.Question_ID +")'>Like</button></a>" + 
-                        "<button onclick='sendButton("+ value.Question_ID +")'>respond</button></a>" + "<hr>");
+                        "<button onclick='sendButton("+ value.Question_ID +")'>Respond</button></a>" + "<hr>");
                     });
                     
                     //if fail it will give this error
@@ -83,14 +85,49 @@
             console.log(questionID);
             window.location.replace("advice.html");
         }
+        ///LIKE QUESTION FUNCTIONALITY
         function likeButton(questionID){
             var Question_ID = questionID;
-            //console.log(questionID);
-            //window.location.replace("register.html");
-
             var dataString = "Question_ID=" + Question_ID;
+
             $.ajax({
                 url: "http://localhost/api/Question/likequestion.php",
+                type: "POST",
+                dataType: "json",
+                data: dataString,
+                //on success it will call this function
+                success: function (data) {
+                    alert(data);
+                }
+
+            });
+
+        }
+        ///FOLLOW USER FUNCTIONALITY
+        function followButton(user_ID2){
+            var uID2 = user_ID2;
+            var dataString = "uID2=" + uID2;
+
+            $.ajax({
+                url: "http://localhost/api/Question/followuser.php",
+                type: "POST",
+                dataType: "json",
+                data: dataString,
+                //on success it will call this function
+                success: function (data) {
+                    alert(data);
+                }
+
+            });
+
+        }
+        ///REPORT QUESTION FUNCTIONALITY
+        function reportButton(questionID){
+            var Question_ID = questionID;
+            var dataString = "Question_ID=" + Question_ID;
+
+            $.ajax({
+                url: "http://10.0.2.2/api/Question/likequestion.php",
                 type: "POST",
                 dataType: "json",
                 data: dataString,

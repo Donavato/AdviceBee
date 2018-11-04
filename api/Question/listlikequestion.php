@@ -3,7 +3,7 @@ include "../Account/db.php";
 
 $uID = $_SESSION['user_ID'];
 
-$datastring = mysqli_query($con, "SELECT * FROM like_posts WHERE user_ID='$uID'");
+$datastring = mysqli_query($con, "SELECT * FROM like_questions WHERE user_ID='$uID'");
 $arr = array();
 
 while($r = mysqli_fetch_object($datastring)){
