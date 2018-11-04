@@ -15,8 +15,7 @@
 	//call ajax
 	var ajax = new XMLHttpRequest();
 	var method = "GET";
-	var url = "http://10.0.2.2/api/getusertopicinfo.php"; //if running through android
-	//var url = "http://10.0.2.2/api/getusertopicinfo.php"; //if running on 10.0.2.2
+	var url = "http://10.0.2.2/api/Profile/getusertopicinfo.php";
 	var asynchronous = true;
 	
 	ajax.open(method, url, asynchronous);
@@ -44,8 +43,7 @@
 			//call ajax
 			var ajax = new XMLHttpRequest();
 			var method = "GET";
-			var url = "http://10.0.2.2/api/gettopicinfo.php"; //if running through android
-			//var url = "http://10.0.2.2/api/gettopicinfo.php"; //if running on 10.0.2.2
+			var url = "http://10.0.2.2/api/Profile/gettopicinfo.php";
 			var asynchronous = true;
 	
 			ajax.open(method, url, asynchronous);
@@ -136,7 +134,7 @@
 			//call ajax
 			$.ajax({
 				method: "POST",
-				url: "http://10.0.2.2/api/addusertopic.php",
+				url: "http://10.0.2.2/api/Profile/addusertopic.php",
 				data: {topicStoreID: storeID}
 			});
 		}
@@ -145,7 +143,7 @@
 			//call ajax
 			$.ajax({
 				method: "POST",
-				url: "http://10.0.2.2/api/deletefromusertopic.php",
+				url: "http://10.0.2.2/api/Profile/deletefromusertopic.php",
 				data: {topicStoreID: storeID}
   			});
 		}

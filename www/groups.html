@@ -1,0 +1,88 @@
+<html>
+    <head>
+        <link rel="stylesheet" href="css/groups.css"/>
+        <link rel="stylesheet" href="style.css">
+        <script type="text/javascript" src="js/jquery-3.3.1.min.js"></script>
+    </head>
+    <h1>Would you like to Subscribe to the following groups?</h1>
+    <table>
+
+    <tbody id="getgroups">
+
+    </tbody>
+    </table>
+    <a href="index.html" class="link">Done!</a>
+</html>
+
+    <script type="text/javascript">
+        //call ajax
+        var ajax = new XMLHttpRequest();
+        var method = "GET";
+        var url = "http://10.0.2.2/api/Profile/getgroupinfo.php";
+        var asynchronous = true;
+        
+        ajax.open(method, url, asynchronous);
+        
+        //sending ajax request
+        ajax.send();
+        
+        //recieve response from getgroupinfo.php
+        ajax.onreadystatechange = function()
+        {
+            if(this.readyState == 4 && this.status == 200)
+            {
+                //converting json back to array
+                var data = JSON.parse(this.responseText);
+                
+                //html value for <tbody>
+                var html = "";
+                        
+                //cycle through all groups
+                for(var c = 0; c < data.length; c++)
+                {
+                    //store group name in variable
+                    var groupName = data[c].group_name;
+                    //store group id
+                    var groupID = data[c].group_id;
+    
+                    html += "<br>";
+                    html += "<label class='switch'>";
+                        html += "<input type='checkbox' name = groupid id= groupID value="+ groupID +" onchange='editGroup(this)'>";
+                        html += "<span class='slider round'>" + groupName + "</span>";
+                    html += "</label>";
+                    html += "</br>";
+                }
+    
+                //replacing the tbody of table
+                document.getElementById("getgroups").innerHTML = html;
+            }
+        }
+    </script>
+    
+    <script type="text/javascript">
+    
+        function editGroup(obj) 
+        {
+            //store the clicks id into variable
+            var storeID = obj.value;
+    
+            if($(obj).is(":checked"))
+            {
+                //call ajax
+                $.ajax({
+                    method: "POST",
+                    url: "http://10.0.2.2/api/Profile/addusergroup.php",
+                    data: {groupStoreID: storeID}
+                  });
+            }
+            else
+            {
+                //call ajax
+                $.ajax({
+                    method: "POST",
+                    url: "http://10.0.2.2/api/Profile/deletefromusergroup.php",
+                    data: {groupStoreID: storeID}
+                  });
+            }
+        }
+    </script>

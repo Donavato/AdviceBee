@@ -1,0 +1,88 @@
+<html>
+    <head>
+		<link rel="stylesheet" href="style.css">
+        <link rel="stylesheet" href="css/topics.css"/>
+        <script type="text/javascript" src="js/jquery-3.3.1.min.js"></script>
+    </head>
+    <h1>Please choose your topics</h1>
+    <table>
+	
+	    <tbody id="gettopics">
+	
+	    </tbody>
+    </table>
+    <a href="groups.html" class="link">Next</a>
+</html>
+
+<script type="text/javascript">
+    //call ajax
+	var ajax = new XMLHttpRequest();
+	var method = "GET";
+	var url = "http://10.0.2.2/api/Profile/gettopicinfo.php";
+	var asynchronous = true;
+	
+	ajax.open(method, url, asynchronous);
+	
+	//sending ajax request
+	ajax.send();
+			
+	//recieve response from gettopicinfo.php
+	ajax.onreadystatechange = function()
+	{
+		if(this.readyState == 4 && this.status == 200)
+		{
+			//converting json back to array
+			var data = JSON.parse(this.responseText);
+			
+			//html value for <tbody>
+			var html = "";
+			
+			//cycle through all groups
+			for(var c = 0; c < data.length; c++)
+			{
+				//store topicName in variable to call on later
+				var topicName = data[c].Topic_name;
+				//store topicID in value to use later
+				var topicID = data[c].Topic_ID;
+
+                html += "<br>";
+				html += "<label class='switch'>";
+					html += "<input type='checkbox' name = topicid id= topicID value="+ topicID +" onchange='editTopic(this)'>";
+					html += "<span class='slider round'>" + topicName + "</span>";
+				html += "</label>";
+				html += "</br>";
+            }
+            
+            //replacing the tbody of table
+			document.getElementById("gettopics").innerHTML = html;
+        }
+    }
+</script>
+
+<script type="text/javascript">
+
+	function editTopic(obj) 
+	{
+		//store the clicks id into variable
+		var storeID = obj.value;
+
+		if($(obj).is(":checked"))
+		{
+			//call ajax
+			$.ajax({
+				method: "POST",
+				url: "http://10.0.2.2/api/Profile/addusertopic.php",
+				data: {topicStoreID: storeID}
+			});
+		}
+		else
+		{
+			//call ajax
+			$.ajax({
+				method: "POST",
+				url: "http://10.0.2.2/api/Profile/deletefromusertopic.php",
+				data: {topicStoreID: storeID}
+  			});
+		}
+	}
+</script>
