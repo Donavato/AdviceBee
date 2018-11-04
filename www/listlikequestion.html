@@ -26,16 +26,13 @@
         <a href="register.html" class="link">Register</a> |
         <a href="changepw.html" class="link">Change PW</a> |
         <a href="pwreset.html" class="link">Password Reset</a>
-        <a href="listlikequestion.html" class="link">List Like post</a>
-        <a href="listfolloweduser.html" class="link">List Followed User</a>
     </nav>
-    
+
     <script type="text/javascript">
         $(document).ready(function () {
             $.ajax({
-                url: "http://localhost/api/Question/fetchdata.php",
+                url: "http://localhost/api/Question/listlikequestion.php",
                 type: "POST",
-                contentType: "application/json; charset=utf-8",
                 dataType: "json",
                 data: "param=no",
                 //on success it will call this function
@@ -46,11 +43,7 @@
                     $.each(data, function (key, value) {
                         
                         //APPEND DATA AND DISPLAY IT
-                        DOM.append("<h3>" + value.Subject + "</h3><p>" + value.Description + "</p>" + 
-                        "<button onclick='reportButton("+ value.Question_ID +")'>Report</button></a>" + 
-                        "<button onclick='followButton("+ value.user_ID2 +")'>Follow</button></a>" + 
-                        "<button onclick='likeButton("+ value.Question_ID +")'>Like</button></a>" + 
-                        "<button onclick='sendButton("+ value.Question_ID +")'>Respond</button></a>" + "<hr>");
+                        DOM.append("<h3>" + value.Subject + "</h3><p>" + value.Description + "</p>" + "<button onclick='unlikeButton("+ value.Question_ID +")'>unlike</button></a>" + "<button onclick='sendButton("+ value.Question_ID +")'>respond</button></a>" + "<hr>");
                     });
                     
                     //if fail it will give this error
@@ -59,68 +52,56 @@
                 }
 
             });
-
         });
+
         function sendButton(questionID){
             sessionStorage.questionID = questionID;
             console.log(questionID);
             window.location.replace("advice.html");
         }
-        ///LIKE QUESTION FUNCTIONALITY
-        function likeButton(questionID){
+        function unlikeButton(questionID){
             var Question_ID = questionID;
+
             var dataString = "Question_ID=" + Question_ID;
-
             $.ajax({
-                url: "http://localhost/api/Question/likequestion.php",
+                url: "http://localhost/api/Question/unlikequestion.php",
                 type: "POST",
                 dataType: "json",
                 data: dataString,
                 //on success it will call this function
                 success: function (data) {
-                    alert(data);
+                    //alert(data);
+                    updatelist();
                 }
-
             });
-
         }
-        ///FOLLOW USER FUNCTIONALITY
-        function followButton(user_ID2){
-            var uID2 = user_ID2;
-            var dataString = "uID2=" + uID2;
-
+        //UPDATES THE LIST IF A QUESTION IS UNLIKED
+        function updatelist(){
             $.ajax({
-                url: "http://localhost/api/Question/followuser.php",
+                url: "http://localhost/api/Question/listlikequestion.php",
                 type: "POST",
                 dataType: "json",
-                data: dataString,
+                data: "param=no",
                 //on success it will call this function
                 success: function (data) {
-                    alert(data);
+                    var DOM = $('#DOM');
+                    document.getElementById("DOM").innerHTML = "";
+                    //GET DATA AND PARSE IT
+                    $.each(data, function (key, value) {
+                        //APPEND DATA AND DISPLAY IT
+                        DOM.append("<h3>" + value.Subject + "</h3><p>" + value.Description + "</p>" + 
+                        "<button onclick='unlikeButton("+ value.Question_ID +")'>unlike</button></a>" + 
+                        "<button onclick='sendButton("+ value.Question_ID +")'>respond</button></a>" + "<hr>");
+                    });
+                    
+                    //if fail it will give this error
+                }, error: function (e) {
+                    alert("failed to work");
                 }
 
             });
-
-        }
-        ///REPORT QUESTION FUNCTIONALITY
-        function reportButton(questionID){
-            var Question_ID = questionID;
-            var dataString = "Question_ID=" + Question_ID;
-
-            $.ajax({
-                url: "http://localhost/api/Question/reportquestion.php",
-                type: "POST",
-                dataType: "json",
-                data: dataString,
-                //on success it will call this function
-                success: function (data) {
-                    alert(data);
-                }
-
-            });
-
         }
     </script>
 
-    </body>
+</body>
 </html>

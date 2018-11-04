@@ -35,9 +35,10 @@
 
         $(document).ready(function () {
             var dataString = "Question_ID=" + Question_ID;
-            //LIST ADVICES GIVEN FOR EACH PARTICULAR QUESTION
+
+            /////LIST ADVICES GIVEN FOR EACH PARTICULAR QUESTION/////////////////////////
             $.ajax({
-                url: "http://10.0.2.2/api/Advice/listadvices.php",
+                url: "http://localhost/api/Advice/listadvices.php",
                 type: "POST",
                 dataType: "json",
                 data: dataString,
@@ -46,17 +47,20 @@
                     var DOM = $('#advices');
 
                     $.each(data, function (key, value) {
-                        DOM.append("<p>" + value.advice +"<br>" + value.name + "</p>" + "<hr>");
+                        DOM.append("<p>" + value.advice +"<br>" + value.name + "</p>" +
+                        "<button onclick='likeButton("+ value.advice_id +")'>Like</button></a>" +"<hr>");
                     });
 
                 }, error: function (e) {
                     alert("failed to work");
                 }
             });
+            ////////////////////////////////////////////////////////////////////////////////
+
             var questionType;
 
             $.ajax({
-                url: "http://10.0.2.2/api/Advice/Advice.php",
+                url: "http://localhost/api/Advice/Advice.php",
                 type: "POST",
                 dataType: "json",
                 data: dataString,
@@ -103,7 +107,7 @@
                 var dataString = "Question_ID=" + Question_ID + "&advice=" + advice;   
                 
                 $.ajax({
-                    url: "http://10.0.2.2/api/Advice/giveAdvice.php",
+                    url: "http://localhost/api/Advice/giveAdvice.php",
                     type: "POST",
                     dataType: "json",
                     data: dataString,
@@ -116,7 +120,27 @@
                 });
             });
         });
+        
+        ///////////////LIKE FUNCTION FOR ADVICES GIVEN///////////////////////
+        function likeButton(advice_id) {
+            var advice_ID = advice_id;
+
+            var dataString = "advice_ID=" + advice_ID;
+            $.ajax({
+                url: "http://localhost/api/Advice/likeadvice.php",
+                type: "POST",
+                dataType: "json",
+                data: dataString,
+                //on success it will call this function
+                success: function (data) {
+                    alert(data);
+                }
+
+            });
+
+        }
     </script>
+
 </body>
 
 </html>
