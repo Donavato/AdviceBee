@@ -17,30 +17,43 @@
     <h1 class="h1">Create a Question</h1>
     <div class="list">
         <input type="hidden" id="id" value="" />
+
+        <form>
         <div class="item">
-            <p>Subject: <input type="text" id="Subject" value="" /></p>
-            
+            <input type="text" id="Subject" value="" placeholder="Subject"/><br>
         </div>
 
         <div class="item">
-            <input type="text" id="Description" value="" />
+            <textarea id="Description"></textarea>
         </div>
         <br>
         <div class="item">
-            <label class="label">Topic</label>
+            <label class="label">Topic: </label>
             <select id="topics_list">
             </select>
         </div>
+        <div class="item">
+            <input type="checkbox" id="anonymous" value="1">Anonymous<br>
+        </div>
         <br>
         <div class="item">
-            <label class="label">Type</label>
+            <input type="checkbox" id="hide_responses" value="1">Hide responses<br>
+        </div>
+        <br>
+        <div class="item">
+            <label class="label">Type: </label>
             <select id="question_type">
             </select>
         </div>
         <br>
         <div class="item">
-            <input type="button" id="insert" value="Insert" />
+            <input type="reset" id="reset" value="Reset"/>
         </div>
+        <br>
+        <div class="item">
+            <input type="button" id="insert" value="Insert" class="submit"/>
+        </div>
+    </form>
     </div>
 
     <br>
@@ -95,12 +108,19 @@
             })
             //WHEN INSERT BUTTON IS CLICKED, TAKE ALL FIELDS, STORE THEM INTO DATASTRING
             //AND SEND THEM IN JSON FORM
+            
             $("#insert").click(function () {
                 var Description = $("#Description").val();
                 var Subject = $("#Subject").val();
                 var topic = $('#topics_list').val();
                 var type = $("#question_type").val();
-                var dataString = "Description=" + Description + "&Subject=" + Subject + "&topic=" + topic + "&question_type=" + type + "&insert=";
+                var anonymous;
+                var hide;
+                if($('#anonymous').is(":checked")){anonymous = 1;}
+                else{anonymous = 0;}
+                if($('#hide_responses').is(":checked")){hide = 1;}
+                else{hide = 0;}
+                var dataString = "Description=" + Description + "&Subject=" + Subject + "&topic=" + topic + "&question_type=" + type + "&anonymous="+ anonymous + "&hide="+hide+ "&insert=";
                 // console.log(dataString);
                 if ($.trim(Description).length > 0 & $.trim(Subject).length > 0) {
                     $.ajax({

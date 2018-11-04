@@ -6,11 +6,20 @@
     <script src="js/jquery-3.3.1.min.js"></script>
     <!--reference style sheet-->
     <link rel="stylesheet" href="style.css">
+    <!--Facebook and Google icon source-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 
 <body>
-    <h1 class="h1">Please Sign In</h1>
-    <br>
+    <h1 class="h1">Please Sign In</h1><br>
+    <div>  
+        <a href="#" class="fb btn">
+             <i class="fa fa-facebook fa-fw"></i> Login with Facebook
+        </a><br>
+        <a href="#" class="google btn">
+             <i class="fa fa-google fa-fw"></i> Login with Google+
+        </a><br>
+    </div>
     <hr><br>
     <form>
         <input type="text" placeholder="Enter email" id="email" required>
@@ -19,9 +28,9 @@
         <br />
         <a href="pwreset.html" class="hyperlink">Forgot your password?</a><br>
         <br>
-        <button type="button" id="submitReg">Sign In</button><br>
+        <button type="button" id="submit" class="submit">Sign In</button><br>
         <br>
-        <p>Dont have one?<a href="register.html"> Create one now!</a></p>
+        <p>Dont have one?<a href="register.html" class="reglink"> Create one now!</a></p>
     </form><br>
 
     
@@ -46,7 +55,7 @@
     <!-- FIX THE SUCCESS/FAIL RESPONSE TYPE -->
     <!--Implementation of jquery/ajax-->
     <script type="text/javascript">
-        $('#submitReg').on('click', function (e) {
+        $('#submit').on('click', function (e) {
             e.preventDefault()
                 var email = $("#email").val();
                 var password = $("#passwrd").val();
@@ -54,7 +63,6 @@
             $.ajax({
                 url: "http://10.0.2.2/api/Account/login.php",
                 type: "POST",
-                // contentType: "application/json; charset=utf-8",
                 dataType: "json",
                 data: dataString,
                 success: function(data){
