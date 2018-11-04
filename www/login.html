@@ -55,7 +55,7 @@
     <!-- FIX THE SUCCESS/FAIL RESPONSE TYPE -->
     <!--Implementation of jquery/ajax-->
     <script type="text/javascript">
-        $('#submitReg').on('click', function (e) {
+        $('#submit').on('click', function (e) {
             e.preventDefault()
                 var email = $("#email").val();
                 var password = $("#passwrd").val();
@@ -63,7 +63,6 @@
             $.ajax({
                 url: "http://localhost/api/Account/login.php",
                 type: "POST",
-                // contentType: "application/json; charset=utf-8",
                 dataType: "json",
                 data: dataString,
                 success: function(data){

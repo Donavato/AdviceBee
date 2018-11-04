@@ -11,11 +11,12 @@
         $type=$_POST['question_type'];
         $uID = $_SESSION['user_ID'];
         $active = $_SESSION['active'];
-
+        $anonymous = $_POST['anonymous'];
+        $hide = $_POST['hide'];
+    
         //has user verified email
         if($active == 1){
-        $q=mysqli_query($con,"INSERT INTO `Questions` (`user_id` ,`Description`,`Subject`,`topic`,`question_type`) VALUES ('$uID','$Description','$Subject','$topic','$type')");
-
+        $q=mysqli_query($con,"INSERT INTO `Questions` (`user_id` ,`Description`,`Subject`,`topic`,`question_type`, `anonymous`, `hide`) VALUES ('$uID','$Description','$Subject','$topic','$type', '$anonymous', '$hide')");
             if($q){
                 echo json_encode("success");
                 die();
