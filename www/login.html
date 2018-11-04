@@ -6,18 +6,36 @@
     <script src="js/jquery-3.3.1.min.js"></script>
     <!--reference style sheet-->
     <link rel="stylesheet" href="style.css">
+    <!--Facebook and Google icon source-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 
 <body>
+    <h1 class="h1">Please Sign In</h1><br>
+    <div>  
+        <a href="#" class="fb btn">
+             <i class="fa fa-facebook fa-fw"></i> Login with Facebook
+        </a><br>
+        <a href="#" class="google btn">
+             <i class="fa fa-google fa-fw"></i> Login with Google+
+        </a><br>
+    </div>
+    <hr><br>
     <form>
-        <label><b>Email</b></label>
         <input type="text" placeholder="Enter email" id="email" required>
         <br />
-        <label><b>Password</b></label>
         <input type="password" placeholder="Enter password" id="passwrd" required>
         <br />
-        <button type="button" id="submit">Login</button>
-    </form>
+        <a href="pwreset.html" class="hyperlink">Forgot your password?</a><br>
+        <br>
+        <button type="button" id="submit" class="submit">Sign In</button><br>
+        <br>
+        <p>Dont have one?<a href="register.html" class="reglink"> Create one now!</a></p>
+    </form><br>
+
+    
+
+    <br>
     <nav class="nav">
         <a href="insert.html" class="link">Insert</a> |
         <a href="delete.html" class="link">Delete</a> |
@@ -37,7 +55,7 @@
     <!-- FIX THE SUCCESS/FAIL RESPONSE TYPE -->
     <!--Implementation of jquery/ajax-->
     <script type="text/javascript">
-        $('#submit').on('click', function (e) {
+        $('#submitReg').on('click', function (e) {
             e.preventDefault()
                 var email = $("#email").val();
                 var password = $("#passwrd").val();
