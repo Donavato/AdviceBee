@@ -66,6 +66,8 @@
                         
                         //APPEND DATA AND DISPLAY IT
                         DOM.append("<h3>" + value.Subject + "</h3><p>" + value.Description + "</p>" + 
+                        "<button onclick='reportButton("+ value.Question_ID +")'>Report</button></a>" + 
+                        "<button onclick='followButton("+ value.user_ID2 +")'>Follow</button></a>" + 
                         "<button onclick='likeButton("+ value.Question_ID +")'>Like</button></a>" + 
                         "<button onclick='sendButton("+ value.Question_ID +")'>Respond</button></a>" + "<hr>");
                     });
