@@ -53,7 +53,7 @@
     <script type="text/javascript">
         $(document).ready(function () {
             $.ajax({
-                url: "http://10.0.2.2/api/Question/fetchdata.php",
+                url: "http://localhost/api/Question/fetchdata.php",
                 type: "POST",
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
@@ -66,7 +66,7 @@
                     $.each(data, function (key, value) {
                         
                         //APPEND DATA AND DISPLAY IT
-                        DOM.append("<h3>" + value.Subject + "</h3><p>" + value.Description + "</p>" + 
+                        DOM.append("<p class='sub'>" + value.Subject + "</p><p>" + value.Description + "</p>" + 
                         "<button onclick='reportButton("+ value.Question_ID +")'>Report</button></a>" + 
                         "<button onclick='followButton("+ value.user_ID2 +")'>Follow</button></a>" + 
                         "<button onclick='likeButton("+ value.Question_ID +")'>Like</button></a>" + 
@@ -92,7 +92,7 @@
             var dataString = "Question_ID=" + Question_ID;
 
             $.ajax({
-                url: "http://10.0.2.2/api/Question/likequestion.php",
+                url: "http://localhost/api/Question/likequestion.php",
                 type: "POST",
                 dataType: "json",
                 data: dataString,
@@ -110,7 +110,7 @@
             var dataString = "uID2=" + uID2;
 
             $.ajax({
-                url: "http://10.0.2.2/api/Question/followuser.php",
+                url: "http://localhost/api/Question/followuser.php",
                 type: "POST",
                 dataType: "json",
                 data: dataString,
@@ -128,7 +128,7 @@
             var dataString = "Question_ID=" + Question_ID;
 
             $.ajax({
-                url: "http://10.0.2.2/api/Question/reportquestion.php",
+                url: "http://localhost/api/Question/reportquestion.php",
                 type: "POST",
                 dataType: "json",
                 data: dataString,

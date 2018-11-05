@@ -51,7 +51,7 @@
 
             /////LIST ADVICES GIVEN FOR EACH PARTICULAR QUESTION/////////////////////////
             $.ajax({
-                url: "http://10.0.2.2/api/Advice/listadvices.php",
+                url: "http://localhost/api/Advice/listadvices.php",
                 type: "POST",
                 dataType: "json",
                 data: dataString,
@@ -73,14 +73,14 @@
             var questionType;
 
             $.ajax({
-                url: "http://10.0.2.2/api/Advice/Advice.php",
+                url: "http://localhost/api/Advice/Advice.php",
                 type: "POST",
                 dataType: "json",
                 data: dataString,
                 //on success it will call this function
                 success: function (data) {
                     var Obj = JSON.parse(JSON.stringify(data));
-                    document.getElementById("Question").innerHTML = "<h3>" + Obj[0].Subject + "</h3><br>" + Obj[0].topic + "<br>" + Obj[0].Description + "<br>" + Obj[0].question_type + "<hr>";
+                    document.getElementById("Question").innerHTML = "<p class='sub'>" + Obj[0].Subject + "</p><p>" + Obj[0].topic + "<br>" + Obj[0].Description + "<br>" + Obj[0].question_type + "</p><hr>";
 
                     // CHECK QUESTION TYPE, OUTPUT FORM ADVICE DEPENDING ON THAT TYPE
                     
@@ -120,7 +120,7 @@
                 var dataString = "Question_ID=" + Question_ID + "&advice=" + advice;   
                 
                 $.ajax({
-                    url: "http://10.0.2.2/api/Advice/giveAdvice.php",
+                    url: "http://localhost/api/Advice/giveAdvice.php",
                     type: "POST",
                     dataType: "json",
                     data: dataString,
@@ -140,7 +140,7 @@
 
             var dataString = "advice_ID=" + advice_ID;
             $.ajax({
-                url: "http://10.0.2.2/api/Advice/likeadvice.php",
+                url: "http://localhost/api/Advice/likeadvice.php",
                 type: "POST",
                 dataType: "json",
                 data: dataString,

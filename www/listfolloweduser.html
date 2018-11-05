@@ -31,7 +31,7 @@
     <script type="text/javascript">
         $(document).ready(function () {
             $.ajax({
-                url: "http://10.0.2.2/api/Question/listfolloweduser.php",
+                url: "http://localhost/api/Question/listfolloweduser.php",
                 type: "POST",
                 dataType: "json",
                 data: "param=no",
@@ -59,7 +59,7 @@
 
             var dataString = "follow_ID=" + follow_ID;
             $.ajax({
-                url: "http://10.0.2.2/api/Question/unfollowuser.php",
+                url: "http://localhost/api/Question/unfollowuser.php",
                 type: "POST",
                 dataType: "json",
                 data: dataString,
@@ -74,7 +74,7 @@
         //UPDATES THE LIST OF FOLLOWED USERS IF A USER IS UNFOLLOWED
         function updatelist() {
             $.ajax({
-                url: "http://10.0.2.2/api/Question/listfolloweduser.php",
+                url: "http://localhost/api/Question/listfolloweduser.php",
                 type: "POST",
                 dataType: "json",
                 data: "param=no",

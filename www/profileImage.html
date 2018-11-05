@@ -4,6 +4,8 @@
 <head>
     <!--initialize jquery from js folder-->
     <script src="js/jquery-3.3.1.min.js"></script>
+    <!--reference style sheet-->
+    <link rel="stylesheet" href="style.css">
 
     <meta http-equiv="Content-Security-Policy" content=" style-src 'self' 'unsafe-inline'; 
             media-src *; 
@@ -24,7 +26,7 @@
 
 <body>
     <div class="page">
-        <p><img alt="image" id="photo" /></p>
+        <p><img alt="image" id="photo"/></p>
         <br>
         <p><img alt="image" id="photo2" /></p>
         <!-- <p><img alt="image" id="photo2" /></p> -->
@@ -33,8 +35,8 @@
         <p><button id="btn2">UPLOAD</button></p>
         <p id="msg"></p>
         <br>
-        <button id="submit">Submit</button>
-    </div>
+        <button id="submit" class="submit">Submit</button>
+    </div><br>
     <nav class="nav">
         <a href="insert.html" class="link">Insert</a> |
         <a href="delete.html" class="link">Delete</a> |
@@ -108,7 +110,7 @@
             $("#submit").click(function () {
                 
                 $.ajax({
-                    url: "http://10.0.2.2/api/profile_image/profile.php",
+                    url: "http://localhost/api/profile_image/profile.php",
                     type: "POST",
                     data: {
                         base64: image_Content                             //Base64 data type send to API
