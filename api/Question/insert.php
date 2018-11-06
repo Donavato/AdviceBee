@@ -13,10 +13,12 @@
         $active = $_SESSION['active'];
         $anonymous = $_POST['anonymous'];
         $hide = $_POST['hide'];
-    
+        $image = $_POST['image'];
+
         //has user verified email
+        
         if($active == 1){
-        $q=mysqli_query($con,"INSERT INTO `Questions` (`user_id` ,`Description`,`Subject`,`topic`,`question_type`, `anonymous`, `hide`) VALUES ('$uID','$Description','$Subject','$topic','$type', '$anonymous', '$hide')");
+        $q=mysqli_query($con,"INSERT INTO `Questions` (`user_id` ,`Description`,`Subject`,`topic`,`question_type`, `anonymous`, `hide`, `image`) VALUES ('$uID','$Description','$Subject','$topic','$type', '$anonymous', '$hide', '$image')");
             if($q){
                 echo json_encode("success");
                 die();
@@ -30,6 +32,7 @@
             echo json_encode("Not active");
             die();
         }    
+    
     }
     else{
         echo json_encode("No account");

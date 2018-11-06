@@ -1,24 +1,33 @@
+<!DOCTYPE html>
 <html>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <head>
     <!--initialize jquery from js folder-->
     <script src="js/jquery-3.3.1.min.js"></script>
-
-    <!--Ajax implementation-->
-
     <!--reference style sheet-->
     <link rel="stylesheet" href="style.css">
+    <meta http-equiv="Content-Security-Policy" content=" style-src 'self' 'unsafe-inline'; 
+            media-src *; 
+            script-src 'self' 'unsafe-inline';
+            img-src 'self' data: content:;">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="msapplication-tap-highlight" content="no">
+    <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
+    <style>
+        #msg{
+            border: 1px solid #eee;
+            padding: 1rem;
+            margin: 1rem;
+        }
+    </style>
 </head>
 
 
 <body>
     <!--button layout-->
     <h1 class="h1">Create a Question</h1>
+    
     <div class="list">
         <input type="hidden" id="id" value="" />
-
-        <form>
         <div class="item">
             <input type="text" id="Subject" value="" placeholder="Subject"/><br>
         </div>
@@ -33,30 +42,29 @@
             </select>
         </div>
         <div class="item">
+            <label class="label">Type: </label>
+            <select id="question_type">
+            </select>
+        </div>
+        <div class="item">
             <input type="checkbox" id="anonymous" value="1">Anonymous<br>
         </div>
         <br>
         <div class="item">
             <input type="checkbox" id="hide_responses" value="1">Hide responses<br>
         </div>
-        <br>
-        <div class="item">
-            <label class="label">Type: </label>
-            <select id="question_type">
-            </select>
-        </div>
-        <br>
-        <div class="item">
-            <input type="reset" id="reset" value="Reset"/>
+        <div class="page">
+                <img alt="image" id="photo"/>
+                <br>
+                <button id="btn">TAKE</button>
+                <button id="btn2">UPLOAD</button>
+            </div>
         </div>
         <br>
         <div class="item">
             <input type="button" id="insert" value="Insert" class="submit"/>
         </div>
-    </form>
-    </div>
 
-    <br>
     <br>
     <nav class="nav">
         <a href="insert.html" class="link">Insert</a> |
@@ -82,6 +90,61 @@
         </div>
     </div>
 
+    <script type="text/javascript" src="cordova.js"></script>
+    <script>
+        var image_Content;
+        let app = {
+            //wait for button to be clicked
+            init: function () {
+                //when one is clicked, send to option selected
+                document.getElementById('btn').addEventListener('click', app.takephoto);
+                document.getElementById('btn2').addEventListener('click', app.pullphoto);
+            },
+            //when button clicked start this function
+            takephoto: function () {
+                //options for camera function
+                let opts = {
+                    quality: 25,                                           //Set the quality of image
+                    destinationType: Camera.DestinationType.DATA_URL,      //Set the filetype of image
+                    sourceType: Camera.PictureSourceType.CAMERA,           //Set the source of image (camera or library)
+                    mediaType: Camera.MediaType.PICTURE,                   //Declare media type as Picture
+                    encodingType: Camera.EncodingType.JPEG,                //Image type JPEG or PNG
+                    cameraDirection: Camera.Direction.BACK,                //Front or back Camera
+                    targetWidth: 100,                                      //Width by pixles
+                    targetHeight: 200                                      //Height by pixles
+                };
+                //navigate the page to the camera on the mobile app
+                navigator.camera.getPicture(app.success, app.fail, opts);
+            },
+            pullphoto: function () {
+                //options for Upload function
+                let opts = {
+                    quality: 25,                                         
+                    destinationType: Camera.DestinationType.DATA_URL,
+                    sourceType: Camera.PictureSourceType.PHOTOLIBRARY,
+                    mediaType: Camera.MediaType.PICTURE,
+                    encodingType: Camera.EncodingType.JPEG,
+                    cameraDirection: Camera.Direction.BACK,
+                    targetWidth: 100,
+                    targetHeight: 200
+                }
+                navigator.camera.getPicture(app.success, app.fail, opts);
+            },
+            //ON SUCCESS use image URI file type. this is a string file type
+            success: function (imageData) {
+                var image = document.getElementById('photo');             //Take html of photo and put it in "image"
+                image.src = "data:image/jpeg;base64," + imageData;        //Make the src element of the image html tag and change it
+                image_Content = "data:image/jpeg;base64," + imageData;    //package the imagedata and string needed into the global variable
+            },
+            //FUNCTION FAILED
+            fail: function (response) {
+                alert("Image failed");    //why did it fail, display it
+            }
+        };
+
+        document.addEventListener('deviceready', app.init);               //Another way to do document on ready
+
+    </script>
     <script type="text/javascript">
         $(document).ready(function () {
             //PULL ALL TOPICS AND STORE THEM INTO A DROP DOWN FOR topics_list
@@ -110,6 +173,9 @@
             //AND SEND THEM IN JSON FORM
             
             $("#insert").click(function () {
+                if(!image_Content){
+                    image_Content = "None";
+                }
                 var Description = $("#Description").val();
                 var Subject = $("#Subject").val();
                 var topic = $('#topics_list').val();
@@ -120,8 +186,8 @@
                 else{anonymous = 0;}
                 if($('#hide_responses').is(":checked")){hide = 1;}
                 else{hide = 0;}
-                var dataString = "Description=" + Description + "&Subject=" + Subject + "&topic=" + topic + "&question_type=" + type + "&anonymous="+ anonymous + "&hide="+hide+ "&insert=";
-                // console.log(dataString);
+                var dataString = "Description="+Description+"&Subject="+Subject+"&topic="+topic+"&question_type="+type+"&anonymous="+anonymous+"&image="+image_Content+"&hide="+hide+"&insert=";
+                console.log(dataString);
                 if ($.trim(Description).length > 0 & $.trim(Subject).length > 0) {
                     $.ajax({
                         type: "POST",
