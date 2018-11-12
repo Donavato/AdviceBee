@@ -1,0 +1,95 @@
+<html>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<head>
+    <!--INITIALIZE JQUERY-->
+    <script src="js/jquery-3.3.1.min.js"></script>
+
+    <!--INITIALIZE J.VALIDATION PLUGIN-->
+    <script src="js/jquery.validate.js"></script>
+
+    <!--reference style sheet-->
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <h1 class="h1">Create a New Password</h1><hr><br>
+    <form action="" id="change" method="POST">
+
+        <label for="old_password"></label>
+        <input type="password" name="old_password" id="old_password" placeholder="Current Password"><br>
+     
+        <label for="new_password"></label>
+        <input type="password" name="new_password" id="new_password" placeholder="New Password"><br>
+ 
+        <label for="confirm_password"></label>
+        <input type="password" name="confirm_password" id="confirm_password" placeholder="Confirm Password"><br>
+
+        <button type="submit" name="submit" id="submit" class="submit">Done</button><br>
+        <br>
+
+    </form>
+
+
+    <nav class="nav">
+        <a href="insert.html" class="link">Insert</a> |
+        <a href="delete.html" class="link">Delete</a> |
+        <a href="index.html" class="link">Show Data</a> |
+        <a href="login.html" class="link">Login</a> |
+        <a href="register.html" class="link">Register</a> |
+        <a href="changepw.html" class="link">Change PW</a> |
+        <a href="pwreset.html" class="link">Password Reset</a>
+    </nav>
+
+</body>
+
+<!--JQUERY.VALIDATION WITH AJAX REQUEST-->
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#change").validate({
+            //SPECIFY RULES
+            rules: {
+                new_password: {
+                    required: true,
+                    minlength: 5
+                },
+                confirm_password: {
+                    equalTo: "#new_password"
+                }
+            },
+            // Specify validation error messages
+            messages: {
+                new_password: {
+                    required: "*Please provide a password",
+                    minlength: "*Your password must be at least 5 characters long"
+                },
+                confirm_password: {
+                    equalTo: "*Please enter the same password"
+                }
+
+            },
+            submitHandler: function (form) {
+
+                var old_pw = $("#old_password").val();
+                var new_password = $("#new_password").val();
+
+                var dataString = "old_password=" + old_pw + "&new_password=" + new_password + "&change=";
+
+                $.ajax({
+                    type: "POST",
+                    url: "http://localhost/api/Account/changepw.php",
+                    data: dataString,
+                    success: function (data) {
+                        alert("Password has been changed.");
+                        //TEMPORARY DIRECT LOCATION
+                        window.location.href = "login.html";
+                    }, error: function(){
+                    //alert(JSON.stringify(data));
+                }
+                });
+            }
+        });
+    });
+</script>
+
+</html>

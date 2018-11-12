@@ -1,7 +1,7 @@
 <?php
     include "../Account/db.php";
     header('Content-type: application/json');
-    $dataquery = mysqli_query($con, "SELECT * FROM Questions");
+    $dataquery = mysqli_query($con, "SELECT * FROM Questions ORDER BY views DESC");
     $arr = array();
 
     while($r = mysqli_fetch_object($dataquery)){
@@ -41,7 +41,7 @@
                     }else{
                         $p_Image = $y->profileImage;
                     }
-
+                    
                     array_push($arr, array("Question_ID" => $Question_ID, "Description" => $Description, 
                     "Subject" => $Subject, "anonymous" => $anonymous, "hide" => $hide, "user_ID2" => $user_ID2, 
                     "name" => $Name, "pImage" => "<img src = $p_Image>", "dImage" => "<img src = $d_Image>"));

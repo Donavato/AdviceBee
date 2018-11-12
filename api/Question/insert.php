@@ -16,22 +16,6 @@
     
         //has user verified email
         if($active == 1){
-			
-			//query table to get points of user
-			$points=mysqli_query($con,
-			"SELECT points
-			FROM users
-			WHERE user_ID = $uID");
-	
-			//subtract points for the question submit
-			$points = $points- 20;
-	
-			//Insert new point value back into users table for specific user
-			mysqli_query($con, 
-			"UPDATE users 
-			SET `points` = $points 
-			WHERE users.user_ID = $uID");
-			
         $q=mysqli_query($con,"INSERT INTO `Questions` (`user_id` ,`Description`,`Subject`,`topic`,`question_type`, `anonymous`, `hide`) VALUES ('$uID','$Description','$Subject','$topic','$type', '$anonymous', '$hide')");
             if($q){
                 echo json_encode("success");

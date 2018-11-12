@@ -1,0 +1,154 @@
+<html>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<head>
+    <!--initialize jquery from js folder-->
+    <script src="js/jquery-3.3.1.min.js"></script>
+
+    <!--Ajax implementation-->
+
+    <!--reference style sheet-->
+    <link rel="stylesheet" href="style.css">
+</head>
+
+
+<body>
+    <!--button layout-->
+    <h1 class="h1">Create a Question</h1>
+    <div class="list">
+        <input type="hidden" id="id" value="" />
+
+        <form>
+        <div class="item">
+            <input type="text" id="Subject" value="" placeholder="Subject"/><br>
+        </div>
+
+        <div class="item">
+            <textarea id="Description"></textarea>
+        </div>
+        <br>
+        <div class="item">
+            <label class="label">Topic: </label>
+            <select id="topics_list">
+            </select>
+        </div>
+        <div class="item">
+            <input type="checkbox" id="anonymous" value="1">Anonymous<br>
+        </div>
+        <br>
+        <div class="item">
+            <input type="checkbox" id="hide_responses" value="1">Hide responses<br>
+        </div>
+        <br>
+        <div class="item">
+            <label class="label">Type: </label>
+            <select id="question_type">
+            </select>
+        </div>
+        <br>
+        <div class="item">
+            <input type="reset" id="reset" value="Reset"/>
+        </div>
+        <br>
+        <div class="item">
+            <input type="button" id="insert" value="Insert" class="submit"/>
+        </div>
+    </form>
+    </div>
+
+    <br>
+    <br>
+    <nav class="nav">
+        <a href="insert.html" class="link">Insert</a> |
+        <a href="delete.html" class="link">Delete</a> |
+        <a href="index.html" class="link">Show Data</a> |
+        <a href="login.html" class="link">Login</a> |
+        <a href="register.html" class="link">Register</a> |
+        <a href="changepw.html" class="link">Change PW</a> |
+        <a href="pwreset.html" class="link">Password Reset</a> |
+        <a href="logout.html" class="link">Logout</a>
+    </nav>
+
+    <!--Need to update page links. Ran into issues with img src links when in folders-->
+    <div class="icon-location">
+        <div class="icon-bar">
+            <a href="listlikepost.html"><img src="list.png"></a>
+            <a href="groups.html"><img src="groups.png"></a>
+            <a href="notification.html"><img src="notification.png"></a>
+            <a href="search.html"><img src="search.png"></a>
+            <a href="users.html"><img src="users.png"></a>
+            <a href="favorite.html"><img src="favorite.png"></a>
+            <a href="profile.html"><img src="profile.png"></a>
+        </div>
+    </div>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            //PULL ALL TOPICS AND STORE THEM INTO A DROP DOWN FOR topics_list
+            $.ajax({
+                type: "POST",
+                url: "http://localhost/api/topics.php",
+                success: function (response) {
+                    var data = JSON.parse(JSON.stringify(response));
+                    var text = "";
+                    text = data.reduce((acc, item) => "<option value='" + item + "'>" + item + "</option>" + acc, '')
+                    document.getElementById("topics_list").innerHTML = text;
+                }
+            })
+            //PULL ALL QUESTION TYPES AND PUT THEM INTO A DROPDOWN question_type
+            $.ajax({
+                type: "POST",
+                url: "http://localhost/api/Question/questionType.php",
+                success: function (response) {
+                    var data = JSON.parse(response);
+                    var text = "";
+                    text = data.reduce((acc, item) => "<option value='" + item + "'>" + item + "</option>" + acc, '')
+                    document.getElementById("question_type").innerHTML = text;
+                }
+            })
+            //WHEN INSERT BUTTON IS CLICKED, TAKE ALL FIELDS, STORE THEM INTO DATASTRING
+            //AND SEND THEM IN JSON FORM
+            
+            $("#insert").click(function () {
+                var Description = $("#Description").val();
+                var Subject = $("#Subject").val();
+                var topic = $('#topics_list').val();
+                var type = $("#question_type").val();
+                var anonymous;
+                var hide;
+                if($('#anonymous').is(":checked")){anonymous = 1;}
+                else{anonymous = 0;}
+                if($('#hide_responses').is(":checked")){hide = 1;}
+                else{hide = 0;}
+                var dataString = "Description=" + Description + "&Subject=" + Subject + "&topic=" + topic + "&question_type=" + type + "&anonymous="+ anonymous + "&hide="+hide+ "&insert=";
+                // console.log(dataString);
+                if ($.trim(Description).length > 0 & $.trim(Subject).length > 0) {
+                    $.ajax({
+                        type: "POST",
+                        url: "http://localhost/api/Question/insert.php",
+                        data: dataString,
+                        success: function (data) {
+                            if (data == "success") {
+                                alert("inserted");
+                                $("#insert").val('submit');
+                                window.location.href = "index.html";
+
+                            } else if (data == "error") {
+                                alert("error");
+                            }
+                            else if (data == "No account") {
+                                alert("Not signed in");
+                            }
+                            else if (data == "Not active"){
+                                alert("account not verified");
+                            }
+                        }
+                    });
+                }
+                return false;
+            });
+        });
+    </script>
+</body>
+
+</html>

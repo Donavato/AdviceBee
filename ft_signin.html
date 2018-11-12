@@ -1,0 +1,44 @@
+<html>
+
+<body>
+    <div class="item">
+        <span id="topics_list">
+        </span>
+    </div>
+</body>
+<script src="js/jquery-3.3.1.min.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $.ajax({
+            type: "POST",
+            url: "http://localhost/api/topics.php",
+            success: function (response) {
+                var data = JSON.parse(response);
+                var text = "";
+                text = data.reduce((acc, item) => item + "<br>" + acc)
+                document.getElementById("topics_list").innerHTML = text;
+            }
+        })
+        $("#insert").click(function () {
+            var dataString = "Description=" + Description + "&Subject=" + Subject + "&topic=" + topic + "&insert=";
+            if ($.trim(Description).length > 0 & $.trim(Subject).length > 0) {
+                $.ajax({
+                    type: "POST",
+                    url: "http://localhost/api/ft_signin.php",
+                    data: dataString,
+                    success: function (data) {
+                        if (data == "success") {
+                            alert("inserted");
+                            $("#insert").val('submit');
+                        } else if (data == "error") {
+                            alert("error");
+                        }
+                    }
+                });
+            }
+            return false;
+        });
+    });
+</script>
+
+</html>
