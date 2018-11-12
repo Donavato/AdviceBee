@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <!--initialize jquery from js folder-->
     <script src="js/jquery-3.3.1.min.js"></script>
@@ -25,11 +26,11 @@
 <body>
     <!--button layout-->
     <h1 class="h1">Create a Question</h1>
-    
+
     <div class="list">
         <input type="hidden" id="id" value="" />
         <div class="item">
-            <input type="text" id="Subject" value="" placeholder="Subject"/><br>
+            <input type="text" id="Subject" value="" placeholder="Subject" /><br>
         </div>
 
         <div class="item">
@@ -54,16 +55,16 @@
             <input type="checkbox" id="hide_responses" value="1">Hide responses<br>
         </div>
         <div class="page">
-                <img alt="image" id="photo"/>
-                <br>
-                <button id="btn">TAKE</button>
-                <button id="btn2">UPLOAD</button>
-            </div>
+            <img alt="image" id="photo" />
+            <br>
+            <button id="btn">TAKE</button>
+            <button id="btn2">UPLOAD</button>
         </div>
-        <br>
-        <div class="item">
-            <input type="button" id="insert" value="Insert" class="submit"/>
-        </div>
+    </div>
+    <br>
+    <div class="item">
+        <input type="button" id="insert" value="Insert" class="submit" />
+    </div>
 
     <br>
     <nav class="nav">
@@ -119,7 +120,7 @@
             pullphoto: function () {
                 //options for Upload function
                 let opts = {
-                    quality: 25,                                         
+                    quality: 25,
                     destinationType: Camera.DestinationType.DATA_URL,
                     sourceType: Camera.PictureSourceType.PHOTOLIBRARY,
                     mediaType: Camera.MediaType.PICTURE,
@@ -171,9 +172,9 @@
             })
             //WHEN INSERT BUTTON IS CLICKED, TAKE ALL FIELDS, STORE THEM INTO DATASTRING
             //AND SEND THEM IN JSON FORM
-            
+
             $("#insert").click(function () {
-                if(!image_Content){
+                if (!image_Content) {
                     image_Content = "None";
                 }
                 var Description = $("#Description").val();
@@ -182,11 +183,11 @@
                 var type = $("#question_type").val();
                 var anonymous;
                 var hide;
-                if($('#anonymous').is(":checked")){anonymous = 1;}
-                else{anonymous = 0;}
-                if($('#hide_responses').is(":checked")){hide = 1;}
-                else{hide = 0;}
-                var dataString = "Description="+Description+"&Subject="+Subject+"&topic="+topic+"&question_type="+type+"&anonymous="+anonymous+"&image="+image_Content+"&hide="+hide+"&insert=";
+                if ($('#anonymous').is(":checked")) { anonymous = 1; }
+                else { anonymous = 0; }
+                if ($('#hide_responses').is(":checked")) { hide = 1; }
+                else { hide = 0; }
+                var dataString = "Description=" + Description + "&Subject=" + Subject + "&topic=" + topic + "&question_type=" + type + "&anonymous=" + anonymous + "&image=" + image_Content + "&hide=" + hide + "&insert=";
                 console.log(dataString);
                 if ($.trim(Description).length > 0 & $.trim(Subject).length > 0) {
                     $.ajax({
@@ -205,7 +206,7 @@
                             else if (data == "No account") {
                                 alert("Not signed in");
                             }
-                            else if (data == "Not active"){
+                            else if (data == "Not active") {
                                 alert("account not verified");
                             }
                         }

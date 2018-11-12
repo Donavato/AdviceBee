@@ -1,0 +1,114 @@
+<!DOCTYPE <!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Page Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="js/jquery-3.3.1.min.js"></script>
+
+    <!--reference style sheet-->
+    <link rel="stylesheet" href="style.css">
+    <style>
+    .tab button {
+        background-color: inherit;
+        float: left;
+        border: none;
+        outline: none;
+        cursor: pointer;
+        padding: 14px 16px;
+        transition: 0.3s;
+        font-size: 17px;
+    }
+    /* Create an active/current tablink class */
+    .tab button.active {
+        background-color: #ccc;
+    }
+
+    /* Style the tab content */
+    .tabcontent {
+        display: none;
+        padding: 6px 12px;
+        border: 1px solid #ccc;
+        border-top: none;
+    }
+    </style>
+</head>
+<body>
+    <h1>Search</h1><br>
+    <input type="text" placeholder="Search.." name="search" id="search_content">
+    <button type="submit" id="Search">Enter</button>
+    <!-- TABS WITH ONCLICK EVENTS TO CALL FUNCTIONS FOR DATA DISPLAY -->
+    <div class="tab">
+        <button class="tablinks" onclick="openCity(event, 'Questions')">Questions</button>
+        <button class="tablinks" onclick="openCity(event, 'Advices')">Advices</button>
+        <button class="tablinks" onclick="openCity(event, 'Users')">Users</button>
+    </div>
+    <!-- TABS THAT HAVE INFO TO DISPLAY  -->
+    <!-- PARSE DATA FROM DB INTO THESE ID'S DISPLAY IS ALREADY FUNCTIONAL -->
+    <div id="Questions" class="tabcontent">
+        <h3>Questions</h3>
+    </div>
+    <div id="Advices" class="tabcontent">
+            <h3>Advices</h3>
+    </div>
+    <div id="Users" class="tabcontent">
+            <h3>Users</h3>
+    </div>
+
+    <script type="text/javascript">
+        //CALLED FUNCTION TO CHANGE CONTENT FOCUS ON ACTIVE TAB SELECTED
+        function openCity(evt, focus) {
+            var i, tabcontent, tablinks;
+            tabcontent = document.getElementsByClassName("tabcontent");
+            for (i = 0; i < tabcontent.length; i++) {
+                tabcontent[i].style.display = "none";
+            }
+            tablinks = document.getElementsByClassName("tablinks");
+            for (i = 0; i < tablinks.length; i++) {
+                tablinks[i].className = tablinks[i].className.replace(" active", "");
+            }
+            document.getElementById(focus).style.display = "block";
+            evt.currentTarget.className += " active";
+        }
+        $(document).ready(function (){
+            $("#Search").click(function (){
+                var search_data = $("#search_content").val();
+                var dataString = "Data=" + search_data;
+                console.log(dataString);
+                $.ajax({
+                        type: "POST",
+                        url: "http://10.0.2.2/api/search.php",
+                        dataType: "json",
+                        data: dataString,
+                        success: function (data) {
+                            document.getElementById("Questions").innerHTML = "";
+                            document.getElementById("Advices").innerHTML = "";
+                            document.getElementById("Users").innerHTML = "";
+                            
+                            var QUE = $('#Questions');
+                            var ADV = $('#Advices');
+                            var USE = $('#Users');
+                            
+
+                            for(var x = 0, leng = data[0].Users.length; x <leng; x++ ){
+                                var item = data[0].Users[x];
+                                USE.append("<h3>" + item.f_name + " " + item.l_name + " " + item.email+ "</h3>");   
+                            }
+                            for(var x = 0, leng = data[0].Questions.length; x <leng; x++ ){
+                                var item = data[0].Questions[x];
+                                QUE.append("<h3>" + item.Subject + " " + item.Description + "</h3>");   
+                            }
+                            for(var x = 0, leng = data[0].Advice.length; x <leng; x++ ){
+                                var item = data[0].Advice[x];
+                                ADV.append("<h3>" + item.advice_id + " " + item.advice + " " + item.user_id+ "</h3>");   
+                            }
+                            
+                        }
+                    });
+            });
+            return false;
+        });
+    </script>
+</body>
+</html>
