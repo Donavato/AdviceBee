@@ -1,11 +1,10 @@
 <?php
-	//connecting to database
-	$conn = mysqli_connect("localhost", "root", "", "advicebee");
+	include "../Account/db.php";
 	
-	//querying table
-	$result = mysqli_query($conn, 
-	"SELECT topic_name, topic_id
-	FROM topic");
+	//querying topics table for topic name and topic id
+	$result = mysqli_query($con, 
+	"SELECT Topic_name, Topic_ID
+	FROM topics");
 	
 	//store results into array
 	$data = array();

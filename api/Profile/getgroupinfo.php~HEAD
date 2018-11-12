@@ -1,9 +1,8 @@
 <?php
-	//connecting to database
-	$conn = mysqli_connect("localhost", "root", "", "advicebee");
+	include "../Account/db.php";
 	
 	//querying table for all group names
-	$result = mysqli_query($conn, 
+	$result = mysqli_query($con, 
 	"SELECT group_name,group_id
 	FROM subtopic");
 	

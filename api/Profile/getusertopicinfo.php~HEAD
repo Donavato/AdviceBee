@@ -1,12 +1,14 @@
 <?php
-	//connecting to database
-	$conn = mysqli_connect("localhost", "root", "", "advicebee");
+	include "../Account/db.php";
 	
-	//querying table for group names user is in
-	$result = mysqli_query($conn, 
+	//store user id from session into variable
+	$user_ID=$_SESSION['user_ID'];
+	
+	//querying table for topic id user is in
+	$result = mysqli_query($con, 
 	"SELECT topic_id
 	FROM user_topic
-	WHERE user_id = 1");
+	WHERE user_ID = '$user_ID'");
 	
 	//store results into array
 	$userdata = array();
