@@ -38,12 +38,14 @@
     <h1>Search</h1><br>
     <input type="text" placeholder="Search.." name="search" id="search_content">
     <button type="submit" id="Search">Enter</button>
+    <br>
     <!-- TABS WITH ONCLICK EVENTS TO CALL FUNCTIONS FOR DATA DISPLAY -->
     <div class="tab">
         <button class="tablinks" onclick="openCity(event, 'Questions')">Questions</button>
         <button class="tablinks" onclick="openCity(event, 'Advices')">Advices</button>
         <button class="tablinks" onclick="openCity(event, 'Users')">Users</button>
     </div>
+    <br><br>
     <!-- TABS THAT HAVE INFO TO DISPLAY  -->
     <!-- PARSE DATA FROM DB INTO THESE ID'S DISPLAY IS ALREADY FUNCTIONAL -->
     <div id="Questions" class="tabcontent">
@@ -55,7 +57,20 @@
     <div id="Users" class="tabcontent">
             <h3>Users</h3>
     </div>
+    <br>
 
+    <!--Need to update page links. Ran into issues with img src links when in folders-->
+    <div class="icon-location">
+        <div class="icon-bar">
+            <a href="listlikepost.html"><img src="list.png"></a>
+            <a href="groups.html"><img src="groups.png"></a>
+            <a href="notification.html"><img src="notification.png"></a>
+            <a href="search.html"><img src="search.png"></a>
+            <a href="users.html"><img src="users.png"></a>
+            <a href="favorite.html"><img src="favorite.png"></a>
+            <a href="profile.html"><img src="profile.png"></a>
+        </div>
+    </div>
     <script type="text/javascript">
         //CALLED FUNCTION TO CHANGE CONTENT FOCUS ON ACTIVE TAB SELECTED
         function openCity(evt, focus) {
@@ -78,7 +93,7 @@
                 console.log(dataString);
                 $.ajax({
                         type: "POST",
-                        url: "http://localhost/api/search.php",
+                        url: "http://10.0.2.2/api/search.php",
                         dataType: "json",
                         data: dataString,
                         success: function (data) {
