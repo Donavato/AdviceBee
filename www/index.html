@@ -10,6 +10,7 @@
 </head>
 
 <body>
+    <a href="logout.html" class="logout">Logout</a>
     <!--output of the json-->
     <div>
         <!--set the id to DOM to show output-->
@@ -36,7 +37,7 @@
     <!-- FILTER BUTTON LOCATION AND CONTENT -->
     <div class="filterButtonLoc">
         <div class="dropdown">
-            <button onclick="filterFunction()" class="dropbtn">Filter</button>
+            <img onclick="filterFunction()" class="dropbtn" src="images/filter.png"></img>
             <div id="filter" class="dropdown-content">
                 <a href="javascript:filterMostRecent();">Most Recent</a>
                 <a href="javascript:filterMostView();">Most Viewed</a>
@@ -47,20 +48,20 @@
     <!-- CREATE BUTTON LOCATION -->
     <div class="postButtonLoc">
         <div class="postButton">
-            <a href="insert.html"><img src="create.png"></a>
+            <a href="insert.html"><img src="images/create.png"></a>
         </div>
     </div>
 
     <!--Need to update page links. Ran into issues with img src links when in folders-->
     <div class="icon-location">
         <div class="icon-bar">
-            <a href="listlikepost.html"><img src="list.png"></a>
-            <a href="groups.html"><img src="groups.png"></a>
-            <a href="notification.html"><img src="notification.png"></a>
-            <a href="search.html"><img src="search.png"></a>
-            <a href="listfolloweduser.html"><img src="users.png"></a>
-            <a href="listlikequestion.html"><img src="favorite.png"></a>
-            <a href="profile.html"><img src="profile.png"></a>
+            <a href="listlikepost.html"><img src="images/NavBar/list.png"></a>
+            <a href="groups.html"><img src="images/NavBar/groups.png"></a>
+            <a href="notification.html"><img src="images/NavBar/notification.png"></a>
+            <a href="search.html"><img src="images/NavBar/search.png"></a>
+            <a href="listfolloweduser.html"><img src="images/NavBar/users.png"></a>
+            <a href="listlikequestion.html"><img src="images/NavBar/favorite.png"></a>
+            <a href="profile.html"><img src="images/NavBar/profile.png"></a>
         </div>
     </div>
 
@@ -104,11 +105,12 @@
                     $.each(data, function (key, value) {
 
                         DOM.append("<p class='sub'>" + value.Subject + "</p><p>" + value.dImage + "<br>" + value.Description + "</p><p>" +
-                            value.pImage + value.name + "</p>" +
-                            "<button onclick='reportButton(" + value.Question_ID + ")'>Report</button>" +
-                            "<button onclick='followButton(" + value.user_ID2 + ")'>Follow</button>" +
-                            "<button onclick='likeButton(" + value.Question_ID + ")'>Like</button>" +
-                            "<button onclick='sendButton(" + value.Question_ID + ")'>Respond</button>" + "<hr>");
+                            value.pImage + value.name + "</p>" + "<div class='actionbar'>" +
+                            "<img onclick='reportButton(" + value.Question_ID + ")' src='images/advice/report.png'> </img>" +
+                            "<img onclick='followButton(" + value.user_ID2 + ")' src='images/advice/followuser.png'></img>" +
+                            "<img onclick='likeButton(" + value.Question_ID + ")' src='images/advice/like.png'></img>" +
+                            "<img onclick='sendButton(" + value.Question_ID + ")' src='images/advice/reply.png'></img>" + "</div>" + 
+                            "<div class='comment'>" + "<a onclick='sendButton("+ value.Question_ID +")'>" + value.c_count + " comments</a></div>" + "<hr>");
 
                     });
 
@@ -138,11 +140,12 @@
                     $.each(data, function (key, value) {
 
                         DOM.append("<p class='sub'>" + value.Subject + "</p><p>" + value.dImage + "<br>" + value.Description + "</p><p>" +
-                            value.pImage + value.name + "</p>" +
-                            "<button onclick='reportButton(" + value.Question_ID + ")'>Report</button>" +
-                            "<button onclick='followButton(" + value.user_ID2 + ")'>Follow</button>" +
-                            "<button onclick='likeButton(" + value.Question_ID + ")'>Like</button>" +
-                            "<button onclick='sendButton(" + value.Question_ID + ")'>Respond</button>" + "<hr>");
+                            value.pImage + value.name + "</p>" + "<div class='actionbar'>" +
+                            "<img onclick='reportButton(" + value.Question_ID + ")' src='images/advice/report.png'> </img>" +
+                            "<img onclick='followButton(" + value.user_ID2 + ")' src='images/advice/followuser.png'></img>" +
+                            "<img onclick='likeButton(" + value.Question_ID + ")' src='images/advice/like.png'></img>" +
+                            "<img onclick='sendButton(" + value.Question_ID + ")' src='images/advice/reply.png'></img>" + "</div>" + 
+                            "<div class='comment'>" + "<a onclick='sendButton("+ value.Question_ID +")'>" + value.c_count + " comments</a></div>" + "<hr>");
 
                     });
 
@@ -174,11 +177,12 @@
                     $.each(data, function (key, value) {
 
                         DOM.append("<p class='sub'>" + value.Subject + "</p><p>" + value.dImage + "<br>" + value.Description + "</p><p>" +
-                            value.pImage + value.name + "</p>" +
-                            "<button onclick='reportButton(" + value.Question_ID + ")'>Report</button>" +
-                            "<button onclick='followButton(" + value.user_ID2 + ")'>Follow</button>" +
-                            "<button onclick='likeButton(" + value.Question_ID + ")'>Like</button>" +
-                            "<button onclick='sendButton(" + value.Question_ID + ")'>Respond</button>" + "<hr>");
+                             value.pImage + value.name + "</p>" + "<div class='actionbar'>" +
+                            "<img onclick='reportButton(" + value.Question_ID + ")' src='images/advice/report.png'> </img>" +
+                            "<img onclick='followButton(" + value.user_ID2 + ")' src='images/advice/followuser.png'></img>" +
+                            "<img onclick='likeButton(" + value.Question_ID + ")' src='images/advice/like.png'></img>" +
+                            "<img onclick='sendButton(" + value.Question_ID + ")' src='images/advice/reply.png'></img>" + "</div>" + 
+                            "<div class='comment'>" + "<a onclick='sendButton("+ value.Question_ID +")'>" + value.c_count + " comments</a></div>" + "<hr>");
 
                     });
 

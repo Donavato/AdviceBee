@@ -31,13 +31,13 @@
     <!--Need to update page links. Ran into issues with img src links when in folders-->
     <div class="icon-location">
         <div class="icon-bar">
-            <a href="listlikepost.html"><img src="list.png"></a>
-            <a href="groups.html"><img src="groups.png"></a>
-            <a href="notification.html"><img src="notification.png"></a>
-            <a href="search.html"><img src="search.png"></a>
-            <a href="users.html"><img src="users.png"></a>
-            <a href="favorite.html"><img src="favorite.png"></a>
-            <a href="profile.html"><img src="profile.png"></a>
+            <a href="listlikepost.html"><img src="images/NavBar/list.png"></a>
+            <a href="groups.html"><img src="images/NavBar/groups.png"></a>
+            <a href="notification.html"><img src="images/NavBar/notification.png"></a>
+            <a href="search.html"><img src="images/NavBar/search.png"></a>
+            <a href="users.html"><img src="images/NavBar/users.png"></a>
+            <a href="favorite.html"><img src="images/NavBar/favorite.png"></a>
+            <a href="profile.html"><img src="images/NavBar/profile.png"></a>
         </div>
     </div>
 
@@ -59,9 +59,9 @@
                     var advices = $('#advices');
 
                     $.each(data, function (key, value) {
-                        advices.append("<p>" + value.advice +"</p><p>" + value.pImage + value.name + "</p>" +
-                        "<button onclick='likeButton("+ value.advice_id +")'>Like</button></a>" + " " +
-                        value.likes +"<hr>");
+                        advices.append("<p>" + value.advice +"</p><p>" + value.pImage + value.name + "</p>" + "<div class='likebox'>" +
+                        "<img onclick='likeButton("+ value.advice_id +")' src='images/advice/like.png'></img>" + " " +
+                        value.likes +"</div><hr>");
                     });
 
                 }, error: function (e) {
@@ -170,9 +170,9 @@
                     var advices = $('#advices');
                     document.getElementById("advices").innerHTML = "";
                     $.each(data, function (key, value) {
-                        advices.append("<p>" + value.advice +"</p><p>" + value.pImage + value.name + "</p>" +
-                        "<button onclick='likeButton("+ value.advice_id +")'>Like</button></a>" + " " +
-                        value.likes +"<hr>");
+                        advices.append("<p>" + value.advice +"</p><p>" + value.pImage + value.name + "</p>" + "<div class='likebox'>" +
+                        "<img onclick='likeButton("+ value.advice_id +")' src='images/advice/like.png'></img>" + " " +
+                        value.likes +"</div><hr>");
                     });
 
                 }, error: function (e) {
