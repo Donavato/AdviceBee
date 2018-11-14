@@ -10,6 +10,7 @@
 </head>
 
 <body>
+    <h1 class="h1">Followed Users</h1><hr>
     <!--output of the json-->
     <div>
         <!--set the id to DOM to show output-->
@@ -28,6 +29,19 @@
         <a href="pwreset.html" class="link">Password Reset</a>
     </nav>
 
+    <div class="icon-location">
+        <div class="icon-bar">
+            <a href="listlikepost.html"><img src="images/NavBar/list.png"></a>
+            <a href="groups.html"><img src="images/NavBar/groups.png"></a>
+            <a href="notification.html"><img src="images/NavBar/notification.png"></a>
+            <a href="search.html"><img src="images/NavBar/search.png"></a>
+            <a href="listfolloweduser.html"><img src="images/NavBar/users.png"></a>
+            <a href="listlikequestion.html"><img src="images/NavBar/favorite.png"></a>
+            <a href="profile.html"><img src="images/NavBar/profile.png"></a>
+        </div>
+    </div>
+
+
     <script type="text/javascript">
         $(document).ready(function () {
             $.ajax({
@@ -42,8 +56,8 @@
                     //GET DATA AND PARSE IT
                     $.each(data, function (key, value) {
                         //APPEND DATA AND DISPLAY IT
-                        DOM.append("<p>" + value.name + "</p>" + 
-                        "<button onclick='unfollowButton(" + value.follow_id + ")'>unfollow</button></a>" + "<hr>");
+                        DOM.append("<p>" + value.name + "</p>" + "<div class='likebox'>" +
+                        "<img onclick='unfollowButton(" + value.follow_id + ")' src='images/advice/followuser.png'></img>" + "</div><hr>");
                     });
 
                     //if fail it will give this error
@@ -85,8 +99,8 @@
                     //GET DATA AND PARSE IT
                     $.each(data, function (key, value) {
                         //APPEND DATA AND DISPLAY IT
-                        DOM.append("<p>" + value.name + "</p>" + 
-                        "<button onclick='unfollowButton(" + value.follow_id + ")'>unfollow</button></a>" + "<hr>");
+                        DOM.append("<p>" + value.name + "</p>" + "<div class='likebox'>" +
+                        "<img onclick='unfollowButton(" + value.follow_id + ")' src='images/advice/followuser.png'></img>" + "</div><hr>");
                     });
 
                     //if fail it will give this error
