@@ -40,12 +40,12 @@ body {
 
 p {
     font-family: "Segoe UI";
-    padding: 0px 10px;
-    text-align: center;
+    padding: 0px 20px;
+    text-align: left;
 }
 
 /* Style for input forms */
-input {
+.input {
     width: 285px;
     height: 41px;
     padding: 15px 10px;
@@ -112,20 +112,12 @@ input {
     font-weight: bold; 
 }
 
-/* Creates submit button for forms 
-#submit {
-    width: 100%;
-    background-color: #00e600;
-    font-size: 20px;
-    color: white;
-    padding: 14px 20px;
-    margin: 15px 0;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
+.sub {
+    font-size: 16px;
+    color: rgb(121, 121, 121);
     font-family: "Segoe UI";
     font-weight: bold;
-}*/
+}
 
 /* Textarea for entering questions */
 #Description {
@@ -135,6 +127,19 @@ input {
     font-size: 16px;
     font-family: "Segoe UI";
     resize: none;
+    display: block;
+    margin: 0 auto;
+}
+
+#Description1 {
+    width: 292px;
+    height: 183px;
+    border: 2px solid #707070;
+    font-size: 16px;
+    font-family: "Segoe UI";
+    resize: none;
+    display: block;
+    margin: 0 auto;
 }
 
 #Question {
@@ -171,6 +176,12 @@ select {
 /* Header 3 styling */
 h3 {
     text-align: center;
+    color: rgb(121, 121, 121);
+    font-family: "Segoe UI";
+}
+
+.questionsubject {
+    text-align: left;
     color: rgb(121, 121, 121);
     font-family: "Segoe UI";
 }
@@ -267,7 +278,89 @@ padding: 5px 0px;
     width: 100%;
 }
 
+/* Action bar displayed on each question */
+.actionbar {
+    width: 110px;
+    height: 37;
+    background-color: #ffffff;
+    overflow: auto;
+    border-style: solid;
+    border-width: 1px;
+    position: relative;
+    left: 220px;
+    bottom: 0px;
+    padding: 5px 5px;
+}
+
+.actionbar a {
+    float: left;
+    text-align: center;
+    width: 50%;
+    padding: 5px 0px;
+}
+
+/* box for like button on advice page */
+.likebox {
+    width: 26px;
+    height: 26px;
+    background-color: #ffffff;
+    overflow: auto;
+    border-style: solid;
+    border-width: 1px;
+    position: relative;
+    left: 90%;
+    top: 20%
+}
+
+.likebox a {
+    float: center;
+    width: 50%;
+    /* top right bottom left */
+    padding: 0 0 0 10px;
+}
+
+
+/*FILTER BUTTON Drop down CSS*/
+.dropbtn:hover, .dropbtn:focus {
+    background-color: #2980B9;
+}
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f1f1f1;
+    min-width: 80px;
+    font-size: 13px;
+    overflow: auto;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    right: 0;
+    z-index: 1;
+    font-family: "Segoe UI";
+}
+
+.dropdown-content a {
+    color: black;
+    padding: 5px 5px;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown a:hover {background-color: #ddd;}
+
+.show {display: block;}
+
 /* Create Question and Filter button location */
+.filterButtonLoc {
+    position: fixed;
+    top: 20px;
+    right: 40px;
+}
+
 .postButtonLoc {
     position: fixed;
     top: 20px;
@@ -304,8 +397,90 @@ input,
     margin: 0 auto;
 }
 
+/* The container for checkbox*/
+.container {
+    display: block;
+    position: relative;
+    padding-left: 35px;
+    margin-bottom: 12px;
+    font-size: 20px;
+}
 
+/* Hide the browser's default checkbox */
+.container input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+}
 
+/* Create a custom checkbox */
+.checkmark {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 25px;
+    width: 25px;
+    background-color: #eee;
+}
 
+/* When the checkbox is checked, add a blue background */
+.container input:checked ~ .checkmark {
+    background-color: #2196F3;
+}
 
+/* Create the checkmark/indicator (hidden when not checked) */
+.checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+}
 
+/* Show the checkmark when checked */
+.container input:checked ~ .checkmark:after {
+    display: block;
+}
+
+/* Style the checkmark/indicator */
+.container .checkmark:after {
+    left: 9px;
+    top: 5px;
+    width: 5px;
+    height: 10px;
+    border: solid white;
+    border-width: 0 3px 3px 0;
+    transform: rotate(45deg);
+}
+
+#photo {
+    height: 100px;
+    width: 100px;
+    border-style: solid black;
+    border-width: 2px;
+    border-radius: 50%;
+}
+
+#profileimage {
+    height: 50px;
+    width: 50px;
+    border-style: solid black;
+    border-width: 2px;
+    border-radius: 50%;
+}
+
+/* logout location */
+.logout {
+    position: relative;
+    text-decoration: none;
+    font-family: "Segoe UI";
+    font-weight: bold;
+    color: #707070;
+}
+
+.comment {
+    font-weight: bold;
+    font-family: "Segoe UI";
+    color: rgb(121, 121, 121);
+    padding: 0 0 0 15px;
+}

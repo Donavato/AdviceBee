@@ -69,7 +69,34 @@
                     
                     if(data==true){
                         alert("Logged in Successfully");
-                        window.location.replace("index.html");
+                        //call ajax
+                        var ajax = new XMLHttpRequest();
+                        var method = "GET";
+                        var url = "http://10.0.2.2/api/Account/fts.php";
+                        var asynchronous = true;
+        
+                        ajax.open(method, url, asynchronous);
+        
+                        //sending ajax
+                        ajax.send();
+        
+                        //recieve response from getinfo.php
+                        ajax.onreadystatechange = function()
+                        {
+                            if(this.readyState == 4 && this.status == 200)
+                            {
+                                var data = JSON.parse(this.responseText);
+                
+                                if(data[0].fts == 0)
+                                {
+                                    window.location.replace("topics.html");
+                                }
+                                else
+                                {
+                                    window.location.replace("index.html");
+                                }
+                            }
+                        }
                     }else{
                         console.log(data);
                         alert("Login Failed");

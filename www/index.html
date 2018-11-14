@@ -11,6 +11,9 @@
 
 <body>
     <a href="logout.html" class="logout">Logout</a>
+    <div id="dashboardTopics">
+
+    </div>
     <!--output of the json-->
     <div>
         <!--set the id to DOM to show output-->
@@ -92,7 +95,7 @@
     <script type="text/javascript">
         function filterMostRecent() {
             $.ajax({
-                url: "http://localhost/api/Question/filtermostrecent.php",
+                url: "http://10.0.2.2/api/Question/filtermostrecent.php",
                 type: "POST",
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
@@ -127,7 +130,7 @@
     <script type="text/javascript">
         function filterMostView() {
             $.ajax({
-                url: "http://localhost/api/Question/filtermostview.php",
+                url: "http://10.0.2.2/api/Question/filtermostview.php",
                 type: "POST",
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
@@ -164,7 +167,7 @@
     <script type="text/javascript">
         $(document).ready(function () {
             $.ajax({
-                url: "http://localhost/api/Question/fetchdata.php",
+                url: "http://10.0.2.2/api/Question/fetchdata.php",
                 type: "POST",
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
@@ -205,7 +208,7 @@
             var dataString = "Question_ID=" + Question_ID;
 
             $.ajax({
-                url: "http://localhost/api/Question/likequestion.php",
+                url: "http://10.0.2.2/api/Question/likequestion.php",
                 type: "POST",
                 dataType: "json",
                 data: dataString,
@@ -224,7 +227,7 @@
             var dataString = "uID2=" + uID2;
 
             $.ajax({
-                url: "http://localhost/api/Question/followuser.php",
+                url: "http://10.0.2.2/api/Question/followuser.php",
                 type: "POST",
                 dataType: "json",
                 data: dataString,
@@ -242,7 +245,7 @@
             var dataString = "Question_ID=" + Question_ID;
 
             $.ajax({
-                url: "http://localhost/api/Question/reportquestion.php",
+                url: "http://10.0.2.2/api/Question/reportquestion.php",
                 type: "POST",
                 dataType: "json",
                 data: dataString,
@@ -255,6 +258,13 @@
 
         }
     </script>
+
+    <script type="text/javascript">
+    $(document).ready(function(){
+    //intial loadup on page
+    $("#dashboardTopics").load("dashboardTopics.html");
+    });
+</script>
 
 </body>
 

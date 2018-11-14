@@ -15,7 +15,7 @@
 	//call ajax
 	var ajax = new XMLHttpRequest();
 	var method = "GET";
-	var url = "http://localhost/api/Profile/getusergroupinfo.php";
+	var url = "http://10.0.2.2/api/Profile/getusergroupinfo.php";
 	var asynchronous = true;
 	
 	ajax.open(method, url, asynchronous);
@@ -43,7 +43,7 @@
 			//call ajax
 			var ajax = new XMLHttpRequest();
 			var method = "GET";
-			var url = "http://localhost/api/Profile/getgroupinfo.php";
+			var url = "http://10.0.2.2/api/Profile/getgroupinfo.php";
 			var asynchronous = true;
 	
 			ajax.open(method, url, asynchronous);
@@ -135,7 +135,7 @@
 			//call ajax
 			$.ajax({
 				method: "POST",
-				url: "http://localhost/api/Profile/addusergroup.php",
+				url: "http://10.0.2.2/api/Profile/addusergroup.php",
 				data: {groupStoreID: storeID}
   			});
 		}
@@ -144,7 +144,7 @@
 			//call ajax
 			$.ajax({
 				method: "POST",
-				url: "http://localhost/api/Profile/deletefromusergroup.php",
+				url: "http://10.0.2.2/api/Profile/deletefromusergroup.php",
 				data: {groupStoreID: storeID}
   			});
 		}

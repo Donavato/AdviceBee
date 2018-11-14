@@ -50,7 +50,7 @@
             var dataString = "Question_ID=" + Question_ID;
             /////LIST ADVICES GIVEN FOR EACH PARTICULAR QUESTION/////////////////////////
             $.ajax({
-                url: "http://localhost/api/Advice/listadvices.php",
+                url: "http://10.0.2.2/api/Advice/listadvices.php",
                 type: "POST",
                 dataType: "json",
                 data: dataString,
@@ -73,7 +73,7 @@
             var questionType;
 
             $.ajax({
-                url: "http://localhost/api/Advice/Advice.php",
+                url: "http://10.0.2.2/api/Advice/Advice.php",
                 type: "POST",
                 dataType: "json",
                 data: dataString,
@@ -91,7 +91,8 @@
                     } else if (Obj[0].question_type == "True or False") {
                         document.getElementById("advice").innerHTML = "True: " + "<input type='radio' name='advice' value='True' />" + "<br>" + "False: " + "<input type='radio' name='advice' value='False' />";
                     } else if (Obj[0].question_type == "Description") {
-                        document.getElementById("advice").innerHTML = "<div id='Description'" + "Advice: " + "<br>" + "<textarea id='Description1' name='advice'>" + "</textarea>" + "<br>" + "</div>";
+                        document.getElementById("advice").innerHTML = "<div id='Description'" + "Advice: " + "<br>" + "<textarea id='Description1' maxlength='140' name='advice'>" + "</textarea>" + "<br>" + "</div>";
+                        "<p>" + "<span id='wordCount'>" + '140' + "</span>/140 characters</p>";
                     } else {
                         document.getElementById("advice").innerHTML = "Error";
                     }
@@ -122,7 +123,7 @@
                 var dataString = "Question_ID=" + Question_ID + "&advice=" + advice;   
                 
                 $.ajax({
-                    url: "http://localhost/api/Advice/giveAdvice.php",
+                    url: "http://10.0.2.2/api/Advice/giveAdvice.php",
                     type: "POST",
                     dataType: "json",
                     data: dataString,
@@ -142,7 +143,7 @@
 
             var dataString = "advice_ID=" + advice_ID;
             $.ajax({
-                url: "http://localhost/api/Advice/likeadvice.php",
+                url: "http://10.0.2.2/api/Advice/likeadvice.php",
                 type: "POST",
                 dataType: "json",
                 data: dataString,
@@ -161,7 +162,7 @@
             var dataString = "Question_ID=" + Question_ID;
 
             $.ajax({
-                url: "http://localhost/api/Advice/listadvices.php",
+                url: "http://10.0.2.2/api/Advice/listadvices.php",
                 type: "POST",
                 dataType: "json",
                 data: dataString,
@@ -181,6 +182,18 @@
             });
         }
 
+    </script>
+
+    <script type="text/javascript">
+        //add event for each time a key is released to run the function for form character count
+        document.addEventListener("keyup",function(e) {
+            if(e.target && e.target.id == "Description1")
+            {
+                var numOfCharacters = e.target.value.split('');
+                wordCounts = 140 - numOfCharacters.length;
+                document.getElementById("wordCount").innerText = wordCounts;
+            }
+        });
     </script>
 
 </body>

@@ -10,15 +10,16 @@
     <tbody id="getgroups">
 
     </tbody>
+   </tbody>
     </table>
-    <a href="index.html" class="link">Done!</a>
+    <button type="button" id="submit" class="submit">Done</button><br>
 </html>
 
     <script type="text/javascript">
         //call ajax
         var ajax = new XMLHttpRequest();
         var method = "GET";
-        var url = "http://localhost/api/Profile/getgroupinfo.php";
+        var url = "http://10.0.2.2/api/Profile/getgroupinfo.php";
         var asynchronous = true;
         
         ajax.open(method, url, asynchronous);
@@ -71,7 +72,7 @@
                 //call ajax
                 $.ajax({
                     method: "POST",
-                    url: "http://localhost/api/Profile/addusergroup.php",
+                    url: "http://10.0.2.2/api/Profile/addusergroup.php",
                     data: {groupStoreID: storeID}
                   });
             }
@@ -80,9 +81,34 @@
                 //call ajax
                 $.ajax({
                     method: "POST",
-                    url: "http://localhost/api/Profile/deletefromusergroup.php",
+                    url: "http://10.0.2.2/api/Profile/deletefromusergroup.php",
                     data: {groupStoreID: storeID}
                   });
             }
         }
     </script>
+
+<script type="text/javascript">
+    $('#submit').on('click', function (e) {
+        //call ajax
+        var ajax = new XMLHttpRequest();
+        var method = "GET";
+        var url = "http://10.0.2.2/api/Account/updatefts.php";
+        var asynchronous = true;
+        
+        ajax.open(method, url, asynchronous);
+        
+        //sending ajax
+        ajax.send();
+        
+        //recieve response from getinfo.php
+        ajax.onreadystatechange = function()
+        {
+            if(this.readyState == 4 && this.status == 200)
+            {
+                window.location.replace("index.html");
+            }
+        }
+    })
+
+</script>

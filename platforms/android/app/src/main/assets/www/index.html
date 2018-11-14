@@ -10,12 +10,18 @@
 </head>
 
 <body>
+    <a href="logout.html" class="logout">Logout</a>
+    <div id="dashboardTopics">
+
+    </div>
     <!--output of the json-->
     <div>
         <!--set the id to DOM to show output-->
+        <!-- <img alt="image" id="photo2" /> -->
         <div id="DOM">
+
         </div>
-        
+
     </div><br>
 
     <nav class="nav">
@@ -31,25 +37,133 @@
         <a href="logout.html" class="link">Logout</a>
     </nav>
 
+    <!-- FILTER BUTTON LOCATION AND CONTENT -->
+    <div class="filterButtonLoc">
+        <div class="dropdown">
+            <img onclick="filterFunction()" class="dropbtn" src="images/filter.png"></img>
+            <div id="filter" class="dropdown-content">
+                <a href="javascript:filterMostRecent();">Most Recent</a>
+                <a href="javascript:filterMostView();">Most Viewed</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- CREATE BUTTON LOCATION -->
     <div class="postButtonLoc">
         <div class="postButton">
-            <a href="insert.html"><img src="create.png"></a>
+            <a href="insert.html"><img src="images/create.png"></a>
         </div>
     </div>
 
     <!--Need to update page links. Ran into issues with img src links when in folders-->
     <div class="icon-location">
         <div class="icon-bar">
-            <a href="listlikepost.html"><img src="list.png"></a>
-            <a href="groups.html"><img src="groups.png"></a>
-            <a href="notification.html"><img src="notification.png"></a>
-            <a href="search.html"><img src="search.png"></a>
-            <a href="users.html"><img src="users.png"></a>
-            <a href="favorite.html"><img src="favorite.png"></a>
-            <a href="profile.html"><img src="profile.png"></a>
+            <a href="listlikepost.html"><img src="images/NavBar/list.png"></a>
+            <a href="groups.html"><img src="images/NavBar/groups.png"></a>
+            <a href="notification.html"><img src="images/NavBar/notification.png"></a>
+            <a href="search.html"><img src="images/NavBar/search.png"></a>
+            <a href="listfolloweduser.html"><img src="images/NavBar/users.png"></a>
+            <a href="listlikequestion.html"><img src="images/NavBar/favorite.png"></a>
+            <a href="profile.html"><img src="images/NavBar/profile.png"></a>
         </div>
     </div>
-    
+
+    <!-- FILTER BUTTON -->
+    <script>
+
+        function filterFunction() {
+            document.getElementById("filter").classList.toggle("show");
+        }
+
+        // Close the dropdown if the user clicks outside of it
+        window.onclick = function (event) {
+            if (!event.target.matches('.dropbtn')) {
+
+                var dropdowns = document.getElementsByClassName("dropdown-content");
+                var i;
+                for (i = 0; i < dropdowns.length; i++) {
+                    var openDropdown = dropdowns[i];
+                    if (openDropdown.classList.contains('show')) {
+                        openDropdown.classList.remove('show');
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- FILTER FUNCTIONALITY -->
+    <script type="text/javascript">
+        function filterMostRecent() {
+            $.ajax({
+                url: "http://10.0.2.2/api/Question/filtermostrecent.php",
+                type: "POST",
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                data: "param=no",
+                //on success it will call this function
+                success: function (data) {
+                    var DOM = $('#DOM');
+                    document.getElementById("DOM").innerHTML = "";
+                    //GET DATA AND PARSE IT
+                    $.each(data, function (key, value) {
+
+                        DOM.append("<p class='sub'>" + value.Subject + "</p><p>" + value.dImage + "<br>" + value.Description + "</p><p>" +
+                            value.pImage + value.name + "</p>" + "<div class='actionbar'>" +
+                            "<img onclick='reportButton(" + value.Question_ID + ")' src='images/advice/report.png'> </img>" +
+                            "<img onclick='followButton(" + value.user_ID2 + ")' src='images/advice/followuser.png'></img>" +
+                            "<img onclick='likeButton(" + value.Question_ID + ")' src='images/advice/like.png'></img>" +
+                            "<img onclick='sendButton(" + value.Question_ID + ")' src='images/advice/reply.png'></img>" + "</div>" + 
+                            "<div class='comment'>" + "<a onclick='sendButton("+ value.Question_ID +")'>" + value.c_count + " comments</a></div>" + "<hr>");
+
+                    });
+
+                    //if fail it will give this error
+                }, error: function (e) {
+                    alert("failed to work");
+                }
+
+            });
+
+        }        
+    </script>
+
+    <script type="text/javascript">
+        function filterMostView() {
+            $.ajax({
+                url: "http://10.0.2.2/api/Question/filtermostview.php",
+                type: "POST",
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                data: "param=no",
+                //on success it will call this function
+                success: function (data) {
+                    var DOM = $('#DOM');
+                    document.getElementById("DOM").innerHTML = "";
+                    //GET DATA AND PARSE IT
+                    $.each(data, function (key, value) {
+
+                        DOM.append("<p class='sub'>" + value.Subject + "</p><p>" + value.dImage + "<br>" + value.Description + "</p><p>" +
+                            value.pImage + value.name + "</p>" + "<div class='actionbar'>" +
+                            "<img onclick='reportButton(" + value.Question_ID + ")' src='images/advice/report.png'> </img>" +
+                            "<img onclick='followButton(" + value.user_ID2 + ")' src='images/advice/followuser.png'></img>" +
+                            "<img onclick='likeButton(" + value.Question_ID + ")' src='images/advice/like.png'></img>" +
+                            "<img onclick='sendButton(" + value.Question_ID + ")' src='images/advice/reply.png'></img>" + "</div>" + 
+                            "<div class='comment'>" + "<a onclick='sendButton("+ value.Question_ID +")'>" + value.c_count + " comments</a></div>" + "<hr>");
+
+                    });
+
+                    //if fail it will give this error
+                }, error: function (e) {
+                    alert("failed to work");
+                }
+
+            });
+
+        }        
+    </script>
+
+
+    <!-- LIST QUESTIONS -->
     <script type="text/javascript">
         $(document).ready(function () {
             $.ajax({
@@ -61,18 +175,20 @@
                 //on success it will call this function
                 success: function (data) {
                     var DOM = $('#DOM');
-                    
+
                     //GET DATA AND PARSE IT
                     $.each(data, function (key, value) {
-                        
-                        //APPEND DATA AND DISPLAY IT
-                        DOM.append("<h3>" + value.Subject + "</h3><p>" + value.Description + "</p>" + 
-                        "<button onclick='reportButton("+ value.Question_ID +")'>Report</button></a>" + 
-                        "<button onclick='followButton("+ value.user_ID2 +")'>Follow</button></a>" + 
-                        "<button onclick='likeButton("+ value.Question_ID +")'>Like</button></a>" + 
-                        "<button onclick='sendButton("+ value.Question_ID +")'>Respond</button></a>" + "<hr>");
+
+                        DOM.append("<p class='sub'>" + value.Subject + "</p><p>" + value.dImage + "<br>" + value.Description + "</p><p>" +
+                             value.pImage + value.name + "</p>" + "<div class='actionbar'>" +
+                            "<img onclick='reportButton(" + value.Question_ID + ")' src='images/advice/report.png'> </img>" +
+                            "<img onclick='followButton(" + value.user_ID2 + ")' src='images/advice/followuser.png'></img>" +
+                            "<img onclick='likeButton(" + value.Question_ID + ")' src='images/advice/like.png'></img>" +
+                            "<img onclick='sendButton(" + value.Question_ID + ")' src='images/advice/reply.png'></img>" + "</div>" + 
+                            "<div class='comment'>" + "<a onclick='sendButton("+ value.Question_ID +")'>" + value.c_count + " comments</a></div>" + "<hr>");
+
                     });
-                    
+
                     //if fail it will give this error
                 }, error: function (e) {
                     alert("failed to work");
@@ -81,13 +197,13 @@
             });
 
         });
-        function sendButton(questionID){
+        function sendButton(questionID) {
             sessionStorage.questionID = questionID;
             console.log(questionID);
             window.location.replace("advice.html");
         }
         ///LIKE QUESTION FUNCTIONALITY
-        function likeButton(questionID){
+        function likeButton(questionID) {
             var Question_ID = questionID;
             var dataString = "Question_ID=" + Question_ID;
 
@@ -99,13 +215,14 @@
                 //on success it will call this function
                 success: function (data) {
                     alert(data);
+                    random();
                 }
 
             });
 
         }
         ///FOLLOW USER FUNCTIONALITY
-        function followButton(user_ID2){
+        function followButton(user_ID2) {
             var uID2 = user_ID2;
             var dataString = "uID2=" + uID2;
 
@@ -123,7 +240,7 @@
 
         }
         ///REPORT QUESTION FUNCTIONALITY
-        function reportButton(questionID){
+        function reportButton(questionID) {
             var Question_ID = questionID;
             var dataString = "Question_ID=" + Question_ID;
 
@@ -142,5 +259,13 @@
         }
     </script>
 
-    </body>
+    <script type="text/javascript">
+    $(document).ready(function(){
+    //intial loadup on page
+    $("#dashboardTopics").load("dashboardTopics.html");
+    });
+</script>
+
+</body>
+
 </html>

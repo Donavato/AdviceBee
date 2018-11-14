@@ -9,6 +9,18 @@
         <link rel="stylesheet" href="style.css">
         <script type="text/javascript" src="js/jquery-3.3.1.min.js"></script>
         <script type="text/javascript">
+            $(document).ready(function(){
+            //intial loadup on page
+            $("#wallpaper").load("wallpaper.html");
+        });
+        </script>
+        <script type="text/javascript">
+            $(document).ready(function(){
+            //intial loadup on page
+            $("#profile_picture").load("avatar.html");
+        });
+        </script>
+        <script type="text/javascript">
            $(document).ready(function(){
                //intial loadup on page
                $("#content").load("info.html");
@@ -24,6 +36,13 @@
 
     </head>
     <body>
+        <div id="wallpaper">
+
+        </div>
+        <div id="profile_picture">
+
+        </div>
+        <br><br>
         <table>
             <tbody id="getpublicinfo"> <!-- data will be displayed here -->
         
@@ -64,7 +83,7 @@
     </body>
 </html>
 
-<script>
+<script type="text/javascript">
         //call ajax
         var ajax = new XMLHttpRequest();
         var method = "GET";
@@ -82,8 +101,7 @@
             if(this.readyState == 4 && this.status == 200)
             {
                 //converting JSON taken from getinfo.php to array
-                var data = JSON.parse(this.responseText);
-                console.log(data); 
+                var data = JSON.parse(this.responseText); 
                 
                 //html value for <tbody>
                 var html = "";
@@ -98,31 +116,28 @@
                 var age = data[0].age;
                 var level = data[0].level;
 
+                var img = document.createElement("img");
+                if (level == "Bronze")
+                {
+                    img.src = "http://10.0.2.2/images/Bronze.png";
+                }
+                else if(level == "Silver")
+                {
+                    img.src = "http://10.0.2.2/images/Silver.png";
+                }
+                else if (level == "Gold")
+                {
+                    img.src = "http://10.0.2.2/images/Gold.png";
+                }
+
+                
                 //combining first name and last name with a space between them
                 var fullName= f_name + '\xa0' + l_name;
 
                 //tie into html
-                /*html += "<tr>";
-                    html += "<td>" + f_name + "</td>";
-                html += "</tr>";
-                html += "<tr>";    
-                    html += "<td>" + l_name + "</td>";
-                html += "</tr>";
-                html += "<tr>";
-                    html += "<td>" + title + "</td>";
-                html += "</tr>";
-                html += "<tr>";
-                    html += "<td>" + points + "</td>";
-                html += "</tr>";
-                html += "<tr>";
-                    html += "<td>" + location + "</td>";
-                html += "</tr>";
-                html += "<tr>";
-                    html += "<td>" + level + "</td>";
-                html += "</tr>";*/
                 html += "<tr>";
                     html += "<td align=left>Credit: " + points + " pts</td>";
-                    html += "<td align=right>"+ level + "</td>";
+                    html += "<div id='level' align=right><td></td></div>";
                 html += "</tr>";
                 html += "<tr align=center>";
                     html += "<input type='text' name = username value="+ fullName +" onchange='editName(this)'>";
@@ -137,6 +152,8 @@
                 //replace <tbody> of table in html
                 document.getElementById("getpublicinfo").innerHTML = html;
             }
+            var src = document.getElementById("level");
+            src.appendChild(img);
         }
 </script>
 

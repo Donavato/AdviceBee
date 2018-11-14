@@ -1,0 +1,86 @@
+<div id="topicsButtons">
+
+</div>
+
+<script type="text/javascript">
+     //call ajax
+     var ajax = new XMLHttpRequest();
+    var method = "GET";
+    var url = "http://10.0.2.2/api/Profile/dashboardTopics.php";
+    var asynchronous = true;
+        
+    ajax.open(method, url, asynchronous);
+        
+    //sending ajax
+    ajax.send();
+        
+    //recieve response
+    ajax.onreadystatechange = function()
+    {
+        if(this.readyState == 4 && this.status == 200)
+        {
+            //converting JSON to array
+            var data = JSON.parse(this.responseText);
+                
+            //append to html
+            var html = "";
+
+            for(var a = 0; a < data.length; a++)
+            {
+                //set array information for current topic in variables
+                var id = data[a].Topic_ID;
+                var name = data[a].Topic_name;
+
+                //create button for each topic to display questions
+                html += "<button id="+ id +" value="+ name +" onclick='displayQuestions(this.value)'>"+ name +"</button>"
+
+                //replace in html
+                document.getElementById("topicsButtons").innerHTML = html;
+            }
+        }
+    }
+</script>
+
+<script type="text/javascript">
+
+	function displayQuestions(obj) 
+	{
+        var topic_name = obj;
+		console.log(topic_name);
+        
+        //call ajax
+        $(document).ready(function () {
+		    $.ajax({
+			    method: "POST",
+			    url: "http://10.0.2.2/api/Profile/displaytopicquestions.php",
+                data: {Topic_Name: topic_name},
+                //on success it will call this function
+                success: function (data) {
+                    var topicsButtons = $('#DOM');
+                    var arrayQuestions = data;
+                    console.log(arrayQuestions);
+
+                    //empty the current div from questions to post the new questions from the topic selected
+                    topicsButtons.empty();
+                        //GET DATA AND PARSE IT
+                    $.each(arrayQuestions, function (key, value) {
+                        
+                        //APPEND DATA AND DISPLAY IT
+                        topicsButtons.append("<p class='sub'>" + value.Subject + "</p><p>" + value.dImage + "<br>" + value.Description + "</p><p>" +
+                             value.pImage + value.name + "</p>" + "<div class='actionbar'>" +
+                            "<img onclick='reportButton(" + value.Question_ID + ")' src='images/advice/report.png'> </img>" +
+                            "<img onclick='followButton(" + value.user_ID2 + ")' src='images/advice/followuser.png'></img>" +
+                            "<img onclick='likeButton(" + value.Question_ID + ")' src='images/advice/like.png'></img>" +
+                            "<img onclick='sendButton(" + value.Question_ID + ")' src='images/advice/reply.png'></img>" + "</div>" + 
+                            "<div class='comment'>" + "<a onclick='sendButton("+ value.Question_ID +")'>" + value.c_count + " comments</a></div>" + "<hr>");
+                    });
+                    //if fail it will give this error
+                }, error: function (e) {
+                    alert("failed to work");
+                }
+
+            });
+
+        });
+    }
+</script>
