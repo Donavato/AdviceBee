@@ -9,42 +9,18 @@
 
     <!--reference style sheet-->
     <link rel="stylesheet" href="style.css">
-    <style>
-    .tab button {
-        background-color: inherit;
-        float: left;
-        border: none;
-        outline: none;
-        cursor: pointer;
-        padding: 14px 16px;
-        transition: 0.3s;
-        font-size: 17px;
-    }
-    /* Create an active/current tablink class */
-    .tab button.active {
-        background-color: #ccc;
-    }
-
-    /* Style the tab content */
-    .tabcontent {
-        display: none;
-        padding: 6px 12px;
-        border: 1px solid #ccc;
-        border-top: none;
-    }
-    </style>
 </head>
 <body>
-    <h1>Search</h1><br>
-    <input type="text" placeholder="Search.." name="search" id="search_content">
-    <button type="submit" id="Search">Enter</button>
+    <h1 class="h1">Search</h1><hr><br>
+    <input type="text" class="input" placeholder="Search..." name="search" id="search_content">
+    <button type="submit" id="Search" class="submitsearch">Enter</button>
     <br>
     <!-- TABS WITH ONCLICK EVENTS TO CALL FUNCTIONS FOR DATA DISPLAY -->
     <div class="tab">
         <button class="tablinks" onclick="openCity(event, 'Questions')">Questions</button>
         <button class="tablinks" onclick="openCity(event, 'Advices')">Advices</button>
         <button class="tablinks" onclick="openCity(event, 'Users')">Users</button>
-    </div>
+    </div><hr>
     <br><br>
     <!-- TABS THAT HAVE INFO TO DISPLAY  -->
     <!-- PARSE DATA FROM DB INTO THESE ID'S DISPLAY IS ALREADY FUNCTIONAL -->
@@ -94,7 +70,7 @@
                 console.log(dataString);
                 $.ajax({
                         type: "POST",
-                        url: "http://10.0.2.2/api/search.php",
+                        url: "http://localhost/api/search.php",
                         dataType: "json",
                         data: dataString,
                         success: function (data) {

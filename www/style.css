@@ -72,6 +72,31 @@ p {
     font-family: "Segoe UI";
 }
 
+.submitsearch {
+    width: 100px;
+    height: 30px;
+    background-color: #69e26d;
+    font-size: 20px;
+    color: white;
+    display: block;
+    margin: 0 auto;
+    border-style: solid #707070;
+    border-width: 2px;
+    cursor: pointer;    
+    font-family: "Segoe UI";
+}
+
+.uploadbutton {
+    width: 89px;
+    height: 25px;
+    background-color: #69e26d;
+    font-size: 13pt;
+    color: white;
+    border-style: solid #707070;
+    border-width: 2px;   
+    font-family: "Segoe UI";
+}
+
 #Subject {
     width: 230px;
     height: 26px;
@@ -319,6 +344,26 @@ padding: 5px 0px;
     padding: 0 0 0 10px;
 }
 
+/* Action bar displayed on the like list page */
+.likelist {
+    width: 52px;
+    height: 26px;
+    background-color: #ffffff;
+    overflow: auto;
+    border-style: solid;
+    border-width: 1px;
+    position: relative;
+    left: 80%;
+    bottom: 0px;
+    
+}
+
+.likelist a {
+    float: left;
+    text-align: center;
+    width: 50%;
+    padding: 5px 0px;
+}
 
 /*FILTER BUTTON Drop down CSS*/
 .dropbtn:hover, .dropbtn:focus {
@@ -334,7 +379,7 @@ padding: 5px 0px;
     display: none;
     position: absolute;
     background-color: #f1f1f1;
-    min-width: 80px;
+    min-width: 90px;
     font-size: 13px;
     overflow: auto;
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
@@ -384,7 +429,7 @@ padding: 5px 0px;
     font-family: Arial, Helvetica, sans-serif;
 }
 
-input,
+.input,
  .btn {
     width: 285px;
     padding: 12px;
@@ -397,62 +442,6 @@ input,
     margin: 0 auto;
 }
 
-/* The container for checkbox*/
-.container {
-    display: block;
-    position: relative;
-    padding-left: 35px;
-    margin-bottom: 12px;
-    font-size: 20px;
-}
-
-/* Hide the browser's default checkbox */
-.container input {
-    position: absolute;
-    opacity: 0;
-    cursor: pointer;
-    height: 0;
-    width: 0;
-}
-
-/* Create a custom checkbox */
-.checkmark {
-    position: absolute;
-    top: 0;
-    left: 0;
-    height: 25px;
-    width: 25px;
-    background-color: #eee;
-}
-
-/* When the checkbox is checked, add a blue background */
-.container input:checked ~ .checkmark {
-    background-color: #2196F3;
-}
-
-/* Create the checkmark/indicator (hidden when not checked) */
-.checkmark:after {
-    content: "";
-    position: absolute;
-    display: none;
-}
-
-/* Show the checkmark when checked */
-.container input:checked ~ .checkmark:after {
-    display: block;
-}
-
-/* Style the checkmark/indicator */
-.container .checkmark:after {
-    left: 9px;
-    top: 5px;
-    width: 5px;
-    height: 10px;
-    border: solid white;
-    border-width: 0 3px 3px 0;
-    transform: rotate(45deg);
-}
-
 #photo {
     height: 100px;
     width: 100px;
@@ -461,12 +450,18 @@ input,
     border-radius: 50%;
 }
 
-#profileimage {
-    height: 50px;
-    width: 50px;
+.profileimage img {
+    height: 40px;
+    width: 40px;
     border-style: solid black;
     border-width: 2px;
     border-radius: 50%;
+
+}
+
+.profileimage span {
+    font-family: "Segoe UI";
+    font-size: 10pt;
 }
 
 /* logout location */
@@ -483,4 +478,36 @@ input,
     font-family: "Segoe UI";
     color: rgb(121, 121, 121);
     padding: 0 0 0 15px;
+}
+
+.check {
+    font-family: "Segoe UI";
+    color: rgb(121, 121, 121);
+}
+
+/* Search buttons */
+.tab button {
+    background-color: inherit;
+    float: left;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    padding: 14px 16px;
+    transition: 0.3s;
+    font-size: 17px;
+    width: 33%;
+    font-weight: bold; 
+    color: rgb(121, 121, 121);
+}
+/* Create an active/current tablink class */
+.tab button.active {
+    background-color: #ccc;
+}
+
+/* Style the tab content */
+.tabcontent {
+    display: none;
+    padding: 6px 12px;
+    border: 1px solid #ccc;
+    border-top: none;
 }

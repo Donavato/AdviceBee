@@ -59,9 +59,9 @@
                     var advices = $('#advices');
 
                     $.each(data, function (key, value) {
-                        advices.append("<p>" + value.advice +"</p><p>" + value.pImage + value.name + "</p>" + "<div class='likebox'>" +
-                        "<img onclick='likeButton("+ value.advice_id +")' src='images/advice/like.png'></img>" + " " +
-                        value.likes +"</div><hr>");
+                        advices.append("<div class='profileimage'>" + value.pImage + "<span>" + value.name +"</span></div><p>" + value.advice + "</p>" + "<div class='likebox'>" +
+                        "<img onclick='likeButton("+ value.advice_id +")' id='like-img" + value.advice_id + "' src='images/advice/like.png'></img>" + " " +
+                        value.likes + "</div><hr>");
                     });
 
                 }, error: function (e) {
@@ -155,6 +155,7 @@
 
             });
 
+            $('#like-img' + advice_ID).attr('src', 'images/advice/liked.png');
         }
 
         function updateLikes(){
@@ -170,7 +171,7 @@
                     var advices = $('#advices');
                     document.getElementById("advices").innerHTML = "";
                     $.each(data, function (key, value) {
-                        advices.append("<p>" + value.advice +"</p><p>" + value.pImage + value.name + "</p>" + "<div class='likebox'>" +
+                        advices.append("<div class='profileimage'>" + value.pImage + "<span>" + value.name +"</span></div><p>" + value.advice + "<div class='likebox'>" +
                         "<img onclick='likeButton("+ value.advice_id +")' src='images/advice/like.png'></img>" + " " +
                         value.likes +"</div><hr>");
                     });
@@ -179,6 +180,7 @@
                     alert("failed to work");
                 }
             });
+            
         }
 
     </script>
