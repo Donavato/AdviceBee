@@ -7,11 +7,14 @@
 
     <!--reference style sheet-->
     <link rel="stylesheet" href="style.css">
+    <!--Popup style sheet-->
+    <link rel="stylesheet" type="text/css" href="css/popup.css"/>
 </head>
 
+
 <body>
-    <a href="logout.html" class="logout">Logout</a><br>
-    <br>
+
+    <a href="logout.html" class="logout">Logout</a>
     <!--output of the json-->
     <div>
         <!--set the id to DOM to show output-->
@@ -35,6 +38,7 @@
         <a href="logout.html" class="link">Logout</a>
     </nav>
 
+
     <!-- FILTER BUTTON LOCATION AND CONTENT -->
     <div class="filterButtonLoc">
         <div class="dropdown">
@@ -52,17 +56,27 @@
             <a href="insert.html"><img src="images/create.png"></a>
         </div>
     </div>
-
+    
     <!--Need to update page links. Ran into issues with img src links when in folders-->
     <div class="icon-location">
         <div class="icon-bar">
-            <a href="listlikepost.html"><img src="images/NavBar/list.png"></a>
+            <a href="index.html"><img src="images/NavBar/list.png"></a>
             <a href="groups.html"><img src="images/NavBar/groups.png"></a>
-            <a href="notification.html"><img src="images/NavBar/notification.png"></a>
+
+            <a href="notification.html" class="badge1" data-badge=""><img src="images/NavBar/notification.png"></a>
+
             <a href="search.html"><img src="images/NavBar/search.png"></a>
             <a href="listfolloweduser.html"><img src="images/NavBar/users.png"></a>
             <a href="listlikequestion.html"><img src="images/NavBar/favorite.png"></a>
             <a href="profile.html"><img src="images/NavBar/profile.png"></a>
+        </div>
+    </div>
+
+    <div class="hover_bkgr_fricc">      <!--Add this div to page for pop up-->
+        <span class="helper"></span>
+        <div>
+            <div class="popupCloseButton">X</div>
+            <p id="popuptext" class="popupText"></p>          <!--Append popup here-->
         </div>
     </div>
 
@@ -93,7 +107,7 @@
     <script type="text/javascript">
         function filterMostRecent() {
             $.ajax({
-                url: "http://localhost/api/Question/filtermostrecent.php",
+                url: "http://10.0.2.2/api/Question/filtermostrecent.php",
                 type: "POST",
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
@@ -117,7 +131,7 @@
 
                     //if fail it will give this error
                 }, error: function (e) {
-                    alert("failed to work");
+                    popup("failed to work");
                 }
 
             });
@@ -128,7 +142,7 @@
     <script type="text/javascript">
         function filterMostView() {
             $.ajax({
-                url: "http://localhost/api/Question/filtermostview.php",
+                url: "http://10.0.2.2/api/Question/filtermostview.php",
                 type: "POST",
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
@@ -152,7 +166,7 @@
 
                     //if fail it will give this error
                 }, error: function (e) {
-                    alert("failed to work");
+                    popup("failed to work");
                 }
 
             });
@@ -164,8 +178,39 @@
     <!-- LIST QUESTIONS -->
     <script type="text/javascript">
         $(document).ready(function () {
+            function load_unread_notification(view = "")
+            {
+
+                //JUST HAVE THIS KEEP TRACK OF NOTIFICATION ON ICON
+                $.ajax({
+                    url: "http://10.0.2.2/api/notification/loadnotification.php",
+                    method: "POST",
+                    data: { view: view },
+                    dataType: "json",
+                    success: function (data) {
+                        if (data.unread_notification > 0) {
+                            $(".badge1").attr("data-badge", data.unread_notification);
+                        }
+                    }
+                });
+            }
+            
+            load_unread_notification();
+            
+            $(document).on('click', ".badge1", function () {
+                $(".badge1").attr("data-badge", "");
+                
+                load_unread_notification("read");
+            });
+
+            // setInterval(function () {
+            //     load_unread_notification();
+            // }, 5000);
+
+
+            // LIST QUESTIONS
             $.ajax({
-                url: "http://localhost/api/Question/fetchdata.php",
+                url: "http://10.0.2.2/api/Question/fetchdata.php",
                 type: "POST",
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
@@ -189,7 +234,7 @@
 
                     //if fail it will give this error
                 }, error: function (e) {
-                    alert("failed to work");
+                    popup("failed to work");
                 }
 
             });
@@ -205,16 +250,14 @@
             var Question_ID = questionID;
             var dataString = "Question_ID=" + Question_ID;
 
-            $('#like-img' + questionID).attr('src', 'images/advice/liked.png');
-
             $.ajax({
-                url: "http://localhost/api/Question/likequestion.php",
+                url: "http://10.0.2.2/api/Question/likequestion.php",
                 type: "POST",
                 dataType: "json",
                 data: dataString,
                 //on success it will call this function
                 success: function (data) {
-                    alert(data);
+                    popup(data);
                     random();
                 }
 
@@ -227,13 +270,13 @@
             var dataString = "uID2=" + uID2;
 
             $.ajax({
-                url: "http://localhost/api/Question/followuser.php",
+                url: "http://10.0.2.2/api/Question/followuser.php",
                 type: "POST",
                 dataType: "json",
                 data: dataString,
                 //on success it will call this function
                 success: function (data) {
-                    alert(data);
+                    popup(data);
                 }
 
             });
@@ -245,18 +288,45 @@
             var dataString = "Question_ID=" + Question_ID;
 
             $.ajax({
-                url: "http://localhost/api/Question/reportquestion.php",
+                url: "http://10.0.2.2/api/Question/reportquestion.php",
                 type: "POST",
                 dataType: "json",
                 data: dataString,
                 //on success it will call this function
                 success: function (data) {
-                    alert(data);
+                    popup(data);
                 }
 
             });
 
         }
+    </script>
+
+    <script type="text/javascript">
+    $(document).ready(function(){
+    //intial loadup on page
+    $("#dashboardTopics").load("dashboardTopics.html");
+    });
+</script>
+<script type="text/javascript">
+    //add this function to for pop up functionality
+    function popup(text){
+        //set popupText to the <p> tag in the div
+        var popupText = $('#popuptext');
+        //empty the <p> tag in case of prior pop ups
+        popupText.empty();
+        //append new text passed through the function to the <p> tag
+        popupText.append(text);
+        //show when pop up is called
+        $('.hover_bkgr_fricc').show();
+        //hide when the x is clicked or anywhere else on the page is clicked
+        $('.hover_bkgr_fricc').click(function(){
+            $('.hover_bkgr_fricc').hide();
+        });
+        $('.popupCloseButton').click(function(){
+            $('.hover_bkgr_fricc').hide();
+        });
+    }
     </script>
 
 </body>

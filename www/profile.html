@@ -7,7 +7,21 @@
         <link rel="stylesheet" href="css/profile.css"/>
         <!--reference style sheet-->
         <link rel="stylesheet" href="style.css">
+        <!--Popup style sheet-->
+    <link rel="stylesheet" type="text/css" href="css/popup.css"/>
         <script type="text/javascript" src="js/jquery-3.3.1.min.js"></script>
+        <script type="text/javascript">
+            $(document).ready(function(){
+            //intial loadup on page
+            $("#wallpaper").load("wallpaper.html");
+        });
+        </script>
+        <script type="text/javascript">
+            $(document).ready(function(){
+            //intial loadup on page
+            $("#profile_picture").load("avatar.html");
+        });
+        </script>
         <script type="text/javascript">
            $(document).ready(function(){
                //intial loadup on page
@@ -24,6 +38,13 @@
 
     </head>
     <body>
+        <div id="wallpaper">
+
+        </div>
+        <div id="profile_picture">
+
+        </div>
+        <br><br>
         <table>
             <tbody id="getpublicinfo"> <!-- data will be displayed here -->
         
@@ -61,14 +82,22 @@
                 <a href="profile.html"><img src="images/NavBar/profile.png"></a>
             </div>
         </div>
+        <div class="hover_bkgr_fricc">      <!--Add this div to page for pop up-->
+            <span class="helper"></span>
+            <div>
+                <div class="popupCloseButton">X</div>
+                <p id="popuptext" class="popupText"></p>          <!--Append popup here-->
+            </div>
+        </div>
     </body>
 </html>
 
-<script>
+<script type="text/javascript">
+    
         //call ajax
         var ajax = new XMLHttpRequest();
         var method = "GET";
-        var url = "http://localhost/api/Profile/getinfo.php";
+        var url = "http://10.0.2.2/api/Profile/getinfo.php";
         var asynchronous = true;
         
         ajax.open(method, url, asynchronous);
@@ -82,8 +111,7 @@
             if(this.readyState == 4 && this.status == 200)
             {
                 //converting JSON taken from getinfo.php to array
-                var data = JSON.parse(this.responseText);
-                console.log(data); 
+                var data = JSON.parse(this.responseText); 
                 
                 //html value for <tbody>
                 var html = "";
@@ -98,31 +126,28 @@
                 var age = data[0].age;
                 var level = data[0].level;
 
+                var img = document.createElement("img");
+                if (level == "Bronze")
+                {
+                    img.src = "images/Bronze.png";
+                }
+                else if(level == "Silver")
+                {
+                    img.src = "images/Silver.png";
+                }
+                else if (level == "Gold")
+                {
+                    img.src = "images/Gold.png";
+                }
+
+                
                 //combining first name and last name with a space between them
                 var fullName= f_name + '\xa0' + l_name;
 
                 //tie into html
-                /*html += "<tr>";
-                    html += "<td>" + f_name + "</td>";
-                html += "</tr>";
-                html += "<tr>";    
-                    html += "<td>" + l_name + "</td>";
-                html += "</tr>";
-                html += "<tr>";
-                    html += "<td>" + title + "</td>";
-                html += "</tr>";
-                html += "<tr>";
-                    html += "<td>" + points + "</td>";
-                html += "</tr>";
-                html += "<tr>";
-                    html += "<td>" + location + "</td>";
-                html += "</tr>";
-                html += "<tr>";
-                    html += "<td>" + level + "</td>";
-                html += "</tr>";*/
                 html += "<tr>";
                     html += "<td align=left>Credit: " + points + " pts</td>";
-                    html += "<td align=right>"+ level + "</td>";
+                    html += "<div id='level' align=right><td></td></div>";
                 html += "</tr>";
                 html += "<tr align=center>";
                     html += "<input type='text' name = username value="+ fullName +" onchange='editName(this)'>";
@@ -137,6 +162,9 @@
                 //replace <tbody> of table in html
                 document.getElementById("getpublicinfo").innerHTML = html;
             }
+            var src = document.getElementById("level");
+            $(document).ready(src.appendChild(img));
+        
         }
 </script>
 
@@ -154,7 +182,7 @@
 		//call ajax
 		$.ajax({
 			method: "POST",
-			url: "http://localhost/api/Profile/updatename.php",
+			url: "http://10.0.2.2/api/Profile/updatename.php",
 			data: {userfirstName: firstName, userlastName: lastName}
         });
     }
@@ -167,7 +195,7 @@
         //call ajax
         $.ajax({
             method: "POST",
-            url: "http://localhost/api/Profile/updatetitle.php",
+            url: "http://10.0.2.2/api/Profile/updatetitle.php",
             data: {userTitle: storeTitle}
         });
     }
@@ -180,8 +208,29 @@
         //call ajax
         $.ajax({
             method: "POST",
-            url: "http://localhost/api/Profile/updatelocation.php",
+            url: "http://10.0.2.2/api/Profile/updatelocation.php",
             data: {userLocation: storeLocation}
         });
     }
 </script>
+
+<script type="text/javascript">
+    //add this function to for pop up functionality
+    function popup(text){
+        //set popupText to the <p> tag in the div
+        var popupText = $('#popuptext');
+        //empty the <p> tag in case of prior pop ups
+        popupText.empty();
+        //append new text passed through the function to the <p> tag
+        popupText.append(text);
+        //show when pop up is called
+        $('.hover_bkgr_fricc').show();
+        //hide when the x is clicked or anywhere else on the page is clicked
+        $('.hover_bkgr_fricc').click(function(){
+            $('.hover_bkgr_fricc').hide();
+        });
+        $('.popupCloseButton').click(function(){
+            $('.hover_bkgr_fricc').hide();
+        });
+    }
+    </script>

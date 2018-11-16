@@ -2,7 +2,11 @@
     include "../Account/db.php";
     header('Content-Type: application/json');
     $Question_ID = $_POST["Question_ID"];
-    $uID = $_SESSION['user_ID'];
+    
+    if(isset($_SESSION['user_ID'])){
+        $uID = $_SESSION['user_ID'];
+    }
+    
 
     //QUERY TO CHECK IS REPONSES FOR QUESTION IS HIDDEN
     $dataquery = mysqli_query($con, "SELECT * FROM questions WHERE Question_ID='$Question_ID'");

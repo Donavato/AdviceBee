@@ -1,0 +1,25 @@
+<div id="getavatar">
+</div>
+
+<script type="text/javascript">
+
+    $.ajax({
+                url: "http://10.0.2.2/api/profile_image/avatar.php",
+                type: "POST",
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                data: "param=no",
+                //on success it will call this function
+                success: function (data) {
+                    var DOM = $('#getavatar');
+
+                    //GET DATA AND PARSE IT
+                        var imageURL = data[0].pImage;
+
+                        //APPEND DATA AND DISPLAY IT
+                        DOM.append("<a href='profileImage.html'>"+ imageURL +"</a>");
+
+                        var image = document.getElementById('getavatar');
+                }
+    });
+</script>

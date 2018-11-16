@@ -3,6 +3,8 @@
     <head>
         <link rel="stylesheet" href="css/groups.css"/>
         <link rel="stylesheet" href="style.css">
+        <!--Popup style sheet-->
+    <link rel="stylesheet" type="text/css" href="css/popup.css"/>
         <script type="text/javascript" src="js/jquery-3.3.1.min.js"></script>
     </head>
     <h1 class="h1">Would you like to Subscribe to the following groups?</h1>
@@ -11,27 +13,16 @@
     <tbody id="getgroups">
 
     </tbody>
+   </tbody>
     </table>
-    <a href="index.html" class="link">Done!</a>
-
-    <div class="icon-location">
-        <div class="icon-bar">
-            <a href="listlikepost.html"><img src="images/NavBar/list.png"></a>
-            <a href="groups.html"><img src="images/NavBar/groups.png"></a>
-            <a href="notification.html"><img src="images/NavBar/notification.png"></a>
-            <a href="search.html"><img src="images/NavBar/search.png"></a>
-            <a href="listfolloweduser.html"><img src="images/NavBar/users.png"></a>
-            <a href="listlikequestion.html"><img src="images/NavBar/favorite.png"></a>
-            <a href="profile.html"><img src="images/NavBar/profile.png"></a>
-        </div>
-    </div>
+    <button type="button" id="submit" class="submit">Done</button><br>
 </html>
 
     <script type="text/javascript">
         //call ajax
         var ajax = new XMLHttpRequest();
         var method = "GET";
-        var url = "http://localhost/api/Profile/getgroupinfo.php";
+        var url = "http://10.0.2.2/api/Profile/getgroupinfo.php";
         var asynchronous = true;
         
         ajax.open(method, url, asynchronous);
@@ -84,7 +75,7 @@
                 //call ajax
                 $.ajax({
                     method: "POST",
-                    url: "http://localhost/api/Profile/addusergroup.php",
+                    url: "http://10.0.2.2/api/Profile/addusergroup.php",
                     data: {groupStoreID: storeID}
                   });
             }
@@ -93,9 +84,34 @@
                 //call ajax
                 $.ajax({
                     method: "POST",
-                    url: "http://localhost/api/Profile/deletefromusergroup.php",
+                    url: "http://10.0.2.2/api/Profile/deletefromusergroup.php",
                     data: {groupStoreID: storeID}
                   });
             }
         }
     </script>
+
+<script type="text/javascript">
+    $('#submit').on('click', function (e) {
+        //call ajax
+        var ajax = new XMLHttpRequest();
+        var method = "GET";
+        var url = "http://10.0.2.2/api/Account/updatefts.php";
+        var asynchronous = true;
+        
+        ajax.open(method, url, asynchronous);
+        
+        //sending ajax
+        ajax.send();
+        
+        //recieve response from getinfo.php
+        ajax.onreadystatechange = function()
+        {
+            if(this.readyState == 4 && this.status == 200)
+            {
+                window.location.replace("index.html");
+            }
+        }
+    })
+
+</script>

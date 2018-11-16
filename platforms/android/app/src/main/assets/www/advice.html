@@ -4,6 +4,8 @@
     <script src="js/jquery-3.3.1.min.js"></script>
     <!--reference style sheet-->
     <link rel="stylesheet" href="style.css">
+    <!--Popup style sheet-->
+    <link rel="stylesheet" type="text/css" href="css/popup.css"/>
 </head>
 
 <body>
@@ -31,13 +33,21 @@
     <!--Need to update page links. Ran into issues with img src links when in folders-->
     <div class="icon-location">
         <div class="icon-bar">
-            <a href="listlikepost.html"><img src="list.png"></a>
-            <a href="groups.html"><img src="groups.png"></a>
-            <a href="notification.html"><img src="notification.png"></a>
-            <a href="search.html"><img src="search.png"></a>
-            <a href="users.html"><img src="users.png"></a>
-            <a href="favorite.html"><img src="favorite.png"></a>
-            <a href="profile.html"><img src="profile.png"></a>
+            <a href="listlikepost.html"><img src="images/NavBar/list.png"></a>
+            <a href="groups.html"><img src="images/NavBar/groups.png"></a>
+            <a href="notification.html"><img src="images/NavBar/notification.png"></a>
+            <a href="search.html"><img src="images/NavBar/search.png"></a>
+            <a href="users.html"><img src="images/NavBar/users.png"></a>
+            <a href="favorite.html"><img src="images/NavBar/favorite.png"></a>
+            <a href="profile.html"><img src="images/NavBar/profile.png"></a>
+        </div>
+    </div>
+
+    <div class="hover_bkgr_fricc">      <!--Add this div to page for pop up-->
+        <span class="helper"></span>
+        <div>
+            <div class="popupCloseButton">X</div>
+            <p id="popuptext" class="popupText"></p>          <!--Append popup here-->
         </div>
     </div>
 
@@ -56,15 +66,16 @@
                 data: dataString,
                 //on success it will call this function
                 success: function (data) {
-                    var DOM = $('#advices');
-
+                    var advices = $('#advices');
+                    data = JSON.parse(JSON.stringify(data));
                     $.each(data, function (key, value) {
-                        DOM.append("<p>" + value.advice +"<br>" + value.name + "</p>" +
-                        "<button onclick='likeButton("+ value.advice_id +")'>Like</button></a>" +"<hr>");
+                        advices.append("<div class='profileimage'>" + value.pImage + "<span>" + value.name +"</span></div><p>" + value.advice + "</p>" + "<div class='likebox'>" +
+                        "<img onclick='likeButton("+ value.advice_id +")' id='like-img" + value.advice_id + "' src='images/advice/like.png'></img>" + " " +
+                        value.likes + "</div><hr>");
                     });
 
                 }, error: function (e) {
-                    alert("failed to work");
+                    popup("failed to work");
                 }
             });
             ////////////////////////////////////////////////////////////////////////////////
@@ -79,7 +90,9 @@
                 //on success it will call this function
                 success: function (data) {
                     var Obj = JSON.parse(JSON.stringify(data));
-                    document.getElementById("Question").innerHTML = "<h3>" + Obj[0].Subject + "</h3><br>" + Obj[0].topic + "<br>" + Obj[0].Description + "<br>" + Obj[0].question_type + "<hr>";
+                    //DISPLAYS THE QUESTION 
+                    document.getElementById("Question").innerHTML = "<div class='profileimage'>" + Obj[0].pImage + Obj[0].name + "</div>" + "<p class='sub'>" + Obj[0].Subject + "</p><p>" + Obj[0].topic + "<br>" 
+                    + Obj[0].dImage + "<br>" + Obj[0].Description + "<br>" + Obj[0].question_type +"</p>" + "<hr>";
 
                     // CHECK QUESTION TYPE, OUTPUT FORM ADVICE DEPENDING ON THAT TYPE
                     
@@ -88,7 +101,8 @@
                     } else if (Obj[0].question_type == "True or False") {
                         document.getElementById("advice").innerHTML = "True: " + "<input type='radio' name='advice' value='True' />" + "<br>" + "False: " + "<input type='radio' name='advice' value='False' />";
                     } else if (Obj[0].question_type == "Description") {
-                        document.getElementById("advice").innerHTML = "<div id='Description'" + "Advice: " + "<br>" + "<textarea id='Description1' name='advice'>" + "</textarea>" + "<br>" + "</div>";
+                        document.getElementById("advice").innerHTML = "<div id='Description'" + "Advice: " + "<br>" + "<textarea id='Description1' maxlength='140' name='advice'>" + "</textarea>" + "<br>" + "</div>";
+                        "<p>" + "<span id='wordCount'>" + '140' + "</span>/140 characters</p>";
                     } else {
                         document.getElementById("advice").innerHTML = "Error";
                     }
@@ -96,7 +110,7 @@
                     questionType = Obj[0].question_type;
                     //if fail it will give this error
                 }, error: function (e) {
-                    alert(JSON.stringify(e));
+                    popup(JSON.stringify(e));
                 }
             });
 
@@ -124,10 +138,10 @@
                     dataType: "json",
                     data: dataString,
                     success: function(data){
-                        alert(JSON.stringify(data));
+                        popup(JSON.stringify(data));
                         window.location.replace("index.html"); 
                     }, error: function(e){
-                        alert(JSON.stringify(e));
+                        popup(JSON.stringify(e));
                     }
                 });
             });
@@ -145,13 +159,73 @@
                 data: dataString,
                 //on success it will call this function
                 success: function (data) {
-                    alert(data);
+                    popup(data);
+                    updateLikes();
                 }
 
             });
 
+            $('#like-img' + advice_ID).attr('src', 'images/advice/liked.png');
         }
+
+        function updateLikes(){
+            var dataString = "Question_ID=" + Question_ID;
+
+            $.ajax({
+                url: "http://10.0.2.2/api/Advice/listadvices.php",
+                type: "POST",
+                dataType: "json",
+                data: dataString,
+                //on success it will call this function
+                success: function (data) {
+                    var advices = $('#advices');
+                    document.getElementById("advices").innerHTML = "";
+                    $.each(data, function (key, value) {
+                        advices.append("<div class='profileimage'>" + value.pImage + "<span>" + value.name +"</span></div><p>" + value.advice + "<div class='likebox'>" +
+                        "<img onclick='likeButton("+ value.advice_id +")' src='images/advice/like.png'></img>" + " " +
+                        value.likes +"</div><hr>");
+                    });
+
+                }, error: function (e) {
+                    popup("failed to work");
+                }
+            });
+            
+        }
+
     </script>
+
+    <script type="text/javascript">
+        //add event for each time a key is released to run the function for form character count
+        document.addEventListener("keyup",function(e) {
+            if(e.target && e.target.id == "Description1")
+            {
+                var numOfCharacters = e.target.value.split('');
+                wordCounts = 140 - numOfCharacters.length;
+                document.getElementById("wordCount").innerText = wordCounts;
+            }
+        });
+    </script>
+    <script type="text/javascript">
+        //add this function to for pop up functionality
+        function popup(text){
+            //set popupText to the <p> tag in the div
+            var popupText = $('#popuptext');
+            //empty the <p> tag in case of prior pop ups
+            popupText.empty();
+            //append new text passed through the function to the <p> tag
+            popupText.append(text);
+            //show when pop up is called
+            $('.hover_bkgr_fricc').show();
+            //hide when the x is clicked or anywhere else on the page is clicked
+            $('.hover_bkgr_fricc').click(function(){
+                $('.hover_bkgr_fricc').hide();
+            });
+            $('.popupCloseButton').click(function(){
+                $('.hover_bkgr_fricc').hide();
+            });
+        }
+        </script>
 
 </body>
 

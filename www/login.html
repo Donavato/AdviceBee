@@ -6,18 +6,20 @@
     <script src="js/jquery-3.3.1.min.js"></script>
     <!--reference style sheet-->
     <link rel="stylesheet" href="style.css">
+    <!--Popup style sheet-->
+    <link rel="stylesheet" type="text/css" href="css/popup.css"/>
     <!--Facebook and Google icon source-->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 
 <body>
     <h1 class="h1">Please Sign In</h1><br>
-    <div>  
+    <div>
         <a href="#" class="fb btn">
-             <i class="fa fa-facebook fa-fw"></i> Login with Facebook
+            <i class="fa fa-facebook fa-fw"></i> Login with Facebook
         </a><br>
         <a href="#" class="google btn">
-             <i class="fa fa-google fa-fw"></i> Login with Google+
+            <i class="fa fa-google fa-fw"></i> Login with Google+
         </a><br>
     </div>
     <hr><br>
@@ -33,7 +35,7 @@
         <p>Dont have one?<a href="register.html" class="reglink"> Create one now!</a></p>
     </form><br>
 
-    
+
 
     <br>
     <nav class="nav">
@@ -47,40 +49,96 @@
         <a href="logout.html" class="link">Logout</a>
     </nav>
     <br><br>
-    
+
 
     <div id="response">
 
+    </div>
+    
+    <div class="hover_bkgr_fricc">      <!--Add this div to page for pop up-->
+        <span class="helper"></span>
+        <div>
+            <div class="popupCloseButton">X</div>
+            <p id="popuptext" class="popupText"></p>          <!--Append popup here-->
+        </div>
     </div>
     <!-- FIX THE SUCCESS/FAIL RESPONSE TYPE -->
     <!--Implementation of jquery/ajax-->
     <script type="text/javascript">
         $('#submit').on('click', function (e) {
             e.preventDefault()
-                var email = $("#email").val();
-                var password = $("#passwrd").val();
-                var dataString = "email=" + email +"&passwrd=" + password;
+            var email = $("#email").val();
+            var password = $("#passwrd").val();
+            var dataString = "email=" + email + "&passwrd=" + password;
             $.ajax({
-                url: "http://localhost/api/Account/login.php",
+                url: "http://10.0.2.2/api/Account/login.php",
                 type: "POST",
                 dataType: "json",
                 data: dataString,
                 success: function(data){
                     
                     if(data==true){
-                        alert("Logged in Successfully");
-                        window.location.replace("index.html");
-                    }else{
+                        //call ajax
+                        var ajax = new XMLHttpRequest();
+                        var method = "GET";
+                        var url = "http://10.0.2.2/api/Account/fts.php";
+                        var asynchronous = true;
+
+                        ajax.open(method, url, asynchronous);
+
+                        //sending ajax
+                        ajax.send();
+        
+                        //recieve response
+                        ajax.onreadystatechange = function()
+                        {
+                            if(this.readyState == 4 && this.status == 200)
+                            {
+                                var data = JSON.parse(this.responseText);
+
+                                if (data[0].fts == 0) {
+                                    window.location.replace("topics.html");
+                                }
+                                else {
+                                    window.location.replace("index.html");
+                                }
+                            }
+                        }
+                    } else {
                         console.log(data);
-                        alert("Login Failed");
+                        //popup("Login Failed");
+                        popup("Login failed");
                     }
                     
                 }, error: function(e){
-                    alert(JSON.stringify(e));
+                    popup(JSON.stringify(e));
                 }
             });
         });
+        function activate(){
+
+        }
     </script>
+    <script type="text/javascript">
+    //add this function to for pop up functionality
+    function popup(text){
+        //set popupText to the <p> tag in the div
+        var popupText = $('#popuptext');
+        //empty the <p> tag in case of prior pop ups
+        popupText.empty();
+        //append new text passed through the function to the <p> tag
+        popupText.append(text);
+        //show when pop up is called
+        $('.hover_bkgr_fricc').show();
+        //hide when the x is clicked or anywhere else on the page is clicked
+        $('.hover_bkgr_fricc').click(function(){
+            $('.hover_bkgr_fricc').hide();
+        });
+        $('.popupCloseButton').click(function(){
+            $('.hover_bkgr_fricc').hide();
+        });
+    }
+    </script>    
 </body>
 
 </html>

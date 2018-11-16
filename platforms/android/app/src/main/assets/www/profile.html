@@ -7,7 +7,21 @@
         <link rel="stylesheet" href="css/profile.css"/>
         <!--reference style sheet-->
         <link rel="stylesheet" href="style.css">
+        <!--Popup style sheet-->
+    <link rel="stylesheet" type="text/css" href="css/popup.css"/>
         <script type="text/javascript" src="js/jquery-3.3.1.min.js"></script>
+        <script type="text/javascript">
+            $(document).ready(function(){
+            //intial loadup on page
+            $("#wallpaper").load("wallpaper.html");
+        });
+        </script>
+        <script type="text/javascript">
+            $(document).ready(function(){
+            //intial loadup on page
+            $("#profile_picture").load("avatar.html");
+        });
+        </script>
         <script type="text/javascript">
            $(document).ready(function(){
                //intial loadup on page
@@ -24,6 +38,13 @@
 
     </head>
     <body>
+        <div id="wallpaper">
+
+        </div>
+        <div id="profile_picture">
+
+        </div>
+        <br><br>
         <table>
             <tbody id="getpublicinfo"> <!-- data will be displayed here -->
         
@@ -52,19 +73,27 @@
 
         <div class="icon-location">
             <div class="icon-bar">
-                <a href="listlikepost.html"><img src="list.png"></a>
-                <a href="groups.html"><img src="groups.png"></a>
-                <a href="notification.html"><img src="notification.png"></a>
-                <a href="search.html"><img src="search.png"></a>
-                <a href="users.html"><img src="users.png"></a>
-                <a href="favorite.html"><img src="favorite.png"></a>
-                <a href="profile.html"><img src="profile.png"></a>
+                <a href="listlikepost.html"><img src="images/NavBar/list.png"></a>
+                <a href="groups.html"><img src="images/NavBar/groups.png"></a>
+                <a href="notification.html"><img src="images/NavBar/notification.png"></a>
+                <a href="search.html"><img src="images/NavBar/search.png"></a>
+                <a href="listfolloweduser.html"><img src="images/NavBar/users.png"></a>
+                <a href="listlikequestion.html"><img src="images/NavBar/favorite.png"></a>
+                <a href="profile.html"><img src="images/NavBar/profile.png"></a>
+            </div>
+        </div>
+        <div class="hover_bkgr_fricc">      <!--Add this div to page for pop up-->
+            <span class="helper"></span>
+            <div>
+                <div class="popupCloseButton">X</div>
+                <p id="popuptext" class="popupText"></p>          <!--Append popup here-->
             </div>
         </div>
     </body>
 </html>
 
-<script>
+<script type="text/javascript">
+    
         //call ajax
         var ajax = new XMLHttpRequest();
         var method = "GET";
@@ -82,8 +111,7 @@
             if(this.readyState == 4 && this.status == 200)
             {
                 //converting JSON taken from getinfo.php to array
-                var data = JSON.parse(this.responseText);
-                console.log(data); 
+                var data = JSON.parse(this.responseText); 
                 
                 //html value for <tbody>
                 var html = "";
@@ -98,31 +126,28 @@
                 var age = data[0].age;
                 var level = data[0].level;
 
+                var img = document.createElement("img");
+                if (level == "Bronze")
+                {
+                    img.src = "images/Bronze.png";
+                }
+                else if(level == "Silver")
+                {
+                    img.src = "images/Silver.png";
+                }
+                else if (level == "Gold")
+                {
+                    img.src = "images/Gold.png";
+                }
+
+                
                 //combining first name and last name with a space between them
                 var fullName= f_name + '\xa0' + l_name;
 
                 //tie into html
-                /*html += "<tr>";
-                    html += "<td>" + f_name + "</td>";
-                html += "</tr>";
-                html += "<tr>";    
-                    html += "<td>" + l_name + "</td>";
-                html += "</tr>";
-                html += "<tr>";
-                    html += "<td>" + title + "</td>";
-                html += "</tr>";
-                html += "<tr>";
-                    html += "<td>" + points + "</td>";
-                html += "</tr>";
-                html += "<tr>";
-                    html += "<td>" + location + "</td>";
-                html += "</tr>";
-                html += "<tr>";
-                    html += "<td>" + level + "</td>";
-                html += "</tr>";*/
                 html += "<tr>";
                     html += "<td align=left>Credit: " + points + " pts</td>";
-                    html += "<td align=right>"+ level + "</td>";
+                    html += "<div id='level' align=right><td></td></div>";
                 html += "</tr>";
                 html += "<tr align=center>";
                     html += "<input type='text' name = username value="+ fullName +" onchange='editName(this)'>";
@@ -137,6 +162,9 @@
                 //replace <tbody> of table in html
                 document.getElementById("getpublicinfo").innerHTML = html;
             }
+            var src = document.getElementById("level");
+            $(document).ready(src.appendChild(img));
+        
         }
 </script>
 
@@ -185,3 +213,24 @@
         });
     }
 </script>
+
+<script type="text/javascript">
+    //add this function to for pop up functionality
+    function popup(text){
+        //set popupText to the <p> tag in the div
+        var popupText = $('#popuptext');
+        //empty the <p> tag in case of prior pop ups
+        popupText.empty();
+        //append new text passed through the function to the <p> tag
+        popupText.append(text);
+        //show when pop up is called
+        $('.hover_bkgr_fricc').show();
+        //hide when the x is clicked or anywhere else on the page is clicked
+        $('.hover_bkgr_fricc').click(function(){
+            $('.hover_bkgr_fricc').hide();
+        });
+        $('.popupCloseButton').click(function(){
+            $('.hover_bkgr_fricc').hide();
+        });
+    }
+    </script>
