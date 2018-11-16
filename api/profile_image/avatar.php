@@ -4,8 +4,8 @@
 
 	$q=mysqli_query($con, "SELECT profileImage FROM profile_pics WHERE user_ID='$User_ID'");
     
-    if($q->num_rows == 0 || $q == NULL){
-		$avatar = "<img src = ../profile_pic/default.png>";
+    if($q->num_rows == 0){
+		$avatar = "<img src = images/default.png>";
 		$arr = array();
 		array_push($arr, array("pImage" => "$avatar"));
 	}

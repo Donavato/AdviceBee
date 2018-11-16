@@ -5,7 +5,7 @@
 	$q=mysqli_query($con, "SELECT * FROM profile_pics WHERE user_ID='$User_ID'");
     
     if($q->num_rows == 0){
-		$avatar = "<img src = ../profile_pic/default.png>";  //change this default image for background default image
+		$avatar = "<img src = images/default.png>";  //change this default image for background default image
 		$arr = array();
 		array_push($arr, array("pImage" => "$avatar"));
 	}
