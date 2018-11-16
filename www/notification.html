@@ -7,6 +7,11 @@
 
     <!--reference style sheet-->
     <link rel="stylesheet" href="style.css">
+    <style>
+            #box1{
+                padding-top: 100px;
+            }
+    </style>
 </head>
 
 
@@ -14,7 +19,7 @@
 
     <a href="logout.html" class="logout">Logout</a>
     <!--output of the json-->
-    <div>
+    <div id="box1">
         <!--set the id to DOM to show output-->
         
         <div id="DOM">
@@ -47,7 +52,7 @@
         $(document).ready(function () {
             // LIST NOTIFICATIONS
             $.ajax({
-                url: "http://localhost/api/notification/listnotifcontent.php",
+                url: "http://10.0.2.2/api/notification/listnotifcontent.php",
                 type: "POST",
                 dataType: "json",
                 data: "param=no",
