@@ -25,47 +25,44 @@
 
 <body>
     <!--button layout-->
-    <h1 class="h1">Create a Question</h1>
+    <h1 class="h1">Create a Question</h1><hr>
 
     <div class="list">
         <input type="hidden" id="id" value="" />
-        <div class="item">
-            <input type="text" id="Subject" value="" placeholder="Subject" /><br>
-        </div>
+        
+        <input type="text" class="input" id="Subject" value="" placeholder="Subject..." /><br>
+        <textarea id="Description"></textarea>
+       
+        <br>
 
-        <div class="item">
-            <textarea id="Description"></textarea>
-        </div>
-        <br>
-        <div class="item">
-            <label class="label">Topic: </label>
-            <select id="topics_list">
-            </select>
-        </div>
-        <div class="item">
-            <label class="label">Type: </label>
-            <select id="question_type">
-            </select>
-        </div>
-        <br>
-        <div class="check">
-        Anonymous<input type="checkbox" id="anonymous" value="1"><br>
-        <br>
-        Hide responses<input type="checkbox" id="hide_responses" value="1"><br>
-        </div>
-        <br>
-        <div class="page">
-            <img alt="image" id="photo" />
-            <br>
-            <button id="btn" class="uploadbutton">TAKE</button>
-            <button id="btn2" class="uploadbutton">UPLOAD</button>
-        </div>
-    </div>
-    <br>
-    <div class="item">
-        <input type="button" id="insert" value="Insert" class="submit" />
-    </div>
+        <div class="insertbox">
+            <div class="optionbox">
+                <label class="label">Topic: </label>
+                <select id="topics_list" class="select"></select>
+      
+                <label class="label">Type: </label>
+                <select id="question_type" class="select"></select><br>
+        
+                <div class="check">
+                    Anonymous<input type="checkbox" id="anonymous" value="1"><br>
+                    Hide responses<input type="checkbox" id="hide_responses" value="1"><br>
+                </div>
+            </div>
 
+            <div class="imageupload">
+                <img alt="image" id="photo" />
+                <input type="button" id="btn" value="Take" class="uploadbutton" />
+                <input type="button" id="btn2" value="Upload" class="uploadbutton" />
+            </div>
+        </div> 
+    
+        <br>
+        <div class="item">
+            <input type="button" id="insert" value="Cancel" class="cancel" />
+            <input type="button" id="insert" value="Insert" class="create" />
+        </div>
+        
+    </div>
     <br>
     <nav class="nav">
         <a href="insert.html" class="link">Insert</a> |
