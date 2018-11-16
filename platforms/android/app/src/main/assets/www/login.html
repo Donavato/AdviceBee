@@ -59,7 +59,7 @@
         <span class="helper"></span>
         <div>
             <div class="popupCloseButton">X</div>
-            <p id="popuptext" class="popupText"></p>          <!--Append alert here-->
+            <p id="popuptext" class="popupText"></p>          <!--Append popup here-->
         </div>
     </div>
     <!-- FIX THE SUCCESS/FAIL RESPONSE TYPE -->
@@ -78,8 +78,6 @@
                 success: function(data){
                     
                     if(data==true){
-                        //alert("Logged in Successfully");
-                        popup("Logged in Successfully");
                         //call ajax
                         var ajax = new XMLHttpRequest();
                         var method = "GET";
@@ -110,12 +108,12 @@
                         }
                     }else{
                         console.log(data);
-                        //alert("Login Failed");
+                        //popup("Login Failed");
                         popup("Login failed");
                     }
                     
                 }, error: function(e){
-                    alert(JSON.stringify(e));
+                    popup(JSON.stringify(e));
                 }
             });
         });

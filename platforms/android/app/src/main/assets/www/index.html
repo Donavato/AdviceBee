@@ -7,6 +7,8 @@
 
     <!--reference style sheet-->
     <link rel="stylesheet" href="style.css">
+    <!--Popup style sheet-->
+    <link rel="stylesheet" type="text/css" href="css/popup.css"/>
 </head>
 
 <body>
@@ -68,6 +70,14 @@
         </div>
     </div>
 
+    <div class="hover_bkgr_fricc">      <!--Add this div to page for pop up-->
+        <span class="helper"></span>
+        <div>
+            <div class="popupCloseButton">X</div>
+            <p id="popuptext" class="popupText"></p>          <!--Append popup here-->
+        </div>
+    </div>
+
     <!-- FILTER BUTTON -->
     <script>
 
@@ -119,7 +129,7 @@
 
                     //if fail it will give this error
                 }, error: function (e) {
-                    alert("failed to work");
+                    popup("failed to work");
                 }
 
             });
@@ -154,7 +164,7 @@
 
                     //if fail it will give this error
                 }, error: function (e) {
-                    alert("failed to work");
+                    popup("failed to work");
                 }
 
             });
@@ -191,7 +201,7 @@
 
                     //if fail it will give this error
                 }, error: function (e) {
-                    alert("failed to work");
+                    popup("failed to work");
                 }
 
             });
@@ -216,7 +226,7 @@
                 data: dataString,
                 //on success it will call this function
                 success: function (data) {
-                    alert(data);
+                    popup(data);
                     random();
                 }
 
@@ -235,7 +245,7 @@
                 data: dataString,
                 //on success it will call this function
                 success: function (data) {
-                    alert(data);
+                    popup(data);
                 }
 
             });
@@ -253,7 +263,7 @@
                 data: dataString,
                 //on success it will call this function
                 success: function (data) {
-                    alert(data);
+                    popup(data);
                 }
 
             });
@@ -267,6 +277,26 @@
     $("#dashboardTopics").load("dashboardTopics.html");
     });
 </script>
+<script type="text/javascript">
+    //add this function to for pop up functionality
+    function popup(text){
+        //set popupText to the <p> tag in the div
+        var popupText = $('#popuptext');
+        //empty the <p> tag in case of prior pop ups
+        popupText.empty();
+        //append new text passed through the function to the <p> tag
+        popupText.append(text);
+        //show when pop up is called
+        $('.hover_bkgr_fricc').show();
+        //hide when the x is clicked or anywhere else on the page is clicked
+        $('.hover_bkgr_fricc').click(function(){
+            $('.hover_bkgr_fricc').hide();
+        });
+        $('.popupCloseButton').click(function(){
+            $('.hover_bkgr_fricc').hide();
+        });
+    }
+    </script>
 
 </body>
 
