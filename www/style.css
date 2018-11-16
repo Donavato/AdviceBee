@@ -303,6 +303,36 @@ padding: 5px 0px;
     width: 100%;
 }
 
+/* NOTIFICATION ICON BADGE */
+.badge1 {
+    position:relative;
+ }
+
+.badge1[data-badge]:after {
+    content:attr(data-badge);
+    position:absolute;
+    top:1px;
+    right: 7px;
+    font-size:.7em;
+    background:red;
+    color:white;
+    width:16px;
+    height:16px;
+    text-align:center;
+    line-height:16px;
+    border-radius:50%;
+    box-shadow:0 0 1px #333;
+ }
+ 
+.badge1[data-badge=""]:after {
+    content: none;
+    }
+
+a.listnotif{
+    color: black;
+    text-decoration:none;
+}
+
 /* Action bar displayed on each question */
 .actionbar {
     width: 110px;
@@ -502,9 +532,6 @@ padding: 5px 0px;
 /* Create an active/current tablink class */
 .tab button.active {
     background-color: #ccc;
-}
-.tab button:hover {
-    background-color: #ddd;
 }
 
 /* Style the tab content */
