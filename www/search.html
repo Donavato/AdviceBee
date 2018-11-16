@@ -10,14 +10,9 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <!--reference style sheet-->
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" type="text/css" href="css/popup.css"/>
     <style>
 
-        #Questions{
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            
-        }
         #searchSubject{
             text-align: center;
             font-family: "Segoe UI";
@@ -35,6 +30,25 @@
         #searchElement:hover {
             color: rgb(0, 102, 255);
         }
+        .tab button:hover {
+            background-color: #ddd;
+        }
+        #Q{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        #A{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        #U{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
         
     </style>
 </head>
@@ -56,20 +70,19 @@
     <br><br>
     <!-- TABS THAT HAVE INFO TO DISPLAY  -->
     <!-- PARSE DATA FROM DB INTO THESE ID'S DISPLAY IS ALREADY FUNCTIONAL -->
-    <div id="Questions" class="tabcontent">
-        <h3>Questions</h3>
+    <div id="Questions" class="tabcontent" style="display:block;">
         <div id="Q">
 
         </div>
     </div>
-    <div id="Advices" class="tabcontent">
-        <h3>Advices</h3>
+    <div id="Advices" class="tabcontent" style="display:block;">
+    
         <div id="A">
 
         </div>
     </div>
-    <div id="Users" class="tabcontent">
-        <h3>Users</h3>
+    <div id="Users" class="tabcontent" style="display:block;">
+    
         <div id="U">
 
         </div>
@@ -91,7 +104,7 @@
     <div class="hover_bkgr_fricc">      <!--Add this div to page for pop up-->
         <span class="helper"></span>
         <div>
-            <div class="popupCloseButton">X</div>
+             
             <p id="popuptext" class="popupText"></p>          <!--Append popup here-->
         </div>
     </div>
@@ -119,7 +132,7 @@
             var mxlen = 10;
 
             if (field.length < mnlen || field.length > mxlen || !field) {
-                //INPUT POP UP BOX WITH MIN AND MAX LENGTH 
+                popup("Please enter a search between " +mnlen + " to " + mxlen + " charecters long." )
                 return false;
             }
             else {
@@ -127,7 +140,7 @@
                 var dataString = "Data=" + search_data;
                 $.ajax({
                     type: "POST",
-                    url: "http://10.0.2.2/api/search.php",
+                    url: "http://localhost/api/search.php",
                     dataType: "json",
                     data: dataString,
                     success: function (data) {

@@ -85,7 +85,7 @@
         <div class="hover_bkgr_fricc">      <!--Add this div to page for pop up-->
             <span class="helper"></span>
             <div>
-                <div class="popupCloseButton">X</div>
+                 
                 <p id="popuptext" class="popupText"></p>          <!--Append popup here-->
             </div>
         </div>
@@ -97,7 +97,7 @@
         //call ajax
         var ajax = new XMLHttpRequest();
         var method = "GET";
-        var url = "http://10.0.2.2/api/Profile/getinfo.php";
+        var url = "http://localhost/api/Profile/getinfo.php";
         var asynchronous = true;
         
         ajax.open(method, url, asynchronous);
@@ -182,7 +182,7 @@
 		//call ajax
 		$.ajax({
 			method: "POST",
-			url: "http://10.0.2.2/api/Profile/updatename.php",
+			url: "http://localhost/api/Profile/updatename.php",
 			data: {userfirstName: firstName, userlastName: lastName}
         });
     }
@@ -195,7 +195,7 @@
         //call ajax
         $.ajax({
             method: "POST",
-            url: "http://10.0.2.2/api/Profile/updatetitle.php",
+            url: "http://localhost/api/Profile/updatetitle.php",
             data: {userTitle: storeTitle}
         });
     }
@@ -208,7 +208,7 @@
         //call ajax
         $.ajax({
             method: "POST",
-            url: "http://10.0.2.2/api/Profile/updatelocation.php",
+            url: "http://localhost/api/Profile/updatelocation.php",
             data: {userLocation: storeLocation}
         });
     }

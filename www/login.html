@@ -58,7 +58,7 @@
     <div class="hover_bkgr_fricc">      <!--Add this div to page for pop up-->
         <span class="helper"></span>
         <div>
-            <div class="popupCloseButton">X</div>
+             
             <p id="popuptext" class="popupText"></p>          <!--Append popup here-->
         </div>
     </div>
@@ -71,7 +71,7 @@
             var password = $("#passwrd").val();
             var dataString = "email=" + email + "&passwrd=" + password;
             $.ajax({
-                url: "http://10.0.2.2/api/Account/login.php",
+                url: "http://localhost/api/Account/login.php",
                 type: "POST",
                 dataType: "json",
                 data: dataString,
@@ -81,7 +81,7 @@
                         //call ajax
                         var ajax = new XMLHttpRequest();
                         var method = "GET";
-                        var url = "http://10.0.2.2/api/Account/fts.php";
+                        var url = "http://localhost/api/Account/fts.php";
                         var asynchronous = true;
 
                         ajax.open(method, url, asynchronous);

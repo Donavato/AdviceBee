@@ -40,8 +40,8 @@ body {
 
 p {
     font-family: "Segoe UI";
-    padding: 0px 20px;
     text-align: left;
+    margin: 2%;
 }
 
 /* Style for input forms */
@@ -51,7 +51,8 @@ p {
     padding: 15px 10px;
     margin: 0 auto;
     display: block;
-    border-style: solid #707070;
+    border-style: solid;
+    border-color: #707070;
     border-width: 1px;
     font-size: 15px;
     font-family: "Segoe UI";
@@ -86,17 +87,6 @@ p {
     font-family: "Segoe UI";
 }
 
-.uploadbutton {
-    width: 89px;
-    height: 25px;
-    background-color: #69e26d;
-    font-size: 13pt;
-    color: white;
-    border-style: solid #707070;
-    border-width: 2px;   
-    font-family: "Segoe UI";
-}
-
 #Subject {
     width: 230px;
     height: 26px;
@@ -109,7 +99,7 @@ p {
     font-family: "Segoe UI";
 }
 
-#insert {
+.insert {
     width: 158;
     height: 54px;
     background-color: #69e26d;
@@ -135,13 +125,6 @@ p {
     cursor: pointer;    
     font-family: "Segoe UI";  
     font-weight: bold; 
-}
-
-.sub {
-    font-size: 16px;
-    color: rgb(121, 121, 121);
-    font-family: "Segoe UI";
-    font-weight: bold;
 }
 
 /* Textarea for entering questions */
@@ -184,18 +167,14 @@ hr {
     width: 100%;
 }
 
-/* Style for drop down menus */
-select {
-    width: 130px;
-    height: 25px;
-}
-
 /* Header 1 styling */
 .h1 {
     text-align: center;
     color: rgb(121, 121, 121);
     font-family: "Segoe UI";
     font-size: 20px;
+    margin-block-end: 0%;
+    margin-block-start: 0%;
 }
 
 /* Header 3 styling */
@@ -333,27 +312,6 @@ a.listnotif{
     text-decoration:none;
 }
 
-/* Action bar displayed on each question */
-.actionbar {
-    width: 110px;
-    height: 37;
-    background-color: #ffffff;
-    overflow: auto;
-    border-style: solid;
-    border-width: 1px;
-    position: relative;
-    left: 220px;
-    bottom: 0px;
-    padding: 5px 5px;
-}
-
-.actionbar a {
-    float: left;
-    text-align: center;
-    width: 50%;
-    padding: 5px 0px;
-}
-
 /* box for like button on advice page */
 .likebox {
     width: 26px;
@@ -395,6 +353,8 @@ a.listnotif{
     padding: 5px 0px;
 }
 
+
+/* ----------- Filter Button Styling ----------- */
 /*FILTER BUTTON Drop down CSS*/
 .dropbtn:hover, .dropbtn:focus {
     background-color: #2980B9;
@@ -445,6 +405,9 @@ a.listnotif{
 .postButton {
     width: 25%;
 }
+/* --------------------------------------------- */
+
+
 
 /* Facebook and Google signin buttons */
 .fb {
@@ -475,24 +438,93 @@ a.listnotif{
 #photo {
     height: 100px;
     width: 100px;
-    border-style: solid black;
+    border-style: solid;
+    border-color: #707070;
     border-width: 2px;
-    border-radius: 50%;
 }
 
+/* ------ Styling for dashboard questions ------ */
+.question {
+    text-align: center;
+}
+
+/* subject style */
+.sub {
+    font-size: 15pt;
+    color: rgb(121, 121, 121);
+    font-family: "Segoe UI";
+    display: inline-block;
+}
+
+.usercontainer {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+/* profile image style */
 .profileimage img {
     height: 40px;
     width: 40px;
-    border-style: solid black;
+    border-style: solid;
+    border-color: #707070;
     border-width: 2px;
     border-radius: 50%;
-
 }
 
-.profileimage span {
+.desc {
+    font-family: "Segoe UI";
+    font-size: 12pt;
+    color: #707070;
+}
+
+/* user name style */
+.username {
     font-family: "Segoe UI";
     font-size: 10pt;
+    padding: 10px;
+    color: #707070;
 }
+
+/* question content */
+.content {
+    display: inline-block;
+}
+
+.comment {
+    font-weight: bold;
+    font-family: "Segoe UI";
+    font-size: 10pt;
+    color: #707070;
+    padding: 0 0 0 15px;
+}
+
+/* Action bar displayed on each question */
+.actionbar {
+    width: 110px;
+    height: 37;
+    background-color: #ffffff;
+    overflow: auto;
+    border-style: solid;
+    border-color: #707070;
+    border-width: 2px;
+    position: relative;
+    left: 25%;
+    display: flex;
+    flex-direction: row; 
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.actionbar a {
+    float: left;
+    text-align: center;
+    width: 50%;
+
+}
+/* --------------------------------------------- */
+
+
 
 /* logout location */
 .logout {
@@ -501,13 +533,6 @@ a.listnotif{
     font-family: "Segoe UI";
     font-weight: bold;
     color: #707070;
-}
-
-.comment {
-    font-weight: bold;
-    font-family: "Segoe UI";
-    color: rgb(121, 121, 121);
-    padding: 0 0 0 15px;
 }
 
 .check {
@@ -541,3 +566,80 @@ a.listnotif{
     border: 1px solid #ccc;
     border-top: none;
 }
+
+
+/* ------ Styling for creat question page ------ */
+.insertbox {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: flex-start;
+}
+.optionbox {
+    display: flex;
+    flex-direction: column;
+    justify-items: center;
+    margin: 0 auto;
+}
+
+.imageupload {
+    display: flex;
+    flex-direction: column;
+    justify-items: center;
+    margin: 0 auto;
+}
+
+.uploadbutton {
+    width: 89px;
+    height: 25px;
+    background-color: #69e26d;
+    font-size: 13pt;
+    color: white;
+    display: block;
+    border: solid;
+    border-width: 1px;
+    border-color: #707070;
+    cursor: pointer;    
+    font-family: "Segoe UI";
+    margin: 4%;
+}
+
+/* Style for drop down menus */
+.select {
+    width: 130px;
+    height: 25px;
+}
+
+.create {
+    width: 89px;
+    height: 25px;
+    background-color: #69e26d;
+    font-size: 13pt;
+    color: white;
+    border-style: solid;
+    border-color: #707070;
+    border-width: 1px;
+    font-family: "Segoe UI";
+    padding: 0 5px;
+}
+
+.cancel {
+    width: 89px;
+    height: 25px;
+    background-color: #A2A2A2;
+    font-size: 13pt;
+    color: white;
+    border-style: solid;
+    border-color: #707070;
+    border-width: 1px;
+    font-family: "Segoe UI";
+    padding: 0 5px;
+}
+
+.item {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+/* --------------------------------------------- */

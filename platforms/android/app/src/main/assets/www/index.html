@@ -15,6 +15,9 @@
 <body>
 
     <a href="logout.html" class="logout">Logout</a>
+    <div id="dashboardTopics">
+        
+    </div>
     <!--output of the json-->
     <div>
         <!--set the id to DOM to show output-->
@@ -52,7 +55,7 @@
 
     <!-- CREATE BUTTON LOCATION -->
     <div class="postButtonLoc">
-        <div class="postButton">
+        <div class="postbutton">
             <a href="insert.html"><img src="images/create.png"></a>
         </div>
     </div>
@@ -119,13 +122,13 @@
                     //GET DATA AND PARSE IT
                     $.each(data, function (key, value) {
 
-                        DOM.append("<div class='profileimage'>" + value.pImage + "<span>" + value.name + "</span></div>" + 
-                            "<p class='sub'>" + value.Subject + "</p><p>" + value.dImage + "<br>" + value.Description + "</p>" + "<div>" + "<div class='actionbar'>" +
+                        DOM.append("<div class='usercontainer'>" + "<div class='profileimage'>" + value.pImage + "</div><div class='username'>" + value.name + "</div>" + "</div>" + "<div class='question'>" +
+                            "<p class='sub'>" + value.Subject + "</p><br>" + "<div class='content'>" + value.dImage + "<br>" + "<div class='desc'>" + value.Description + "</div>" + "</div><br>" + "<br><div class='usercontainer'>" +
+                            "<div class='comment'>" + "<a onclick='sendButton("+ value.Question_ID +")'>" + value.c_count + " comments</a></div>" + "<div class='actionbar'>" +
                             "<img onclick='reportButton(" + value.Question_ID + ")' src='images/advice/report.png'> </img>" +
                             "<img onclick='followButton(" + value.user_ID2 + ")' src='images/advice/followuser.png'></img>" +
                             "<img onclick='likeButton(" + value.Question_ID + ")' id='like-img" + value.Question_ID + "' src='images/advice/like.png'></img>" +
-                            "<img onclick='sendButton(" + value.Question_ID + ")' src='images/advice/reply.png'></img>" + "</div>" + 
-                            "<div class='comment'>" + "<a onclick='sendButton("+ value.Question_ID +")'>" + value.c_count + " comments</a></div>" + "<hr>");
+                            "<img onclick='sendButton(" + value.Question_ID + ")' src='images/advice/reply.png'></img>" + "</div></div>" + "</div><hr>");
 
                     });
 
@@ -154,13 +157,13 @@
                     //GET DATA AND PARSE IT
                     $.each(data, function (key, value) {
 
-                        DOM.append("<div class='profileimage'>" + value.pImage + "<span>" + value.name + "</span></div>" + 
-                            "<p class='sub'>" + value.Subject + "</p><p>" + value.dImage + "<br>" + value.Description + "</p>" + "<div>" + "<div class='actionbar'>" +
+                        DOM.append("<div class='usercontainer'>" + "<div class='profileimage'>" + value.pImage + "</div><div class='username'>" + value.name + "</div>" + "</div>" + "<div class='question'>" +
+                            "<p class='sub'>" + value.Subject + "</p><br>" + "<div class='content'>" + value.dImage + "<br>" + "<div class='desc'>" + value.Description + "</div>" + "</div><br>" + "<br><div class='usercontainer'>" +
+                            "<div class='comment'>" + "<a onclick='sendButton("+ value.Question_ID +")'>" + value.c_count + " comments</a></div>" + "<div class='actionbar'>" +
                             "<img onclick='reportButton(" + value.Question_ID + ")' src='images/advice/report.png'> </img>" +
                             "<img onclick='followButton(" + value.user_ID2 + ")' src='images/advice/followuser.png'></img>" +
                             "<img onclick='likeButton(" + value.Question_ID + ")' id='like-img" + value.Question_ID + "' src='images/advice/like.png'></img>" +
-                            "<img onclick='sendButton(" + value.Question_ID + ")' src='images/advice/reply.png'></img>" + "</div>" + 
-                            "<div class='comment'>" + "<a onclick='sendButton("+ value.Question_ID +")'>" + value.c_count + " comments</a></div>" + "<hr>");
+                            "<img onclick='sendButton(" + value.Question_ID + ")' src='images/advice/reply.png'></img>" + "</div></div>" + "</div><hr>");
 
                     });
 
@@ -221,14 +224,14 @@
 
                     //GET DATA AND PARSE IT
                     $.each(data, function (key, value) {
-                        
-                        DOM.append("<div class='profileimage'>" + value.pImage + "<span>" + value.name + "</span></div>" + 
-                            "<p class='sub'>" + value.Subject + "</p><p>" + value.dImage + "<br>" + value.Description + "</p>" + "<div>" + "<div class='actionbar'>" +
+
+                        DOM.append("<div class='usercontainer'>" + "<div class='profileimage'>" + value.pImage + "</div><div class='username'>" + value.name + "</div>" + "</div>" + "<div class='question'>" +
+                            "<p class='sub'>" + value.Subject + "</p><br>" + "<div class='content'>" + value.dImage + "<br>" + "<div class='desc'>" + value.Description + "</div>" + "</div><br>" + "<br><div class='usercontainer'>" +
+                            "<div class='comment'>" + "<a onclick='sendButton("+ value.Question_ID +")'>" + value.c_count + " comments</a></div>" + "<div class='actionbar'>" +
                             "<img onclick='reportButton(" + value.Question_ID + ")' src='images/advice/report.png'> </img>" +
                             "<img onclick='followButton(" + value.user_ID2 + ")' src='images/advice/followuser.png'></img>" +
-                            "<img onclick='likeButton(" + value.Question_ID + ")' src='images/advice/like.png'></img>" +
-                            "<img onclick='sendButton(" + value.Question_ID + ")' src='images/advice/reply.png'></img>" + "</div>" + 
-                            "<div class='comment'>" + "<a onclick='sendButton("+ value.Question_ID +")'>" + value.c_count + " comments</a></div>" + "<hr>");
+                            "<img onclick='likeButton(" + value.Question_ID + ")' id='like-img" + value.Question_ID + "' src='images/advice/like.png'></img>" +
+                            "<img onclick='sendButton(" + value.Question_ID + ")' src='images/advice/reply.png'></img>" + "</div></div>" + "</div><hr>");
 
                     });
 

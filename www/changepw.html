@@ -46,7 +46,7 @@
     <div class="hover_bkgr_fricc">      <!--Add this div to page for pop up-->
         <span class="helper"></span>
         <div>
-            <div class="popupCloseButton">X</div>
+             
             <p id="popuptext" class="popupText"></p>          <!--Append popup here-->
         </div>
     </div>
@@ -87,7 +87,7 @@
 
                 $.ajax({
                     type: "POST",
-                    url: "http://10.0.2.2/api/Account/changepw.php",
+                    url: "http://localhost/api/Account/changepw.php",
                     data: dataString,
                     success: function (data) {
                         popup("Password has been changed.");

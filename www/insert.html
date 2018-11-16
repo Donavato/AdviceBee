@@ -33,6 +33,9 @@
         
             <input type="text" id="Subject" maxlength="30" value="" placeholder="Subject" /><br>
             <textarea id="Description"></textarea>
+            <p>
+                <span id="wordCount">250</span>/250 characters
+            </p>
         
 
         <div class="insertbox">
@@ -50,7 +53,7 @@
             </div>
 
             <div class="imageupload">
-                <img alt="image" id="photo" />
+                <img id="photo" />
                 <input type="button" id="btn" value="Take" class="uploadbutton" />
                 <input type="button" id="btn2" value="Upload" class="uploadbutton" />
             </div>
@@ -91,13 +94,13 @@
     <div class="hover_bkgr_fricc">      <!--Add this div to page for pop up-->
         <span class="helper"></span>
         <div>
-            <div class="popupCloseButton">X</div>
+             
             <p id="popuptext" class="popupText"></p>          <!--Append popup here-->
         </div>
     </div>
     
 
-    <!-- <script type="text/javascript" src="cordova.js"></script> -->
+    <script type="text/javascript" src="cordova.js"></script>
     <script>
         var image_Content;
         let app = {

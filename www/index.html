@@ -15,6 +15,9 @@
 <body>
 
     <a href="logout.html" class="logout">Logout</a>
+    <div id="dashboardTopics">
+
+    </div>
     <!--output of the json-->
     <div>
         <!--set the id to DOM to show output-->
@@ -75,7 +78,7 @@
     <div class="hover_bkgr_fricc">      <!--Add this div to page for pop up-->
         <span class="helper"></span>
         <div>
-            <div class="popupCloseButton">X</div>
+             
             <p id="popuptext" class="popupText"></p>          <!--Append popup here-->
         </div>
     </div>
@@ -107,7 +110,7 @@
     <script type="text/javascript">
         function filterMostRecent() {
             $.ajax({
-                url: "http://10.0.2.2/api/Question/filtermostrecent.php",
+                url: "http://localhost/api/Question/filtermostrecent.php",
                 type: "POST",
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
@@ -142,7 +145,7 @@
     <script type="text/javascript">
         function filterMostView() {
             $.ajax({
-                url: "http://10.0.2.2/api/Question/filtermostview.php",
+                url: "http://localhost/api/Question/filtermostview.php",
                 type: "POST",
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
@@ -183,7 +186,7 @@
 
                 //JUST HAVE THIS KEEP TRACK OF NOTIFICATION ON ICON
                 $.ajax({
-                    url: "http://10.0.2.2/api/notification/loadnotification.php",
+                    url: "http://localhost/api/notification/loadnotification.php",
                     method: "POST",
                     data: { view: view },
                     dataType: "json",
@@ -210,7 +213,7 @@
 
             // LIST QUESTIONS
             $.ajax({
-                url: "http://10.0.2.2/api/Question/fetchdata.php",
+                url: "http://localhost/api/Question/fetchdata.php",
                 type: "POST",
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
@@ -251,7 +254,7 @@
             var dataString = "Question_ID=" + Question_ID;
 
             $.ajax({
-                url: "http://10.0.2.2/api/Question/likequestion.php",
+                url: "http://localhost/api/Question/likequestion.php",
                 type: "POST",
                 dataType: "json",
                 data: dataString,
@@ -270,7 +273,7 @@
             var dataString = "uID2=" + uID2;
 
             $.ajax({
-                url: "http://10.0.2.2/api/Question/followuser.php",
+                url: "http://localhost/api/Question/followuser.php",
                 type: "POST",
                 dataType: "json",
                 data: dataString,
@@ -288,7 +291,7 @@
             var dataString = "Question_ID=" + Question_ID;
 
             $.ajax({
-                url: "http://10.0.2.2/api/Question/reportquestion.php",
+                url: "http://localhost/api/Question/reportquestion.php",
                 type: "POST",
                 dataType: "json",
                 data: dataString,

@@ -26,47 +26,46 @@
 
 <body>
     <!--button layout-->
-    <h1 class="h1">Create a Question</h1>
-    
+    <h1 class="h1">Create a Question</h1><hr>
+
     <div class="list">
         <input type="hidden" id="id" value="" />
-        <div class="item">
+        
             <input type="text" id="Subject" maxlength="30" value="" placeholder="Subject" /><br>
-        </div>
-
-        <div class="item">
             <textarea id="Description"></textarea>
-        </div>
-        <br>
-        <div class="item">
-            <label class="label">Topic: </label>
-            <select id="topics_list">
-            </select>
-        </div>
-        <div class="item">
-            <label class="label">Type: </label>
-            <select id="question_type">
-            </select>
-        </div>
-        <div class="item">
-            <input type="checkbox" id="anonymous" value="1">Anonymous<br>
-        </div>
-        <br>
-        <div class="item">
-            <input type="checkbox" id="hide_responses" value="1">Hide responses<br>
-        </div>
-        <div class="page">
-                <img id="photo"/>
-                <br>
-                <button id="btn">TAKE</button>
-                <button id="btn2">UPLOAD</button>
-            </div>
-        </div>
-        <br>
-        <div class="item">
-            <input type="button" id="insert" value="Insert" class="submit"/>
-        </div>
+            <p>
+                <span id="wordCount">250</span>/250 characters
+            </p>
+        
 
+        <div class="insertbox">
+            <div class="optionbox">
+                <label class="label">Topic: </label>
+                <select id="topics_list" class="select"></select>
+      
+                <label class="label">Type: </label>
+                <select id="question_type" class="select"></select><br>
+        
+                <div class="check">
+                    Anonymous<input type="checkbox" id="anonymous" value="1"><br>
+                    Hide responses<input type="checkbox" id="hide_responses" value="1"><br>
+                </div>
+            </div>
+
+            <div class="imageupload">
+                <img alt="image" id="photo" />
+                <input type="button" id="btn" value="Take" class="uploadbutton" />
+                <input type="button" id="btn2" value="Upload" class="uploadbutton" />
+            </div>
+        </div> 
+    
+        <br>
+        <div class="item">
+            <input type="button" id="cancel" value="Cancel" class="cancel" />
+            <input type="button" id="insert" value="Insert" class="create" />
+        </div>
+        
+    </div>
     <br>
     <nav class="nav">
         <a href="insert.html" class="link">Insert</a> |
