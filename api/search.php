@@ -13,11 +13,12 @@
     //Store data retrieved in JSON array that you can send back
     $arr_Questions = array();
     while($r = mysqli_fetch_object($find_data_Questions)){
-        array_push($arr_Questions, array("Description" => $r->Description, "Subject" => $r->Subject));
+        array_push($arr_Questions, array("Question_ID"=> $r->Question_ID,"Description" => $r->Description, "Subject" => $r->Subject));
+        
     }
     $arr_Users = array();
     while($x = mysqli_fetch_object($find_data_Users)){
-        array_push($arr_Users, array("f_name" => $x->f_name, "l_name" => $x->l_name, "email" => $x->email));
+        array_push($arr_Users, array("user_ID" => $x->user_ID,"f_name" => $x->f_name, "l_name" => $x->l_name, "email" => $x->email));
     }
     $arr_Advices = array();
     while($y = mysqli_fetch_object($find_data_Advices)){

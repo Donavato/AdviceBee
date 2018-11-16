@@ -1,37 +1,78 @@
 <!DOCTYPE <!DOCTYPE html>
 <html>
+
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Page Title</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <script src="js/jquery-3.3.1.min.js"></script>
-
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <!--reference style sheet-->
     <link rel="stylesheet" href="style.css">
+    <style>
+
+        #Questions{
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            
+        }
+        #searchSubject{
+            text-align: center;
+            font-family: "Segoe UI";
+            font-size: 20px;
+            font-weight: bold;
+            display: flex;
+            justify-content: center;
+        }
+        #searchElement{
+            background-color: white;
+            border: 2px solid #707070;
+            width: 300px;
+            color: rgb(121, 121, 121);
+        }
+        #searchElement:hover {
+            color: rgb(0, 102, 255);
+        }
+        
+    </style>
 </head>
+
 <body>
-    <h1 class="h1">Search</h1><hr><br>
-    <input type="text" class="input" placeholder="Search..." name="search" id="search_content">
-    <button type="submit" id="Search" class="submitsearch">Enter</button>
+    <h1 class="h1">Search</h1>
+    <hr><br>
+    <input type="text" class="input" placeholder="Search..." name="search" id="search_content" minlength=3>
+    <br>
+    <button type="submit" id="Search" class="submitsearch" onclick="stringlength()" >Enter</button>
     <br>
     <!-- TABS WITH ONCLICK EVENTS TO CALL FUNCTIONS FOR DATA DISPLAY -->
     <div class="tab">
-        <button class="tablinks" onclick="openCity(event, 'Questions')">Questions</button>
-        <button class="tablinks" onclick="openCity(event, 'Advices')">Advices</button>
-        <button class="tablinks" onclick="openCity(event, 'Users')">Users</button>
-    </div><hr>
+        <button class="tablinks" id="Q1" onclick="openCity(event, 'Questions')">Questions</button>
+        <button class="tablinks" id="A1" onclick="openCity(event, 'Advices')">Advices</button>
+        <button class="tablinks" id="U1" onclick="openCity(event, 'Users')">Users</button>
+    </div>
+    <hr>
     <br><br>
     <!-- TABS THAT HAVE INFO TO DISPLAY  -->
     <!-- PARSE DATA FROM DB INTO THESE ID'S DISPLAY IS ALREADY FUNCTIONAL -->
     <div id="Questions" class="tabcontent">
         <h3>Questions</h3>
+        <div id="Q">
+
+        </div>
     </div>
     <div id="Advices" class="tabcontent">
-            <h3>Advices</h3>
+        <h3>Advices</h3>
+        <div id="A">
+
+        </div>
     </div>
     <div id="Users" class="tabcontent">
-            <h3>Users</h3>
+        <h3>Users</h3>
+        <div id="U">
+
+        </div>
     </div>
     <br>
 
@@ -47,7 +88,7 @@
             <a href="profile.html"><img src="images/NavBar/profile.png"></a>
         </div>
     </div>
-    
+
     <script type="text/javascript">
         //CALLED FUNCTION TO CHANGE CONTENT FOCUS ON ACTIVE TAB SELECTED
         function openCity(evt, focus) {
@@ -63,44 +104,78 @@
             document.getElementById(focus).style.display = "block";
             evt.currentTarget.className += " active";
         }
-        $(document).ready(function (){
-            $("#Search").click(function (){
+        // $(document).ready(function () {
+        // });
+        function stringlength() {
+            var field = $("#search_content").val();
+            var mnlen = 3;
+            var mxlen = 10;
+
+            if (field.length < mnlen || field.length > mxlen || !field) {
+                //INPUT POP UP BOX WITH MIN AND MAX LENGTH 
+                return false;
+            }
+            else {
                 var search_data = $("#search_content").val();
                 var dataString = "Data=" + search_data;
-                console.log(dataString);
                 $.ajax({
-                        type: "POST",
-                        url: "http://10.0.2.2/api/search.php",
-                        dataType: "json",
-                        data: dataString,
-                        success: function (data) {
-                            document.getElementById("Questions").innerHTML = "";
-                            document.getElementById("Advices").innerHTML = "";
-                            document.getElementById("Users").innerHTML = "";
-                            
-                            var QUE = $('#Questions');
-                            var ADV = $('#Advices');
-                            var USE = $('#Users');
-                            
+                    type: "POST",
+                    url: "http://10.0.2.2/api/search.php",
+                    dataType: "json",
+                    data: dataString,
+                    success: function (data) {
+                        showTabs();
+                        document.getElementById("Q").innerHTML = "";
+                        document.getElementById("A").innerHTML = "";
+                        document.getElementById("U").innerHTML = "";
 
-                            for(var x = 0, leng = data[0].Users.length; x <leng; x++ ){
-                                var item = data[0].Users[x];
-                                USE.append("<h3>" + item.f_name + " " + item.l_name + " " + item.email+ "</h3>");   
-                            }
-                            for(var x = 0, leng = data[0].Questions.length; x <leng; x++ ){
-                                var item = data[0].Questions[x];
-                                QUE.append("<h3>" + item.Subject + " " + item.Description + "</h3>");   
-                            }
-                            for(var x = 0, leng = data[0].Advice.length; x <leng; x++ ){
-                                var item = data[0].Advice[x];
-                                ADV.append("<h3>" + item.advice_id + " " + item.advice + " " + item.user_id+ "</h3>");   
-                            }
-                            
+                        var QUE = $('#Q');
+                        var ADV = $('#A');
+                        var USE = $('#U');
+
+                        //APPEND DATA INTO DIV ID'S OF THE TABS
+                        for (var x = 0, leng = data[0].Users.length; x < leng; x++) {
+                            var item = data[0].Users[x];
+                            USE.append("<div id='searchElement' onclick='sendUser(" + item.user_ID + ")'>" + "<p>" + item.f_name + " " + item.l_name + " " + item.email + "</p>" + "</div>" + "<br>");
                         }
-                    });
-            });
-            return false;
-        });
+                        for (var x = 0, leng = data[0].Questions.length; x < leng; x++) {
+                            var item = data[0].Questions[x];
+                            QUE.append("<div id='searchElement' onclick='sendQuestion(" + item.Question_ID + ")'>" + "<div id='searchSubject'>" + item.Subject + "</div>" + "<br> " + "<p>" + item.Description + "</p>" + "</div>" + "<br>");
+                        }
+                        for (var x = 0, leng = data[0].Advice.length; x < leng; x++) {
+                            var item = data[0].Advice[x];
+                            ADV.append("<div id='searchElement'>" + "<p>" + item.advice_id + " " + item.advice + " " + item.user_id + "</p>" + "<div>" + "<br>");
+                        }
+                        //LOCK TABS IF THEY ARE EMPTY
+                        if ($(QUE).text().length == 0) {
+                            $('#Q1').hide();
+                        }
+                        if ($(ADV).text().length == 0) {
+                            $('#A1').hide();
+                        }
+                        if ($(USE).text().length == 0) {
+                            $('#U1').hide();
+                        }
+                    }
+                });
+            }
+        }
+        
+        function showTabs() {
+            $('#Q1').show();
+            $('#A1').show();
+            $('#U1').show();
+        }
+        function sendQuestion(questionID) {
+            sessionStorage.questionID = questionID;
+            window.location.replace("advice.html");
+        }
+        function sendUser(uID) {
+            sessionStorage.user_id = uID;
+            window.location.replace("profile.html");
+        }
+
     </script>
 </body>
+
 </html>
