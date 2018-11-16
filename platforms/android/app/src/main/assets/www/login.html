@@ -14,12 +14,12 @@
 
 <body>
     <h1 class="h1">Please Sign In</h1><br>
-    <div>  
+    <div>
         <a href="#" class="fb btn">
-             <i class="fa fa-facebook fa-fw"></i> Login with Facebook
+            <i class="fa fa-facebook fa-fw"></i> Login with Facebook
         </a><br>
         <a href="#" class="google btn">
-             <i class="fa fa-google fa-fw"></i> Login with Google+
+            <i class="fa fa-google fa-fw"></i> Login with Google+
         </a><br>
     </div>
     <hr><br>
@@ -35,7 +35,7 @@
         <p>Dont have one?<a href="register.html" class="reglink"> Create one now!</a></p>
     </form><br>
 
-    
+
 
     <br>
     <nav class="nav">
@@ -49,7 +49,7 @@
         <a href="logout.html" class="link">Logout</a>
     </nav>
     <br><br>
-    
+
 
     <div id="response">
 
@@ -67,9 +67,9 @@
     <script type="text/javascript">
         $('#submit').on('click', function (e) {
             e.preventDefault()
-                var email = $("#email").val();
-                var password = $("#passwrd").val();
-                var dataString = "email=" + email +"&passwrd=" + password;
+            var email = $("#email").val();
+            var password = $("#passwrd").val();
+            var dataString = "email=" + email + "&passwrd=" + password;
             $.ajax({
                 url: "http://10.0.2.2/api/Account/login.php",
                 type: "POST",
@@ -83,9 +83,9 @@
                         var method = "GET";
                         var url = "http://10.0.2.2/api/Account/fts.php";
                         var asynchronous = true;
-        
+
                         ajax.open(method, url, asynchronous);
-        
+
                         //sending ajax
                         ajax.send();
         
@@ -95,18 +95,16 @@
                             if(this.readyState == 4 && this.status == 200)
                             {
                                 var data = JSON.parse(this.responseText);
-                
-                                if(data[0].fts == 0)
-                                {
+
+                                if (data[0].fts == 0) {
                                     window.location.replace("topics.html");
                                 }
-                                else
-                                {
+                                else {
                                     window.location.replace("index.html");
                                 }
                             }
                         }
-                    }else{
+                    } else {
                         console.log(data);
                         //popup("Login Failed");
                         popup("Login failed");
@@ -117,6 +115,9 @@
                 }
             });
         });
+        function activate(){
+
+        }
     </script>
     <script type="text/javascript">
     //add this function to for pop up functionality
