@@ -16,10 +16,11 @@
         $image = $_POST['image'];
 
         //has user verified email
-        
+    
         if($active == 1){
         $q=mysqli_query($con,"INSERT INTO `Questions` (`user_id` ,`Description`,`Subject`,`topic`,`question_type`, `anonymous`, `hide`, `image`) VALUES ('$uID','$Description','$Subject','$topic','$type', '$anonymous', '$hide', '$image')");
             if($q){
+                
                 echo json_encode("success");
                 die();
             }

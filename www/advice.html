@@ -57,7 +57,7 @@
                 //on success it will call this function
                 success: function (data) {
                     var advices = $('#advices');
-
+                    data = JSON.parse(JSON.stringify(data));
                     $.each(data, function (key, value) {
                         advices.append("<div class='profileimage'>" + value.pImage + "<span>" + value.name +"</span></div><p>" + value.advice + "</p>" + "<div class='likebox'>" +
                         "<img onclick='likeButton("+ value.advice_id +")' id='like-img" + value.advice_id + "' src='images/advice/like.png'></img>" + " " +
@@ -65,7 +65,7 @@
                     });
 
                 }, error: function (e) {
-                    alert("failed to work");
+                    alert("listadvices.php failed");
                 }
             });
             ////////////////////////////////////////////////////////////////////////////////
@@ -81,8 +81,8 @@
                 success: function (data) {
                     var Obj = JSON.parse(JSON.stringify(data));
                     //DISPLAYS THE QUESTION 
-                    document.getElementById("Question").innerHTML = "<p class='sub'>" + Obj[0].Subject + "</p><p>" + Obj[0].topic + "<br>" 
-                    + Obj[0].dImage + "<br>" + Obj[0].Description + "<br>" + Obj[0].question_type +"</p><p>" +  Obj[0].pImage + Obj[0].name +"</p><hr>";
+                    document.getElementById("Question").innerHTML = "<div class='profileimage'>" + Obj[0].pImage + Obj[0].name + "</div>" + "<p class='sub'>" + Obj[0].Subject + "</p><p>" + Obj[0].topic + "<br>" 
+                    + Obj[0].dImage + "<br>" + Obj[0].Description + "<br>" + Obj[0].question_type +"</p>" + "<hr>";
 
                     // CHECK QUESTION TYPE, OUTPUT FORM ADVICE DEPENDING ON THAT TYPE
                     
@@ -178,7 +178,7 @@
                     });
 
                 }, error: function (e) {
-                    alert("failed to work");
+                    alert("updateLikes Failed");
                 }
             });
             

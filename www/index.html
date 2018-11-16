@@ -211,9 +211,9 @@
 
                     //GET DATA AND PARSE IT
                     $.each(data, function (key, value) {
-
-                        DOM.append("<p class='sub'>" + value.Subject + "</p><p>" + value.dImage + "<br>" + value.Description + "</p><p>" +
-                             value.pImage + value.name + "</p>" + "<div class='actionbar'>" +
+                        
+                        DOM.append("<div class='profileimage'>" + value.pImage + "<span>" + value.name + "</span></div>" + 
+                            "<p class='sub'>" + value.Subject + "</p><p>" + value.dImage + "<br>" + value.Description + "</p>" + "<div>" + "<div class='actionbar'>" +
                             "<img onclick='reportButton(" + value.Question_ID + ")' src='images/advice/report.png'> </img>" +
                             "<img onclick='followButton(" + value.user_ID2 + ")' src='images/advice/followuser.png'></img>" +
                             "<img onclick='likeButton(" + value.Question_ID + ")' src='images/advice/like.png'></img>" +

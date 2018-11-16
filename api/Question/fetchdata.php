@@ -21,7 +21,7 @@
         $comment_count = $r->CommentCount;
 
 
-        if($d_Image == NULL){
+        if($d_Image == NULL ||$d_Image == "None"){
             $d_Image = NULL;
         }else{
             $d_Image = $r->image;
