@@ -1,0 +1,115 @@
+<html>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<head>
+    <!--initialize jquery from js folder-->
+    <script src="js/jquery-3.3.1.min.js"></script>
+
+    <!--reference style sheet-->
+    <link rel="stylesheet" href="style.css">
+</head>
+
+
+<body>
+
+    <a href="logout.html" class="logout">Logout</a>
+    <!--output of the json-->
+    <div>
+        <!--set the id to DOM to show output-->
+        
+        <div id="DOM">
+
+        </div>
+
+    </div><br>
+
+    <div class="icon-location">
+        <div class="icon-bar">
+            <a href="index.html"><img src="images/NavBar/list.png"></a>
+            <a href="groups.html"><img src="images/NavBar/groups.png"></a>
+
+            <!--    //////////////         TEST HERE        /////////////              -->
+
+            <a href="notification.html" class="badge1" data-badge=""><img src="images/NavBar/notification.png"></a>
+
+
+            <a href="search.html"><img src="images/NavBar/search.png"></a>
+            <a href="listfolloweduser.html"><img src="images/NavBar/users.png"></a>
+            <a href="listlikequestion.html"><img src="images/NavBar/favorite.png"></a>
+            <a href="profile.html"><img src="images/NavBar/profile.png"></a>
+        </div>
+    </div>
+
+
+
+    <!-- LIST QUESTIONS -->
+    <script type="text/javascript">
+        $(document).ready(function () {
+            // LIST NOTIFICATIONS
+            $.ajax({
+                url: "http://localhost/api/notification/listnotifcontent.php",
+                type: "POST",
+                dataType: "json",
+                data: "param=no",
+                //on success it will call this function
+                success: function (data) {
+                    var DOM = $('#DOM');
+
+                    //GET DATA AND PARSE IT
+                    $.each(data, function (key, value) {
+
+                        if (value.likeid == null && value.likeadvID == null && value.followid == null) {
+                            //FOR ADVICE GIVEN ON QUESTION
+                            DOM.append("<a href=javascript:sendtoQuestion(" + value.Question_ID + "); class=listnotif>" +
+                                "<div class='profileimage'>" + value.pImage + "<span><strong>" + value.name + 
+                                "</strong> has given an advice on your question.</span></div>" + "</a><hr>");
+
+                        } else if (value.likeid != null) {
+                            //FOR QUESTION BEING LIKED
+                            DOM.append("<a href=javascript:sendtoQuestion(" + value.Question_ID + "); class=listnotif>" +
+                                "<div class='profileimage'>" + value.pImage + "<span><strong>" + value.name + 
+                                "</strong> has liked your question.</span></div>" + "</a><hr>");
+
+                        } else if (value.likeadvID != null) {
+                            //FOR ADVICE BEING LIKED
+                            DOM.append("<a href=javascript:sendtoQuestion(" + value.Question_ID + "); class=listnotif>" +
+                                "<div class='profileimage'>" + value.pImage + "<span><strong>" + value.name + 
+                                "</strong> has liked your advice.</span></div>" + "</a><hr>");
+
+                        } else if (value.followid != null) {
+                            //FOR BEING FOLLOWED
+                            DOM.append("<a href=javascript:sendtoFollow(" + value.user_ID2 + "); class=listnotif>" +
+                                "<div class='profileimage'>" + value.pImage + "<span><strong>" + value.name + 
+                                "</strong> has followed you.</span></div>" + "</a><hr>");
+                                
+                        }
+
+
+                    });
+
+                    //if fail it will give this error
+                }, error: function (e) {
+                    alert("failed to work");
+                }
+
+            });
+
+        });
+
+        function sendtoQuestion(questionID) {
+            sessionStorage.questionID = questionID;
+            console.log(questionID);
+            window.location.replace("advice.html");
+        }
+        
+        function sendtoFollow(user_ID2) {
+            var uID2 = user_ID2;
+            var dataString = "uID2=" + uID2;
+            //need to direct to that user's profile page
+            window.location.replace("#");
+        }
+    </script>
+
+</body>
+
+</html>

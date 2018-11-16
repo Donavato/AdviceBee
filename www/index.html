@@ -9,11 +9,10 @@
     <link rel="stylesheet" href="style.css">
 </head>
 
-<body>
-    <a href="logout.html" class="logout">Logout</a>
-    <div id="dashboardTopics">
 
-    </div>
+<body>
+
+    <a href="logout.html" class="logout">Logout</a>
     <!--output of the json-->
     <div>
         <!--set the id to DOM to show output-->
@@ -37,6 +36,7 @@
         <a href="logout.html" class="link">Logout</a>
     </nav>
 
+
     <!-- FILTER BUTTON LOCATION AND CONTENT -->
     <div class="filterButtonLoc">
         <div class="dropdown">
@@ -54,13 +54,15 @@
             <a href="insert.html"><img src="images/create.png"></a>
         </div>
     </div>
-
+    
     <!--Need to update page links. Ran into issues with img src links when in folders-->
     <div class="icon-location">
         <div class="icon-bar">
-            <a href="listlikepost.html"><img src="images/NavBar/list.png"></a>
+            <a href="index.html"><img src="images/NavBar/list.png"></a>
             <a href="groups.html"><img src="images/NavBar/groups.png"></a>
-            <a href="notification.html"><img src="images/NavBar/notification.png"></a>
+
+            <a href="notification.html" class="badge1" data-badge=""><img src="images/NavBar/notification.png"></a>
+
             <a href="search.html"><img src="images/NavBar/search.png"></a>
             <a href="listfolloweduser.html"><img src="images/NavBar/users.png"></a>
             <a href="listlikequestion.html"><img src="images/NavBar/favorite.png"></a>
@@ -95,7 +97,7 @@
     <script type="text/javascript">
         function filterMostRecent() {
             $.ajax({
-                url: "http://10.0.2.2/api/Question/filtermostrecent.php",
+                url: "http://localhost/api/Question/filtermostrecent.php",
                 type: "POST",
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
@@ -130,7 +132,7 @@
     <script type="text/javascript">
         function filterMostView() {
             $.ajax({
-                url: "http://10.0.2.2/api/Question/filtermostview.php",
+                url: "http://localhost/api/Question/filtermostview.php",
                 type: "POST",
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
@@ -166,8 +168,39 @@
     <!-- LIST QUESTIONS -->
     <script type="text/javascript">
         $(document).ready(function () {
+            function load_unread_notification(view = "")
+            {
+
+                //JUST HAVE THIS KEEP TRACK OF NOTIFICATION ON ICON
+                $.ajax({
+                    url: "http://localhost/api/notification/loadnotification.php",
+                    method: "POST",
+                    data: { view: view },
+                    dataType: "json",
+                    success: function (data) {
+                        if (data.unread_notification > 0) {
+                            $(".badge1").attr("data-badge", data.unread_notification);
+                        }
+                    }
+                });
+            }
+            
+            load_unread_notification();
+            
+            $(document).on('click', ".badge1", function () {
+                $(".badge1").attr("data-badge", "");
+                
+                load_unread_notification("read");
+            });
+
+            // setInterval(function () {
+            //     load_unread_notification();
+            // }, 5000);
+
+
+            // LIST QUESTIONS
             $.ajax({
-                url: "http://10.0.2.2/api/Question/fetchdata.php",
+                url: "http://localhost/api/Question/fetchdata.php",
                 type: "POST",
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
@@ -179,11 +212,11 @@
                     //GET DATA AND PARSE IT
                     $.each(data, function (key, value) {
 
-                        DOM.append("<div class='profileimage'>" + value.pImage + "<span>" + value.name + "</span></div>" + 
-                            "<p class='sub'>" + value.Subject + "</p><p>" + value.dImage + "<br>" + value.Description + "</p>" + "<div>" + "<div class='actionbar'>" +
+                        DOM.append("<p class='sub'>" + value.Subject + "</p><p>" + value.dImage + "<br>" + value.Description + "</p><p>" +
+                             value.pImage + value.name + "</p>" + "<div class='actionbar'>" +
                             "<img onclick='reportButton(" + value.Question_ID + ")' src='images/advice/report.png'> </img>" +
                             "<img onclick='followButton(" + value.user_ID2 + ")' src='images/advice/followuser.png'></img>" +
-                            "<img onclick='likeButton(" + value.Question_ID + ")' id='like-img" + value.Question_ID + "' src='images/advice/like.png'></img>" +
+                            "<img onclick='likeButton(" + value.Question_ID + ")' src='images/advice/like.png'></img>" +
                             "<img onclick='sendButton(" + value.Question_ID + ")' src='images/advice/reply.png'></img>" + "</div>" + 
                             "<div class='comment'>" + "<a onclick='sendButton("+ value.Question_ID +")'>" + value.c_count + " comments</a></div>" + "<hr>");
 
@@ -207,17 +240,14 @@
             var Question_ID = questionID;
             var dataString = "Question_ID=" + Question_ID;
 
-            $('#like-img' + questionID).attr('src', 'images/advice/liked.png');
-
             $.ajax({
-                url: "http://10.0.2.2/api/Question/likequestion.php",
+                url: "http://localhost/api/Question/likequestion.php",
                 type: "POST",
                 dataType: "json",
                 data: dataString,
                 //on success it will call this function
                 success: function (data) {
                     alert(data);
-                    random();
                 }
 
             });
@@ -229,7 +259,7 @@
             var dataString = "uID2=" + uID2;
 
             $.ajax({
-                url: "http://10.0.2.2/api/Question/followuser.php",
+                url: "http://localhost/api/Question/followuser.php",
                 type: "POST",
                 dataType: "json",
                 data: dataString,
@@ -247,7 +277,7 @@
             var dataString = "Question_ID=" + Question_ID;
 
             $.ajax({
-                url: "http://10.0.2.2/api/Question/reportquestion.php",
+                url: "http://localhost/api/Question/reportquestion.php",
                 type: "POST",
                 dataType: "json",
                 data: dataString,
@@ -260,13 +290,6 @@
 
         }
     </script>
-
-    <script type="text/javascript">
-    $(document).ready(function(){
-    //intial loadup on page
-    $("#dashboardTopics").load("dashboardTopics.html");
-    });
-</script>
 
 </body>
 
