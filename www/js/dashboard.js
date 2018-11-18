@@ -17,12 +17,9 @@ window.onclick = function (event) {
     }
 }
 
-
-
-
 function filterMostRecent() {
     $.ajax({
-        url: "http://localhost/api/Question/filtermostrecent.php",
+        url: "http://10.0.2.2/api/Question/filtermostrecent.php",
         type: "POST",
         contentType: "application/json; charset=utf-8",
         dataType: "json",
@@ -44,11 +41,10 @@ function filterMostRecent() {
     });
 
 }
-
 
 function filterMostView() {
     $.ajax({
-        url: "http://localhost/api/Question/filtermostview.php",
+        url: "http://10.0.2.2/api/Question/filtermostview.php",
         type: "POST",
         contentType: "application/json; charset=utf-8",
         dataType: "json",
@@ -70,17 +66,13 @@ function filterMostView() {
     });
 
 }
-
-
-
-
 
 $(document).ready(function () {
     function load_unread_notification(view = "") {
 
         //JUST HAVE THIS KEEP TRACK OF NOTIFICATION ON ICON
         $.ajax({
-            url: "http://localhost/api/notification/loadnotification.php",
+            url: "http://10.0.2.2/api/notification/loadnotification.php",
             method: "POST",
             data: { view: view },
             dataType: "json",
@@ -107,7 +99,7 @@ $(document).ready(function () {
 
     // LIST QUESTIONS
     $.ajax({
-        url: "http://localhost/api/Question/fetchdata.php",
+        url: "http://10.0.2.2/api/Question/fetchdata.php",
         type: "POST",
         contentType: "application/json; charset=utf-8",
         dataType: "json",
@@ -140,7 +132,7 @@ function likeButton(questionID) {
     var dataString = "Question_ID=" + Question_ID;
 
     $.ajax({
-        url: "http://localhost/api/Question/likequestion.php",
+        url: "http://10.0.2.2/api/Question/likequestion.php",
         type: "POST",
         dataType: "json",
         data: dataString,
@@ -158,7 +150,7 @@ function followButton(user_ID2) {
     var dataString = "uID2=" + uID2;
 
     $.ajax({
-        url: "http://localhost/api/Question/followuser.php",
+        url: "http://10.0.2.2/api/Question/followuser.php",
         type: "POST",
         dataType: "json",
         data: dataString,
@@ -176,7 +168,7 @@ function reportButton(questionID) {
     var dataString = "Question_ID=" + Question_ID;
 
     $.ajax({
-        url: "http://localhost/api/Question/reportquestion.php",
+        url: "http://10.0.2.2/api/Question/reportquestion.php",
         type: "POST",
         dataType: "json",
         data: dataString,
@@ -189,17 +181,11 @@ function reportButton(questionID) {
 
 }
 
-
-
 $(document).ready(function () {
     //intial loadup on page
     $("#dashboardTopics").load("dashboardTopics.html");
 });
-
-
 //add this function to for pop up functionality
-
-
 function CreatePost(jElement, key, value)
 {
     // jElement.append("<div class='usercontainer'>" + "<div class='profileimage'>" + value.pImage + "</div><div class='username'>" + value.name + "</div>" + "</div>" + "<div class='question'>" +
@@ -209,6 +195,7 @@ function CreatePost(jElement, key, value)
     //     "<img onclick='followButton(" + value.user_ID2 + ")' src='images/advice/followuser.png'></img>" +
     //     "<img onclick='likeButton(" + value.Question_ID + ")' id='like-img" + value.Question_ID + "' src='images/advice/like.png'></img>" +
     //     "<img onclick='sendButton(" + value.Question_ID + ")' src='images/advice/reply.png'></img>" + "</div></div>" + "</div><hr>");
+
     value.dImage = (value.dImage === "<img src = >") ? '' :  value.dImage;
     jElement.append(`
     <div class="post">
