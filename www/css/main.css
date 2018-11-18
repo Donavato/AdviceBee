@@ -12,6 +12,8 @@ body {
     box-shadow: 1px 1px 1px 1px rgba(0,0,0,.11),-1px 1px 1px 1px rgba(0,0,0,.11);
     border-radius: 3px;
     border: none;
+    display: flex;
+    justify-content: center;
 }
 .btn.submit {
     width: 200px;
@@ -19,6 +21,14 @@ body {
     background: #4caf50;
     font-size: 18px;
     color:white;
+}
+.charactercount {
+    font-family: "Segoe UI";
+    font-size: 10pt;
+    color: #707070;
+    display: flex;
+    justify-content: flex-end;
+    padding-right: 30px;
 }
 
 
