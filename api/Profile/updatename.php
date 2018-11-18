@@ -12,4 +12,7 @@
 	"UPDATE `users` 
 	SET `f_name` = '$first_name', `l_name` = '$last_name' 
 	WHERE `users`.`user_ID` = $user_ID");
+
+	echo json_encode("Name successfully changed");
+	die();
 ?>

@@ -71,10 +71,36 @@ table{
     background-color: #ccc;
 }
 
-.profilepic{
+#profile_picture img{
     border-radius: 50%;
     position: relative;
+    top: -50px;
     left: 37%;
+}
+
+#getpublicinfo td{
+    position: relative;
+    top: -50px;
+}
+
+#getpublicinfo #level{
+    position: relative;
+    top: -100px;
+}
+
+#getpublicinfo{
+    max-width: 140px;
+}
+
+.userdata input[type="text"]{
+    font-size: 20px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.userdata{
+    position: relative;
+    top: -60px;
 }
 
 #wallpaper img{
@@ -90,4 +116,9 @@ table{
 .topicinfodata{
     height: 220px;
     overflow-y: scroll;
+}
+
+div #content{
+    position: relative;
+    top: -50px;
 }

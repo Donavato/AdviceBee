@@ -8,6 +8,7 @@
         <!--Popup style sheet-->
     <link rel="stylesheet" type="text/css" href="css/popup.css"/>
         <script type="text/javascript" src="js/jquery-3.3.1.min.js"></script>
+        <script src="js/popup.js"></script>
         <script type="text/javascript">
             $(document).ready(function(){
             //intial loadup on page
@@ -52,7 +53,7 @@
         <ul id="nav">
             <li class="tablinks"><a href="info">Info</a></li>
             <li class="tablinks"><a href="topicinfo">Topics</a></li>
-            <li class="tablinks"><a href="groupinfo">Groups</a></li>
+            <li class="tablinks"><a href="changepw">Account</a></li>
         </ul>
         <div id="content">
             
@@ -80,7 +81,7 @@
                 <a href="profile.html"><img src="images/NavBar/profile.png" onclick="clearStorageUser()"></a>
             </div>
         </div>
-        <div class="hover_bkgr_fricc">      <!--Add this div to page for pop up-->
+        <div class="hover-bkgr-fricc">      <!--Add this div to page for pop up-->
             <span class="helper"></span>
             <div>
                 
@@ -267,8 +268,6 @@
             success: function (yourID) {
 
                 var uID = JSON.parse(yourID);
-                console.log(uID);
-                console.log(sessionStorage.getItem("user_ID"));
 
                 //if session storage is undefined or if the session storage is holding the same user id as the profile's user id
                 if(sessionStorage.getItem("user_ID") === null || sessionStorage.getItem("user_ID") == uID)
@@ -278,7 +277,8 @@
                         url: "http://10.0.2.2/api/Profile/updatename.php",
                         data: {userfirstName: firstName, userlastName: lastName},
                         success: function (data) {
-                            popup(JSON.parse(data));
+                            //popup(JSON.parse(data));
+                            popup("Name successfully changed");
                         }
                     });
                 }
@@ -371,5 +371,3 @@
         sessionStorage.removeItem("user_ID");
     }
 </script>
-
-<script src="js/popup.js"></script>

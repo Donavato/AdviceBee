@@ -11,4 +11,7 @@
 	"UPDATE `users` 
 	SET `location` = '$location' 
 	WHERE `users`.`user_ID` = $user_ID");
+
+	echo json_encode("Location successfully changed");
+	die();
 ?>

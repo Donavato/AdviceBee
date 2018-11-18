@@ -11,4 +11,7 @@
 	"UPDATE `users` 
 	SET `title` = '$title' 
 	WHERE `users`.`user_ID` = $user_ID");
+
+	echo json_encode("Title successfully changed");
+	die();
 ?>
