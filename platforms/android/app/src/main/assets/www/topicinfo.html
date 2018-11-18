@@ -23,8 +23,6 @@
 		success: function (yourID) {
 
 			var uID = JSON.parse(yourID);
-			console.log(uID);
-			console.log(sessionStorage.getItem("user_ID"));
 
 			//if session storage is undefined or if the session storage is holding the same user id as the profile's user id
 			if(sessionStorage.getItem("user_ID") === null || sessionStorage.getItem("user_ID") == uID)
