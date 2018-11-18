@@ -1,0 +1,61 @@
+
+
+#DOM {
+    display: grid;
+    grid-gap: 10px;
+}
+.logout {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+}
+
+
+.post {
+    display: grid;
+    grid-template-columns: 40px auto;
+    box-shadow: 1px 1px 1px 1px rgba(0,0,0,.11),-1px 1px 1px 1px rgba(0,0,0,.11);
+    border-radius: 3px;
+    padding: 10px;
+    grid-gap: 10px;
+    background: white;
+}
+.post > img {
+    width: 40px;
+    border-radius: 20px;
+    box-shadow: 1px 1px 1px 1px rgba(0,0,0,.11),-1px 1px 1px 1px rgba(0,0,0,.11);
+}
+.main-body {
+    display: grid;
+    grid-template-rows: 40px auto 20px;
+    grid-gap: 10px;
+}
+.post-header {
+    font-size: 14px;
+    color: #707070;
+    display: grid;
+    align-items: center;
+}
+
+.post-header .subject{
+    font-size: 18px;
+
+}
+
+.post-body {
+    display: grid;
+    grid-gap: 10px;
+}
+.post-body > img {
+    box-shadow: 1px 1px 1px 1px rgba(0,0,0,.11),-1px 1px 1px 1px rgba(0,0,0,.11);
+    border-radius: 5px;
+    margin-left: 50px;
+}
+
+.post-footer {
+    display: flex;
+
+}
+.post-footer > *{
+    margin-right:30px;
+}

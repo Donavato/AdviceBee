@@ -1,5 +1,5 @@
 /* Popup box BEGIN */
-.hover_bkgr_fricc{
+.hover-bkgr-fricc{
     background:rgba(0,0,0,.4);
     cursor:pointer;
     display:none;
@@ -7,15 +7,16 @@
     position:fixed;
     text-align:center;
     top:0;
+    left: 0;
     width:100%;
     z-index:10000;
 }
-.hover_bkgr_fricc .helper{
+.hover-bkgr-fricc .helper{
     display:inline-block;
     height:100%;
     vertical-align:middle;
 }
-.hover_bkgr_fricc > div {
+.hover-bkgr-fricc > div {
     background-color: rgb(246, 246, 246);
     box-shadow: 10px 10px 60px #555;
     display: inline-block;
@@ -48,7 +49,7 @@
 .popupCloseButton:hover {
     background-color: #ccc;
 }
-.trigger_popup_fricc {
+.trigger-popup-fricc {
     cursor: pointer;
     font-size: 20px;
     margin: 20px;
