@@ -4,19 +4,19 @@
 <head>
     <!--initialize jquery from js folder-->
     <script src="js/jquery-3.3.1.min.js"></script>
-
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,500,900" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
     <!--reference style sheet-->
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="css/main.css">
     <!--Popup style sheet-->
     <link rel="stylesheet" type="text/css" href="css/popup.css"/>
+    <link rel="stylesheet" href="css/dashboard.css">
 </head>
 
 
 <body>
-
     <a href="logout.html" class="logout">Logout</a>
     <div id="dashboardTopics">
-
     </div>
     <!--output of the json-->
     <div>
@@ -28,16 +28,16 @@
 
     </div><br>
 
-    <nav class="nav">
-        <a href="insert.html" class="link">Insert</a> |
-        <a href="delete.html" class="link">Delete</a> |
-        <a href="index.html" class="link">Show Data</a> |
-        <a href="login.html" class="link">Login</a> |
-        <a href="register.html" class="link">Register</a> |
-        <a href="changepw.html" class="link">Change PW</a> |
-        <a href="pwreset.html" class="link">Password Reset</a> |
-        <a href="imageOption.html" class="link">Profile Images</a> |
-        <a href="profile.html" class="link">Profile</a> |
+    <nav>
+        <a href="insert.html" class="link">Insert</a>
+        <a href="delete.html" class="link">Delete</a>
+        <a href="index.html" class="link">Show Data</a>
+        <a href="login.html" class="link">Login</a>
+        <a href="register.html" class="link">Register</a>
+        <a href="changepw.html" class="link">Change PW</a>
+        <a href="pwreset.html" class="link">Password Reset</a>
+        <a href="imageOption.html" class="link">Profile Images</a>
+        <a href="profile.html" class="link">Profile</a>
         <a href="logout.html" class="link">Logout</a>
     </nav>
 
@@ -75,16 +75,14 @@
         </div>
     </div>
 
-    <div class="hover_bkgr_fricc">      <!--Add this div to page for pop up-->
+    <div class="hover-bkgr-fricc">      <!--Add this div to page for pop up-->
         <span class="helper"></span>
         <div>
-             
             <p id="popuptext" class="popupText"></p>          <!--Append popup here-->
         </div>
     </div>
-
-   <script src="js/dashboard.js"></script>
-
+    <script src="js/popup.js"></script>
+    <script src="js/dashboard.js"></script>
 </body>
 
 </html>

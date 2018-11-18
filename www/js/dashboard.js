@@ -33,15 +33,7 @@ function filterMostRecent() {
             document.getElementById("DOM").innerHTML = "";
             //GET DATA AND PARSE IT
             $.each(data, function (key, value) {
-
-                DOM.append("<div class='usercontainer'>" + "<div class='profileimage'>" + value.pImage + "</div><div class='username'>" + value.name + "</div>" + "</div>" + "<div class='question'>" +
-                    "<p class='sub'>" + value.Subject + "</p><br>" + "<div class='content'>" + value.dImage + "<br>" + "<div class='desc'>" + value.Description + "</div>" + "</div><br>" + "<br><div class='usercontainer'>" +
-                    "<div class='comment'>" + "<a onclick='sendButton(" + value.Question_ID + ")'>" + value.c_count + " comments</a></div>" + "<div class='actionbar'>" +
-                    "<img onclick='reportButton(" + value.Question_ID + ")' src='images/advice/report.png'> </img>" +
-                    "<img onclick='followButton(" + value.user_ID2 + ")' src='images/advice/followuser.png'></img>" +
-                    "<img onclick='likeButton(" + value.Question_ID + ")' id='like-img" + value.Question_ID + "' src='images/advice/like.png'></img>" +
-                    "<img onclick='sendButton(" + value.Question_ID + ")' src='images/advice/reply.png'></img>" + "</div></div>" + "</div><hr>");
-
+                CreatePost(DOM,key,value);
             });
 
             //if fail it will give this error
@@ -67,15 +59,7 @@ function filterMostView() {
             document.getElementById("DOM").innerHTML = "";
             //GET DATA AND PARSE IT
             $.each(data, function (key, value) {
-
-                DOM.append("<div class='usercontainer'>" + "<div class='profileimage'>" + value.pImage + "</div><div class='username'>" + value.name + "</div>" + "</div>" + "<div class='question'>" +
-                    "<p class='sub'>" + value.Subject + "</p><br>" + "<div class='content'>" + value.dImage + "<br>" + "<div class='desc'>" + value.Description + "</div>" + "</div><br>" + "<br><div class='usercontainer'>" +
-                    "<div class='comment'>" + "<a onclick='sendButton(" + value.Question_ID + ")'>" + value.c_count + " comments</a></div>" + "<div class='actionbar'>" +
-                    "<img onclick='reportButton(" + value.Question_ID + ")' src='images/advice/report.png'> </img>" +
-                    "<img onclick='followButton(" + value.user_ID2 + ")' src='images/advice/followuser.png'></img>" +
-                    "<img onclick='likeButton(" + value.Question_ID + ")' id='like-img" + value.Question_ID + "' src='images/advice/like.png'></img>" +
-                    "<img onclick='sendButton(" + value.Question_ID + ")' src='images/advice/reply.png'></img>" + "</div></div>" + "</div><hr>");
-
+                CreatePost(DOM,key,value);
             });
 
             //if fail it will give this error
@@ -134,15 +118,7 @@ $(document).ready(function () {
 
             //GET DATA AND PARSE IT
             $.each(data, function (key, value) {
-
-                DOM.append("<div class='usercontainer'>" + "<div class='profileimage'>" + value.pImage + "</div><div class='username'>" + value.name + "</div>" + "</div>" + "<div class='question'>" +
-                    "<p class='sub'>" + value.Subject + "</p><br>" + "<div class='content'>" + value.dImage + "<br>" + "<div class='desc'>" + value.Description + "</div>" + "</div><br>" + "<br><div class='usercontainer'>" +
-                    "<div class='comment'>" + "<a onclick='sendButton(" + value.Question_ID + ")'>" + value.c_count + " comments</a></div>" + "<div class='actionbar'>" +
-                    "<img onclick='reportButton(" + value.Question_ID + ")' src='images/advice/report.png'> </img>" +
-                    "<img onclick='followButton(" + value.user_ID2 + ")' src='images/advice/followuser.png'></img>" +
-                    "<img onclick='likeButton(" + value.Question_ID + ")' id='like-img" + value.Question_ID + "' src='images/advice/like.png'></img>" +
-                    "<img onclick='sendButton(" + value.Question_ID + ")' src='images/advice/reply.png'></img>" + "</div></div>" + "</div><hr>");
-
+                CreatePost(DOM,key,value);
             });
 
             //if fail it will give this error
@@ -171,7 +147,6 @@ function likeButton(questionID) {
         //on success it will call this function
         success: function (data) {
             popup(data);
-            random();
         }
 
     });
@@ -223,20 +198,45 @@ $(document).ready(function () {
 
 
 //add this function to for pop up functionality
-function popup(text) {
-    //set popupText to the <p> tag in the div
-    var popupText = $('#popuptext');
-    //empty the <p> tag in case of prior pop ups
-    popupText.empty();
-    //append new text passed through the function to the <p> tag
-    popupText.append(text);
-    //show when pop up is called
-    $('.hover_bkgr_fricc').show();
-    //hide when the x is clicked or anywhere else on the page is clicked
-    $('.hover_bkgr_fricc').click(function () {
-        $('.hover_bkgr_fricc').hide();
-    });
-    $('.popupCloseButton').click(function () {
-        $('.hover_bkgr_fricc').hide();
-    });
+
+
+function CreatePost(jElement, key, value)
+{
+    // jElement.append("<div class='usercontainer'>" + "<div class='profileimage'>" + value.pImage + "</div><div class='username'>" + value.name + "</div>" + "</div>" + "<div class='question'>" +
+    //     "<p class='sub'>" + value.Subject + "</p><br>" + "<div class='content'>" + value.dImage + "<br>" + "<div class='desc'>" + value.Description + "</div>" + "</div><br>" + "<br><div class='usercontainer'>" +
+    //     "<div class='comment'>" + "<a onclick='sendButton(" + value.Question_ID + ")'>" + value.c_count + " comments</a></div>" + "<div class='actionbar'>" +
+    //     "<img onclick='reportButton(" + value.Question_ID + ")' src='images/advice/report.png'> </img>" +
+    //     "<img onclick='followButton(" + value.user_ID2 + ")' src='images/advice/followuser.png'></img>" +
+    //     "<img onclick='likeButton(" + value.Question_ID + ")' id='like-img" + value.Question_ID + "' src='images/advice/like.png'></img>" +
+    //     "<img onclick='sendButton(" + value.Question_ID + ")' src='images/advice/reply.png'></img>" + "</div></div>" + "</div><hr>");
+    value.dImage = (value.dImage === "<img src = >") ? '' :  value.dImage;
+    jElement.append(`
+    <div class="post">
+        ${value.pImage}
+        <div class="main-body">
+            <div class="post-header">
+                <span>${value.name}</span>
+                <div class="subject">${value.Subject}</div>
+            </div>
+            <div class="post-body">
+                    ${value.dImage}
+                    <div class="description">${value.Description}</div>
+            </div>
+            <div class="post-footer"> 
+                <div>
+                    <i class="far fa-comment" onclick="sendButton(${value.Question_ID})"></i>
+                    ${value.c_count}
+                </div>
+                <i class="fas fa-exclamation" onclick="reportButton(${value.Question_ID})"></i>
+                <i class="far fa-user" onclick="followButton(${value.user_ID2})"></i>
+                <i class="far fa-heart" onclick="likeButton(${value.Question_ID})"></i><!-- filled -->
+                <!--<i class="far fa-heart" onclick="reportButton(${value.Question_ID})"></i> unfilled -->
+                <i class="far fa-share-square" onclick="sendButton(${value.Question_ID})"></i>
+
+            </div>
+        </div>
+    </div>
+    `)
+
+
 }
