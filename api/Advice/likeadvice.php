@@ -4,8 +4,14 @@ include "../Account/db.php";
 $uID = $_SESSION['user_ID'];
 $aID=$_POST['advice_ID'];
 
-$query=mysqli_query($con, "SELECT * FROM like_advices WHERE advice_ID='$aID' AND user_ID='$uID'");
-$match = mysqli_num_rows($query);
+$m_query=mysqli_query($con, "SELECT * FROM like_advices WHERE advice_ID='$aID' AND user_ID='$uID'");
+$match = mysqli_num_rows($m_query);
+
+    while($g = mysqli_fetch_object($m_query)){
+        $like_aID = $g->likeadv_ID;
+        $adviceID = $g->advice_ID;
+        $a_like = $g->advice_like;
+    }
 
     if($match > 0 && $a_like == 0){
         mysqli_query($con, "UPDATE like_advices SET advice_like='1' WHERE advice_ID=$aID AND user_ID=$uID");

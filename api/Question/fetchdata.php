@@ -2,13 +2,7 @@
     include "../Account/db.php";
     header('Content-type: application/json');
     $dataquery = mysqli_query($con, "SELECT *, (select count(*) from advice where advice.question_id = questions.Question_ID) AS CommentCount FROM Questions");
-    //mysqli_query($con, "SELECT * FROM Questions");
     $arr = array();
-
-    //mysqli_query($con, "SELECT *, (select count(*) from advice where advice.question_id = questions.Question_ID) AS CommentCount FROM Questions");
-    // while($r = mysqli_fetch_object($dataquery)){
-    // $comment_count = $r->CommentCount;
-    // }
 
     while($r = mysqli_fetch_object($dataquery)){
         $Question_ID = $r->Question_ID;
@@ -20,6 +14,14 @@
         $d_Image = $r->image;
         $comment_count = $r->CommentCount;
 
+        $likequery = mysqli_query($con, "SELECT * FROM like_questions WHERE question_ID=$Question_ID AND question_like='1'");
+        $like_count = mysqli_num_rows($likequery);
+        
+        if($like_count == 0){
+            $like_count = " ";
+        }else{
+            $like_count = mysqli_num_rows($likequery) . ' Like';
+        }
 
         if($d_Image == NULL ||$d_Image == "None"){
             $d_Image = NULL;
@@ -52,7 +54,8 @@
 
                     array_push($arr, array("Question_ID" => $Question_ID, "Description" => $Description, 
                     "Subject" => $Subject, "anonymous" => $anonymous, "hide" => $hide, "user_ID2" => $user_ID2, 
-                    "name" => $Name, "pImage" => "<img src = $p_Image>", "dImage" => "<img src = $d_Image>", "c_count" => $comment_count));
+                    "name" => $Name, "pImage" => "<img src = $p_Image>", "dImage" => "<img src = $d_Image>", 
+                    "c_count" => $comment_count, "likes" => $like_count));
 
                 }
 

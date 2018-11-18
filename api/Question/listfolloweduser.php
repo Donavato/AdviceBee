@@ -18,7 +18,12 @@ while($r = mysqli_fetch_object($datastring)){
         $lname = $z->l_name;
         $Name = $fname . ' ' . $lname;
 
-        array_push($arr, array("name" => $Name, "follow_id" => $follow_ID));
+        $query2 = mysqli_query($con, "SELECT profileImage FROM profile_pics WHERE user_ID=$uID2");
+        while($d = mysqli_fetch_object($query2)){
+            $p_Image = $d->profileImage;
+
+            array_push($arr, array("name" => $Name, "follow_id" => $follow_ID, "pImage" => "<img src = $p_Image>"));
+        }
     }
 }
 

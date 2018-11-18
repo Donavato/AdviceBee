@@ -5,11 +5,67 @@
     </table>
     
     
-    <script>
-        //call ajax
+<script type="text/javascript">
+
+    //call to get userID of the person logged in
+    $.ajax({
+        url: "http://10.0.2.2/api/Profile/getuserID.php",
+        type: "POST",
+        data: "param=no",
+        //on success it will call this function
+        success: function (yourID) {
+
+            var uID = JSON.parse(yourID);
+        if(sessionStorage.getItem("user_ID") != uID && sessionStorage.getItem("user_ID") != null)
+        {
+
+            //html value for <tbody>
+            var html = "";
+
+            html += "<p style='text-align:center;'>" + "You must be the owner of this account to have access to this information." + "</p>";
+
+            //replace <tbody> of table in html
+            document.getElementById("getinfo").innerHTML = html;
+        
+        }
+        else
+        {
+            $.ajax({
+                method: "POST",
+                url: "http://10.0.2.2/api/Profile/getinfo.php",
+                data: {profileID: uID},
+                success: function (data) {
+
+                    var datareturned = JSON.parse(data);
+        
+                    //html value for <tbody>
+                    var html = "";
+        
+                    //setting varaibles to use for profile
+                    var Email = datareturned[0].email;
+                    var age = datareturned[0].age;
+
+                    //tie into html
+                    html += "<tr>";
+                        html += "<td>" + "Email: " + Email + "</td>";
+                    html += "</tr>";
+                    html += "<tr>";
+                        html += "<td>" + "Age: " + age + "</td>";
+                    html += "</tr>";
+                    
+                    //replace <tbody> of table in html
+                    document.getElementById("getinfo").innerHTML = html;
+                    }
+                });
+            }
+        }
+    });
+            
+        
+        /*//call ajax
         var ajax = new XMLHttpRequest();
         var method = "GET";
-        var url = "http://localhost/api/Profile/getinfo.php";
+        var url = "http://10.0.2.2/api/Profile/getinfo.php";
         var asynchronous = true;
         
         ajax.open(method, url, asynchronous);
@@ -30,13 +86,8 @@
                 var html = "";
                 
                 var Email = data[0].email;
-                var f_name = data[0].f_name;
-                var l_name = data[0].l_name;
-                var title = data[0].title;
-                var points = data[0].points;
-                var location = data[0].location;
                 var age = data[0].age;
-                var level = data[0].level;
+                
                 
                 //tie into html
                 html += "<tr>";
@@ -49,5 +100,5 @@
                 //replace <tbody> of table in html
                 document.getElementById("getinfo").innerHTML = html;
             }
-        }
+        }*/
     </script>

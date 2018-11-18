@@ -312,6 +312,12 @@ a.listnotif{
     text-decoration:none;
 }
 
+.test{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
 /* box for like button on advice page */
 .likebox {
     width: 26px;

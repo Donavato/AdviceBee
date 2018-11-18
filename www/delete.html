@@ -36,7 +36,7 @@
     <script type="text/javascript">
         $(document).ready(function () {
             $.ajax({
-                url: "http://localhost/api/Question/myQuestions.php",
+                url: "http://10.0.2.2/api/Question/myQuestions.php",
                 type: "POST",
                 dataType: "json",
                 data: "param=no",
@@ -46,7 +46,9 @@
                     //GET DATA AND PARSE IT
                     $.each(data, function (key, value) {    
                         //APPEND DATA AND DISPLAY IT
-                        DOM.append("<h3>" + value.Subject + "</h3><p>" + value.Description + "</p>" +  "<button onclick='DeleteButton("+ value.Question_ID +")'>Delete</button></a>");
+                        DOM.append("<div class='usercontainer'>" + "<div class='profileimage'>" + value.pImage + "</div><div class='username'>" + value.name + "</div>" + "</div>" + "<div class='question'>" +
+                            "<p class='sub'>" + value.Subject + "</p><br>" + "<div class='content'>" + value.dImage + "<br>" + "<div class='desc'>" + value.Description + "</div>" + "</div><br>" + "<br>" +
+                            "<button onclick='DeleteButton("+ value.Question_ID +")'>Delete</button><hr>");
                     });
                     
                     //if fail it will give this error
@@ -63,7 +65,7 @@
             }
             var dataString = "Question_ID=" + Question_id;
             $.ajax({
-                url: "http://localhost/api/Question/delete.php",
+                url: "http://10.0.2.2/api/Question/delete.php",
                 type: "POST",
                 dataType: "json",
                 data: dataString,
@@ -75,7 +77,7 @@
         }
         function updatelist(){
             $.ajax({
-                url: "http://localhost/api/Question/myQuestions.php",
+                url: "http://10.0.2.2/api/Question/myQuestions.php",
                 type: "POST",
                 dataType: "json",
                 data: "param=no",

@@ -10,7 +10,7 @@
      //call ajax
      var ajax = new XMLHttpRequest();
     var method = "GET";
-    var url = "http://localhost/api/Profile/dashboardTopics.php";
+    var url = "http://10.0.2.2/api/Profile/dashboardTopics.php";
     var asynchronous = true;
         
     ajax.open(method, url, asynchronous);
@@ -36,10 +36,11 @@
                 var name = data[a].Topic_name;
 
                 //create button for each topic to display questions
-                html += "<button id="+ id +" value="+ name +" onclick='displayQuestions(this.value)'>"+ name +"</button>"
+                html += "<button id="+ id +" value="+ name +" onclick='displayQuestions(this.value, this.id)'>"+ name +"</button>"
 
                 //replace in html
                 document.getElementById("topicsButtons").innerHTML = html;
+
             }
         }
     }
@@ -47,16 +48,19 @@
 
 <script type="text/javascript">
 
-	function displayQuestions(obj) 
+	function displayQuestions(obj, tID) 
 	{
         var topic_name = obj;
 		console.log(topic_name);
-        
+        var topic_ID = tID;
+        console.log(topic_ID);
         //call ajax
         $(document).ready(function () {
+            sessionStorage.removeItem('topic_id');
+            sessionStorage.setItem('topic_id', topic_ID);
 		    $.ajax({
 			    method: "POST",
-			    url: "http://localhost/api/Profile/displaytopicquestions.php",
+			    url: "http://10.0.2.2/api/Profile/displaytopicquestions.php",
                 data: {Topic_Name: topic_name},
                 //on success it will call this function
                 success: function (data) {

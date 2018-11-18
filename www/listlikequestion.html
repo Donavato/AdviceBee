@@ -33,7 +33,7 @@
 
     <div class="icon-location">
         <div class="icon-bar">
-            <a href="listlikepost.html"><img src="images/NavBar/list.png"></a>
+            <a href="index.html"><img src="images/NavBar/list.png"></a>
             <a href="groups.html"><img src="images/NavBar/groups.png"></a>
             <a href="notification.html"><img src="images/NavBar/notification.png"></a>
             <a href="search.html"><img src="images/NavBar/search.png"></a>
@@ -53,7 +53,7 @@
     <script type="text/javascript">
         $(document).ready(function () {
             $.ajax({
-                url: "http://localhost/api/Question/listlikequestion.php",
+                url: "http://10.0.2.2/api/Question/listlikequestion.php",
                 type: "POST",
                 dataType: "json",
                 data: "param=no",
@@ -65,9 +65,12 @@
                     $.each(data, function (key, value) {
                         
                         //APPEND DATA AND DISPLAY IT
-                        DOM.append("<p class='sub'>" + value.Subject + "</p><p>" + value.Description + "</p>" + "<div class='likelist'>" +
-                        "<img onclick='unlikeButton("+ value.Question_ID +")' src='images/advice/liked.png'></img>" + 
-                        "<img onclick='sendButton("+ value.Question_ID +")' src='images/advice/reply.png'></img>" + "</div><hr>");
+                        DOM.append("<div class='usercontainer'>" + "<div class='profileimage'>" + value.pImage + "</div><div class='username'>" + value.name + "</div>" + "</div>" + "<div class='question'>" +
+                            "<p class='sub'>" + value.Subject + "</p><br>" + "<div class='content'>" + value.dImage + "<br>" + "<div class='desc'>" + value.Description + "</div>" + "</div><br>" + "<br><div class='usercontainer'>" +
+                            "<div class='comment'>" + "<a onclick='sendButton("+ value.Question_ID +")'>" + value.c_count + " comments</a></div>" + "<div class='actionbar'>" +
+                            "<img onclick='unlikeButton("+ value.Question_ID +")' src='images/advice/liked.png'></img>" + 
+                            "<img onclick='sendButton(" + value.Question_ID + ")' src='images/advice/reply.png'></img>" + "</div></div>" + "</div><hr>");
+
                     });
                     
                     //if fail it will give this error
@@ -88,7 +91,7 @@
 
             var dataString = "Question_ID=" + Question_ID;
             $.ajax({
-                url: "http://localhost/api/Question/unlikequestion.php",
+                url: "http://10.0.2.2/api/Question/unlikequestion.php",
                 type: "POST",
                 dataType: "json",
                 data: dataString,
@@ -102,7 +105,7 @@
         //UPDATES THE LIST IF A QUESTION IS UNLIKED
         function updatelist(){
             $.ajax({
-                url: "http://localhost/api/Question/listlikequestion.php",
+                url: "http://10.0.2.2/api/Question/listlikequestion.php",
                 type: "POST",
                 dataType: "json",
                 data: "param=no",
@@ -112,11 +115,16 @@
                     document.getElementById("DOM").innerHTML = "";
                     //GET DATA AND PARSE IT
                     $.each(data, function (key, value) {
+                        
                         //APPEND DATA AND DISPLAY IT
-                        DOM.append("<h3>" + value.Subject + "</h3><p>" + value.Description + "</p>" + 
-                        "<button onclick='unlikeButton("+ value.Question_ID +")'>unlike</button></a>" + 
-                        "<button onclick='sendButton("+ value.Question_ID +")'>respond</button></a>" + "<hr>");
+                        DOM.append("<div class='usercontainer'>" + "<div class='profileimage'>" + value.pImage + "</div><div class='username'>" + value.name + "</div>" + "</div>" + "<div class='question'>" +
+                            "<p class='sub'>" + value.Subject + "</p><br>" + "<div class='content'>" + value.dImage + "<br>" + "<div class='desc'>" + value.Description + "</div>" + "</div><br>" + "<br><div class='usercontainer'>" +
+                            "<div class='comment'>" + "<a onclick='sendButton("+ value.Question_ID +")'>" + value.c_count + " comments</a></div>" + "<div class='actionbar'>" +
+                            "<img onclick='unlikeButton("+ value.Question_ID +")' src='images/advice/liked.png'></img>" + 
+                            "<img onclick='sendButton(" + value.Question_ID + ")' src='images/advice/reply.png'></img>" + "</div></div>" + "</div><hr>");
+
                     });
+                    
                     
                     //if fail it will give this error
                 }, error: function (e) {

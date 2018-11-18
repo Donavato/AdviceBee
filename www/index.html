@@ -63,15 +63,15 @@
     <!--Need to update page links. Ran into issues with img src links when in folders-->
     <div class="icon-location">
         <div class="icon-bar">
-            <a href="index.html"><img src="images/NavBar/list.png"></a>
-            <a href="groups.html"><img src="images/NavBar/groups.png"></a>
+            <a href="index.html"><img src="images/NavBar/list.png" onclick="clearTopicID()"></a>
+            <a href="groups.html"><img src="images/NavBar/groups.png" onclick="clearTopicID()"></a>
 
-            <a href="notification.html" class="badge1" data-badge=""><img src="images/NavBar/notification.png"></a>
+            <a href="notification.html" class="badge1" data-badge=""><img src="images/NavBar/notification.png" onclick="clearStorageTopicID()"></a>
 
-            <a href="search.html"><img src="images/NavBar/search.png"></a>
-            <a href="listfolloweduser.html"><img src="images/NavBar/users.png"></a>
-            <a href="listlikequestion.html"><img src="images/NavBar/favorite.png"></a>
-            <a href="profile.html"><img src="images/NavBar/profile.png"></a>
+            <a href="search.html"><img src="images/NavBar/search.png" onclick="clearTopicID()"></a>
+            <a href="listfolloweduser.html"><img src="images/NavBar/users.png" onclick="clearTopicID()"></a>
+            <a href="listlikequestion.html"><img src="images/NavBar/favorite.png" onclick="clearTopicID()"></a>
+            <a href="profile.html"><img src="images/NavBar/profile.png" onclick="clearTopicID()"></a>
         </div>
     </div>
 
@@ -109,12 +109,13 @@
     <!-- FILTER FUNCTIONALITY -->
     <script type="text/javascript">
         function filterMostRecent() {
+
+            var tID = sessionStorage.getItem('topic_id');
+
             $.ajax({
-                url: "http://localhost/api/Question/filtermostrecent.php",
+                url: "http://10.0.2.2/api/Question/filtermostrecent.php",
                 type: "POST",
-                contentType: "application/json; charset=utf-8",
-                dataType: "json",
-                data: "param=no",
+                data: {tID: tID},
                 //on success it will call this function
                 success: function (data) {
                     var DOM = $('#DOM');
@@ -144,12 +145,13 @@
 
     <script type="text/javascript">
         function filterMostView() {
+
+            var tID = sessionStorage.getItem('topic_id');
+
             $.ajax({
-                url: "http://localhost/api/Question/filtermostview.php",
+                url: "http://10.0.2.2/api/Question/filtermostview.php",
                 type: "POST",
-                contentType: "application/json; charset=utf-8",
-                dataType: "json",
-                data: "param=no",
+                data: {tID: tID},
                 //on success it will call this function
                 success: function (data) {
                     var DOM = $('#DOM');
@@ -186,7 +188,7 @@
 
                 //JUST HAVE THIS KEEP TRACK OF NOTIFICATION ON ICON
                 $.ajax({
-                    url: "http://localhost/api/notification/loadnotification.php",
+                    url: "http://10.0.2.2/api/notification/loadnotification.php",
                     method: "POST",
                     data: { view: view },
                     dataType: "json",
@@ -206,14 +208,14 @@
                 load_unread_notification("read");
             });
 
-            // setInterval(function () {
-            //     load_unread_notification();
-            // }, 5000);
+            setInterval(function () {
+                load_unread_notification();
+            }, 5000);
 
 
             // LIST QUESTIONS
             $.ajax({
-                url: "http://localhost/api/Question/fetchdata.php",
+                url: "http://10.0.2.2/api/Question/fetchdata.php",
                 type: "POST",
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
@@ -227,9 +229,9 @@
 
                         DOM.append("<div class='usercontainer'>" + "<div class='profileimage'>" + value.pImage + "</div><div class='username'>" + value.name + "</div>" + "</div>" + "<div class='question'>" +
                             "<p class='sub'>" + value.Subject + "</p><br>" + "<div class='content'>" + value.dImage + "<br>" + "<div class='desc'>" + value.Description + "</div>" + "</div><br>" + "<br><div class='usercontainer'>" +
-                            "<div class='comment'>" + "<a onclick='sendButton("+ value.Question_ID +")'>" + value.c_count + " comments</a></div>" + "<div class='actionbar'>" +
+                            "<div class='comment'>" + "<a onclick='sendButton("+ value.Question_ID +")'>" + value.c_count + " comments</a>  "+ value.likes +"</div>" + "<div class='actionbar'>" +
                             "<img onclick='reportButton(" + value.Question_ID + ")' src='images/advice/report.png'> </img>" +
-                            "<img onclick='followButton(" + value.user_ID2 + ")' src='images/advice/followuser.png'></img>" +
+                            "<img onclick='followButton(" + value.Question_ID + "," + value.user_ID2 + ")' src='images/advice/followuser.png'></img>" +
                             "<img onclick='likeButton(" + value.Question_ID + ")' id='like-img" + value.Question_ID + "' src='images/advice/like.png'></img>" +
                             "<img onclick='sendButton(" + value.Question_ID + ")' src='images/advice/reply.png'></img>" + "</div></div>" + "</div><hr>");
 
@@ -243,6 +245,7 @@
             });
 
         });
+        //REPLY TO QUESTION
         function sendButton(questionID) {
             sessionStorage.questionID = questionID;
             console.log(questionID);
@@ -254,26 +257,62 @@
             var dataString = "Question_ID=" + Question_ID;
 
             $.ajax({
-                url: "http://localhost/api/Question/likequestion.php",
+                url: "http://10.0.2.2/api/Question/likequestion.php",
                 type: "POST",
                 dataType: "json",
                 data: dataString,
                 //on success it will call this function
                 success: function (data) {
                     popup(data);
-                    random();
+                    updatelikes();
+                }
+
+            });
+
+        }
+        //UPDATE LIKE QUESTION
+        function updatelikes(){
+
+            $.ajax({
+                url: "http://10.0.2.2/api/Question/fetchdata.php",
+                type: "POST",
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                data: "param=no",
+                //on success it will call this function
+                success: function (data) {
+                    var DOM = $('#DOM');
+                    document.getElementById("DOM").innerHTML = "";
+                    //GET DATA AND PARSE IT
+                    $.each(data, function (key, value) {
+
+                        DOM.append("<div class='usercontainer'>" + "<div class='profileimage'>" + value.pImage + "</div><div class='username'>" + value.name + "</div>" + "</div>" + "<div class='question'>" +
+                            "<p class='sub'>" + value.Subject + "</p><br>" + "<div class='content'>" + value.dImage + "<br>" + "<div class='desc'>" + value.Description + "</div>" + "</div><br>" + "<br><div class='usercontainer'>" +
+                            "<div class='comment'>" + "<a onclick='sendButton("+ value.Question_ID +")'>" + value.c_count + " comments</a>  "+ value.likes +"</div>" + "<div class='actionbar'>" +
+                            "<img onclick='reportButton(" + value.Question_ID + ")' src='images/advice/report.png'> </img>" +
+                            "<img onclick='followButton(" + value.Question_ID + "," + value.user_ID2 + ")' src='images/advice/followuser.png'></img>" +
+                            "<img onclick='likeButton(" + value.Question_ID + ")' id='like-img" + value.Question_ID + "' src='images/advice/like.png'></img>" +
+                            "<img onclick='sendButton(" + value.Question_ID + ")' src='images/advice/reply.png'></img>" + "</div></div>" + "</div><hr>");
+
+                    });
+
+                    //if fail it will give this error
+                }, error: function (e) {
+                    popup("failed to work");
                 }
 
             });
 
         }
         ///FOLLOW USER FUNCTIONALITY
-        function followButton(user_ID2) {
+        function followButton(qID, user_ID2) {
+            var qID = qID;
             var uID2 = user_ID2;
-            var dataString = "uID2=" + uID2;
+            
+            var dataString = "qID=" + qID + "&uID2=" + uID2;
 
             $.ajax({
-                url: "http://localhost/api/Question/followuser.php",
+                url: "http://10.0.2.2/api/Question/followuser.php",
                 type: "POST",
                 dataType: "json",
                 data: dataString,
@@ -291,7 +330,7 @@
             var dataString = "Question_ID=" + Question_ID;
 
             $.ajax({
-                url: "http://localhost/api/Question/reportquestion.php",
+                url: "http://10.0.2.2/api/Question/reportquestion.php",
                 type: "POST",
                 dataType: "json",
                 data: dataString,
@@ -330,6 +369,14 @@
             $('.hover_bkgr_fricc').hide();
         });
     }
+    </script>
+    <script type="text/javascript">
+
+        function clearTopicID() 
+        {
+            sessionStorage.removeItem("topic_id");
+        }
+
     </script>
 
 </body>

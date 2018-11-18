@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="style.css">
     <style>
             #box1{
-                padding-top: 100px;
+                padding-top: 20px;
             }
     </style>
 </head>
@@ -52,7 +52,7 @@
         $(document).ready(function () {
             // LIST NOTIFICATIONS
             $.ajax({
-                url: "http://localhost/api/notification/listnotifcontent.php",
+                url: "http://10.0.2.2/api/notification/listnotifcontent.php",
                 type: "POST",
                 dataType: "json",
                 data: "param=no",
@@ -66,26 +66,26 @@
                         if (value.likeid == null && value.likeadvID == null && value.followid == null) {
                             //FOR ADVICE GIVEN ON QUESTION
                             DOM.append("<a href=javascript:sendtoQuestion(" + value.Question_ID + "); class=listnotif>" +
-                                "<div class='profileimage'>" + value.pImage + "<span><strong>" + value.name + 
-                                "</strong> has given an advice on your question.</span></div>" + "</a><hr>");
+                                "<div class='usercontainer'><div class='profileimage'>" + value.pImage + "</div><div class='username'><strong>" + value.name + 
+                                "</strong> has given an advice on your question.</div></div>" + "</a><hr>");
 
                         } else if (value.likeid != null) {
                             //FOR QUESTION BEING LIKED
                             DOM.append("<a href=javascript:sendtoQuestion(" + value.Question_ID + "); class=listnotif>" +
-                                "<div class='profileimage'>" + value.pImage + "<span><strong>" + value.name + 
-                                "</strong> has liked your question.</span></div>" + "</a><hr>");
+                                "<div class='usercontainer'><div class='profileimage'>" + value.pImage + "</div><div class='username'><strong>" + value.name + 
+                                "</strong> has liked your question.</div></div>" + "</a><hr>");
 
                         } else if (value.likeadvID != null) {
                             //FOR ADVICE BEING LIKED
                             DOM.append("<a href=javascript:sendtoQuestion(" + value.Question_ID + "); class=listnotif>" +
-                                "<div class='profileimage'>" + value.pImage + "<span><strong>" + value.name + 
-                                "</strong> has liked your advice.</span></div>" + "</a><hr>");
+                                "<div class='usercontainer'><div class='profileimage'>" + value.pImage + "</div><div class='username'><strong>" + value.name + 
+                                "</strong> has liked your advice.</div></div>" + "</a><hr>");
 
                         } else if (value.followid != null) {
                             //FOR BEING FOLLOWED
                             DOM.append("<a href=javascript:sendtoFollow(" + value.user_ID2 + "); class=listnotif>" +
-                                "<div class='profileimage'>" + value.pImage + "<span><strong>" + value.name + 
-                                "</strong> has followed you.</span></div>" + "</a><hr>");
+                                "<div class='usercontainer'><div class='profileimage'>" + value.pImage + "</div><div class='username'><strong>" + value.name + 
+                                "</strong> has followed you.</div></div>" + "</a><hr>");
                                 
                         }
 
@@ -108,10 +108,11 @@
         }
         
         function sendtoFollow(user_ID2) {
-            var uID2 = user_ID2;
-            var dataString = "uID2=" + uID2;
+            sessionStorage.user_ID = user_ID2;
+            // var uID2 = user_ID2;
+            // var dataString = "uID2=" + uID2;
             //need to direct to that user's profile page
-            window.location.replace("#");
+            window.location.replace("profile.html");
         }
     </script>
 

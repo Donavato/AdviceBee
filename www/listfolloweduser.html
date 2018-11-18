@@ -33,7 +33,7 @@
 
     <div class="icon-location">
         <div class="icon-bar">
-            <a href="listlikepost.html"><img src="images/NavBar/list.png"></a>
+            <a href="index.html"><img src="images/NavBar/list.png"></a>
             <a href="groups.html"><img src="images/NavBar/groups.png"></a>
             <a href="notification.html"><img src="images/NavBar/notification.png"></a>
             <a href="search.html"><img src="images/NavBar/search.png"></a>
@@ -55,7 +55,7 @@
     <script type="text/javascript">
         $(document).ready(function () {
             $.ajax({
-                url: "http://localhost/api/Question/listfolloweduser.php",
+                url: "http://10.0.2.2/api/Question/listfolloweduser.php",
                 type: "POST",
                 dataType: "json",
                 data: "param=no",
@@ -66,8 +66,10 @@
                     //GET DATA AND PARSE IT
                     $.each(data, function (key, value) {
                         //APPEND DATA AND DISPLAY IT
-                        DOM.append("<p>" + value.name + "</p>" + "<div class='likebox'>" +
-                        "<img onclick='unfollowButton(" + value.follow_id + ")' src='images/advice/followuser.png'></img>" + "</div><hr>");
+                        DOM.append("<div class='usercontainer'><div class='profileimage'>" + value.pImage + "</div><div class='username'><strong>" + value.name + 
+                        "</div></div>" + "<div class='likebox'>" +
+                        "<img onclick='unfollowButton(" + value.follow_id + ")' src='images/advice/followuser.png'></img>" + "</div></a><hr>");
+
                     });
 
                     //if fail it will give this error
@@ -83,7 +85,7 @@
 
             var dataString = "follow_ID=" + follow_ID;
             $.ajax({
-                url: "http://localhost/api/Question/unfollowuser.php",
+                url: "http://10.0.2.2/api/Question/unfollowuser.php",
                 type: "POST",
                 dataType: "json",
                 data: dataString,
@@ -98,7 +100,7 @@
         //UPDATES THE LIST OF FOLLOWED USERS IF A USER IS UNFOLLOWED
         function updatelist() {
             $.ajax({
-                url: "http://localhost/api/Question/listfolloweduser.php",
+                url: "http://10.0.2.2/api/Question/listfolloweduser.php",
                 type: "POST",
                 dataType: "json",
                 data: "param=no",
@@ -109,8 +111,10 @@
                     //GET DATA AND PARSE IT
                     $.each(data, function (key, value) {
                         //APPEND DATA AND DISPLAY IT
-                        DOM.append("<p>" + value.name + "</p>" + "<div class='likebox'>" +
-                        "<img onclick='unfollowButton(" + value.follow_id + ")' src='images/advice/followuser.png'></img>" + "</div><hr>");
+                        DOM.append("<div class='usercontainer'><div class='profileimage'>" + value.pImage + "</div><div class='username'><strong>" + value.name + 
+                        "</div></div>" + "<div class='likebox'>" +
+                        "<img onclick='unfollowButton(" + value.follow_id + ")' src='images/advice/followuser.png'></img>" + "</div></a><hr>");
+
                     });
 
                     //if fail it will give this error
