@@ -144,29 +144,30 @@ function likeButton(questionID) {
 
 }
 
-function updatelikes(){
-    $.ajax({
-        url: "http://localhost/api/Question/fetchdata.php",
-        type: "POST",
-        contentType: "application/json; charset=utf-8",
-        dataType: "json",
-        data: "param=no",
-        //on success it will call this function
-        success: function (data) {
-            var DOM = $('#DOM');
-            document.getElementById("DOM").innerHTML = "";
-            //GET DATA AND PARSE IT
-            $.each(data, function (key, value) {
-                CreatePost(DOM,key,value);
-            });
+// function updatelikes(){
+//     $.ajax({
+//         url: "http://localhost/api/Question/fetchdata.php",
+//         type: "POST",
+//         contentType: "application/json; charset=utf-8",
+//         dataType: "json",
+//         data: "param=no",
+//         //on success it will call this function
+//         success: function (data) {
+//             var DOM = $('#DOM');
+//             document.getElementById("DOM").innerHTML = "";
+//             //GET DATA AND PARSE IT
+//             $.each(data, function (key, value) {
+//                 CreatePost(DOM,key,value);
+//             });
 
-            //if fail it will give this error
-        }, error: function (e) {
-            popup("failed to work");
-        }
+//             //if fail it will give this error
+//         }, error: function (e) {
+//             popup("failed to work");
+//         }
 
-    });
-}
+//     });
+// }
+
 ///FOLLOW USER FUNCTIONALITY
 function followButton(qID, user_ID2) {
     var qID = qID;
@@ -219,6 +220,7 @@ function CreatePost(jElement, key, value)
     //     "<img onclick='followButton(" + value.user_ID2 + ")' src='images/advice/followuser.png'></img>" +
     //     "<img onclick='likeButton(" + value.Question_ID + ")' id='like-img" + value.Question_ID + "' src='images/advice/like.png'></img>" +
     //     "<img onclick='sendButton(" + value.Question_ID + ")' src='images/advice/reply.png'></img>" + "</div></div>" + "</div><hr>");
+    
 
     value.dImage = (value.dImage === "<img src = >") ? '' :  value.dImage;
     jElement.append(`
@@ -240,9 +242,11 @@ function CreatePost(jElement, key, value)
                 </div>
                 <i class="fas fa-exclamation" onclick="reportButton(${value.Question_ID})"></i>
                 <i class="far fa-user" onclick="followButton(${value.Question_ID} , ${value.user_ID2})"></i>
-                <div>
+                
+                <div id="u_Heart">
                 <i class="far fa-heart" onclick="likeButton(${value.Question_ID})"></i>${value.likes}<!-- unfilled -->
                 </div>
+
                 <!--<i class="far fa-heart" onclick="reportButton(${value.Question_ID})"></i> filled -->
                 <i class="far fa-share-square" onclick="sendButton(${value.Question_ID})"></i>
 
@@ -251,6 +255,9 @@ function CreatePost(jElement, key, value)
     </div>
     `)
 
+    // $("#u_Heart").click(function(){
+    //     $(this).find("i").toggleClass("far fa-heart fas fa-heart");
+    // });
 
 }
 
