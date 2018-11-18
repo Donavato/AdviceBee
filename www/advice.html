@@ -3,9 +3,18 @@
 <head>
     <script src="js/jquery-3.3.1.min.js"></script>
     <!--reference style sheet-->
-    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,500,900" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+    
+    <!-- <link rel="stylesheet" href="style.css"> -->
     <!--Popup style sheet-->
     <link rel="stylesheet" type="text/css" href="css/popup.css"/>
+    
+    <link rel="stylesheet" type="text/css" href="css/advice.css"/>
+    
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" type="text/css" href="css/navigation.css"/>
+    
 </head>
 
 <body>
@@ -17,18 +26,10 @@
         <div id="advice">
         </div>
         <br>
-        <input type="button" id="submit" value="Submit" class="submit">
+        <div class="sumbit-button-center">
+            <input type="button" id="submit" value="Submit" class="btn submit">
+        </div>
     </form>
-
-    <nav class="nav">
-        <a href="insert.html" class="link">Insert</a> |
-        <a href="delete.html" class="link">Delete</a> |
-        <a href="index.html" class="link">Show Data</a> |
-        <a href="login.html" class="link">Login</a> |
-        <a href="register.html" class="link">Register</a> |
-        <a href="changepw.html" class="link">Change PW</a> |
-        <a href="pwreset.html" class="link">Password Reset</a>
-    </nav>
 
     <!--Need to update page links. Ran into issues with img src links when in folders-->
     <div class="icon-location">
@@ -50,168 +51,7 @@
         </div>
     </div>
     <script src="js/popup.js"></script>
-
-    <!-- GET ID FROM URL -->
-    <script type="text/javascript">
-        
-        var Question_ID = sessionStorage.questionID;
-
-        $(document).ready(function () {
-            var dataString = "Question_ID=" + Question_ID;
-            /////LIST ADVICES GIVEN FOR EACH PARTICULAR QUESTION/////////////////////////
-            $.ajax({
-                url: "http://10.0.2.2/api/Advice/listadvices.php",
-                type: "POST",
-                dataType: "json",
-                data: dataString,
-                //on success it will call this function
-                success: function (data) {
-
-                    if(data == "Responses Private"){
-                        popup("Responses Private");
-                    }else{
-                        var advices = $('#advices');
-                        data = JSON.parse(JSON.stringify(data));
-                        $.each(data, function (key, value) {
-                        advices.append("<div class='profileimage'>" + value.pImage + "<span>" + value.name + "</span></div><p>" + value.advice + "</p>" + value.likes +  "<div class='likebox'>" +
-                        "<img onclick='likeButton("+ value.advice_id +")' id='like-img" + value.advice_id + "' src='images/advice/like.png'></img>" + 
-                        "</div><hr>");
-                        });
-                    }  
-
-                }, error: function (e) {
-                    popup("failed to work");
-                }
-            });
-            ////////////////////////////////////////////////////////////////////////////////
-
-            var questionType;
-
-            $.ajax({
-                url: "http://10.0.2.2/api/Advice/Advice.php",
-                type: "POST",
-                dataType: "json",
-                data: dataString,
-                //on success it will call this function
-                success: function (data) {
-                    var Obj = JSON.parse(JSON.stringify(data));
-                    //DISPLAYS THE QUESTION 
-                    document.getElementById("Question").innerHTML = "<div class='profileimage'>" + Obj[0].pImage + Obj[0].name + "</div>" + "<p class='sub'>" + Obj[0].Subject + "</p><p>" + Obj[0].topic + "<br>" 
-                    + Obj[0].dImage + "<br>" + Obj[0].Description + "<br>" + Obj[0].question_type +"</p>" + "<hr>";
-
-                    // CHECK QUESTION TYPE, OUTPUT FORM ADVICE DEPENDING ON THAT TYPE
-                    
-                    if (Obj[0].question_type == "Yes or No") {
-                        document.getElementById("advice").innerHTML = "Yes: " + "<input type='radio' name='advice' value='Yes' id='1' />" + "<br>" + "No: " + "<input type='radio' name='advice' value='No' id='2' />";
-                    } else if (Obj[0].question_type == "True or False") {
-                        document.getElementById("advice").innerHTML = "True: " + "<input type='radio' name='advice' value='True' />" + "<br>" + "False: " + "<input type='radio' name='advice' value='False' />";
-                    } else if (Obj[0].question_type == "Description") {
-                        document.getElementById("advice").innerHTML = "<div id='Description'" + "Advice: " + "<br>" + "<textarea id='Description1' maxlength='140' name='advice'>" + "</textarea>" + "<br>" + "</div>" +
-                        "<p>" + "<span id='wordCount'>" + '140' + "</span>/140 characters</p>";
-                    } else {
-                        document.getElementById("advice").innerHTML = "Error";
-                    }
-
-                    questionType = Obj[0].question_type;
-                    //if fail it will give this error
-                }, error: function (e) {
-                    popup(JSON.stringify(e));
-                }
-            });
-
-                $('#submit').on('click', function (e) {
-                e.preventDefault()
-                var advice;
-                if (questionType == "Yes or No"){
-                    advice = $("input[type=radio][name=advice]:checked").val();
-                    
-                }else if (questionType == "True or False"){
-                    advice = $("input[type=radio][name=advice]:checked").val();
-                    
-                }else if (questionType == "Description"){
-                    advice = $("#Description1").val();
-                    
-                }else{
-                    console.log("no type");
-                }
-                
-                var dataString = "Question_ID=" + Question_ID + "&advice=" + advice;   
-                
-                $.ajax({
-                    url: "http://10.0.2.2/api/Advice/giveAdvice.php",
-                    type: "POST",
-                    dataType: "json",
-                    data: dataString,
-                    success: function(data){
-                        popup(JSON.stringify(data));
-                        window.location.replace("index.html"); 
-                    }, error: function(e){
-                        popup(JSON.stringify(e));
-                    }
-                });
-            });
-        });
-        
-        ///////////////LIKE FUNCTION FOR ADVICES GIVEN///////////////////////
-        function likeButton(advice_id) {
-            var advice_ID = advice_id;
-
-            var dataString = "advice_ID=" + advice_ID;
-            $.ajax({
-                url: "http://10.0.2.2/api/Advice/likeadvice.php",
-                type: "POST",
-                dataType: "json",
-                data: dataString,
-                //on success it will call this function
-                success: function (data) {
-                    popup(data);
-                    updateLikes();
-                }
-
-            });
-
-            $('#like-img' + advice_ID).attr('src', 'images/advice/liked.png');
-        }
-
-        function updateLikes(){
-            var dataString = "Question_ID=" + Question_ID;
-
-            $.ajax({
-                url: "http://10.0.2.2/api/Advice/listadvices.php",
-                type: "POST",
-                dataType: "json",
-                data: dataString,
-                //on success it will call this function
-                success: function (data) {
-                    var advices = $('#advices');
-                    document.getElementById("advices").innerHTML = "";
-                    $.each(data, function (key, value) {
-                        advices.append("<div class='profileimage'>" + value.pImage + "<span>" + value.name +"</span></div><p>" + value.advice + "<div class='likebox'>" +
-                        "<img onclick='likeButton("+ value.advice_id +")' src='images/advice/like.png'></img>" + " " +
-                        value.likes +"</div><hr>");
-                    });
-
-                }, error: function (e) {
-                    popup("failed to work");
-                }
-            });
-            
-        }
-
-    </script>
-
-    <script type="text/javascript">
-        //add event for each time a key is released to run the function for form character count
-        document.addEventListener("keyup",function(e) {
-            if(e.target && e.target.id == "Description1")
-            {
-                var numOfCharacters = e.target.value.split('');
-                wordCounts = 140 - numOfCharacters.length;
-                document.getElementById("wordCount").innerText = wordCounts;
-            }
-        });
-    </script>
-    
+    <script src="js/advice.js"></script>
 
 </body>
 

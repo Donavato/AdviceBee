@@ -212,14 +212,6 @@ $(document).ready(function () {
 //add this function to for pop up functionality
 function CreatePost(jElement, key, value)
 {
-    // jElement.append("<div class='usercontainer'>" + "<div class='profileimage'>" + value.pImage + "</div><div class='username'>" + value.name + "</div>" + "</div>" + "<div class='question'>" +
-    //     "<p class='sub'>" + value.Subject + "</p><br>" + "<div class='content'>" + value.dImage + "<br>" + "<div class='desc'>" + value.Description + "</div>" + "</div><br>" + "<br><div class='usercontainer'>" +
-    //     "<div class='comment'>" + "<a onclick='sendButton(" + value.Question_ID + ")'>" + value.c_count + " comments</a></div>" + "<div class='actionbar'>" +
-    //     "<img onclick='reportButton(" + value.Question_ID + ")' src='images/advice/report.png'> </img>" +
-    //     "<img onclick='followButton(" + value.user_ID2 + ")' src='images/advice/followuser.png'></img>" +
-    //     "<img onclick='likeButton(" + value.Question_ID + ")' id='like-img" + value.Question_ID + "' src='images/advice/like.png'></img>" +
-    //     "<img onclick='sendButton(" + value.Question_ID + ")' src='images/advice/reply.png'></img>" + "</div></div>" + "</div><hr>");
-
     value.dImage = (value.dImage === "<img src = >") ? '' :  value.dImage;
     jElement.append(`
     <div class="post">
@@ -250,8 +242,6 @@ function CreatePost(jElement, key, value)
         </div>
     </div>
     `)
-
-
 }
 
 function clearTopicID() 
