@@ -14,113 +14,217 @@
 </table>
 
 <script type="text/javascript">
-	//call ajax
-	var ajax = new XMLHttpRequest();
-	var method = "GET";
-	var url = "http://10.0.2.2/api/Profile/getusertopicinfo.php";
-	var asynchronous = true;
-	
-	ajax.open(method, url, asynchronous);
-	
-	//sending ajax request
-	ajax.send();
-	
-	//recieve response from gettopicinfo.php
-	ajax.onreadystatechange = function()
-	{
-		if(this.readyState == 4 && this.status == 200)
-		{
-			//converting json back to array
-			var userdata = JSON.parse(this.responseText);
-			
-			//html value for <tbody>
-			var html = "";
-			
-			//loop through array for the different topics
-			for(var a = 0; a < userdata.length; a++)
-			{
-				var userTopics = userdata[a].Topic_name;
-			}
+	//call to get userID of the person logged in
+	$.ajax({
+		url: "http://10.0.2.2/api/Profile/getuserID.php",
+		type: "POST",
+		data: "param=no",
+		//on success it will call this function
+		success: function (yourID) {
 
-			//call ajax
-			var ajax = new XMLHttpRequest();
-			var method = "GET";
-			var url = "http://10.0.2.2/api/Profile/gettopicinfo.php";
-			var asynchronous = true;
-	
-			ajax.open(method, url, asynchronous);
-	
-			//sending ajax request
-			ajax.send();
-			
-			//recieve response from gettopicinfo.php
-			ajax.onreadystatechange = function()
+			var uID = JSON.parse(yourID);
+			console.log(uID);
+			console.log(sessionStorage.getItem("user_ID"));
+
+			//if session storage is undefined or if the session storage is holding the same user id as the profile's user id
+			if(sessionStorage.getItem("user_ID") === null || sessionStorage.getItem("user_ID") == uID)
 			{
-				if(this.readyState == 4 && this.status == 200)
+				//call ajax
+				var ajax = new XMLHttpRequest();
+				var method = "GET";
+				var url = "http://10.0.2.2/api/Profile/getusertopicinfo.php";
+				var asynchronous = true;
+				
+				ajax.open(method, url, asynchronous);
+				
+				//sending ajax request
+				ajax.send();
+				
+				//recieve response from gettopicinfo.php
+				ajax.onreadystatechange = function()
 				{
-					//converting json back to array
-					var data = JSON.parse(this.responseText);
-			
-					//html value for <tbody>
-					var html = "";
-			
-					//cycle through all groups
-					for(var c = 0; c < data.length; c++)
+					if(this.readyState == 4 && this.status == 200)
 					{
-						//store topicName in variable to call on later
-						var topicName = data[c].Topic_name;
-						//store topicID in value to use later
-						var topicID = data[c].Topic_ID;
+						//converting json back to array
+						var userdata = JSON.parse(this.responseText);
 						
-						//if user topic array is empty
-						if(userdata.length>0)
+						//html value for <tbody>
+						var html = "";
+						
+						//loop through array for the different topics
+						for(var a = 0; a < userdata.length; a++)
 						{
-							//cycle through users followed groups
-							for(var d = 0; d < userdata.length ; d++)
+							var userTopics = userdata[a].Topic_name;
+						}
+
+						//call ajax
+						var ajax = new XMLHttpRequest();
+						var method = "GET";
+						var url = "http://10.0.2.2/api/Profile/gettopicinfo.php";
+						var asynchronous = true;
+				
+						ajax.open(method, url, asynchronous);
+				
+						//sending ajax request
+						ajax.send();
+						
+						//recieve response from gettopicinfo.php
+						ajax.onreadystatechange = function()
+						{
+							if(this.readyState == 4 && this.status == 200)
 							{
-								//if topic id is present in both tables select the button
-								if(data[c].Topic_ID == userdata[d].topic_id)
+								//converting json back to array
+								var data = JSON.parse(this.responseText);
+						
+								//html value for <tbody>
+								var html = "";
+						
+								//cycle through all groups
+								for(var c = 0; c < data.length; c++)
 								{
-									html += "<br>";
-									html += "<label class='switch'>";
-										html += "<input type='checkbox' name = topicid id= topicID value="+ topicID +" onchange='editTopic(this)' checked>";
-										html += "<span class='slider round'>" + topicName + "</span>";
-									html += "</label>";
-									html += "</br>";
-									break;
+									//store topicName in variable to call on later
+									var topicName = data[c].Topic_name;
+									//store topicID in value to use later
+									var topicID = data[c].Topic_ID;
+									
+									//if user topic array is empty
+									if(userdata.length>0)
+									{
+										//cycle through users followed groups
+										for(var d = 0; d < userdata.length ; d++)
+										{
+											//if topic id is present in both tables select the button
+											if(data[c].Topic_ID == userdata[d].topic_id)
+											{
+												html += "<br>";
+												html += "<label class='switch'>";
+													html += "<input type='checkbox' name = topicid id= topicID value="+ topicID +" onchange='editTopic(this)' checked>";
+													html += "<span class='slider round'>" + topicName + "</span>";
+												html += "</label>";
+												html += "</br>";
+												break;
+											}
+											//if ran through entire user data array and no match, output as unselected
+											else if ((d+1) == userdata.length) 
+											{
+												html += "<br>";
+												html += "<label class='switch'>";
+													html += "<input type='checkbox' name = topicid id= topicID value="+ topicID +" onchange='editTopic(this)'>";
+													html += "<span class='slider round'>" + topicName + "</span>";
+												html += "</label>";
+												html += "</br>";
+											}
+										}
+									}
+
+									//output all buttons as unselected 
+									else
+									{
+										html += "<br>";
+										html += "<label class='switch'>";
+											html += "<input type='checkbox' name = topicid id= topicID value="+ topicID +" onchange='editTopic(this)'>";
+											html += "<span class='slider round'>" + topicName + "</span>";
+										html += "</label>";
+										html += "</br>";
+									}			
 								}
-								//if ran through entire user data array and no match, output as unselected
-								else if ((d+1) == userdata.length) 
+								
+								//replacing the tbody of table
+								document.getElementById("gettopicinfo").innerHTML = html;
+								
+							}
+						}
+					}
+				}
+			}
+			else
+			{
+				//call ajax
+				var ajax = new XMLHttpRequest();
+				var method = "GET";
+				var url = "http://10.0.2.2/api/Profile/getusertopicinfo.php";
+				var asynchronous = true;
+				
+				ajax.open(method, url, asynchronous);
+				
+				//sending ajax request
+				ajax.send();
+				
+				//recieve response from gettopicinfo.php
+				ajax.onreadystatechange = function()
+				{
+					if(this.readyState == 4 && this.status == 200)
+					{
+						//converting json back to array
+						var userdata = JSON.parse(this.responseText);
+						
+						//html value for <tbody>
+						var html = "";
+						
+						//loop through array for the different topics
+						for(var a = 0; a < userdata.length; a++)
+						{
+							var userTopics = userdata[a].Topic_name;
+						}
+
+						//call ajax
+						var ajax = new XMLHttpRequest();
+						var method = "GET";
+						var url = "http://10.0.2.2/api/Profile/gettopicinfo.php";
+						var asynchronous = true;
+				
+						ajax.open(method, url, asynchronous);
+				
+						//sending ajax request
+						ajax.send();
+						
+						//recieve response from gettopicinfo.php
+						ajax.onreadystatechange = function()
+						{
+							if(this.readyState == 4 && this.status == 200)
+							{
+								//converting json back to array
+								var data = JSON.parse(this.responseText);
+						
+								//html value for <tbody>
+								var html = "";
+						
+								//cycle through all groups
+								for(var c = 0; c < data.length; c++)
 								{
-									html += "<br>";
-									html += "<label class='switch'>";
-										html += "<input type='checkbox' name = topicid id= topicID value="+ topicID +" onchange='editTopic(this)'>";
-										html += "<span class='slider round'>" + topicName + "</span>";
-									html += "</label>";
-									html += "</br>";
+									//store topicName in variable to call on later
+									var topicName = data[c].Topic_name;
+									//store topicID in value to use later
+									var topicID = data[c].Topic_ID;
+									
+									//if user topic array is empty
+									if(userdata.length>0)
+									{
+										//cycle through users followed groups
+										for(var d = 0; d < userdata.length ; d++)
+										{
+											//if topic id is present in both tables select the button
+											if(data[c].Topic_ID == userdata[d].topic_id)
+											{
+												html += "<br>";
+													html += "<p>" + topicName + "</p>";
+												html += "</br>";
+
+												//replacing the tbody of table
+												document.getElementById("gettopicinfo").innerHTML = html;
+												break;
+											}
+								
+										}	
+									}
 								}
 							}
 						}
-
-						//output all buttons as unselected 
-						else
-						{
-							html += "<br>";
-							html += "<label class='switch'>";
-								html += "<input type='checkbox' name = topicid id= topicID value="+ topicID +" onchange='editTopic(this)'>";
-								html += "<span class='slider round'>" + topicName + "</span>";
-							html += "</label>";
-							html += "</br>";
-						}			
 					}
-					
-					//replacing the tbody of table
-					document.getElementById("gettopicinfo").innerHTML = html;
-					
 				}
 			}
 		}
-	}
+	});
 </script>
 
 

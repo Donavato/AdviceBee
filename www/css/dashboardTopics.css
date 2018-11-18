@@ -1,0 +1,30 @@
+.makeCircle{
+	border-radius: 50%;
+}
+
+.makeCircleButton{
+	outline:none;
+	background: none;
+	border-radius: 50%;
+	border: 2px solid rgb(246, 246, 246);
+}
+
+.makeCircleButton:focus{
+	border: 4px solid #C2E3F9;
+}
+
+#topicsButtons li{
+	display: inline-block;
+	text-align: center;
+	margin-right: 10px;
+}
+
+#topicsButtons{
+	overflow: auto;
+	white-space: nowrap;
+}
+
+.textsize{
+	font-size: 12px;
+	text-align: center;
+}

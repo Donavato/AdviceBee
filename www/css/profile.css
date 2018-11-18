@@ -22,8 +22,16 @@ ul#nav li:active{
     border: 2px solid black;
 }
 
+input{
+    align-content: center;
+}
+
 input[type="text"]{
     border: none;
+}
+
+button.active {
+    background-color: #ccc;
 }
 
 input[type="text"], textarea{
@@ -37,4 +45,49 @@ input[type="text"], textarea{
 
 table{
     width: 100%;
+    text-align: center;
+}
+
+#nav{
+    margin-left: 4.6%;
+}
+
+
+#nav li {
+    background-color: inherit;
+    float: left;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    padding: 14px 16px;
+    transition: 0.3s;
+    font-size: 17px;
+    width: 33%;
+    font-weight: bold; 
+    color: rgb(121, 121, 121);
+}
+
+#nav li:active {
+    background-color: #ccc;
+}
+
+.profilepic{
+    border-radius: 50%;
+    position: relative;
+    left: 37%;
+}
+
+#wallpaper img{
+    height: 170px; 
+	width: 100%; 
+	overflow: hidden;
+}
+
+.userdata{
+    text-align: center;
+}
+
+.topicinfodata{
+    height: 220px;
+    overflow-y: scroll;
 }

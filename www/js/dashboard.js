@@ -20,7 +20,7 @@ window.onclick = function (event) {
 function filterMostRecent() {
     var tID = sessionStorage.getItem('topic_id');
     $.ajax({
-        url: "http://10.0.2.2/api/Question/filtermostrecent.php",
+        url: "http://localhost/api/Question/filtermostrecent.php",
         type: "POST",
         data: {tID: tID},
         //on success it will call this function
@@ -44,7 +44,7 @@ function filterMostRecent() {
 function filterMostView() {
     var tID = sessionStorage.getItem('topic_id');
     $.ajax({
-        url: "http://10.0.2.2/api/Question/filtermostview.php",
+        url: "http://localhost/api/Question/filtermostview.php",
         type: "POST",
         data: {tID: tID},
         //on success it will call this function
@@ -70,7 +70,7 @@ $(document).ready(function () {
 
         //JUST HAVE THIS KEEP TRACK OF NOTIFICATION ON ICON
         $.ajax({
-            url: "http://10.0.2.2/api/notification/loadnotification.php",
+            url: "http://localhost/api/notification/loadnotification.php",
             method: "POST",
             data: { view: view },
             dataType: "json",
@@ -97,7 +97,7 @@ $(document).ready(function () {
 
     // LIST QUESTIONS
     $.ajax({
-        url: "http://10.0.2.2/api/Question/fetchdata.php",
+        url: "http://localhost/api/Question/fetchdata.php",
         type: "POST",
         contentType: "application/json; charset=utf-8",
         dataType: "json",
@@ -130,7 +130,7 @@ function likeButton(questionID) {
     var dataString = "Question_ID=" + Question_ID;
 
     $.ajax({
-        url: "http://10.0.2.2/api/Question/likequestion.php",
+        url: "http://localhost/api/Question/likequestion.php",
         type: "POST",
         dataType: "json",
         data: dataString,
@@ -146,7 +146,7 @@ function likeButton(questionID) {
 
 function updatelikes(){
     $.ajax({
-        url: "http://10.0.2.2/api/Question/fetchdata.php",
+        url: "http://localhost/api/Question/fetchdata.php",
         type: "POST",
         contentType: "application/json; charset=utf-8",
         dataType: "json",
@@ -174,7 +174,7 @@ function followButton(qID, user_ID2) {
     var dataString = "qID=" + qID + "&uID2=" + uID2;
 
     $.ajax({
-        url: "http://10.0.2.2/api/Question/followuser.php",
+        url: "http://localhost/api/Question/followuser.php",
         type: "POST",
         dataType: "json",
         data: dataString,
@@ -192,7 +192,7 @@ function reportButton(questionID) {
     var dataString = "Question_ID=" + Question_ID;
 
     $.ajax({
-        url: "http://10.0.2.2/api/Question/reportquestion.php",
+        url: "http://localhost/api/Question/reportquestion.php",
         type: "POST",
         dataType: "json",
         data: dataString,

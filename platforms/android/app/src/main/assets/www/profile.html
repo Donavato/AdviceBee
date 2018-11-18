@@ -4,9 +4,7 @@
     <head>
         <title>Profile</title>
         <link rel="stylesheet" href="style.css"/>
-        <link rel="stylesheet" href="css/profile.css"/>
-        <!--reference style sheet-->
-        <link rel="stylesheet" href="style.css">
+        <link rel="stylesheet" type="text/css" href="css/profile.css"/>
         <!--Popup style sheet-->
     <link rel="stylesheet" type="text/css" href="css/popup.css"/>
         <script type="text/javascript" src="js/jquery-3.3.1.min.js"></script>
@@ -45,16 +43,16 @@
 
         </div>
         <br><br>
-        <table>
+        <table class="userdatainfo">
             <tbody id="getpublicinfo"> <!-- data will be displayed here -->
         
             </tbody>
         </table>
 
         <ul id="nav">
-            <li><a href="info">Info</a></li>
-            <li><a href="topicinfo">Topics</a></li>
-            <li><a href="groupinfo">Groups</a></li>
+            <li class="tablinks"><a href="info">Info</a></li>
+            <li class="tablinks"><a href="topicinfo">Topics</a></li>
+            <li class="tablinks"><a href="groupinfo">Groups</a></li>
         </ul>
         <div id="content">
             
@@ -73,19 +71,19 @@
 
         <div class="icon-location">
             <div class="icon-bar">
-                <a href="listlikepost.html"><img src="images/NavBar/list.png"></a>
-                <a href="groups.html"><img src="images/NavBar/groups.png"></a>
-                <a href="notification.html"><img src="images/NavBar/notification.png"></a>
-                <a href="search.html"><img src="images/NavBar/search.png"></a>
-                <a href="listfolloweduser.html"><img src="images/NavBar/users.png"></a>
-                <a href="listlikequestion.html"><img src="images/NavBar/favorite.png"></a>
-                <a href="profile.html"><img src="images/NavBar/profile.png"></a>
+                <a href="listlikepost.html"><img src="images/NavBar/list.png" onclick="clearStorageUser()"></a>
+                <a href="groups.html"><img src="images/NavBar/groups.png" onclick="clearStorageUser()"></a>
+                <a href="notification.html"><img src="images/NavBar/notification.png" onclick="clearStorageUser()"></a>
+                <a href="search.html"><img src="images/NavBar/search.png" onclick="clearStorageUser()"></a>
+                <a href="listfolloweduser.html"><img src="images/NavBar/users.png" onclick="clearStorageUser()"></a>
+                <a href="listlikequestion.html"><img src="images/NavBar/favorite.png" onclick="clearStorageUser()"></a>
+                <a href="profile.html"><img src="images/NavBar/profile.png" onclick="clearStorageUser()"></a>
             </div>
         </div>
         <div class="hover_bkgr_fricc">      <!--Add this div to page for pop up-->
             <span class="helper"></span>
             <div>
-                 
+                
                 <p id="popuptext" class="popupText"></p>          <!--Append popup here-->
             </div>
         </div>
@@ -93,38 +91,47 @@
 </html>
 
 <script type="text/javascript">
+    if(sessionStorage.getItem("user_ID") === null)
+    {
+        $.ajax({
+            url: "http://10.0.2.2/api/Profile/getuserID.php",
+            type: "POST",
+            data: "param=no",
+            //on success it will call this function
+            success: function (yourID) {
+
+                var uID = JSON.parse(yourID);
+            }
+        });
+    }
+    else
+    {
+        var uID = sessionStorage.getItem('user_ID');
+    }
+
+    if(sessionStorage.getItem("user_ID") != null || sessionStorage.getItem("user_ID") != uID)
+    {
+        var uID = sessionStorage.getItem("user_ID");
+        $.ajax({
+            method: "POST",
+            url: "http://10.0.2.2/api/Profile/getinfo.php",
+            data: {profileID: uID},
+            success: function (data) {
+
+                var datareturned = JSON.parse(data);
     
-        //call ajax
-        var ajax = new XMLHttpRequest();
-        var method = "GET";
-        var url = "http://10.0.2.2/api/Profile/getinfo.php";
-        var asynchronous = true;
-        
-        ajax.open(method, url, asynchronous);
-        
-        //sending ajax
-        ajax.send();
-        
-        //recieve response from getinfo.php
-        ajax.onreadystatechange = function()
-        {
-            if(this.readyState == 4 && this.status == 200)
-            {
-                //converting JSON taken from getinfo.php to array
-                var data = JSON.parse(this.responseText); 
-                
                 //html value for <tbody>
                 var html = "";
-                
+    
                 //setting varaibles to use for profile
-                var Email = data[0].email;
-                var f_name = data[0].f_name;
-                var l_name = data[0].l_name;
-                var title = data[0].title;
-                var points = data[0].points;
-                var location = data[0].location;
-                var age = data[0].age;
-                var level = data[0].level;
+                var Email = datareturned[0].email;
+                var f_name = datareturned[0].f_name;
+                var l_name = datareturned[0].l_name;
+                var title = datareturned[0].title;
+                var points = datareturned[0].points;
+                var location = datareturned[0].location;
+                var age = datareturned[0].age;
+                var level = datareturned[0].level;
 
                 var img = document.createElement("img");
                 if (level == "Bronze")
@@ -140,7 +147,7 @@
                     img.src = "images/Gold.png";
                 }
 
-                
+    
                 //combining first name and last name with a space between them
                 var fullName= f_name + '\xa0' + l_name;
 
@@ -149,54 +156,174 @@
                     html += "<td align=left>Credit: " + points + " pts</td>";
                     html += "<div id='level' align=right><td></td></div>";
                 html += "</tr>";
-                html += "<tr align=center>";
-                    html += "<input type='text' name = username value="+ fullName +" onchange='editName(this)'>";
-                html += "</tr>";
-                html += "<tr align='center'>";
+                html += "<div class='userdata'>";
+                        html += "<input type='text' name = username value="+ fullName +" onchange='editName(this)'>";
+                        html += "<br>";
                         html += "<input type='text' name = userTitle value="+ title +" onchange='editTitle(this)'>";
-                html += "</tr>";
-                html += "<tr align='center'>";
+                        html += "<br>";
                         html += "<input type='text' name = userLocation value="+ location +" onchange='editLocation(this)'>";
-                html += "</tr>";
+                html += "</div>";
 
                 //replace <tbody> of table in html
                 document.getElementById("getpublicinfo").innerHTML = html;
-            }
+            
             var src = document.getElementById("level");
             $(document).ready(src.appendChild(img));
-        
-        }
+            }
+        });
+
+    }
+    else
+    {
+        $.ajax({
+            url: "http://10.0.2.2/api/Profile/getuserID.php",
+            type: "POST",
+            data: "param=no",
+            //on success it will call this function
+            success: function (yourID) {
+
+                var uID = JSON.parse(yourID);
+
+                $.ajax({
+                    method: "POST",
+                    url: "http://10.0.2.2/api/Profile/getinfo.php",
+                    data: {profileID: uID},
+                    success: function (data) {
+
+                        var datareturned = JSON.parse(data);
+            
+                        //html value for <tbody>
+                        var html = "";
+            
+                        //setting varaibles to use for profile
+                        var Email = datareturned[0].email;
+                        var f_name = datareturned[0].f_name;
+                        var l_name = datareturned[0].l_name;
+                        var title = datareturned[0].title;
+                        var points = datareturned[0].points;
+                        var location = datareturned[0].location;
+                        var age = datareturned[0].age;
+                        var level = datareturned[0].level;
+
+                        var img = document.createElement("img");
+                        if (level == "Bronze")
+                        {
+                            img.src = "images/Bronze.png";
+                        }
+                        else if(level == "Silver")
+                        {
+                            img.src = "images/Silver.png";
+                        }
+                        else if (level == "Gold")
+                        {
+                            img.src = "images/Gold.png";
+                        }
+
+            
+                        //combining first name and last name with a space between them
+                        var fullName= f_name + '\xa0' + l_name;
+
+                        //tie into html
+                        html += "<tr>";
+                            html += "<td align=left>Credit: " + points + " pts</td>";
+                            html += "<div id='level' align=right><td></td></div>";
+                        html += "</tr>";
+                        html += "<div class='userdata'>";
+                                html += "<input type='text' name = username value="+ fullName +" onchange='editName(this)'>";
+                                html += "<br>";
+                                html += "<input type='text' name = userTitle value="+ title +" onchange='editTitle(this)'>";
+                                html += "<br>";
+                                html += "<input type='text' name = userLocation value="+ location +" onchange='editLocation(this)'>";
+                        html += "</div>";
+
+                        //replace <tbody> of table in html
+                        document.getElementById("getpublicinfo").innerHTML = html;
+                    
+                    var src = document.getElementById("level");
+                    $(document).ready(src.appendChild(img));
+                    }
+                });
+            }
+        });
+    }
 </script>
 
 <script type="text/javascript">
 
 	function editName(obj) 
 	{
-		//store the names into variables
+        //store the names into variables
 		var storeName = obj.value.split(/[' ''\xa0']/);
         var firstName = storeName[0];
         storeName.shift();
         var lastName = storeName.join(' ');
-        
+       
+       //call to get userID of the person logged in
+        $.ajax({
+            url: "http://10.0.2.2/api/Profile/getuserID.php",
+            type: "POST",
+            data: "param=no",
+            //on success it will call this function
+            success: function (yourID) {
 
-		//call ajax
-		$.ajax({
-			method: "POST",
-			url: "http://10.0.2.2/api/Profile/updatename.php",
-			data: {userfirstName: firstName, userlastName: lastName}
-        });
+                var uID = JSON.parse(yourID);
+                console.log(uID);
+                console.log(sessionStorage.getItem("user_ID"));
+
+                //if session storage is undefined or if the session storage is holding the same user id as the profile's user id
+                if(sessionStorage.getItem("user_ID") === null || sessionStorage.getItem("user_ID") == uID)
+                {
+                    $.ajax({
+                        method: "POST",
+                        url: "http://10.0.2.2/api/Profile/updatename.php",
+                        data: {userfirstName: firstName, userlastName: lastName},
+                        success: function (data) {
+                            popup(JSON.parse(data));
+                        }
+                    });
+                }
+                else
+                {
+                    popup("Error: This is not your profile.");
+                }
+
+            }
+        });   
     }
 
     function editTitle(obj)
     {
         //store the title into variable
 		var storeTitle = obj.value;
-		
-        //call ajax
+
+        //call to get userID of the person logged in
         $.ajax({
-            method: "POST",
-            url: "http://10.0.2.2/api/Profile/updatetitle.php",
-            data: {userTitle: storeTitle}
+            url: "http://10.0.2.2/api/Profile/getuserID.php",
+            type: "POST",
+            data: "param=no",
+            //on success it will call this function
+            success: function (yourID) {
+
+                var uID = JSON.parse(yourID);
+
+                //if session storage is undefined or if the session storage is holding the same user id as the profile's user id
+                if(sessionStorage.getItem("user_ID") === null || sessionStorage.getItem("user_ID") == uID)
+                {
+                    $.ajax({
+                        method: "POST",
+                        url: "http://10.0.2.2/api/Profile/updatetitle.php",
+                        data: {userTitle: storeTitle},
+                        success: function (data) {
+                            popup(JSON.parse(data));
+                        }
+                    });
+                }
+                else
+                {
+                    popup("Error: This is not your profile.");
+                }
+
+            }
         });
     }
 
@@ -204,33 +331,45 @@
     {
         //store the location into variable
 		var storeLocation = obj.value;
-		
-        //call ajax
+
+        //call to get userID of the person logged in
         $.ajax({
-            method: "POST",
-            url: "http://10.0.2.2/api/Profile/updatelocation.php",
-            data: {userLocation: storeLocation}
+            url: "http://10.0.2.2/api/Profile/getuserID.php",
+            type: "POST",
+            data: "param=no",
+            //on success it will call this function
+            success: function (yourID) {
+
+                var uID = JSON.parse(yourID);
+
+                //if session storage is undefined or if the session storage is holding the same user id as the profile's user id
+                if(sessionStorage.getItem("user_ID") === null || sessionStorage.getItem("user_ID") == uID)
+                {
+                    $.ajax({
+                        method: "POST",
+                        url: "http://10.0.2.2/api/Profile/updatelocation.php",
+                        data: {userLocation: storeLocation},
+                        success: function (data) {
+                            popup(JSON.parse(data));
+                        }
+                    });
+                }
+                else
+                {
+                    popup("Error: This is not your profile.");
+                }
+
+            }
         });
     }
 </script>
 
 <script type="text/javascript">
-    //add this function to for pop up functionality
-    function popup(text){
-        //set popupText to the <p> tag in the div
-        var popupText = $('#popuptext');
-        //empty the <p> tag in case of prior pop ups
-        popupText.empty();
-        //append new text passed through the function to the <p> tag
-        popupText.append(text);
-        //show when pop up is called
-        $('.hover_bkgr_fricc').show();
-        //hide when the x is clicked or anywhere else on the page is clicked
-        $('.hover_bkgr_fricc').click(function(){
-            $('.hover_bkgr_fricc').hide();
-        });
-        $('.popupCloseButton').click(function(){
-            $('.hover_bkgr_fricc').hide();
-        });
+
+	function clearStorageUser() 
+	{
+        sessionStorage.removeItem("user_ID");
     }
-    </script>
+</script>
+
+<script src="js/popup.js"></script>
