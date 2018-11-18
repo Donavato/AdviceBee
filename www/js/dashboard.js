@@ -160,13 +160,13 @@ function updatelikes(){
                 CreatePost(DOM,key,value);
             });
 
-//             //if fail it will give this error
-//         }, error: function (e) {
-//             popup("failed to work");
-//         }
+            //if fail it will give this error
+        }, error: function (e) {
+            popup("failed to work");
+        }
 
-//     });
-// }
+    });
+}
 
 ///FOLLOW USER FUNCTIONALITY
 function followButton(qID, user_ID2) {
