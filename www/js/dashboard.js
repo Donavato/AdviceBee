@@ -18,12 +18,11 @@ window.onclick = function (event) {
 }
 
 function filterMostRecent() {
+    var tID = sessionStorage.getItem('topic_id');
     $.ajax({
         url: "http://10.0.2.2/api/Question/filtermostrecent.php",
         type: "POST",
-        contentType: "application/json; charset=utf-8",
-        dataType: "json",
-        data: "param=no",
+        data: {tID: tID},
         //on success it will call this function
         success: function (data) {
             var DOM = $('#DOM');
@@ -43,12 +42,11 @@ function filterMostRecent() {
 }
 
 function filterMostView() {
+    var tID = sessionStorage.getItem('topic_id');
     $.ajax({
         url: "http://10.0.2.2/api/Question/filtermostview.php",
         type: "POST",
-        contentType: "application/json; charset=utf-8",
-        dataType: "json",
-        data: "param=no",
+        data: {tID: tID},
         //on success it will call this function
         success: function (data) {
             var DOM = $('#DOM');
@@ -92,9 +90,9 @@ $(document).ready(function () {
         load_unread_notification("read");
     });
 
-    // setInterval(function () {
-    //     load_unread_notification();
-    // }, 5000);
+    setInterval(function () {
+        load_unread_notification();
+    }, 5000);
 
 
     // LIST QUESTIONS
@@ -139,15 +137,41 @@ function likeButton(questionID) {
         //on success it will call this function
         success: function (data) {
             popup(data);
+            updatelikes();
         }
 
     });
 
 }
+
+function updatelikes(){
+    $.ajax({
+        url: "http://10.0.2.2/api/Question/fetchdata.php",
+        type: "POST",
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        data: "param=no",
+        //on success it will call this function
+        success: function (data) {
+            var DOM = $('#DOM');
+            document.getElementById("DOM").innerHTML = "";
+            //GET DATA AND PARSE IT
+            $.each(data, function (key, value) {
+                CreatePost(DOM,key,value);
+            });
+
+            //if fail it will give this error
+        }, error: function (e) {
+            popup("failed to work");
+        }
+
+    });
+}
 ///FOLLOW USER FUNCTIONALITY
-function followButton(user_ID2) {
+function followButton(qID, user_ID2) {
+    var qID = qID;
     var uID2 = user_ID2;
-    var dataString = "uID2=" + uID2;
+    var dataString = "qID=" + qID + "&uID2=" + uID2;
 
     $.ajax({
         url: "http://10.0.2.2/api/Question/followuser.php",
@@ -215,9 +239,11 @@ function CreatePost(jElement, key, value)
                     ${value.c_count}
                 </div>
                 <i class="fas fa-exclamation" onclick="reportButton(${value.Question_ID})"></i>
-                <i class="far fa-user" onclick="followButton(${value.user_ID2})"></i>
-                <i class="far fa-heart" onclick="likeButton(${value.Question_ID})"></i><!-- filled -->
-                <!--<i class="far fa-heart" onclick="reportButton(${value.Question_ID})"></i> unfilled -->
+                <i class="far fa-user" onclick="followButton(${value.Question_ID} , ${value.user_ID2})"></i>
+                <div>
+                <i class="far fa-heart" onclick="likeButton(${value.Question_ID})"></i>${value.likes}<!-- unfilled -->
+                </div>
+                <!--<i class="far fa-heart" onclick="reportButton(${value.Question_ID})"></i> filled -->
                 <i class="far fa-share-square" onclick="sendButton(${value.Question_ID})"></i>
 
             </div>
@@ -226,4 +252,9 @@ function CreatePost(jElement, key, value)
     `)
 
 
+}
+
+function clearTopicID() 
+{
+    sessionStorage.removeItem("topic_id");
 }

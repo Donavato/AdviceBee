@@ -43,7 +43,7 @@
         </div>
     </div>
 
-    <div class="hover_bkgr_fricc">      <!--Add this div to page for pop up-->
+     <div class="hover-bkgr-fricc">      <!--Add this div to page for pop up-->
         <span class="helper"></span>
         <div>
              
@@ -125,26 +125,7 @@
             });
         }
     </script>
-    <script type="text/javascript">
-        //add this function to for pop up functionality
-        function popup(text){
-            //set popupText to the <p> tag in the div
-            var popupText = $('#popuptext');
-            //empty the <p> tag in case of prior pop ups
-            popupText.empty();
-            //append new text passed through the function to the <p> tag
-            popupText.append(text);
-            //show when pop up is called
-            $('.hover_bkgr_fricc').show();
-            //hide when the x is clicked or anywhere else on the page is clicked
-            $('.hover_bkgr_fricc').click(function(){
-                $('.hover_bkgr_fricc').hide();
-            });
-            $('.popupCloseButton').click(function(){
-                $('.hover_bkgr_fricc').hide();
-            });
-        }
-        </script>
+<script src="js/popup.js"></script>
 
 </body>
 

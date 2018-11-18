@@ -63,7 +63,7 @@
                     
                     //if fail it will give this error
                 }, error: function (e) {
-                    alert("failed to work");
+                    popup("failed to work");
                 }
 
             });
@@ -85,7 +85,7 @@
                 data: dataString,
                 //on success it will call this function
                 success: function (data) {
-                    alert(data);
+                    popup(data);
                     updatelist();
                 }
             });
@@ -112,7 +112,7 @@
                     
                     //if fail it will give this error
                 }, error: function (e) {
-                    alert("failed to work");
+                    popup("failed to work");
                 }
 
             });

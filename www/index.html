@@ -83,32 +83,7 @@
     </div>
     <script src="js/popup.js"></script>
     <script src="js/dashboard.js"></script>
-            var tID = sessionStorage.getItem('topic_id');
-                data: {tID: tID},
-                            "<img onclick='followButton(" + value.Question_ID + "," + value.user_ID2 + ")' src='images/advice/followuser.png'></img>" +
-                    updatelikes();
-        function updatelikes(){
-            var qID = qID;
-            var uID2 = user_ID2;
-            var dataString = "qID=" + qID + "&uID2=" + uID2;
-        function followButton(qID, user_ID2) {
-            
 
-            $.ajax({
-                url: "http://10.0.2.2/api/Question/followuser.php",
-                type: "POST",
-                dataType: "json",
-                data: dataString,
-                //on success it will call this function
-                success: function (data) {
-                }
-                    popup(data);
-
-            });
-        function clearTopicID() 
-        {
-            sessionStorage.removeItem("topic_id");
-        }
 </body>
 
 </html>
