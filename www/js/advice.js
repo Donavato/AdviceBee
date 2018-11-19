@@ -36,7 +36,7 @@ $(document).ready(function () {
                             </div>
                             <div class="post-footer">
                                 <div>
-                                <i class="far fa-heart" onclick="likeButton(${value.advice_id})"></i>
+                                <i class="far fa-heart" onclick="likeButton(${value.advice_id})"></i>${value.likes}
                                 </div>
                             </div>
                         </div>
@@ -166,6 +166,8 @@ function likeButton(advice_id) {
         data: dataString,
         //on success it will call this function
         success: function (data) {
+            data = JSON.parse(JSON.stringify(data));
+            console.log(data);
             popup(data);
             updateLikes();
         }
@@ -188,10 +190,29 @@ function updateLikes() {
             var advices = $('#advices');
             document.getElementById("advices").innerHTML = "";
             $.each(data, function (key, value) {
-                advices.append("<div class='profileimage'>" + value.pImage + "<span>" + value.name + "</span></div><p>" + value.advice + "<div class='likebox'>" +
-                    "<img onclick='likeButton(" + value.advice_id + ")' src='images/advice/like.png'></img>" + " " +
-                    value.likes + "</div><hr>");
+
+                value.dImage = (value.pImage === "<img src = >") ? '' : value.pImage;
+                    advices.append(`
+                    <div class="post">
+                        ${value.pImage}
+                        <div class="main-body">
+                            <div class="post-header">
+                                <span>${value.name}</span>
+                            </div>
+                            <div class="post-body">
+                                    <div class="description">${value.advice}</div>
+                            </div>
+                            <div class="post-footer">
+                                <div>
+                                <i class="far fa-heart" onclick="likeButton(${value.advice_id})"></i>${value.likes}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    `)
+                    
             });
+
 
         }, error: function (e) {
             popup("failed to work");

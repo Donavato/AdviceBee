@@ -25,7 +25,7 @@
             if($like_count == 0){
                 $like_count = " ";
             }else{
-                $like_count = mysqli_num_rows($likequery) . ' Like';
+                $like_count = mysqli_num_rows($likequery);
             }
 
             if($d_Image == NULL ||$d_Image == "None"){
@@ -98,7 +98,7 @@
                 if($like_count == 0){
                     $like_count = " ";
                 }else{
-                    $like_count = mysqli_num_rows($likequery) . ' Like';
+                    $like_count = mysqli_num_rows($likequery);
                 }
         
                 if($d_Image == NULL ||$d_Image == "None"){

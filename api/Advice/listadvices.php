@@ -77,7 +77,7 @@
         if($like_count == 0){
             $like_count = " ";
         }else{
-            $like_count = mysqli_num_rows($likequery) . ' Like';
+            $like_count = mysqli_num_rows($likequery);
         }
 
         $query = mysqli_query($con, "SELECT f_name, l_name FROM users WHERE user_ID='$user_ID'");

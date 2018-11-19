@@ -21,7 +21,15 @@
         $d_Image = $r->image;
         $comment_count = $r->CommentCount;
 
-
+        $likequery = mysqli_query($con, "SELECT * FROM like_questions WHERE question_ID=$Question_ID AND question_like='1'");
+        $like_count = mysqli_num_rows($likequery);
+        
+        if($like_count == 0){
+            $like_count = " ";
+        }else{
+            $like_count = mysqli_num_rows($likequery);
+        }
+        
         if($d_Image == NULL){
             $d_Image = NULL;
         }else{
@@ -53,7 +61,7 @@
 
                     array_push($arr, array("Question_ID" => $Question_ID, "Description" => $Description, 
                     "Subject" => $Subject, "anonymous" => $anonymous, "hide" => $hide, "user_ID2" => $user_ID2, 
-                    "name" => $Name, "pImage" => "<img src = $p_Image>", "dImage" => "<img src = $d_Image>", "c_count" => $comment_count));
+                    "name" => $Name, "pImage" => "<img src = $p_Image>", "dImage" => "<img src = $d_Image>", "c_count" => $comment_count, "likes" => $like_count));
 
                 }
 

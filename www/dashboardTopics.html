@@ -1,8 +1,7 @@
-
 <head>
     <link rel="stylesheet" href="style.css">
     <!--dashboardTopics stylesheet-->
-	<link rel="stylesheet" type="text/css" href="css/dashboardTopics.css"/>
+    <link rel="stylesheet" type="text/css" href="css/dashboardTopics.css" />
 </head>
 <div id="topicsButtons">
 
@@ -14,33 +13,30 @@
     var method = "GET";
     var url = "http://10.0.2.2/api/Profile/dashboardTopics.php";
     var asynchronous = true;
-        
+
     ajax.open(method, url, asynchronous);
-        
+
     //sending ajax
     ajax.send();
-        
+
     //recieve response
-    ajax.onreadystatechange = function()
-    {
-        if(this.readyState == 4 && this.status == 200)
-        {
+    ajax.onreadystatechange = function () {
+        if (this.readyState == 4 && this.status == 200) {
             //converting JSON to array
             var data = JSON.parse(this.responseText);
-                
+
             //append to html
             var html = "";
 
-            for(var a = 0; a < data.length; a++)
-            {
+            for (var a = 0; a < data.length; a++) {
                 //set array information for current topic in variables
                 var id = data[a].Topic_ID;
                 var name = data[a].Topic_name;
-				var imageURL = data[a].topicImage;
+                var imageURL = data[a].topicImage;
 
                 //create button for each topic to display questions
-                html += "<li><button class='makeCircleButton' id="+ id +" value="+ name +" onclick='displayQuestions(this.value, this.id)'><img src='"+ imageURL +"' class='makeCircle'></button>";
-				html += "<p class='textsize'>" + name + "</p></li>";
+                html += "<li><button class='makeCircleButton' id=" + id + " value=" + name + " onclick='displayQuestions(this.value, this.id)'><img src='" + imageURL + "' class='makeCircle'></button>";
+                html += "<p class='textsize'>" + name + "</p></li>";
 
                 //replace in html
                 document.getElementById("topicsButtons").innerHTML = html;
@@ -51,19 +47,18 @@
 
 <script type="text/javascript">
 
-	function displayQuestions(obj, tID) 
-	{
+    function displayQuestions(obj, tID) {
         var topic_name = obj;
         var topic_ID = tID;
-        
+
         //call ajax
         $(document).ready(function () {
             sessionStorage.removeItem('topic_id');
             sessionStorage.setItem('topic_id', topic_ID);
-		    $.ajax({
-			    method: "POST",
-			    url: "http://10.0.2.2/api/Profile/displaytopicquestions.php",
-                data: {Topic_Name: topic_name},
+            $.ajax({
+                method: "POST",
+                url: "http://10.0.2.2/api/Profile/displaytopicquestions.php",
+                data: { Topic_Name: topic_name },
                 //on success it will call this function
                 success: function (data) {
                     var topicsButtons = $('#DOM');
@@ -71,17 +66,43 @@
 
                     //empty the current div from questions to post the new questions from the topic selected
                     topicsButtons.empty();
-                        //GET DATA AND PARSE IT
+                    //GET DATA AND PARSE IT
                     $.each(arrayQuestions, function (key, value) {
-                        
+
                         //APPEND DATA AND DISPLAY IT
-                        topicsButtons.append("<div class='profileimage'>" + value.pImage + "<span>" + value.name + "</span></div>" + 
-                            "<p class='sub'>" + value.Subject + "</p><p>" + value.dImage + "<br>" + value.Description + "</p>" + "<div>" + "<div class='actionbar'>" +
-                            "<img onclick='reportButton(" + value.Question_ID + ")' src='images/advice/report.png'> </img>" +
-                            "<img onclick='followButton(" + value.user_ID2 + ")' src='images/advice/followuser.png'></img>" +
-                            "<img onclick='likeButton(" + value.Question_ID + ")' id='like-img" + value.Question_ID + "' src='images/advice/like.png'></img>" +
-                            "<img onclick='sendButton(" + value.Question_ID + ")' src='images/advice/reply.png'></img>" + "</div>" + 
-                            "<div class='comment'>" + "<a onclick='sendButton("+ value.Question_ID +")'>" + value.c_count + " comments</a></div>" + "<hr>");
+                        
+                        value.dImage = (value.dImage === "<img src = >") ? '' : value.dImage;
+                        topicsButtons.append(`
+                            <div class="post">
+                                ${value.pImage}
+                                <div class="main-body">
+                                    <div class="post-header">
+                                        <span>${value.name}</span>
+                                        <div class="subject">${value.Subject}</div>
+                                    </div>
+                                    <div class="post-body">
+                                            ${value.dImage}
+                                            <div class="description">${value.Description}</div>
+                                    </div>
+                                    <div class="post-footer"> 
+                                        <div>
+                                            <i class="far fa-comment" onclick="sendButton(${value.Question_ID})"></i>
+                                            ${value.c_count}
+                                        </div>
+                                        <i class="fas fa-exclamation" onclick="reportButton(${value.Question_ID})"></i>
+                                        <i class="far fa-user" onclick="followButton(${value.Question_ID} , ${value.user_ID2})"></i>
+                                        
+                                        <div id="u_Heart">
+                                        <i class="far fa-heart" onclick="likeButton(${value.Question_ID})"></i>${value.likes}<!-- unfilled -->
+                                        </div>
+
+                                        <!--<i class="far fa-heart" onclick="reportButton(${value.Question_ID})"></i> filled -->
+                                        <i class="far fa-share-square" onclick="sendButton(${value.Question_ID})"></i>
+
+                                    </div>
+                                </div>
+                            </div>
+                            `)
 
                     });
                     //if fail it will give this error
