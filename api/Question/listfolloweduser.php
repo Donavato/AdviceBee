@@ -22,7 +22,7 @@ while($r = mysqli_fetch_object($datastring)){
         while($d = mysqli_fetch_object($query2)){
             $p_Image = $d->profileImage;
 
-            array_push($arr, array("name" => $Name, "follow_id" => $follow_ID, "pImage" => "<img src = $p_Image>"));
+            array_push($arr, array("name" => $Name, "follow_id" => $follow_ID, "pImage" => "<img src = $p_Image>", "user_ID2" => $uID2));
         }
     }
 }
