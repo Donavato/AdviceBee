@@ -5,16 +5,23 @@
     <!--initialize jquery from js folder-->
     <script src="js/jquery-3.3.1.min.js"></script>
 
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,500,900" rel="stylesheet">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+
     <!--reference style sheet-->
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="css/main.css">
     <!--notification stylesheet-->
     <link rel="stylesheet" type="text/css" href="css/notification.css"/>
     <!--Popup style sheet-->
     <link rel="stylesheet" type="text/css" href="css/popup.css"/>
+    <link rel="stylesheet" type="text/css" href="css/dashboard.css"/>
+
+    <link rel="stylesheet" type="text/css" href="css/navigation.css"/>
+    
 </head>
 
 <body>
-    <h1 class="h1">Liked Questions</h1><hr>
+    <h1 class="generalTitle">Liked Questions</h1>
     <!--output of the json-->
     <div>
         <!--set the id to DOM to show output-->
@@ -55,14 +62,34 @@
                     
                     //GET DATA AND PARSE IT
                     $.each(data, function (key, value) {
-                        
-                        //APPEND DATA AND DISPLAY IT
-                        DOM.append("<div class='usercontainer'>" + "<div class='profileimage'>" + value.pImage + "</div><div class='username'>" + value.name + "</div>" + "</div>" + "<div class='question'>" +
-                            "<p class='sub'>" + value.Subject + "</p><br>" + "<div class='content'>" + value.dImage + "<br>" + "<div class='desc'>" + value.Description + "</div>" + "</div><br>" + "<br><div class='usercontainer'>" +
-                            "<div class='comment'>" + "<a onclick='sendButton("+ value.Question_ID +")'>" + value.c_count + " comments</a></div>" + "<div class='actionbar'>" +
-                            "<img onclick='unlikeButton("+ value.Question_ID +")' src='images/advice/liked.png'></img>" + 
-                            "<img onclick='sendButton(" + value.Question_ID + ")' src='images/advice/reply.png'></img>" + "</div></div>" + "</div><hr>");
 
+                        value.dImage = (value.dImage === "<img src = >") ? '' :  value.dImage;
+                        DOM.append(`
+                        <div class="post">
+                            ${value.pImage}
+                            <div class="main-body">
+                                <div class="post-header">
+                                    <span>${value.name}</span>
+                                    <div class="subject">${value.Subject}</div>
+                                </div>
+                                <div class="post-body">
+                                        ${value.dImage}
+                                        <div class="description">${value.Description}</div>
+                                </div>
+                                <div class="post-footer"> 
+                                    <div>
+                                        <i class="far fa-comment" onclick="sendButton(${value.Question_ID})"></i>
+                                        ${value.c_count}
+                                    </div>
+                                    <div id="u_Heart">
+                                    <i class="far fa-heart" onclick="unlikeButton(${value.Question_ID})"></i>
+                                    </div>
+                                    <i class="far fa-share-square" onclick="sendButton(${value.Question_ID})"></i>
+
+                                </div>
+                            </div>
+                        </div>
+                        `)
                     });
                     
                     //if fail it will give this error
@@ -109,12 +136,33 @@
                     $.each(data, function (key, value) {
                         
                         //APPEND DATA AND DISPLAY IT
-                        DOM.append("<div class='usercontainer'>" + "<div class='profileimage'>" + value.pImage + "</div><div class='username'>" + value.name + "</div>" + "</div>" + "<div class='question'>" +
-                            "<p class='sub'>" + value.Subject + "</p><br>" + "<div class='content'>" + value.dImage + "<br>" + "<div class='desc'>" + value.Description + "</div>" + "</div><br>" + "<br><div class='usercontainer'>" +
-                            "<div class='comment'>" + "<a onclick='sendButton("+ value.Question_ID +")'>" + value.c_count + " comments</a></div>" + "<div class='actionbar'>" +
-                            "<img onclick='unlikeButton("+ value.Question_ID +")' src='images/advice/liked.png'></img>" + 
-                            "<img onclick='sendButton(" + value.Question_ID + ")' src='images/advice/reply.png'></img>" + "</div></div>" + "</div><hr>");
+                        value.dImage = (value.dImage === "<img src = >") ? '' :  value.dImage;
+                        DOM.append(`
+                        <div class="post">
+                            ${value.pImage}
+                            <div class="main-body">
+                                <div class="post-header">
+                                    <span>${value.name}</span>
+                                    <div class="subject">${value.Subject}</div>
+                                </div>
+                                <div class="post-body">
+                                        ${value.dImage}
+                                        <div class="description">${value.Description}</div>
+                                </div>
+                                <div class="post-footer"> 
+                                    <div>
+                                        <i class="far fa-comment" onclick="sendButton(${value.Question_ID})"></i>
+                                        ${value.c_count}
+                                    </div>
+                                    <div id="u_Heart">
+                                    <i class="far fa-heart" onclick="likeButton(${value.Question_ID})"></i>
+                                    </div>
+                                    <i class="far fa-share-square" onclick="sendButton(${value.Question_ID})"></i>
 
+                                </div>
+                            </div>
+                        </div>
+                        `)
                     });
                     
                     
