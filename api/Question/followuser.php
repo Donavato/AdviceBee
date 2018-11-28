@@ -19,14 +19,27 @@ while($f = mysqli_fetch_object($a_data)){
         $query=mysqli_query($con, "SELECT * FROM follow_user WHERE user_ID1='$uID' AND user_ID2='$uID2'");
         $match  = mysqli_num_rows($query);
         
+        while($g = mysqli_fetch_object($query)){
+            $u_follow = $g->u_follow;
+        }
+
         if($match > 0 && $anonymous == 1){
             echo json_encode("Cannot follow user!");
             die();
-        }else if($match > 0){
-            echo json_encode("You have already followed this user!");
+
+        }else if($match > 0 && $u_follow == 0){
+            mysqli_query($con, "UPDATE follow_user SET u_follow='1' WHERE user_ID1='$uID' AND user_ID2='$uID2'");
+            echo json_encode("Followed User!");
             die();
-        }else{
-            mysqli_query($con,"INSERT INTO follow_user (`user_ID1`,`user_ID2`) VALUES ('$uID','$uID2')");
+
+        }else if($match > 0){
+            mysqli_query($con, "UPDATE follow_user SET u_follow='0' WHERE user_ID1='$uID' AND user_ID2='$uID2'");
+            echo json_encode("Unfollowed User!");
+            die();
+
+        }
+        else{
+            mysqli_query($con,"INSERT INTO follow_user (`user_ID1`,`user_ID2`,`u_follow`) VALUES ('$uID','$uID2','1')");
         
             $data=mysqli_query($con, "SELECT * FROM follow_user WHERE user_ID1='$uID' AND user_ID2='$uID2'");
             
@@ -34,7 +47,7 @@ while($f = mysqli_fetch_object($a_data)){
                 $follow_ID = $r->follow_id;
                 $userID = $r->user_id2;
         
-                $data3 = mysqli_query($con, "SELECT * FROM users WHERE user_id=$uID");
+                $data3 = mysqli_query($con, "SELECT * FROM users WHERE user_id='$uID'");
                 while($c = mysqli_fetch_object($data3)){
                     $fname = $c->f_name;
                     $lname = $c->l_name;
@@ -44,14 +57,15 @@ while($f = mysqli_fetch_object($a_data)){
             }
         
             if($uID != $userID){
-                mysqli_query($con,"INSERT INTO `notification` (`follow_id`, `user_id`, `user_id2`, `name`) VALUES ('$follow_ID', '$uID2', '$uID', '$Name')");
+                $q=mysqli_query($con,"INSERT INTO `notification` (`follow_id`, `user_id`, `user_id2`, `name`) VALUES ('$follow_ID', '$uID2', '$uID', '$Name')");
+                echo json_encode("Followed User!");
+                die();
             }
-            
-            echo json_encode("Followed User!");
-            die();
+               
         }
 
     }
+
 }
 
 ?>

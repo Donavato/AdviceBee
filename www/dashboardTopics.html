@@ -49,6 +49,7 @@
 
     function displayQuestions(obj, tID) {
         var topic_name = obj;
+        sessionStorage.setItem('topic_obj', obj);
         var topic_ID = tID;
 
         //call ajax
@@ -93,7 +94,7 @@
                                         <i class="far fa-user" onclick="followButton(${value.Question_ID} , ${value.user_ID2})"></i>
                                         
                                         <div id="u_Heart">
-                                        <i class="far fa-heart" onclick="likeButton(${value.Question_ID})"></i>${value.likes}<!-- unfilled -->
+                                        <i class="far fa-heart" onclick="likeButtonTopics(${value.Question_ID})"></i>${value.likes}<!-- unfilled -->
                                         </div>
 
                                         <!--<i class="far fa-heart" onclick="reportButton(${value.Question_ID})"></i> filled -->
@@ -114,4 +115,30 @@
 
         });
     }
+
+
+    function likeButtonTopics(questionID) {
+
+    var Question_ID = questionID;
+    var dataString = "Question_ID=" + Question_ID;
+
+        $.ajax({
+            url: "http://10.0.2.2/api/Question/likequestion.php",
+            type: "POST",
+            dataType: "json",
+            data: dataString,
+            //on success it will call this function
+            success: function (data) {
+                var topic_obj = sessionStorage.getItem("topic_obj");
+                var tID = sessionStorage.getItem("topic_id");
+                popup(data);
+                displayQuestions(topic_obj, tID);
+                
+            }
+
+        });
+    }
+
+
 </script>
+

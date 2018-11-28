@@ -4,6 +4,8 @@
     <head>
         <title>Profile</title>
         <link rel="stylesheet" href="style.css"/>
+        <!--notification stylesheet-->
+        <link rel="stylesheet" type="text/css" href="css/notification.css"/>
         <link rel="stylesheet" type="text/css" href="css/profile.css"/>
         <!--Popup style sheet-->
     <link rel="stylesheet" type="text/css" href="css/popup.css"/>
@@ -74,7 +76,7 @@
             <div class="icon-bar">
                 <a href="index.html"><img src="images/NavBar/list.png" onclick="clearStorageUser()"></a>
                 <a href="groups.html"><img src="images/NavBar/groups.png" onclick="clearStorageUser()"></a>
-                <a href="notification.html"><img src="images/NavBar/notification.png" onclick="clearStorageUser()"></a>
+                <a href="notification.html" class="badge1" data-badge=""><img src="images/NavBar/notification.png" onclick="clearStorageUser()"></a>
                 <a href="search.html"><img src="images/NavBar/search.png" onclick="clearStorageUser()"></a>
                 <a href="listfolloweduser.html"><img src="images/NavBar/users.png" onclick="clearStorageUser()"></a>
                 <a href="listlikequestion.html"><img src="images/NavBar/favorite.png" onclick="clearStorageUser()"></a>
@@ -371,3 +373,4 @@
         sessionStorage.removeItem("user_ID");
     }
 </script>
+<script src="js/notification.js"></script>

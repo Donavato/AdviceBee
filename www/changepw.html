@@ -59,6 +59,9 @@
         $("#change").validate({
             //SPECIFY RULES
             rules: {
+                old_password:{
+                    required:true
+                },
                 new_password: {
                     required: true,
                     minlength: 5
@@ -69,6 +72,9 @@
             },
             // Specify validation error messages
             messages: {
+                old_password:{
+                    required: "*Please provide a password"
+                },
                 new_password: {
                     required: "*Please provide a password",
                     minlength: "*Your password must be at least 5 characters long"
@@ -88,11 +94,21 @@
                 $.ajax({
                     type: "POST",
                     url: "http://10.0.2.2/api/Account/changepw.php",
+                    dataType: "json",
                     data: dataString,
                     success: function (data) {
-                        popup("Password has been changed.");
-                        //TEMPORARY DIRECT LOCATION
-                        window.location.href = "login.html";
+                        
+                        if(data == "not valid"){
+                            popup("Current password does not match. Password entered not valid.");
+                        }else{
+                            popup("Password has been changed.");
+                            
+                            setTimeout(function() {
+                            window.location.replace("profile.html");
+                            }, 2000);
+                            
+                        }
+
                     }, error: function(){
                     //popup(JSON.stringify(data));
                 }

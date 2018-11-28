@@ -14,13 +14,13 @@
 </head>
 
 <body>
-    <h1 class="h1">Just enter the email address for your account and
-        we will send you a password reset verification code. </h1><hr><br>
+    <h1 class="h1">Please enter the email address for your account and
+        we will send you a new password. </h1><hr><br>
     <form action="" id="pwreset" method="POST">
         <label for="Email"></label>
         <input type="text" class="input" name="email" id="email" placeholder="E-mail"><br>
         <br>
-        <button type="submit" name="submit" id="submit" class="submit">Send Code</button>
+        <button type="submit" name="submit" id="submit" class="submit">Send</button>
     </form>
      <div class="hover-bkgr-fricc">      <!--Add this div to page for pop up-->
         <span class="helper"></span>
@@ -48,18 +48,30 @@
             submitHandler: function(form) {
             
             var email = $("#email").val();
-
             var dataString = "&email=" + email + "&pwreset=";
 
                 $.ajax({
                     type: "POST",
                     url: "http://10.0.2.2/api/Account/pwreset.php",
+                    dataType: "json",
                     data: dataString,
                     success: function(data) {
-                        popup("Password has been reset and sent");
-                        window.location.href = "login.html";
+
+                        if(data == "not valid"){
+                            popup("Email does not exist!");
+                        }else if (data == "valid"){
+                            popup("Password has been reset and sent!");
+                            
+                            setTimeout(function() {
+                            window.location.replace("login.html");
+                            }, 2000);
+                            
+                        } 
+
                 }
+
             });
+
         }
     });
 });

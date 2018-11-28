@@ -7,6 +7,8 @@
 
     <!--reference style sheet-->
     <link rel="stylesheet" href="style.css">
+    <!--notification stylesheet-->
+    <link rel="stylesheet" type="text/css" href="css/notification.css"/>
     <!--Popup style sheet-->
     <link rel="stylesheet" type="text/css" href="css/popup.css"/>
 </head>
@@ -21,21 +23,11 @@
         
     </div><br>
 
-    <nav class="nav">
-        <a href="insert.html" class="link">Insert</a> |
-        <a href="delete.html" class="link">Delete</a> |
-        <a href="index.html" class="link">Show Data</a> |
-        <a href="login.html" class="link">Login</a> |
-        <a href="register.html" class="link">Register</a> |
-        <a href="changepw.html" class="link">Change PW</a> |
-        <a href="pwreset.html" class="link">Password Reset</a>
-    </nav>
-
     <div class="icon-location">
         <div class="icon-bar">
             <a href="index.html"><img src="images/NavBar/list.png"></a>
             <a href="groups.html"><img src="images/NavBar/groups.png"></a>
-            <a href="notification.html"><img src="images/NavBar/notification.png"></a>
+            <a href="notification.html" class="badge1" data-badge=""><img src="images/NavBar/notification.png"></a>
             <a href="search.html"><img src="images/NavBar/search.png"></a>
             <a href="listfolloweduser.html"><img src="images/NavBar/users.png"></a>
             <a href="listlikequestion.html"><img src="images/NavBar/favorite.png"></a>
@@ -97,7 +89,7 @@
                 data: dataString,
                 //on success it will call this function
                 success: function (data) {
-                    //popup(data);
+                    popup(data);
                     updatelist();
                 }
             });
@@ -135,6 +127,6 @@
         }
     </script>
 <script src="js/popup.js"></script>
-
+<script src="js/notification.js"></script>
 </body>
 </html>

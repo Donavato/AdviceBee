@@ -31,7 +31,6 @@ $match = mysqli_num_rows($m_query);
         while($r = mysqli_fetch_object($query)){
             $like_aID = $r->likeadv_ID;
             $adviceID = $r->advice_ID;
-            $a_like = $r->advice_like;
 
             $data2 = mysqli_query($con, "SELECT * FROM advice WHERE advice_id=$adviceID");
             while($b = mysqli_fetch_object($data2)){
