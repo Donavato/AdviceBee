@@ -28,7 +28,7 @@
     <!-- TABS WITH ONCLICK EVENTS TO CALL FUNCTIONS FOR DATA DISPLAY -->
     <div class="tab">
         <button class="tablinks" id="Q1" onclick="openCity(event, 'Questions')">Questions</button>
-        <button class="tablinks" id="A1" onclick="openCity(event, 'Advices')">Advices</button>
+        <!-- <button class="tablinks" id="A1" onclick="openCity(event, 'Advices')">Advices</button> -->
         <button class="tablinks" id="U1" onclick="openCity(event, 'Users')">Users</button>
     </div>
     <hr>
@@ -41,12 +41,12 @@
             <h4>None</h4>
         </div>
     </div>
-    <div id="Advices" class="tabcontent" style="display:block;">
+    <!-- <div id="Advices" class="tabcontent" style="display:block;">
         <h3>Advices</h3>
         <div id="A">
             <h4>None</h4>
         </div>
-    </div>
+    </div> -->
     <div id="Users" class="tabcontent" style="display:block;">
         <h3>Users</h3>
         <div id="U">
@@ -114,11 +114,11 @@
                     success: function (data) {
                         showTabs();
                         document.getElementById("Q").innerHTML = "";
-                        document.getElementById("A").innerHTML = "";
+                        // document.getElementById("A").innerHTML = "";
                         document.getElementById("U").innerHTML = "";
 
                         var QUE = $('#Q');
-                        var ADV = $('#A');
+                        // var ADV = $('#A');
                         var USE = $('#U');
 
                         //APPEND DATA INTO DIV ID'S OF THE TABS
@@ -130,20 +130,20 @@
                             var item = data[0].Questions[x];
                             QUE.append("<div id='searchElement' onclick='sendQuestion(" + item.Question_ID + ")'>" + "<div id='searchSubject'>" + item.Subject + "</div>" + "<br> " + "<p>" + item.Description + "</p>" + "</div>" + "<br>");
                         }
-                        for (var x = 0, leng = data[0].Advice.length; x < leng; x++) {
-                            var item = data[0].Advice[x];
-                            ADV.append("<div id='searchElement' onclick='sendQuestion(" + item.Question_ID + ")'>" + "<div id='searchSubject'>" + item.Subject + "</div>" + "<br> " +
-                                "<p>" + item.Description + "</p>" + "<p>" + item.advice + " " + "</p>" + "<div>" + "<br>");
-                        }
+                        // for (var x = 0, leng = data[0].Advice.length; x < leng; x++) {
+                        //     var item = data[0].Advice[x];
+                        //     ADV.append("<div id='searchElement' onclick='sendQuestion(" + item.Question_ID + ")'>" + "<div id='searchSubject'>" + item.Subject + "</div>" + "<br> " +
+                        //         "<p>" + item.Description + "</p>" + "<p>" + item.advice + " " + "</p>" + "<div>" + "<br>");
+                        // }
                         //LOCK TABS IF THEY ARE EMPTY
                         if ($(QUE).text().length == 0) {
                             $('#Q1').hide();
                             QUE.append("<h4>" + "None" + "<h4>");
                         }
-                        if ($(ADV).text().length == 0) {
-                            $('#A1').hide();
-                            ADV.append("<h4>" + "None" + "<h4>");
-                        }
+                        // if ($(ADV).text().length == 0) {
+                        //     $('#A1').hide();
+                        //     ADV.append("<h4>" + "None" + "<h4>");
+                        // }
                         if ($(USE).text().length == 0) {
                             $('#U1').hide();
                             USE.append("<h4>" + "None" + "<h4>");
@@ -155,7 +155,7 @@
 
         function showTabs() {
             $('#Q1').show();
-            $('#A1').show();
+            // $('#A1').show();
             $('#U1').show();
         }
         function sendQuestion(questionID) {
