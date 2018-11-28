@@ -20,6 +20,18 @@
             padding: 1rem;
             margin: 1rem;
         }
+        #MultipleParent{
+            display: flex;
+            justify-content: center;
+            padding-top: 10px;
+        }
+        #mcInputs{
+            padding-bottom: 5px;
+        }
+        #centerparent{
+            display: flex;
+            justify-content: center;
+        }
     </style>
 </head>
 
@@ -51,14 +63,20 @@
                     Hide responses<input type="checkbox" id="hide_responses" value="1"><br>
                 </div>
             </div>
-
             <div class="imageupload">
                 <img id="photo" />
                 <input type="button" id="btn" value="Take" class="uploadbutton" />
                 <input type="button" id="btn2" value="Upload" class="uploadbutton" />
             </div>
+            
         </div> 
-    
+        <div id="centerparent">
+            <div id="MultipleParent">
+                <div id="multipleChoice">
+
+                </div>
+            </div>
+        </div>
         <br>
         <div class="item">
             <input type="button" id="cancel" value="Cancel" class="cancel" />
@@ -67,16 +85,7 @@
         
     </div>
     <br>
-    <nav>
-        <a href="insert.html" class="link">Insert</a> 
-        <a href="delete.html" class="link">Delete</a> 
-        <a href="index.html" class="link">Show Data</a> 
-        <a href="login.html" class="link">Login</a> 
-        <a href="register.html" class="link">Register</a> 
-        <a href="changepw.html" class="link">Change PW</a> 
-        <a href="pwreset.html" class="link">Password Reset</a> 
-        <a href="logout.html" class="link">Logout</a>
-    </nav>
+
 
     <!--Need to update page links. Ran into issues with img src links when in folders-->
     <div class="icon-location">
@@ -98,11 +107,11 @@
             <p id="popuptext" class="popupText"></p>          <!--Append popup here-->
         </div>
     </div>
-    
-
-    <script type="text/javascript" src="cordova.js"></script>
+    <!-- <script type="text/javascript" src="cordova.js"></script> -->
     <script>
         var image_Content;
+        var token =false;
+
         let app = {
             //wait for button to be clicked
             init: function () {
@@ -156,11 +165,46 @@
 
     </script>
     <script type="text/javascript">
+    // <div id="MultipleParent">
+    //     <div id="multipleChoice">
+    //          //inputs
+    //     </div>
+    // </div>
+    $("#question_type").change(function() {
+        var conceptName = $('#question_type').find(":selected").text();
+        var multipleInputs = $('#multipleChoice');
+        var i;
+        if(token != true){
+            var x = $('#MultipleParent')[0];
+            for (i = 1; i <= 4; i++)  
+            { 
+                multipleInputs.append(`
+                    <div id='mcInputs'>
+                        <input type="text" class='myinputs' id="${i}" maxlength="10" placeholder="Choice ${i}"/>
+                    </div>
+                `)   
+            }
+            token = true;
+            x.style.display = "none";
+        }
+        else{
+            var x = $('#MultipleParent')[0];
+            if (conceptName == "Multiple"){
+                x.style.display = "block";    
+            }
+            else{
+                $('#multipleChoice').find('input:text').val('');
+                x.style.display = "none";
+
+            }
+        }  
+    });
+    
         $(document).ready(function () {
             //PULL ALL TOPICS AND STORE THEM INTO A DROP DOWN FOR topics_list
             $.ajax({
                 type: "POST",
-                url: "http://10.0.2.2/api/topics.php",
+                url: "http://localhost/api/topics.php",
                 success: function (response) {
                     var data = JSON.parse(JSON.stringify(response));
                     var text = "";
@@ -171,7 +215,7 @@
             //PULL ALL QUESTION TYPES AND PUT THEM INTO A DROPDOWN question_type
             $.ajax({
                 type: "POST",
-                url: "http://10.0.2.2/api/Question/questionType.php",
+                url: "http://localhost/api/Question/questionType.php",
                 success: function (response) {
                     var data = JSON.parse(response);
                     var text = "";
@@ -181,24 +225,35 @@
             })
             //WHEN INSERT BUTTON IS CLICKED, TAKE ALL FIELDS, STORE THEM INTO DATASTRING
             //AND SEND THEM IN JSON FORM
-            
+            var conceptName = $('#aioConceptName').find(":selected").text()
             $("#insert").click(function () {
                 if(!image_Content){
                     image_Content = null;
                 }
+                var multipleChoice = $('#question_type').find(":selected").text();
                 var Description = $("#Description").val();
                 var Subject = $("#Subject").val();
                 var topic = $('#topics_list').val();
                 var type = $("#question_type").val();
                 var anonymous;
                 var hide;
+                if(multipleChoice == "Multiple"){
+                    var inputs = document.getElementsByClassName("myinputs");
+                    var inputArr = new Array();
+                    for (i = 0; i < inputs.length; i++) {
+                        inputArr.push(inputs[i].value);
+                    }
+                }
+                else{
+                    inputArr = "Empty array";
+                }
                 if($('#anonymous').is(":checked")){anonymous = 1;}
                 else{anonymous = 0;}
                 if($('#hide_responses').is(":checked")){hide = 1;}
                 else{hide = 0;}
                 if ($.trim(Description).length > 0 & $.trim(Subject).length > 0) {
                     $.ajax({
-                    url: "http://10.0.2.2/api/Question/insert.php",
+                    url: "http://localhost/api/Question/insert.php",
                     type: "POST",
                     data: {
                         base64: image_Content,
@@ -209,9 +264,11 @@
                         anonymous: anonymous,
                         image: image_Content,
                         hide: hide,
+                        inputArray: inputArr,
                         insert: true
                     },
                     success: function (data) {
+                        console.log(JSON.parse(JSON.stringify(data)));
                         if (data == "success") {
                                 popup("inserted");
                                 $("#insert").val('submit');
@@ -226,8 +283,10 @@
                             else if (data == "Not active") {
                                 popup("account not verified");
                             }
+
                             }, error: function (e) {
-                        popup("ERROR");
+                                
+                                popup("ERROR");
                     }
                 });
                 }

@@ -9,7 +9,7 @@
 
     //call to get userID of the person logged in
     $.ajax({
-        url: "http://10.0.2.2/api/Profile/getuserID.php",
+        url: "http://localhost/api/Profile/getuserID.php",
         type: "POST",
         data: "param=no",
         //on success it will call this function
@@ -32,7 +32,7 @@
         {
             $.ajax({
                 method: "POST",
-                url: "http://10.0.2.2/api/Profile/getinfo.php",
+                url: "http://localhost/api/Profile/getinfo.php",
                 data: {profileID: uID},
                 success: function (data) {
 
@@ -65,7 +65,7 @@
         /*//call ajax
         var ajax = new XMLHttpRequest();
         var method = "GET";
-        var url = "http://10.0.2.2/api/Profile/getinfo.php";
+        var url = "http://localhost/api/Profile/getinfo.php";
         var asynchronous = true;
         
         ajax.open(method, url, asynchronous);

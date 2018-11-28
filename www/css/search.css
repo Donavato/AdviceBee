@@ -1,0 +1,109 @@
+.input,
+ .btn {
+    width: 285px;
+    border: none;
+    font-size: 17px;
+    line-height: 20px;
+    text-decoration: none;
+    display: block;
+    margin: 0 auto;
+}
+        h4 {
+            text-align: center;
+            color: rgb(121, 121, 121);
+            font-family: "Segoe UI";
+       }
+        #searchSubject{
+            text-align: center;
+            font-family: "Segoe UI";
+            font-size: 20px;
+            font-weight: bold;
+            display: flex;
+            justify-content: center;
+        }
+        #searchElement{
+            background-color: white;
+            border: 2px solid #707070;
+            width: 300px;
+            color: rgb(121, 121, 121);
+            margin-bottom: 20px;
+        }
+        #searchElement:hover {
+            color: rgb(0, 102, 255);
+        }
+        
+        #Q{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        #A{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        #U{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .btn.search {
+            height: 40px;
+            width: 200px;
+        }
+        /* Style the tab */
+        .tab {
+            display: flex;
+            justify-content: space-evenly;
+            overflow: hidden;
+            border: 1px solid #ccc;
+            background-color: #f1f1f1;
+        }
+
+        /* Style the buttons inside the tab */
+        .tab button {
+            background-color: inherit;
+            float: left;
+            border: none;
+            outline: none;
+            cursor: pointer;
+            padding: 14px 16px;
+            transition: 0.3s;
+            font-size: 17px;
+        }
+
+        /* Change background color of buttons on hover */
+        .tab button:hover {
+            background-color: #ddd;
+        }
+
+        /* Create an active/current tablink class */
+        .tab button.active {
+            background-color: #ccc;
+        }
+
+        /* Style the tab content */
+        .tabcontent {
+            display: none;
+            padding: 6px 12px;
+            border: 1px solid #ccc;
+            border-top: none;
+        }
+        .input {
+            width: 285px;
+            height: 41px;
+            padding: 15px 10px;
+            margin: 0 auto;
+            display: block;
+            border-style: solid;
+            border-color: #707070;
+            border-width: 1px;
+            font-size: 15px;
+            font-family: "Segoe UI";
+        }
+        h3 {
+            text-align: center;
+    color: rgb(121, 121, 121);
+    font-family: "Segoe UI";
+        }
+    

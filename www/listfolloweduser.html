@@ -1,18 +1,22 @@
 <html>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="https://fonts.googleapis.com/css?family=Roboto:400,500,900" rel="stylesheet">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
 
 <head>
     <!--initialize jquery from js folder-->
     <script src="js/jquery-3.3.1.min.js"></script>
 
     <!--reference style sheet-->
-    <link rel="stylesheet" href="style.css">
-    <!--Popup style sheet-->
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" type="text/css" href="css/navigation.css"/>
+    <link rel="stylesheet" type="text/css" href="css/popup.css"/>
+    <link rel="stylesheet" type="text/css" href="css/listfolloweduser.css"/>
     <link rel="stylesheet" type="text/css" href="css/popup.css"/>
 </head>
 
 <body>
-    <h1 class="h1">Followed Users</h1><hr>
+    <h1 class="generalTitle">Followed Users</h1>
     <!--output of the json-->
     <div>
         <!--set the id to DOM to show output-->
@@ -20,17 +24,6 @@
         </div>
 
     </div><br>
-
-    <nav class="nav">
-        <a href="insert.html" class="link">Insert</a> |
-        <a href="delete.html" class="link">Delete</a> |
-        <a href="index.html" class="link">Show Data</a> |
-        <a href="login.html" class="link">Login</a> |
-        <a href="register.html" class="link">Register</a> |
-        <a href="changepw.html" class="link">Change PW</a> |
-        <a href="pwreset.html" class="link">Password Reset</a>
-    </nav>
-
     <div class="icon-location">
         <div class="icon-bar">
             <a href="index.html"><img src="images/NavBar/list.png"></a>
@@ -55,7 +48,7 @@
     <script type="text/javascript">
         $(document).ready(function () {
             $.ajax({
-                url: "http://10.0.2.2/api/Question/listfolloweduser.php",
+                url: "http://localhost/api/Question/listfolloweduser.php",
                 type: "POST",
                 dataType: "json",
                 data: "param=no",
@@ -66,10 +59,18 @@
                     //GET DATA AND PARSE IT
                     $.each(data, function (key, value) {
                         //APPEND DATA AND DISPLAY IT
-                        DOM.append("<a href=javascript:sendtoFollow(" + value.user_ID2 + "); class=listnotif>" +
-                                "<div class='usercontainer'><div class='profileimage'>" + value.pImage + "</div><div class='username'><strong>" + value.name + 
-                                "</strong></div></div>" + "</a><div class='likebox'>" + "<img onclick='unfollowButton(" + value.follow_id + ")' src='images/advice/followuser.png'></img>" + "</div><hr>");
-
+                            
+                    DOM.append(`
+                        <div class="post">
+                            <div class="profileimage">
+                            ${value.pImage}
+                            </div>
+                            <span>${value.name}</span>
+                            <i class="far fa-user" onclick="unfollowButton(${value.follow_id})"></i>
+                        </div>
+                        <hr>
+                    `)
+                    
                     });
 
                     //if fail it will give this error
@@ -80,23 +81,18 @@
             });
         });
 
-        function sendtoFollow(user_ID2){
-            sessionStorage.user_ID = user_ID2;
-            window.location.replace("profile.html");
-        }
-
         function unfollowButton(follow_id) {
             var follow_ID = follow_id;
 
             var dataString = "follow_ID=" + follow_ID;
             $.ajax({
-                url: "http://10.0.2.2/api/Question/unfollowuser.php",
+                url: "http://localhost/api/Question/unfollowuser.php",
                 type: "POST",
                 dataType: "json",
                 data: dataString,
                 //on success it will call this function
                 success: function (data) {
-                    popup(data);
+                    //popup(data);
                     updatelist();
                 }
             });
@@ -105,7 +101,7 @@
         //UPDATES THE LIST OF FOLLOWED USERS IF A USER IS UNFOLLOWED
         function updatelist() {
             $.ajax({
-                url: "http://10.0.2.2/api/Question/listfolloweduser.php",
+                url: "http://localhost/api/Question/listfolloweduser.php",
                 type: "POST",
                 dataType: "json",
                 data: "param=no",
@@ -116,9 +112,17 @@
                     //GET DATA AND PARSE IT
                     $.each(data, function (key, value) {
                         //APPEND DATA AND DISPLAY IT
-                        DOM.append("<a href=javascript:sendtoFollow(" + value.user_ID2 + "); class=listnotif>" +
-                                "<div class='usercontainer'><div class='profileimage'>" + value.pImage + "</div><div class='username'><strong>" + value.name + 
-                                "</strong></div></div>" + "</a><div class='likebox'>" + "<img onclick='unfollowButton(" + value.follow_id + ")' src='images/advice/followuser.png'></img>" + "</div><hr>");
+                        DOM.append(`
+                        <div class="post">
+                            <div class="profileimage">
+                            ${value.pImage}
+                            </div>
+                            <span>${value.name}</span>
+                            <i class="far fa-user" onclick="unfollowButton(${value.follow_id})"></i>
+                        </div>
+                        <hr>
+                    `)
+                    
 
                     });
 

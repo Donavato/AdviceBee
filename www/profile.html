@@ -53,7 +53,7 @@
         <ul id="nav">
             <li class="tablinks"><a href="info">Info</a></li>
             <li class="tablinks"><a href="topicinfo">Topics</a></li>
-            <li class="tablinks"><a href="delete">Posts</a></li>
+            <li class="tablinks"><a href="changepw">Account</a></li>
         </ul>
         <div id="content">
             
@@ -95,7 +95,7 @@
     if(sessionStorage.getItem("user_ID") === null)
     {
         $.ajax({
-            url: "http://10.0.2.2/api/Profile/getuserID.php",
+            url: "http://localhost/api/Profile/getuserID.php",
             type: "POST",
             data: "param=no",
             //on success it will call this function
@@ -115,7 +115,7 @@
         var uID = sessionStorage.getItem("user_ID");
         $.ajax({
             method: "POST",
-            url: "http://10.0.2.2/api/Profile/getinfo.php",
+            url: "http://localhost/api/Profile/getinfo.php",
             data: {profileID: uID},
             success: function (data) {
 
@@ -177,7 +177,7 @@
     else
     {
         $.ajax({
-            url: "http://10.0.2.2/api/Profile/getuserID.php",
+            url: "http://localhost/api/Profile/getuserID.php",
             type: "POST",
             data: "param=no",
             //on success it will call this function
@@ -187,7 +187,7 @@
 
                 $.ajax({
                     method: "POST",
-                    url: "http://10.0.2.2/api/Profile/getinfo.php",
+                    url: "http://localhost/api/Profile/getinfo.php",
                     data: {profileID: uID},
                     success: function (data) {
 
@@ -261,7 +261,7 @@
        
        //call to get userID of the person logged in
         $.ajax({
-            url: "http://10.0.2.2/api/Profile/getuserID.php",
+            url: "http://localhost/api/Profile/getuserID.php",
             type: "POST",
             data: "param=no",
             //on success it will call this function
@@ -274,7 +274,7 @@
                 {
                     $.ajax({
                         method: "POST",
-                        url: "http://10.0.2.2/api/Profile/updatename.php",
+                        url: "http://localhost/api/Profile/updatename.php",
                         data: {userfirstName: firstName, userlastName: lastName},
                         success: function (data) {
                             //popup(JSON.parse(data));
@@ -298,7 +298,7 @@
 
         //call to get userID of the person logged in
         $.ajax({
-            url: "http://10.0.2.2/api/Profile/getuserID.php",
+            url: "http://localhost/api/Profile/getuserID.php",
             type: "POST",
             data: "param=no",
             //on success it will call this function
@@ -311,7 +311,7 @@
                 {
                     $.ajax({
                         method: "POST",
-                        url: "http://10.0.2.2/api/Profile/updatetitle.php",
+                        url: "http://localhost/api/Profile/updatetitle.php",
                         data: {userTitle: storeTitle},
                         success: function (data) {
                             popup(JSON.parse(data));
@@ -334,7 +334,7 @@
 
         //call to get userID of the person logged in
         $.ajax({
-            url: "http://10.0.2.2/api/Profile/getuserID.php",
+            url: "http://localhost/api/Profile/getuserID.php",
             type: "POST",
             data: "param=no",
             //on success it will call this function
@@ -347,7 +347,7 @@
                 {
                     $.ajax({
                         method: "POST",
-                        url: "http://10.0.2.2/api/Profile/updatelocation.php",
+                        url: "http://localhost/api/Profile/updatelocation.php",
                         data: {userLocation: storeLocation},
                         success: function (data) {
                             popup(JSON.parse(data));
