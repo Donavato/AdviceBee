@@ -112,7 +112,7 @@
     <!-- <script type="text/javascript" src="cordova.js"></script> -->
     <script>
         var image_Content;
-        var token =false;
+        var token = false;
 
         let app = {
             //wait for button to be clicked
@@ -167,11 +167,7 @@
 
     </script>
     <script type="text/javascript">
-    // <div id="MultipleParent">
-    //     <div id="multipleChoice">
-    //          //inputs
-    //     </div>
-    // </div>
+    
     $("#question_type").change(function() {
         var conceptName = $('#question_type').find(":selected").text();
         var multipleInputs = $('#multipleChoice');
@@ -186,8 +182,9 @@
                     </div>
                 `)   
             }
+            
             token = true;
-            x.style.display = "none";
+            //x.style.display = "none";
         }
         else{
             var x = $('#MultipleParent')[0];
