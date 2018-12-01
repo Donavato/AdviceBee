@@ -1,1 +1,123 @@
-AdviceBee
+# File Descriptions
+## API
+ - **Account**
+   - changepw.php
+   - db.php
+   - emailsverify.php
+   - fts.php
+   - login.php
+   - logout.php
+   - pwreset.php
+   - register.php
+   - updatefts.php
+ - **Advice**
+   - Advice.php
+   - giveAdvice.php
+   - likeadvice.php
+   - listadvices.php
+   - multipleChoices.php
+ - **Profile**
+   - addusergroup.php
+   - addusertopic.php
+   - dashboardTopics.php
+   - deletefromusergroup.php
+   - deletefromusergroup.php~HEAD
+   - deletefromusergroup.php~master
+   - deletefromusertopic.php
+   - displaytopicquestions.php
+   - getgroupinfo.php
+   - getgroupinfo.php~HEAD
+   - getgroupinfo.php~master
+   - getinfo.php
+   - getinfo.php~HEAD
+   - getinfo.php~master
+   - gettopicinfo.php'	19 days ago
+   - gettopicinfo.php~master
+   - getuserID.php
+   - getusergroupinfo.php
+   - getusergroupinfo.php~HEAD
+   - getusergroupinfo.php~master
+   - getusertopicinfo.php
+   - getusertopicinfo.php~HEAD
+   - getusertopicinfo.php~master
+   - insertintousergroup.php
+   - insertintousergroup.php~HEAD
+   - insertintousergroup.php~master
+   - updatelocation.php
+   - updatename.php
+   - updatetitle.php
+ - **Question**
+   - delete.php
+   - fetchdata.php
+   - filterfollowusersposts.php
+   - filtermostlikes.php
+   - filtermostrecent.php
+   - filtermostview.php
+   - followuser.php
+   - insert.php
+   - likequestion.php
+   - listfolloweduser.php
+   - listlikequestion.php
+   - myQuestions.php
+   - questionType.php
+   - reportquestion.php
+   - unfollowuser.php
+   - unlikequestion.php
+   - views.php
+ - **notification**
+   - insertnotifkeys.php
+   - listnotifcontent.php
+   - loadnotifications.php
+ - **profile_image**
+   - avatar.php
+   - profile.php
+   - wallpaper.php
+   - wallpaperimage.php
+ - **profile_pic**
+   - Hacktivism example.webp
+   - default.png
+ - ft_signin.php
+ - search.php
+ - topics.php
+
+## WWW
+ - **CSS**
+ - **images**
+ - **JS**
+   - advice.js
+   - dashboard.js
+   - jquery-3.3.1.min.js
+   - jquery.validagte.js
+   - logout.js
+   - notification.js
+   - popup.js
+ - advice.html - Page to allow a user to reply to another users post/question
+ - avatar.html
+ - changepw.html - Page that allows the user to change their password
+ - dashboardTopics.html -
+ - delete.html
+ - ft_signin.html
+ - groupinfo.html
+ - groups.html - page to display groups onfirst time sign in
+ - imageOption.html
+ - index.html - main dashboard for the application. Lists all of the questions.
+ - info.html - user info/bio on the user profile page
+ - insert.html - create a question page
+ - listfolloweduser.html - lists the users which ahve been followed
+ - listlikepost.html - lists posts liked by the user
+ - listlikequestion.html - lists questions liked by the user
+ - login.html - login page
+ - logout.html - notifies the user they are being logged out. Also has query to initiate logout
+ - notification.html - displays any notifications the user may have
+ - popup.html
+ - profile.html - user profile
+ - profileImage.html
+ - profileImages.html
+ - pwreset.html - page for user to reset their password
+ - register.html - page for user to register for a new account
+ - search.html - search page. allows user to search for questions or users
+ - style.css - main style sheet for original styling. Pages with new styling no longer use this style sheet
+ - topicinfo.html
+ - topics.html - page to display topic from which the user can choose upon first time sign in
+ - wallpaper.html
+ - wallpaperImage.html
