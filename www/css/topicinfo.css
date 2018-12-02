@@ -47,3 +47,9 @@
     width: 155px;
     height: 57px;
   }
+
+  .scroll{
+    display: block;
+    height: 220px;
+    overflow-y: scroll;
+  }

@@ -5,6 +5,8 @@
     <script src="js/jquery-3.3.1.min.js"></script>
     <!--reference style sheet-->
     <link rel="stylesheet" href="style.css">
+    <!--notification stylesheet-->
+    <link rel="stylesheet" type="text/css" href="css/notification.css"/>    
     <!--Popup style sheet-->
     <link rel="stylesheet" type="text/css" href="css/popup.css"/>
     <meta http-equiv="Content-Security-Policy" content=" style-src 'self' 'unsafe-inline'; 
@@ -90,13 +92,13 @@
     <!--Need to update page links. Ran into issues with img src links when in folders-->
     <div class="icon-location">
         <div class="icon-bar">
-            <a href="index.html"><img src="list.png"></a>
-            <a href="groups.html"><img src="groups.png"></a>
-            <a href="notification.html"><img src="notification.png"></a>
-            <a href="search.html"><img src="search.png"></a>
-            <a href="listfolloweduser.html"><img src="users.png"></a>
-            <a href="favorite.html"><img src="favorite.png"></a>
-            <a href="profile.html"><img src="profile.png"></a>
+            <a href="index.html"><img src="images/NavBar/list.png"></a>
+            <a href="groups.html"><img src="images/NavBar/groups.png"></a>
+            <a href="notification.html" class="badge1" data-badge=""><img src="images/NavBar/notification.png"></a>
+            <a href="search.html"><img src="images/NavBar/search.png"></a>
+            <a href="listfolloweduser.html"><img src="images/NavBar/users.png"></a>
+            <a href="listlikequestion.html"><img src="images/NavBar/favorite.png"></a>
+            <a href="profile.html"><img src="images/NavBar/profile.png"></a>
         </div>
     </div>
 
@@ -110,7 +112,7 @@
     <!-- <script type="text/javascript" src="cordova.js"></script> -->
     <script>
         var image_Content;
-        var token =false;
+        var token = false;
 
         let app = {
             //wait for button to be clicked
@@ -165,11 +167,7 @@
 
     </script>
     <script type="text/javascript">
-    // <div id="MultipleParent">
-    //     <div id="multipleChoice">
-    //          //inputs
-    //     </div>
-    // </div>
+    
     $("#question_type").change(function() {
         var conceptName = $('#question_type').find(":selected").text();
         var multipleInputs = $('#multipleChoice');
@@ -184,8 +182,9 @@
                     </div>
                 `)   
             }
+            
             token = true;
-            x.style.display = "none";
+            //x.style.display = "none";
         }
         else{
             var x = $('#MultipleParent')[0];
@@ -283,7 +282,9 @@
                             else if (data == "Not active") {
                                 popup("account not verified");
                             }
-
+                            else if(data == "Insufficient points"){
+                                popup(data);
+                            }
                             }, error: function (e) {
                                 
                                 popup("ERROR");
@@ -307,6 +308,7 @@
         });
     </script>
 <script src="js/popup.js"></script>
+<script src="js/notification.js"></script>
 </body>
 
 </html>

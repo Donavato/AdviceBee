@@ -282,7 +282,9 @@
                             else if (data == "Not active") {
                                 popup("account not verified");
                             }
-
+                            else if(data == "Insufficient points"){
+                                popup(data);
+                            }
                             }, error: function (e) {
                                 
                                 popup("ERROR");

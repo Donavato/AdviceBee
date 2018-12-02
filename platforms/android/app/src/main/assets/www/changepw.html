@@ -32,17 +32,6 @@
 
     </form>
 
-
-    <nav class="nav">
-        <a href="insert.html" class="link">Insert</a> |
-        <a href="delete.html" class="link">Delete</a> |
-        <a href="index.html" class="link">Show Data</a> |
-        <a href="login.html" class="link">Login</a> |
-        <a href="register.html" class="link">Register</a> |
-        <a href="changepw.html" class="link">Change PW</a> |
-        <a href="pwreset.html" class="link">Password Reset</a>
-    </nav>
-
     <div class="hover-bkgr-fricc">      <!--Add this div to page for pop up-->
         <span class="helper"></span>
         <div>
@@ -59,6 +48,9 @@
         $("#change").validate({
             //SPECIFY RULES
             rules: {
+                old_password:{
+                    required:true
+                },
                 new_password: {
                     required: true,
                     minlength: 5
@@ -69,6 +61,9 @@
             },
             // Specify validation error messages
             messages: {
+                old_password:{
+                    required: "*Please provide a password"
+                },
                 new_password: {
                     required: "*Please provide a password",
                     minlength: "*Your password must be at least 5 characters long"
@@ -88,11 +83,21 @@
                 $.ajax({
                     type: "POST",
                     url: "http://10.0.2.2/api/Account/changepw.php",
+                    dataType: "json",
                     data: dataString,
                     success: function (data) {
-                        popup("Password has been changed.");
-                        //TEMPORARY DIRECT LOCATION
-                        window.location.href = "login.html";
+                        
+                        if(data == "not valid"){
+                            popup("Current password does not match. Password entered not valid.");
+                        }else{
+                            popup("Password has been changed.");
+                            
+                            setTimeout(function() {
+                            window.location.replace("profile.html");
+                            }, 2000);
+                            
+                        }
+
                     }, error: function(){
                     //popup(JSON.stringify(data));
                 }

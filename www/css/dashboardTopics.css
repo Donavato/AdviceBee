@@ -26,6 +26,19 @@
 	margin-top: 15px;
 }
 
+#groupButtons li{
+	display: inline-block;
+	text-align: center;
+	margin-right: 10px;
+}
+
+#groupButtons{
+	overflow: auto;
+	white-space: nowrap;
+	margin-bottom: 15px;
+	margin-top: 15px;
+}
+
 .textsize{
 	font-size: 12px;
 	text-align: center;
