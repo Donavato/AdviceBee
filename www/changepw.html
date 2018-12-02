@@ -11,19 +11,22 @@
     <!--reference style sheet-->
     <link rel="stylesheet" href="style.css">
     <!--Popup style sheet-->
-    <link rel="stylesheet" type="text/css" href="css/popup.css"/>
+    <link rel="stylesheet" type="text/css" href="css/popup.css" />
 </head>
 
 <body>
-    <h1 class="h1">Create a New Password</h1><hr><br>
+
+    <!-- FORM FOR CHANGING PASSWORD -->
+    <h1 class="h1">Create a New Password</h1>
+    <hr><br>
     <form action="" id="change" method="POST">
 
         <label for="old_password"></label>
         <input type="password" name="old_password" id="old_password" placeholder="Current Password"><br>
-     
+
         <label for="new_password"></label>
         <input type="password" name="new_password" id="new_password" placeholder="New Password"><br>
- 
+
         <label for="confirm_password"></label>
         <input type="password" name="confirm_password" id="confirm_password" placeholder="Confirm Password"><br>
 
@@ -32,21 +35,12 @@
 
     </form>
 
-
-    <nav class="nav">
-        <a href="insert.html" class="link">Insert</a> |
-        <a href="delete.html" class="link">Delete</a> |
-        <a href="index.html" class="link">Show Data</a> |
-        <a href="login.html" class="link">Login</a> |
-        <a href="register.html" class="link">Register</a> |
-        <a href="changepw.html" class="link">Change PW</a> |
-        <a href="pwreset.html" class="link">Password Reset</a>
-    </nav>
-
-    <div class="hover-bkgr-fricc">      <!--Add this div to page for pop up-->
+    <div class="hover-bkgr-fricc">
+        <!--Add this div to page for pop up-->
         <span class="helper"></span>
         <div>
-            <p id="popuptext" class="popupText"></p>          <!--Append popup here-->
+            <p id="popuptext" class="popupText"></p>
+            <!--Append popup here-->
         </div>
     </div>
     <script src="js/popup.js"></script>
@@ -59,8 +53,8 @@
         $("#change").validate({
             //SPECIFY RULES
             rules: {
-                old_password:{
-                    required:true
+                old_password: {
+                    required: true
                 },
                 new_password: {
                     required: true,
@@ -72,7 +66,7 @@
             },
             // Specify validation error messages
             messages: {
-                old_password:{
+                old_password: {
                     required: "*Please provide a password"
                 },
                 new_password: {
@@ -84,6 +78,7 @@
                 }
 
             },
+            // CALL SUBMITHANDLER AFTER THE FORM IS SUBMITTED
             submitHandler: function (form) {
 
                 var old_pw = $("#old_password").val();
@@ -91,27 +86,30 @@
 
                 var dataString = "old_password=" + old_pw + "&new_password=" + new_password + "&change=";
 
+                // AJAX REQUEST TO PROCESS FORM DATA AND RETURN NOTIFICATION IF SUCCESSFUL OR NOT
                 $.ajax({
                     type: "POST",
                     url: "http://10.0.2.2/api/Account/changepw.php",
                     dataType: "json",
                     data: dataString,
                     success: function (data) {
-                        
-                        if(data == "not valid"){
+
+                        //CHECK TO SEE IF PASSWORD WAS CORRECT OR NOT, THEN NOTIFY USER IF PASSWORD WAS CHANGED
+                        if (data == "not valid") {
                             popup("Current password does not match. Password entered not valid.");
-                        }else{
+                        } else {
                             popup("Password has been changed.");
-                            
-                            setTimeout(function() {
-                            window.location.replace("profile.html");
+
+                            //DELAY REDIRECTING TO SHOW POPUP NOTIFICATION
+                            setTimeout(function () {
+                                window.location.replace("profile.html");
                             }, 2000);
-                            
+
                         }
 
-                    }, error: function(){
-                    //popup(JSON.stringify(data));
-                }
+                    }, error: function () {
+                        popup(JSON.stringify(data));
+                    }
                 });
             }
         });

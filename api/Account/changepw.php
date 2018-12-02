@@ -6,6 +6,7 @@ if(isset($_POST['change']))
     //GET USER EMAIL FROM SESSION
     $uemail = $_SESSION['email'];
 
+    //GET OLD AND NEW PASSWORD FROM FORM ACTION
     $oldpw=$_POST['old_password'];
     $newpw=$_POST['new_password'];
    
@@ -20,7 +21,6 @@ if(isset($_POST['change']))
     if(password_verify($oldpw, $user['passwrd'])){
         //IF VALID CHANGE THE PASSWORD
         mysqli_query($con, "UPDATE `users` SET passwrd='$hashed_newpassword' WHERE email='$uemail'") or die(mysql_error());
-        //$response = "Password has been changed.";
         echo json_encode("valid");
         die();
     }

@@ -3,78 +3,88 @@
 
 <head>
     <!--INITIALIZE JQUERY-->
-    <script src ="js/jquery-3.3.1.min.js"></script>
+    <script src="js/jquery-3.3.1.min.js"></script>
     <!--INITIALIZE J.VALIDATION PLUGIN-->
-    <script src ="js/jquery.validate.js"></script>
-
+    <script src="js/jquery.validate.js"></script>
     <!--reference style sheet-->
     <link rel="stylesheet" href="style.css">
     <!--Popup style sheet-->
-    <link rel="stylesheet" type="text/css" href="css/popup.css"/>
+    <link rel="stylesheet" type="text/css" href="css/popup.css" />
 </head>
 
 <body>
+    <!-- PASSWORD RESET FORM -->
     <h1 class="h1">Please enter the email address for your account and
-        we will send you a new password. </h1><hr><br>
+        we will send you a new password. </h1>
+    <hr><br>
     <form action="" id="pwreset" method="POST">
         <label for="Email"></label>
         <input type="text" class="input" name="email" id="email" placeholder="E-mail"><br>
         <br>
         <button type="submit" name="submit" id="submit" class="submit">Send</button>
     </form>
-     <div class="hover-bkgr-fricc">      <!--Add this div to page for pop up-->
+
+     <!--Add this div to page for pop up-->
+    <div class="hover-bkgr-fricc">
         <span class="helper"></span>
         <div>
-             
-            <p id="popuptext" class="popupText"></p>          <!--Append popup here-->
+            <!--Append popup here-->
+            <p id="popuptext" class="popupText"></p>
         </div>
     </div>
+
 </body>
 
-    <script type="text/javascript">
-        $(document).ready(function() {
-            $("#pwreset").validate({
+<script type="text/javascript">
+    $(document).ready(function () {
+        // JQUERY VALIDATION FOR PASSWORD RESET
+        $("#pwreset").validate({
             //SPECIFY RULES
             rules: {
-            email: {
-                required: true,
-                email: true
-            }
+                email: {
+                    required: true,
+                    email: true
+                }
             },
             // Specify validation error messages
             messages: {
-            email: "*Please enter a valid Email address."
+                email: "*Please enter a valid Email address."
             },
-            submitHandler: function(form) {
-            
-            var email = $("#email").val();
-            var dataString = "&email=" + email + "&pwreset=";
+            submitHandler: function (form) {
+                //STORE DATA FROM FORM INTO VARIABLES
+                var email = $("#email").val();
 
+                //STORE VARIABLE INTO DATASTRING
+                var dataString = "&email=" + email + "&pwreset=";
+                
+                //AJAX REQUEST FOR PASSWORD RESET
                 $.ajax({
                     type: "POST",
                     url: "http://10.0.2.2/api/Account/pwreset.php",
                     dataType: "json",
                     data: dataString,
-                    success: function(data) {
+                    success: function (data) {
 
-                        if(data == "not valid"){
+                        //PROVIDE NOTIFICATION IF EMAIL DOESNT EXIST OR IF THE PASSWORD RESET WAS SUCCESSFUL
+                        if (data == "not valid") {
                             popup("Email does not exist!");
-                        }else if (data == "valid"){
+                        } else if (data == "valid") {
                             popup("Password has been reset and sent!");
                             
-                            setTimeout(function() {
-                            window.location.replace("login.html");
+                            //DELAY REDIRECTING TO SHOW NOTIFICATION
+                            setTimeout(function () {
+                                window.location.replace("login.html");
                             }, 2000);
-                            
-                        } 
 
-                }
+                        }
 
-            });
+                    }
 
-        }
+                });
+
+            }
+        });
     });
-});
 </script>
 <script src="js/popup.js"></script>
 

@@ -49,6 +49,7 @@
         </div>
     </div>
 
+    <!-- AJAX REQUEST TO LIST LIKE QUESTIONS -->
     <script type="text/javascript">
         $(document).ready(function () {
             $.ajax({
@@ -100,11 +101,14 @@
             });
         });
 
+        //REPLY FUNCTION
         function sendButton(questionID){
             sessionStorage.questionID = questionID;
             console.log(questionID);
             window.location.replace("advice.html");
         }
+
+        //UNLIKE FUNCTION
         function unlikeButton(questionID){
             var Question_ID = questionID;
 
@@ -121,6 +125,7 @@
                 }
             });
         }
+        
         //UPDATES THE LIST IF A QUESTION IS UNLIKED
         function updatelist(){
             $.ajax({

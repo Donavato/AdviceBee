@@ -46,7 +46,7 @@
         </div>
     </div>
 
-
+    <!-- AJAX REQUEST TO LIST FOLLOWED USERS -->
     <script type="text/javascript">
         $(document).ready(function () {
             $.ajax({
@@ -82,7 +82,8 @@
 
             });
         });
-
+        
+        // FUNCTION FOR UNFOLLOW BUTTON
         function unfollowButton(follow_id) {
             var follow_ID = follow_id;
 
@@ -94,7 +95,7 @@
                 data: dataString,
                 //on success it will call this function
                 success: function (data) {
-                    //popup(data);
+                    popup(data);
                     updatelist();
                 }
             });

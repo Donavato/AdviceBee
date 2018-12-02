@@ -33,20 +33,13 @@
         <div class="icon-bar">
             <a href="index.html"><img src="images/NavBar/list.png"></a>
             <a href="groups.html"><img src="images/NavBar/groups.png"></a>
-
-            <!--    //////////////         TEST HERE        /////////////              -->
-
             <a href="notification.html" class="badge1" data-badge=""><img src="images/NavBar/notification.png"></a>
-
-
             <a href="search.html"><img src="images/NavBar/search.png"></a>
             <a href="listfolloweduser.html"><img src="images/NavBar/users.png"></a>
             <a href="listlikequestion.html"><img src="images/NavBar/favorite.png"></a>
             <a href="profile.html"><img src="images/NavBar/profile.png"></a>
         </div>
     </div>
-
-
 
     <!-- LIST QUESTIONS -->
     <script type="text/javascript">
@@ -101,13 +94,15 @@
             });
 
         });
-
+        
+        //SEND USER TO SPECIFIC QUESTION FUNCTION
         function sendtoQuestion(questionID) {
             sessionStorage.questionID = questionID;
             console.log(questionID);
             window.location.replace("advice.html");
         }
         
+        //REDIRECT TO USER PROFILE FUNTCION
         function sendtoFollow(user_ID2) {
             sessionStorage.user_ID = user_ID2;
             window.location.replace("profile.html");
