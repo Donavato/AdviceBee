@@ -9,45 +9,52 @@
     <script src="js/jquery.validate.js"></script>
 
     <!--reference style sheet-->
+
+
     <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" type="text/css" href="css/main.css" />
+    <link rel="stylesheet" type="text/css" href="css/main.css"/>
     <!--Popup style sheet-->
-    <link rel="stylesheet" type="text/css" href="css/popup.css" />
+    <link rel="stylesheet" type="text/css" href="css/popup.css"/>
 </head>
 
 <body>
-    <!-- REGISTRATION FORM -->
-    <h1 class="h1">Please Complete the Form</h1>
-    <hr><br>
+    <h1 class="h1">Please Complete the Form</h1><hr><br>
     <form action="" id="reg" method="POST">
 
         <label for="firstname"></label>
-        <input type="text" class="input" name="firstname" id="fname" placeholder="First Name"><br>
-
+        <input type="text" class="inputbox" name="firstname" id="fname" placeholder="First Name"><br>
+        
         <label for="lastname"></label>
-        <input type="text" class="input" name="lastname" id="lname" placeholder="Last Name"><br>
-
+        <input type="text" class="inputbox" name="lastname" id="lname" placeholder="Last Name"><br>
+        
         <label for="Email"></label>
-        <input type="text" class="input" name="email" id="email" placeholder="E-mail"><br>
-
+        <input type="text" class="inputbox" name="email" id="email" placeholder="E-mail"><br>
+        
         <label for="password"></label>
-        <input type="password" class="input" name="password" id="password" placeholder="Password"><br>
-
+        <input type="password" class="inputbox" name="password" id="password" placeholder="Password"><br>
+        
         <label for="confirm_password"></label>
-        <input type="password" class="input" name="confirm_password" id="confirm_password" placeholder="Confirm Password"><br>
+        <input type="password" class="inputbox" name="confirm_password" id="confirm_password" placeholder="Confirm Password"><br>
         <br>
         <button type="submit" name="submit" id="submit" class="btn submit">Done</button><br>
         <br>
 
     </form>
 
-    <div class="hover-bkgr-fricc">
-        <!--Add this div to page for pop up-->
+    <nav>
+        <a href="insert.html" class="link">Insert</a>
+        <a href="delete.html" class="link">Delete</a>
+        <a href="index.html" class="link">Show Data</a>
+        <a href="login.html" class="link">Login</a>
+        <a href="register.html" class="link">Register</a>
+        <a href="changepw.html" class="link">Change PW</a>
+        <a href="pwreset.html" class="link">Password Reset</a>
+    </nav>
+     <div class="hover-bkgr-fricc">      <!--Add this div to page for pop up-->
         <span class="helper"></span>
         <div>
-
-            <p id="popuptext" class="popupText"></p>
-            <!--Append popup here-->
+             
+            <p id="popuptext" class="popupText"></p>          <!--Append popup here-->
         </div>
     </div>
 </body>
@@ -85,47 +92,40 @@
                 },
                 email: "*Please enter a valid email address"
             },
-            //CALL SUBMIT HANDLER WHEN THE FORM IS SUBMITTED
             submitHandler: function (form) {
 
-                //STORE VALUES FROM THE FORM INTO VARIABLES
                 var fname = $("#fname").val();
                 var lname = $("#lname").val();
                 var email = $("#email").val();
                 var password = $("#password").val();
 
-                //STORE VARIABLES INTO DATASTRING VARIABLE
                 var dataString = "fname=" + fname + "&lname=" + lname + "&email=" + email + "&password=" + password + "&reg=";
-                
-                //AJAX REQUEST FOR REGISTRATION
-                $.ajax({
-                    type: "POST",
-                    url: "http://10.0.2.2/api/Account/register.php",
-                    dataType: "json",
-                    data: dataString,
-                    success: function (data) {
 
-                        //PROVIDE NOTIFICATION IF THE EMAIL ALREADY EXIST OR REGISTRATION IS COMPLETED
-                        if (data == "email exist") {
-                            popup("The email already exists");
-                        } else if (data == "success") {
-                            popup("Registration Completed. Please verify your email by clicking the activation link that has been sent.");
-
-                            //DELAY REDIRECTING TO SHOW POPUP NOTIFICATION
-                            setTimeout(function () {
+                    $.ajax({
+                        type: "POST",
+                        url: "http://localhost/api/Account/register.php",
+                        dataType: "json",
+                        data: dataString,
+                        success: function(data) {
+                            
+                            if(data == "email exist"){
+                                popup("The email already exists");
+                            }else if (data == "success"){
+                                popup("Registration Completed. Please verify your email by clicking the activation link that has been sent.");
+                                
+                                setTimeout(function() {
                                 window.location.replace("login.html");
-                            }, 2000);
-
-                        }
-
+                                }, 2000);
+                                
+                            }
+                            
                     }
                 });
             }
         });
     });
-</script>
+    </script>
 <script src="js/popup.js"></script>
-
+            
 </body>
-
 </html>

@@ -28,7 +28,7 @@
     </div><br>
     <div class="icon-location">
         <div class="icon-bar">
-            <a href="index.html"><img src="images/NavBar/list.png"></a>
+            <a href="index.html"><img src="images/NavBar/home.png"></a>
             <a href="groups.html"><img src="images/NavBar/groups.png"></a>
             <a href="notification.html" class="badge1" data-badge=""><img src="images/NavBar/notification.png"></a>
             <a href="search.html"><img src="images/NavBar/search.png"></a>
@@ -46,11 +46,11 @@
         </div>
     </div>
 
-    <!-- AJAX REQUEST TO LIST FOLLOWED USERS -->
+
     <script type="text/javascript">
         $(document).ready(function () {
             $.ajax({
-                url: "http://10.0.2.2/api/Question/listfolloweduser.php",
+                url: "http://localhost/api/Question/listfolloweduser.php",
                 type: "POST",
                 dataType: "json",
                 data: "param=no",
@@ -82,20 +82,19 @@
 
             });
         });
-        
-        // FUNCTION FOR UNFOLLOW BUTTON
+
         function unfollowButton(follow_id) {
             var follow_ID = follow_id;
 
             var dataString = "follow_ID=" + follow_ID;
             $.ajax({
-                url: "http://10.0.2.2/api/Question/unfollowuser.php",
+                url: "http://localhost/api/Question/unfollowuser.php",
                 type: "POST",
                 dataType: "json",
                 data: dataString,
                 //on success it will call this function
                 success: function (data) {
-                    popup(data);
+                    //popup(data);
                     updatelist();
                 }
             });
@@ -104,7 +103,7 @@
         //UPDATES THE LIST OF FOLLOWED USERS IF A USER IS UNFOLLOWED
         function updatelist() {
             $.ajax({
-                url: "http://10.0.2.2/api/Question/listfolloweduser.php",
+                url: "http://localhost/api/Question/listfolloweduser.php",
                 type: "POST",
                 dataType: "json",
                 data: "param=no",
