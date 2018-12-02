@@ -4,16 +4,9 @@
 <head>
     <!--initialize jquery from js folder-->
     <script src="js/jquery-3.3.1.min.js"></script>
-<!--Remove later -->
-    <!-- <script
-            src="https://code.jquery.com/jquery-3.3.1.js"
-            integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
-            crossorigin="anonymous"></script> -->
-    <!--reference style sheet-->
-    <!--<link rel="stylesheet" href="style.css">-->
     <!--Popup style sheet-->
     <link rel="stylesheet" type="text/css" href="css/popup.css"/>
-    <!--Facebook and Google icon source-->
+    <!--Awesome fonts-->
     <link href="https://fonts.googleapis.com/css?family=Roboto:400,500,900" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="css/main.css">
@@ -21,20 +14,32 @@
 </head>
 
 <body>
-<h3 class="title">Please Sign In</h3>
-<div class="alt-login">
+    <div style="padding-top:7px;"></div>
+        <hr>
+<!-- <div class="alt-login">
+    
     <a href="#" class="fb btn">
         <i class="fa fa-facebook fa-fw"></i> <span>Login with Facebook</span>
     </a>
     <a href="#" class="google btn">
         <i class="fa fa-google fa-fw"></i>  <span>Login with Google+</span>
     </a>
+</div> -->
+<div class="logo">
+    <img src="/Images/Bee.png" style="height: 125px; width: 153px">
 </div>
+<div id="AdviceBee">
+    <span>AdviceBee</span>    
+</div>
+
+
+
 <div class="login-or">
-    <hr>
-    <span>or</span>
+    <!-- <hr>
+    <span>or</span> -->
     <hr>
 </div>
+<h3 class="title">Please Sign In</h3>
 <div class="inputs">
     <input type="text" class="input" placeholder="Enter email" id="email" required>
     <input type="password" class="input" placeholder="Enter password" id="passwrd" required>
@@ -44,26 +49,10 @@
     <button type="button" id="submit" class="btn submit">Sign In</button>
 </div>
 <p class="create-account">Dont have one?<a href="register.html" class="reglink"> Create one now!</a></p>
-
-
-
-
-<nav class="nav">
-    <a href="insert.html" class="link">Insert</a>
-    <a href="delete.html" class="link">Delete</a>
-    <a href="index.html" class="link">Show Data</a>
-    <a href="login.html" class="link">Login</a>
-    <a href="register.html" class="link">Register</a>
-    <a href="changepw.html" class="link">Change PW</a>
-    <a href="pwreset.html" class="link">Password Reset</a>
-    <a href="logout.html" class="link">Logout</a>
-</nav>
-
-
 <div id="response">
 
 </div>
-
+<!-- Popup div waiting for call -->
 <div class="hover-bkgr-fricc">      <!--Add this div to page for pop up-->
     <span class="helper"></span>
     <div>
@@ -73,25 +62,29 @@
 <!-- FIX THE SUCCESS/FAIL RESPONSE TYPE -->
 <!--Implementation of jquery/ajax-->
 
+<!-- popup JS call -->
 <script src="js/popup.js"></script>
 <script type="text/javascript">
+//On Submit button, AJAX call to login API
     $('#submit').on('click', function (e) {
         e.preventDefault()
+        //Get email, password from input and combine them into a datastring for JSON
+        //format and send to API
         var email = $("#email").val();
         var password = $("#passwrd").val();
         var dataString = "email=" + email + "&passwrd=" + password;
         $.ajax({
-            url: "http://10.0.2.2/api/Account/login.php",
+            url: "http://localhost/api/Account/login.php",
             type: "POST",
             dataType: "json",
-            data: dataString,
+            data: dataString, //DATA to be sent
             success: function(data){
-
+                //Check if there actually is data
                 if(data==true){
-                    //call ajax
+                    //call ajax for first time signin
                     var ajax = new XMLHttpRequest();
                     var method = "GET";
-                    var url = "http://10.0.2.2/api/Account/fts.php";
+                    var url = "http://localhost/api/Account/fts.php";
                     var asynchronous = true;
 
                     ajax.open(method, url, asynchronous);
@@ -102,6 +95,7 @@
                     //recieve response
                     ajax.onreadystatechange = function()
                     {
+                        //if signin response is successful, check if user has signed in before.
                         if(this.readyState == 4 && this.status == 200)
                         {
                             var data = JSON.parse(this.responseText);

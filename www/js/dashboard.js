@@ -1,3 +1,5 @@
+
+//Activate filter button
 function filterFunction() {
     document.getElementById("filter").classList.toggle("show");
 }
@@ -16,44 +18,42 @@ window.onclick = function (event) {
         }
     }
 }
-
+//FILTER POSTS BY MOST RECENT
 function filterMostRecent() {
     var tID = sessionStorage.getItem('topic_id');
     $.ajax({
-        url: "http://10.0.2.2/api/Question/filtermostrecent.php",
+        url: "http://localhost/api/Question/filtermostrecent.php",
         type: "POST",
-        data: {tID: tID},
+        data: { tID: tID },
         //on success it will call this function
         success: function (data) {
             var DOM = $('#DOM');
             document.getElementById("DOM").innerHTML = "";
             //GET DATA AND PARSE IT
             $.each(data, function (key, value) {
-                CreatePostMostRecent(DOM,key,value);
+                CreatePostMostRecent(DOM, key, value);
             });
 
             //if fail it will give this error
         }, error: function (e) {
             popup("failed to work");
         }
-
     });
-
 }
-
+//FILTER POSTS BY MOST VIEWED
 function filterMostView() {
     var tID = sessionStorage.getItem('topic_id');
     $.ajax({
-        url: "http://10.0.2.2/api/Question/filtermostview.php",
+        url: "http://localhost/api/Question/filtermostview.php",
         type: "POST",
-        data: {tID: tID},
+        data: { tID: tID },
         //on success it will call this function
         success: function (data) {
             var DOM = $('#DOM');
             document.getElementById("DOM").innerHTML = "";
             //GET DATA AND PARSE IT
             $.each(data, function (key, value) {
-                CreatePostMostViewed(DOM,key,value);
+                CreatePostMostViewed(DOM, key, value);
             });
 
             //if fail it will give this error
@@ -64,20 +64,20 @@ function filterMostView() {
     });
 
 }
-
+//FILTER POSTS BY MOST LIKED
 function filterMostLikes() {
     var tID = sessionStorage.getItem('topic_id');
     $.ajax({
-        url: "http://10.0.2.2/api/Question/filtermostlikes.php",
+        url: "http://localhost/api/Question/filtermostlikes.php",
         type: "POST",
-        data: {tID: tID},
+        data: { tID: tID },
         //on success it will call this function
         success: function (data) {
             var DOM = $('#DOM');
             document.getElementById("DOM").innerHTML = "";
             //GET DATA AND PARSE IT
             $.each(data, function (key, value) {
-                CreatePostMostLikes(DOM,key,value);
+                CreatePostMostLikes(DOM, key, value);
             });
 
             //if fail it will give this error
@@ -88,11 +88,11 @@ function filterMostLikes() {
     });
 
 }
-
+//FILTER POSTS BY WHICH USERS LOGGED IN ACCOUNT IS FOLLOWING
 function filterFollowUsersPosts() {
 
     $.ajax({
-        url: "http://10.0.2.2/api/Question/filterfollowusersposts.php",
+        url: "http://localhost/api/Question/filterfollowusersposts.php",
         type: "POST",
         data: "param=no",
         //on success it will call this function
@@ -101,7 +101,7 @@ function filterFollowUsersPosts() {
             document.getElementById("DOM").innerHTML = "";
             //GET DATA AND PARSE IT
             $.each(data, function (key, value) {
-                CreatePostFollowUsersPosts(DOM,key,value);
+                CreatePostFollowUsersPosts(DOM, key, value);
             });
 
             //if fail it will give this error
@@ -112,10 +112,11 @@ function filterFollowUsersPosts() {
     });
 
 }
+//ON READY ACCESS API TO GET ALL POSTS
 $(document).ready(function () {
     // LIST QUESTIONS
     $.ajax({
-        url: "http://10.0.2.2/api/Question/fetchdata.php",
+        url: "http://localhost/api/Question/fetchdata.php",
         type: "POST",
         contentType: "application/json; charset=utf-8",
         dataType: "json",
@@ -126,7 +127,7 @@ $(document).ready(function () {
 
             //GET DATA AND PARSE IT
             $.each(data, function (key, value) {
-                CreatePost(DOM,key,value);
+                CreatePost(DOM, key, value);
             });
 
             //if fail it will give this error
@@ -137,6 +138,7 @@ $(document).ready(function () {
     });
 
 });
+//STORE QUESTION ID IN SESSION STORAGE FOR WHEN CLICKING ON QUESTION
 function sendButton(questionID) {
     sessionStorage.questionID = questionID;
     console.log(questionID);
@@ -144,15 +146,13 @@ function sendButton(questionID) {
 }
 
 ///LIKE QUESTION FUNCTIONALITY
-///
-///
 function likeButton(questionID) {
 
     var Question_ID = questionID;
     var dataString = "Question_ID=" + Question_ID;
 
     $.ajax({
-        url: "http://10.0.2.2/api/Question/likequestion.php",
+        url: "http://localhost/api/Question/likequestion.php",
         type: "POST",
         dataType: "json",
         data: dataString,
@@ -166,13 +166,14 @@ function likeButton(questionID) {
 
 }
 
+//CHECK IF LIKED WHEN FILTER ACTIVATES
 function likeButtonMostRecent(questionID) {
 
     var Question_ID = questionID;
     var dataString = "Question_ID=" + Question_ID;
 
     $.ajax({
-        url: "http://10.0.2.2/api/Question/likequestion.php",
+        url: "http://localhost/api/Question/likequestion.php",
         type: "POST",
         dataType: "json",
         data: dataString,
@@ -185,13 +186,14 @@ function likeButtonMostRecent(questionID) {
     });
 
 }
+//CHECK IF LIKED WHEN FILTER ACTIVATES
 function likeButtonMostViewed(questionID) {
 
     var Question_ID = questionID;
     var dataString = "Question_ID=" + Question_ID;
 
     $.ajax({
-        url: "http://10.0.2.2/api/Question/likequestion.php",
+        url: "http://localhost/api/Question/likequestion.php",
         type: "POST",
         dataType: "json",
         data: dataString,
@@ -204,14 +206,14 @@ function likeButtonMostViewed(questionID) {
     });
 
 }
-
+//CHECK IF LIKED WHEN FILTER ACTIVATES
 function likeButtonMostLikes(questionID) {
 
     var Question_ID = questionID;
     var dataString = "Question_ID=" + Question_ID;
 
     $.ajax({
-        url: "http://10.0.2.2/api/Question/likequestion.php",
+        url: "http://localhost/api/Question/likequestion.php",
         type: "POST",
         dataType: "json",
         data: dataString,
@@ -224,14 +226,14 @@ function likeButtonMostLikes(questionID) {
     });
 
 }
-
+//CHECK IF LIKED WHEN FILTER ACTIVATES
 function likeButtonFollowUsersPosts(questionID) {
 
     var Question_ID = questionID;
     var dataString = "Question_ID=" + Question_ID;
 
     $.ajax({
-        url: "http://10.0.2.2/api/Question/likequestion.php",
+        url: "http://localhost/api/Question/likequestion.php",
         type: "POST",
         dataType: "json",
         data: dataString,
@@ -246,11 +248,9 @@ function likeButtonFollowUsersPosts(questionID) {
 }
 
 //UPDATE FUNCTIONALITY FOR LIKING QUESTIONS
-//
-//
-function updatelikes(){
+function updatelikes() {
     $.ajax({
-        url: "http://10.0.2.2/api/Question/fetchdata.php",
+        url: "http://localhost/api/Question/fetchdata.php",
         type: "POST",
         contentType: "application/json; charset=utf-8",
         dataType: "json",
@@ -261,7 +261,7 @@ function updatelikes(){
             document.getElementById("DOM").innerHTML = "";
             //GET DATA AND PARSE IT
             $.each(data, function (key, value) {
-                CreatePost(DOM,key,value);
+                CreatePost(DOM, key, value);
             });
 
             //if fail it will give this error
@@ -271,20 +271,20 @@ function updatelikes(){
 
     });
 }
-
-function updatelikesMostRecent(){
+//CHECK IF LIKED WHEN FILTER ACTIVATES
+function updatelikesMostRecent() {
     var tID = sessionStorage.getItem('topic_id');
     $.ajax({
-        url: "http://10.0.2.2/api/Question/filtermostrecent.php",
+        url: "http://localhost/api/Question/filtermostrecent.php",
         type: "POST",
-        data: {tID: tID},
+        data: { tID: tID },
         //on success it will call this function
         success: function (data) {
             var DOM = $('#DOM');
             document.getElementById("DOM").innerHTML = "";
             //GET DATA AND PARSE IT
             $.each(data, function (key, value) {
-                CreatePostMostRecent(DOM,key,value);
+                CreatePostMostRecent(DOM, key, value);
             });
 
             //if fail it will give this error
@@ -294,20 +294,20 @@ function updatelikesMostRecent(){
 
     });
 }
-
-function updatelikesMostViewed(){
+//CHECK IF LIKED WHEN FILTER ACTIVATES
+function updatelikesMostViewed() {
     var tID = sessionStorage.getItem('topic_id');
     $.ajax({
-        url: "http://10.0.2.2/api/Question/filtermostview.php",
+        url: "http://localhost/api/Question/filtermostview.php",
         type: "POST",
-        data: {tID: tID},
+        data: { tID: tID },
         //on success it will call this function
         success: function (data) {
             var DOM = $('#DOM');
             document.getElementById("DOM").innerHTML = "";
             //GET DATA AND PARSE IT
             $.each(data, function (key, value) {
-                CreatePostMostViewed(DOM,key,value);
+                CreatePostMostViewed(DOM, key, value);
             });
 
             //if fail it will give this error
@@ -317,20 +317,20 @@ function updatelikesMostViewed(){
 
     });
 }
-
-function updateMostLikes(){
+//CHECK IF LIKED WHEN FILTER ACTIVATES
+function updateMostLikes() {
     var tID = sessionStorage.getItem('topic_id');
     $.ajax({
-        url: "http://10.0.2.2/api/Question/filtermostlikes.php",
+        url: "http://localhost/api/Question/filtermostlikes.php",
         type: "POST",
-        data: {tID: tID},
+        data: { tID: tID },
         //on success it will call this function
         success: function (data) {
             var DOM = $('#DOM');
             document.getElementById("DOM").innerHTML = "";
             //GET DATA AND PARSE IT;
             $.each(data, function (key, value) {
-                CreatePostMostLikes(DOM,key,value);
+                CreatePostMostLikes(DOM, key, value);
             });
 
             //if fail it will give this error
@@ -340,20 +340,20 @@ function updateMostLikes(){
 
     });
 }
-
-function updatelikesFollowUsersPosts(){
+//CHECK IF LIKED WHEN FILTER ACTIVATES
+function updatelikesFollowUsersPosts() {
     var tID = sessionStorage.getItem('topic_id');
     $.ajax({
-        url: "http://10.0.2.2/api/Question/filterfollowusersposts.php",
+        url: "http://localhost/api/Question/filterfollowusersposts.php",
         type: "POST",
-        data: {tID: tID},
+        data: { tID: tID },
         //on success it will call this function
         success: function (data) {
             var DOM = $('#DOM');
             document.getElementById("DOM").innerHTML = "";
             //GET DATA AND PARSE IT
             $.each(data, function (key, value) {
-                CreatePostFollowUsersPosts(DOM,key,value);
+                CreatePostFollowUsersPosts(DOM, key, value);
             });
 
             //if fail it will give this error
@@ -365,15 +365,13 @@ function updatelikesFollowUsersPosts(){
 }
 
 ///FOLLOW USER FUNCTIONALITY
-///
-///
 function followButton(qID, user_ID2) {
     var qID = qID;
     var uID2 = user_ID2;
     var dataString = "qID=" + qID + "&uID2=" + uID2;
 
     $.ajax({
-        url: "http://10.0.2.2/api/Question/followuser.php",
+        url: "http://localhost/api/Question/followuser.php",
         type: "POST",
         dataType: "json",
         data: dataString,
@@ -391,33 +389,33 @@ function reportButton(questionID) {
     var dataString = "Question_ID=" + Question_ID;
 
     $.ajax({
-        url: "http://10.0.2.2/api/Question/reportquestion.php",
+        url: "http://localhost/api/Question/reportquestion.php",
         type: "POST",
         dataType: "json",
         data: dataString,
         //on success it will call this function
         success: function (data) {
 
-            if(data == "already reported"){
+            if (data == "already reported") {
                 popup("You have already reported this Question!");
-            }else{
+            } else {
                 popup(data);
-            } 
-            
+            }
+
         }
 
     });
 
 }
-
+//load topics on dashboard
 $(document).ready(function () {
     //intial loadup on page
     $("#dashboardTopics").load("dashboardTopics.html");
 });
 //add this function to for pop up functionality
-function CreatePost(jElement, key, value)
-{
-    value.dImage = (value.dImage === "<img src = >") ? '' :  value.dImage;
+//show posts after topic selected
+function CreatePost(jElement, key, value) {
+    value.dImage = (value.dImage === "<img src = >") ? '' : value.dImage;
     jElement.append(`
     <div class="post">
         ${value.pImage}
@@ -430,9 +428,10 @@ function CreatePost(jElement, key, value)
                     ${value.dImage}
                     <div class="description">${value.Description}</div>
             </div>
-            <div class="post-footer"> 
+            <div class="post-footer" style="font-size: 1.3rem;">
+            
                 <div>
-                    <i class="far fa-comment" onclick="sendButton(${value.Question_ID})"></i>
+                    <i class="far fa-comment icon-large" onclick="sendButton(${value.Question_ID})"></i>
                     ${value.c_count}
                 </div>
                 <i class="fas fa-exclamation" onclick="reportButton(${value.Question_ID})"></i>
@@ -451,32 +450,17 @@ function CreatePost(jElement, key, value)
     `)
 }
 
-function clearTopicID() 
-{
+function clearTopicID() {
     sessionStorage.removeItem("topic_id");
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
 //ADDED DIFFERENT CREATE POSTS FUCNTIONS FOR EACH FILTER
 //
 //MostRecent
-function CreatePostMostRecent(jElement, key, value)
-{
-    value.dImage = (value.dImage === "<img src = >") ? '' :  value.dImage;
+function CreatePostMostRecent(jElement, key, value) {
+    value.dImage = (value.dImage === "<img src = >") ? '' : value.dImage;
     jElement.append(`
     <div class="post">
         ${value.pImage}
@@ -489,7 +473,7 @@ function CreatePostMostRecent(jElement, key, value)
                     ${value.dImage}
                     <div class="description">${value.Description}</div>
             </div>
-            <div class="post-footer"> 
+            <div class="post-footer" style="font-size: 1.2rem;"> 
                 <div>
                     <i class="far fa-comment" onclick="sendButton(${value.Question_ID})"></i>
                     ${value.c_count}
@@ -511,9 +495,8 @@ function CreatePostMostRecent(jElement, key, value)
 }
 
 //MostViewed
-function CreatePostMostViewed(jElement, key, value)
-{
-    value.dImage = (value.dImage === "<img src = >") ? '' :  value.dImage;
+function CreatePostMostViewed(jElement, key, value) {
+    value.dImage = (value.dImage === "<img src = >") ? '' : value.dImage;
     jElement.append(`
     <div class="post">
         ${value.pImage}
@@ -526,7 +509,7 @@ function CreatePostMostViewed(jElement, key, value)
                     ${value.dImage}
                     <div class="description">${value.Description}</div>
             </div>
-            <div class="post-footer"> 
+            <div class="post-footer" style="font-size: 1.2rem;"> 
                 <div>
                     <i class="far fa-comment" onclick="sendButton(${value.Question_ID})"></i>
                     ${value.c_count}
@@ -548,9 +531,8 @@ function CreatePostMostViewed(jElement, key, value)
 }
 
 //MostLikes
-function CreatePostMostLikes(jElement, key, value)
-{
-    value.dImage = (value.dImage === "<img src = >") ? '' :  value.dImage;
+function CreatePostMostLikes(jElement, key, value) {
+    value.dImage = (value.dImage === "<img src = >") ? '' : value.dImage;
     jElement.append(`
     <div class="post">
         ${value.pImage}
@@ -563,7 +545,7 @@ function CreatePostMostLikes(jElement, key, value)
                     ${value.dImage}
                     <div class="description">${value.Description}</div>
             </div>
-            <div class="post-footer"> 
+            <div class="post-footer" style="font-size: 1.2rem;"> 
                 <div>
                     <i class="far fa-comment" onclick="sendButton(${value.Question_ID})"></i>
                     ${value.c_count}
@@ -585,9 +567,8 @@ function CreatePostMostLikes(jElement, key, value)
 }
 
 //FollowUsersPosts
-function CreatePostFollowUsersPosts(jElement, key, value)
-{
-    value.dImage = (value.dImage === "<img src = >") ? '' :  value.dImage;
+function CreatePostFollowUsersPosts(jElement, key, value) {
+    value.dImage = (value.dImage === "<img src = >") ? '' : value.dImage;
     jElement.append(`
     <div class="post">
         ${value.pImage}
@@ -600,7 +581,7 @@ function CreatePostFollowUsersPosts(jElement, key, value)
                     ${value.dImage}
                     <div class="description">${value.Description}</div>
             </div>
-            <div class="post-footer"> 
+            <div class="post-footer" style="font-size: 1.2rem;"> 
                 <div>
                     <i class="far fa-comment" onclick="sendButton(${value.Question_ID})"></i>
                     ${value.c_count}

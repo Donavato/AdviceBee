@@ -14,16 +14,6 @@
     <div id="DOM">
     
     </div>
-    <br>
-    <nav class="nav">
-        <a href="insert.html" class="link">Insert</a> |
-        <a href="delete.html" class="link">Delete</a> |
-        <a href="index.html" class="link">Show Data</a> |
-        <a href="login.html" class="link">Login</a> |
-        <a href="register.html" class="link">Register</a> |
-        <a href="changepw.html" class="link">Change PW</a> |
-        <a href="pwreset.html" class="link">Password Reset</a>
-    </nav>
 
      <div class="hover-bkgr-fricc">      <!--Add this div to page for pop up-->
         <span class="helper"></span>
@@ -32,10 +22,11 @@
         </div>
     </div>
 
+    <!-- Load mu questions from DB -->
     <script type="text/javascript">
         $(document).ready(function () {
             $.ajax({
-                url: "http://10.0.2.2/api/Question/myQuestions.php",
+                url: "http://localhost/api/Question/myQuestions.php",
                 type: "POST",
                 dataType: "json",
                 data: "param=no",
@@ -62,9 +53,10 @@
                 e.preventDefault();
                 return false;
             }
+            // Send Question ID and Delete.
             var dataString = "Question_ID=" + Question_id;
             $.ajax({
-                url: "http://10.0.2.2/api/Question/delete.php",
+                url: "http://localhost/api/Question/delete.php",
                 type: "POST",
                 dataType: "json",
                 data: dataString,
@@ -74,9 +66,10 @@
                 }
             });
         }
+        // Update the list of questions after delete
         function updatelist(){
             $.ajax({
-                url: "http://10.0.2.2/api/Question/myQuestions.php",
+                url: "http://localhost/api/Question/myQuestions.php",
                 type: "POST",
                 dataType: "json",
                 data: "param=no",

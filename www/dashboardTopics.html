@@ -11,7 +11,7 @@
     //call ajax
     var ajax = new XMLHttpRequest();
     var method = "GET";
-    var url = "http://10.0.2.2/api/Profile/dashboardTopics.php";
+    var url = "http://localhost/api/Profile/dashboardTopics.php";
     var asynchronous = true;
 
     ajax.open(method, url, asynchronous);
@@ -46,7 +46,7 @@
 </script>
 
 <script type="text/javascript">
-
+    
     function displayQuestions(obj, tID) {
         var topic_name = obj;
         sessionStorage.setItem('topic_obj', obj);
@@ -58,7 +58,7 @@
             sessionStorage.setItem('topic_id', topic_ID);
             $.ajax({
                 method: "POST",
-                url: "http://10.0.2.2/api/Profile/displaytopicquestions.php",
+                url: "http://localhost/api/Profile/displaytopicquestions.php",
                 data: { Topic_Name: topic_name },
                 //on success it will call this function
                 success: function (data) {
@@ -85,7 +85,7 @@
                                             ${value.dImage}
                                             <div class="description">${value.Description}</div>
                                     </div>
-                                    <div class="post-footer"> 
+                                    <div class="post-footer" style="font-size: 1.2rem;"> 
                                         <div>
                                             <i class="far fa-comment" onclick="sendButton(${value.Question_ID})"></i>
                                             ${value.c_count}
@@ -123,7 +123,7 @@
     var dataString = "Question_ID=" + Question_ID;
 
         $.ajax({
-            url: "http://10.0.2.2/api/Question/likequestion.php",
+            url: "http://localhost/api/Question/likequestion.php",
             type: "POST",
             dataType: "json",
             data: dataString,
