@@ -5,13 +5,12 @@
     <!--reference style sheet-->
     <link href="https://fonts.googleapis.com/css?family=Roboto:400,500,900" rel="stylesheet">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
-    
+    <!--notification stylesheet-->
+    <link rel="stylesheet" type="text/css" href="css/notification.css"/>
     <!-- <link rel="stylesheet" href="style.css"> -->
     <!--Popup style sheet-->
     <link rel="stylesheet" type="text/css" href="css/popup.css"/>
-    
     <link rel="stylesheet" type="text/css" href="css/advice.css"/>
-    
     <link rel="stylesheet" href="css/main.css">
     <link rel="stylesheet" type="text/css" href="css/navigation.css"/>
     
@@ -20,8 +19,10 @@
 <body>
 
     <p id="Question"></p>
+    <!-- previous advices -->
     <div id="advices">
     </div>
+    <!-- new user avice -->
     <form>
         <div id="advice">
         </div>
@@ -36,7 +37,7 @@
         <div class="icon-bar">
             <a href="index.html"><img src="images/NavBar/list.png"></a>
             <a href="groups.html"><img src="images/NavBar/groups.png"></a>
-            <a href="notification.html"><img src="images/NavBar/notification.png"></a>
+            <a href="notification.html" class="badge1" data-badge=""><img src="images/NavBar/notification.png"></a>
             <a href="search.html"><img src="images/NavBar/search.png"></a>
             <a href="listfolloweduser.html"><img src="images/NavBar/users.png"></a>
             <a href="favorite.html"><img src="images/NavBar/favorite.png"></a>
@@ -52,7 +53,7 @@
     </div>
     <script src="js/advice.js"></script>
     <script src="js/popup.js"></script>
-    
+    <script src="js/notification.js"></script>
 
 </body>
 

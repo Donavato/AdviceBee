@@ -3,7 +3,12 @@ ul#nav{
     padding: 0;
     background-color: #f3f3f3;
     color: gray;
-    width: 100%;
+    width: 90%;
+    display: inline-flex;
+}
+
+body {
+    background-color: rgb(246, 246, 246);
 }
 
 ul#nav li{
@@ -34,9 +39,16 @@ button.active {
     background-color: #ccc;
 }
 
-input[type="text"], textarea{
+.bio input[type="text"], textarea{
     background-color: rgb(246, 246, 246);
     text-align: center;
+    display: grid;
+    box-shadow: 1px 1px 1px 1px rgba(0,0,0,.11), -1px 1px 1px 1px rgba(0,0,0,.11);
+    border-radius: 3px;
+    padding: 4px;
+    grid-gap: 10px;
+    width: 270px;
+    height: 100px;
 }
 
 #content{
@@ -80,7 +92,13 @@ table{
 
 #getpublicinfo td{
     position: relative;
-    top: -50px;
+    top: -110px;
+    background-color: rgb(246, 246, 246);
+    display: grid;
+    box-shadow: 1px 1px 1px 1px rgba(0,0,0,.11), -1px 1px 1px 1px rgba(0,0,0,.11);
+    border-radius: 3px;
+    width: 70px;
+    padding-left: 10px;
 }
 
 #getpublicinfo #level{
@@ -93,32 +111,127 @@ table{
 }
 
 .userdata input[type="text"]{
-    font-size: 20px;
-    padding-top: 10px;
-    padding-bottom: 10px;
+    font-size: 17px;
+    background-color: rgb(246, 246, 246);
+    text-align: center;
+}
+
+.userdata .userconnections{
+    font-size: 14px;
+    text-align: center;
+    display: grid;
+    box-shadow: 1px 1px 1px 1px rgba(0,0,0,.11), -1px 1px 1px 1px rgba(0,0,0,.11);
+    border-radius: 3px;
+    padding: 4px;
+    grid-gap: 10px;
 }
 
 .userdata{
+    padding: 38px;
     position: relative;
-    top: -60px;
+    top: -120px;
 }
 
 #wallpaper img{
     height: 170px; 
 	width: 100%; 
-	overflow: hidden;
+    overflow: hidden;
+    border: 0;
+}
+
+#wallpaper{
+    margin-top: 0;
+    margin-left: 0;
+    margin-right: 0;
+    border: 0;
 }
 
 .userdata{
     text-align: center;
 }
 
-.topicinfodata{
-    height: 220px;
-    overflow-y: scroll;
-}
-
 div #content{
     position: relative;
     top: -50px;
+}
+
+.fa, .fab, .fal, .far, .fas{
+    float: right;
+    font-size: 35px;
+    position: relative;
+    top: -60px;
+    display: grid;
+    box-shadow: 1px 1px 1px 1px rgba(0,0,0,.11),-1px 1px 1px 1px rgba(0,0,0,.11);
+    border-radius: 3px;
+    padding: 10px;
+    grid-gap: 10px;
+}
+
+/* Search buttons */
+.tab button {
+    background-color: inherit;
+    float: left;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    padding: 14px 16px;
+    transition: 0.3s;
+    font-size: 17px;
+    width: 33%;
+    font-weight: bold; 
+    color: rgb(121, 121, 121);
+}
+/* Create an active/current tablink class */
+.tab button.active {
+    background-color: #ccc;
+}
+
+/* Style the tab content */
+.tabcontent {
+    display: none;
+    padding: 6px 12px;
+    border: 1px solid #ccc;
+    border-top: none;
+}
+
+/* question content */
+.content {
+    display: inline-block;
+}
+
+/* Icon Bar Styling */
+.icon-bar {
+    width: 100%;
+    background-color: #ffffff;
+    overflow: auto;
+    border-style: solid;
+    border-width: 1px;
+}
+
+.icon-bar a {
+float: left;
+text-align: center;
+width: 14.25%;
+padding: 5px 0px;
+}
+
+.icon-location {
+    position: fixed;
+    bottom: 0px;
+    left: 0px;
+    width: 100%;
+}
+
+#getinfo{
+    height: auto;
+}
+
+#onebox{
+    display: grid;
+    box-shadow: 1px 1px 1px 1px rgba(0,0,0,.11), -1px 1px 1px 1px rgba(0,0,0,.11);
+    border-radius: 3px;
+    padding: 4px;
+    grid-gap: 10px;
+    width: 270px;
+    background-color: rgb(246, 246, 246);
 }

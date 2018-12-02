@@ -104,10 +104,21 @@
                     $.ajax({
                         type: "POST",
                         url: "http://10.0.2.2/api/Account/register.php",
+                        dataType: "json",
                         data: dataString,
                         success: function(data) {
-                            popup("Registration Completed. Please verify your email by clicking the activation link that has been sent.");
-                            window.location.href = "login.html";
+                            
+                            if(data == "email exist"){
+                                popup("The email already exists");
+                            }else if (data == "success"){
+                                popup("Registration Completed. Please verify your email by clicking the activation link that has been sent.");
+                                
+                                setTimeout(function() {
+                                window.location.replace("login.html");
+                                }, 2000);
+                                
+                            }
+                            
                     }
                 });
             }
