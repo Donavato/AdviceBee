@@ -23,29 +23,29 @@ $match  = mysqli_num_rows($query);
         die();
 
     }else{
-
-        //PERSON WHO OWNS THE QUESTION
-        $data2 = mysqli_query($con, "SELECT * FROM questions WHERE Question_ID='$qID'");
-        while($b = mysqli_fetch_object($data2)){
-            $userID = $b->user_id;
-        }
-
-        //YOUR NAME
-        $data3 = mysqli_query($con, "SELECT * FROM users WHERE user_id=$uID");
-        while($c = mysqli_fetch_object($data3)){
-            $fname = $c->f_name;
-            $lname = $c->l_name;
-            $Name = $fname . ' ' . $lname;
-        }
-
         //INSERT INTO LIKE QUESTIONS TABLE
         mysqli_query($con,"INSERT INTO `like_questions` (`user_ID`,`question_ID`,`question_like`) VALUES ('$uID','$qID','1')");
-
-
+        
         //GET LIKE_ID
         $data = mysqli_query($con, "SELECT * FROM like_questions WHERE user_ID='$uID' AND question_ID='$qID'");
         while($a = mysqli_fetch_object($data)){
             $likeID = $a->like_ID;
+
+            //PERSON WHO OWNS THE QUESTION
+            $data2 = mysqli_query($con, "SELECT * FROM questions WHERE Question_ID='$qID'");
+            while($b = mysqli_fetch_object($data2)){
+                $userID = $b->user_id;
+
+                //YOUR NAME
+                $data3 = mysqli_query($con, "SELECT * FROM users WHERE user_id='$uID'");
+                while($c = mysqli_fetch_object($data3)){
+                    $fname = $c->f_name;
+                    $lname = $c->l_name;
+                    $Name = $fname . ' ' . $lname;
+                }
+
+            }
+
         }
 
         //notification query and check
@@ -55,6 +55,7 @@ $match  = mysqli_num_rows($query);
 
         echo json_encode("Question Liked!");
         die();
+
     }
 
  ?>

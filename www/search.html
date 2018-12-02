@@ -9,70 +9,27 @@
     <script src="js/jquery-3.3.1.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <!--reference style sheet-->
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" type="text/css" href="css/popup.css"/>
-    <link rel="stylesheet" type="text/css" href="css/main.css"/>
-    <style>
-        h4 {
-            text-align: center;
-            color: rgb(121, 121, 121);
-            font-family: "Segoe UI";
-       }
-        #searchSubject{
-            text-align: center;
-            font-family: "Segoe UI";
-            font-size: 20px;
-            font-weight: bold;
-            display: flex;
-            justify-content: center;
-        }
-        #searchElement{
-            background-color: white;
-            border: 2px solid #707070;
-            width: 300px;
-            color: rgb(121, 121, 121);
-            margin-bottom: 20px;
-        }
-        #searchElement:hover {
-            color: rgb(0, 102, 255);
-        }
-        .tab button:hover {
-            background-color: #ddd;
-        }
-        #Q{
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-        #A{
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-        #U{
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-        .btn.search {
-            height: 40px;
-            width: 200px;
-        }
-        
-    </style>
+    <!-- <link rel="stylesheet" href="style.css"> -->
+    <link rel="stylesheet" type="text/css" href="css/popup.css" />
+    <link rel="stylesheet" type="text/css" href="css/main.css" />
+    <link rel="stylesheet" type="text/css" href="css/navigation.css" />
+    <link rel="stylesheet" type="text/css" href="css/notification.css" />
+    <link rel="stylesheet" type="text/css" href="css/search.css" />
+    
+    
 </head>
 
 <body>
-    <h1 class="h1">Search</h1>
+    <h1 class="generalTitle">Search</h1>
     <hr><br>
     <input type="text" class="input" placeholder="Search..." name="search" id="search_content" minlength=3>
     <br>
-    <button type="submit" id="Search" class="btn search" onclick="stringlength()" >Enter</button>
+    <button type="submit" id="Search" class="btn search" onclick="stringlength()">Enter</button>
     <br>
     <!-- TABS WITH ONCLICK EVENTS TO CALL FUNCTIONS FOR DATA DISPLAY -->
     <div class="tab">
         <button class="tablinks" id="Q1" onclick="openCity(event, 'Questions')">Questions</button>
-        <button class="tablinks" id="A1" onclick="openCity(event, 'Advices')">Advices</button>
+        <!-- <button class="tablinks" id="A1" onclick="openCity(event, 'Advices')">Advices</button> -->
         <button class="tablinks" id="U1" onclick="openCity(event, 'Users')">Users</button>
     </div>
     <hr>
@@ -85,12 +42,12 @@
             <h4>None</h4>
         </div>
     </div>
-    <div id="Advices" class="tabcontent" style="display:block;">
+    <!-- <div id="Advices" class="tabcontent" style="display:block;">
         <h3>Advices</h3>
         <div id="A">
             <h4>None</h4>
         </div>
-    </div>
+    </div> -->
     <div id="Users" class="tabcontent" style="display:block;">
         <h3>Users</h3>
         <div id="U">
@@ -104,21 +61,23 @@
         <div class="icon-bar">
             <a href="index.html"><img src="images/NavBar/list.png"></a>
             <a href="groups.html"><img src="images/NavBar/groups.png"></a>
-            <a href="notification.html"><img src="images/NavBar/notification.png"></a>
+            <a href="notification.html" class="badge1" data-badge=""><img src="images/NavBar/notification.png"></a>
             <a href="search.html"><img src="images/NavBar/search.png"></a>
             <a href="listfolloweduser.html"><img src="images/NavBar/users.png"></a>
             <a href="listlikequestion.html"><img src="images/NavBar/favorite.png"></a>
             <a href="profile.html"><img src="images/NavBar/profile.png"></a>
         </div>
     </div>
-    <div class="hover-bkgr-fricc">      <!--Add this div to page for pop up-->
+    <div class="hover-bkgr-fricc">
+        <!--Add this div to page for pop up-->
         <span class="helper"></span>
         <div>
-             
-            <p id="popuptext" class="popupText"></p>          <!--Append popup here-->
+
+            <p id="popuptext" class="popupText"></p>
+            <!--Append popup here-->
         </div>
     </div>
-    
+
     <script type="text/javascript">
         //CALLED FUNCTION TO CHANGE CONTENT FOCUS ON ACTIVE TAB SELECTED
         function openCity(evt, focus) {
@@ -142,7 +101,7 @@
             var mxlen = 10;
 
             if (field.length < mnlen || field.length > mxlen || !field) {
-                popup("Please enter a search between " +mnlen + " to " + mxlen + " charecters long." )
+                popup("Please enter a search between " + mnlen + " to " + mxlen + " charecters long.")
                 return false;
             }
             else {
@@ -156,11 +115,11 @@
                     success: function (data) {
                         showTabs();
                         document.getElementById("Q").innerHTML = "";
-                        document.getElementById("A").innerHTML = "";
+                        // document.getElementById("A").innerHTML = "";
                         document.getElementById("U").innerHTML = "";
 
                         var QUE = $('#Q');
-                        var ADV = $('#A');
+                        // var ADV = $('#A');
                         var USE = $('#U');
 
                         //APPEND DATA INTO DIV ID'S OF THE TABS
@@ -172,32 +131,32 @@
                             var item = data[0].Questions[x];
                             QUE.append("<div id='searchElement' onclick='sendQuestion(" + item.Question_ID + ")'>" + "<div id='searchSubject'>" + item.Subject + "</div>" + "<br> " + "<p>" + item.Description + "</p>" + "</div>" + "<br>");
                         }
-                        for (var x = 0, leng = data[0].Advice.length; x < leng; x++) {
-                            var item = data[0].Advice[x];
-                            ADV.append("<div id='searchElement' onclick='sendQuestion(" + item.Question_ID + ")'>" + "<div id='searchSubject'>" + item.Subject  + "</div>" + "<br> " +
-                             "<p>" + item.Description + "</p>" + "<p>" + item.advice + " " + "</p>" + "<div>" + "<br>");
-                        }
+                        // for (var x = 0, leng = data[0].Advice.length; x < leng; x++) {
+                        //     var item = data[0].Advice[x];
+                        //     ADV.append("<div id='searchElement' onclick='sendQuestion(" + item.Question_ID + ")'>" + "<div id='searchSubject'>" + item.Subject + "</div>" + "<br> " +
+                        //         "<p>" + item.Description + "</p>" + "<p>" + item.advice + " " + "</p>" + "<div>" + "<br>");
+                        // }
                         //LOCK TABS IF THEY ARE EMPTY
                         if ($(QUE).text().length == 0) {
                             $('#Q1').hide();
-                            QUE.append("<h4>" +"None" + "<h4>");
+                            QUE.append("<h4>" + "None" + "<h4>");
                         }
-                        if ($(ADV).text().length == 0) {
-                            $('#A1').hide();
-                            ADV.append("<h4>" +"None" + "<h4>");
-                        }
+                        // if ($(ADV).text().length == 0) {
+                        //     $('#A1').hide();
+                        //     ADV.append("<h4>" + "None" + "<h4>");
+                        // }
                         if ($(USE).text().length == 0) {
                             $('#U1').hide();
-                            USE.append("<h4>" +"None" + "<h4>");
+                            USE.append("<h4>" + "None" + "<h4>");
                         }
                     }
                 });
             }
         }
-        
+
         function showTabs() {
             $('#Q1').show();
-            $('#A1').show();
+            // $('#A1').show();
             $('#U1').show();
         }
         function sendQuestion(questionID) {
@@ -210,6 +169,7 @@
         }
 
     </script>
+    <script src="js/notification.js"></script>
     <script src="js/popup.js"></script>
 </body>
 

@@ -5,34 +5,42 @@ $uID = $_SESSION['user_ID'];
 $qID=$_POST['Question_ID'];
 $email = "advicebeemod@gmail.com";
 
-///GRAB USER NAME AND EMAIL
-$data=mysqli_query($con, "SELECT f_name, l_name, email FROM users WHERE user_ID='$uID'");
-while($a = mysqli_fetch_object($data)){
-    $f_NAME = $a->f_name;
-    $l_NAME = $a->l_name;
-    $userName = $f_NAME . ' ' . $l_NAME;
-    $userEmail = $a->email;
-}
+$check=mysqli_query($con, "SELECT * FROM `report` WHERE question_id='$qID' AND user_id='$uID' AND reported='1'");
+$match=mysqli_num_rows($check);
 
-///GRAB EMAIL INFORMATION OF THE QUESTION REPORTED
-$query=mysqli_query($con,"SELECT * FROM questions WHERE Question_ID='$qID'");
+if($match > 0){
+    echo json_encode("already reported");
 
-while($r = mysqli_fetch_object($query)){
-    $topic = $r->topic;
-    $q_subject = $r->Subject;
-    $description = $r->Description;
-    $ownerID = $r->user_id;
-
-    $query2 = mysqli_query($con, "SELECT f_name, l_name, email FROM users WHERE user_ID='$ownerID'");
-
-    while($z = mysqli_fetch_object($query2)){
-        $fname = $z->f_name;
-        $lname = $z->l_name;
-        $ownerName = $fname . ' ' . $lname;
-        $ownerEmail = $z->email;
-
+}else{
+    mysqli_query($con,"INSERT INTO `report` (`question_id`, `user_id`, `reported`) VALUES ('$qID', '$uID', '1')");
+    ///GRAB USER NAME AND EMAIL
+    $data=mysqli_query($con, "SELECT f_name, l_name, email FROM users WHERE user_ID='$uID'");
+    while($a = mysqli_fetch_object($data)){
+        $f_NAME = $a->f_name;
+        $l_NAME = $a->l_name;
+        $userName = $f_NAME . ' ' . $l_NAME;
+        $userEmail = $a->email;
     }
-}
+
+    ///GRAB EMAIL INFORMATION OF THE QUESTION REPORTED
+    $query=mysqli_query($con,"SELECT * FROM questions WHERE Question_ID='$qID'");
+
+    while($r = mysqli_fetch_object($query)){
+        $topic = $r->topic;
+        $q_subject = $r->Subject;
+        $description = $r->Description;
+        $ownerID = $r->user_id;
+
+            $query2 = mysqli_query($con, "SELECT f_name, l_name, email FROM users WHERE user_ID='$ownerID'");
+
+            while($z = mysqli_fetch_object($query2)){
+                $fname = $z->f_name;
+                $lname = $z->l_name;
+                $ownerName = $fname . ' ' . $lname;
+                $ownerEmail = $z->email;
+
+            }
+        }
 
 
     //EMAIL FOR QUESTION REPORTED
@@ -65,4 +73,5 @@ while($r = mysqli_fetch_object($query)){
     echo json_encode("Question has been reported!");
     die();
 
+}
  ?>

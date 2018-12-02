@@ -3,6 +3,9 @@
 
     <head>
         <title>Profile</title>
+        <link rel="stylesheet" href="style.css"/>
+        <!--notification stylesheet-->
+        <link rel="stylesheet" type="text/css" href="css/notification.css"/>
         <link rel="stylesheet" type="text/css" href="css/profile.css"/>
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
         <!--Popup style sheet-->
@@ -54,7 +57,7 @@
         <ul id="nav">
             <li class="tablinks"><a href="info">Info</a></li>
             <li class="tablinks"><a href="topicinfo">Topics</a></li>
-            <li class="tablinks"><a href="delete">Posts</a></li>
+            <li class="tablinks"><a href="changepw">Account</a></li>
         </ul>
         <div id="content">
             
@@ -65,7 +68,7 @@
             <div class="icon-bar">
                 <a href="index.html"><img src="images/NavBar/list.png" onclick="clearStorageUser()"></a>
                 <a href="groups.html"><img src="images/NavBar/groups.png" onclick="clearStorageUser()"></a>
-                <a href="notification.html"><img src="images/NavBar/notification.png" onclick="clearStorageUser()"></a>
+                <a href="notification.html" class="badge1" data-badge=""><img src="images/NavBar/notification.png" onclick="clearStorageUser()"></a>
                 <a href="search.html"><img src="images/NavBar/search.png" onclick="clearStorageUser()"></a>
                 <a href="listfolloweduser.html"><img src="images/NavBar/users.png" onclick="clearStorageUser()"></a>
                 <a href="listlikequestion.html"><img src="images/NavBar/favorite.png" onclick="clearStorageUser()"></a>
@@ -407,3 +410,4 @@
         sessionStorage.removeItem("user_ID");
     }
 </script>
+<script src="js/notification.js"></script>

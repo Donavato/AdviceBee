@@ -19,13 +19,9 @@ $(document).ready(function () {
                 data = JSON.parse(JSON.stringify(data));
                 $.each(data, function (key, value) {
 
-                    // advices.append("<div class='profileimage'>" + value.pImage + "<span>" + value.name + "</span></div><p>" + value.advice + "</p>" + value.likes + "<div class='likebox'>" +
-                    //     "<img onclick='likeButton(" + value.advice_id + ")' id='like-img" + value.advice_id + "' src='images/advice/like.png'></img>" +
-                    //     "</div><hr>");
-
                     value.dImage = (value.pImage === "<img src = >") ? '' : value.pImage;
                     advices.append(`
-                    <div class="post">
+                    <div class="post advice">
                         ${value.pImage}
                         <div class="main-body">
                             <div class="post-header">
@@ -41,6 +37,7 @@ $(document).ready(function () {
                             </div>
                         </div>
                     </div>
+                    <hr>
                     `)
 
                 });
@@ -81,6 +78,7 @@ $(document).ready(function () {
                             </div>
                         </div>
                     </div>
+                    <hr>
                     `)
                     }
                     else {
@@ -99,6 +97,7 @@ $(document).ready(function () {
                             </div>
                         </div>
                     </div>
+                    <hr>
                     `)
                     }
             // CHECK QUESTION TYPE, OUTPUT FORM ADVICE DEPENDING ON THAT TYPE
@@ -110,7 +109,10 @@ $(document).ready(function () {
             } else if (Obj[0].question_type == "Description") {
                 document.getElementById("advice").innerHTML = "<div id='Description'" + "Advice: " + "<br>" + "<textarea id='Description1' class='DescriptionAdvice' maxlength='140' name='advice'>" + "</textarea>" + "<br>" + "</div>" +
                     "<p class='charactercount'>" + "<span id='wordCount'>" + '140' + "</span>/140</p>";
-            } else {
+            } else if (Obj[0].question_type == "Multiple") {
+                GetMultiple();
+            } 
+            else {
                 document.getElementById("advice").innerHTML = "Error";
             }
 
@@ -120,7 +122,34 @@ $(document).ready(function () {
             popup(JSON.stringify(e));
         }
     });
+    function GetMultiple(){
+        var dataString = "Question_ID=" + Question_ID;
+        /////LIST ADVICES GIVEN FOR EACH PARTICULAR QUESTION/////////////////////////
+        $.ajax({
+            url: "http://10.0.2.2/api/Advice/multipleChoices.php",
+            type: "POST",
+            dataType: "json",
+            data: dataString,
+            //on success it will call this function
+            success: function (data) {
+    
+                    var multichocies = $('#advice');
+                    data = JSON.parse(JSON.stringify(data));
+                    $.each(data, function (key, value) {
+                        multichocies.append(`
+                        <div>
+                            ${value.option_value} <input type='radio' name='advice' value='${value.option_value}'/>
+                        </div>
+                        `)
 
+                    });
+    
+            }, error: function (e) {
+                popup("failed to work");
+            }
+        });
+        
+    }
     $('#submit').on('click', function (e) {
         e.preventDefault()
         var advice;
@@ -133,7 +162,10 @@ $(document).ready(function () {
         } else if (questionType == "Description") {
             advice = $("#Description1").val();
 
-        } else {
+        }else if (questionType == "Multiple") {
+            advice = $("input[type=radio][name=advice]:checked").val();
+        }
+         else {
             popup("No Question Type Selected");
         }
 

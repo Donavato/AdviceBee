@@ -24,8 +24,10 @@
             
             if($like_count == 0){
                 $like_count = " ";
+                mysqli_query($con,"UPDATE `questions` SET likes='$like_count' WHERE Question_ID=$Question_ID");
             }else{
                 $like_count = mysqli_num_rows($likequery);
+                mysqli_query($con,"UPDATE `questions` SET likes='$like_count' WHERE Question_ID=$Question_ID");
             }
 
             if($d_Image == NULL ||$d_Image == "None"){
@@ -97,8 +99,10 @@
                 
                 if($like_count == 0){
                     $like_count = " ";
+                    mysqli_query($con,"UPDATE `questions` SET likes='$like_count' WHERE Question_ID=$Question_ID");
                 }else{
                     $like_count = mysqli_num_rows($likequery);
+                    mysqli_query($con,"UPDATE `questions` SET likes='$like_count' WHERE Question_ID=$Question_ID");
                 }
         
                 if($d_Image == NULL ||$d_Image == "None"){

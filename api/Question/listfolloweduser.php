@@ -4,7 +4,7 @@ include "../Account/db.php";
 $uID = $_SESSION['user_ID'];
 //$Question_ID = $_POST["Question_ID"];
 
-$datastring = mysqli_query($con, "SELECT * FROM follow_user WHERE user_id1='$uID'");
+$datastring = mysqli_query($con, "SELECT * FROM follow_user WHERE user_id1='$uID' AND u_follow='1'");
 $arr = array();
 
 while($r = mysqli_fetch_object($datastring)){

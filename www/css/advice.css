@@ -1,6 +1,6 @@
 #advices {
     display: grid;
-    grid-gap: 10px;
+    /* grid-gap: 10px; */
 }
 
 .post {
@@ -18,6 +18,15 @@
     width: 40px;
     border-radius: 20px;
     box-shadow: 1px 1px 1px 1px rgba(0,0,0,.11),-1px 1px 1px 1px rgba(0,0,0,.11);
+}
+.post.Question{
+    margin-bottom: 10px;
+}
+.post.advice{
+    margin-bottom: 10px;
+}
+hr{
+    margin-bottom: 10px;
 }
 .main-body {
     display: grid;
