@@ -1,3 +1,4 @@
+//on ready list notifications from DB
 $(document).ready(function () {
     function load_unread_notification(view = "") {
 
@@ -14,7 +15,7 @@ $(document).ready(function () {
             }
         });
     }
-
+    
     load_unread_notification();
 
     $(document).on('click', ".badge1", function () {

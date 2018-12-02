@@ -11,10 +11,11 @@ $(document).ready(function () {
         data: dataString,
         //on success it will call this function
         success: function (data) {
-
+            // check if answers should be displayed for other users
             if (data == "Responses Private") {
                 popup("Responses Private");
             } else {
+                // append all the answers to specified ID
                 var advices = $('#advices');
                 data = JSON.parse(JSON.stringify(data));
                 $.each(data, function (key, value) {
@@ -30,7 +31,7 @@ $(document).ready(function () {
                             <div class="post-body">
                                     <div class="description">${value.advice}</div>
                             </div>
-                            <div class="post-footer">
+                            <div class="post-footer" style="font-size: 1.2rem;">
                                 <div>
                                 <i class="far fa-heart" onclick="likeButton(${value.advice_id})"></i>${value.likes}
                                 </div>
@@ -41,9 +42,7 @@ $(document).ready(function () {
                     `)
 
                 });
-
             }
-
         }, error: function (e) {
             popup("failed to work");
         }
@@ -52,6 +51,7 @@ $(document).ready(function () {
 
     var questionType;
 
+    // Display question
     $.ajax({
         url: "http://10.0.2.2/api/Advice/Advice.php",
         type: "POST",
@@ -63,7 +63,8 @@ $(document).ready(function () {
             var Question = $('#Question');
             var uImage = (Obj[0].pImage === "<img src = >") ? '' : Obj[0].pImage;
             var dImage = (Obj[0].dImage === "<img src = >") ? '' : Obj[0].dImage;
-                if(!dImage){    
+                // Display the question without an image 
+            if(!dImage){    
                     console.log("Image source is empty");
                     Question.append(`
                     <div class="post Question">
@@ -82,6 +83,7 @@ $(document).ready(function () {
                     `)
                     }
                     else {
+                        // Display the question with an image
                         console.log("Image source exists!");
                         Question.append(`
                     <div class="post Question">
@@ -122,6 +124,7 @@ $(document).ready(function () {
             popup(JSON.stringify(e));
         }
     });
+    // Call API to get multiple choice answer choices from DB
     function GetMultiple(){
         var dataString = "Question_ID=" + Question_ID;
         /////LIST ADVICES GIVEN FOR EACH PARTICULAR QUESTION/////////////////////////
@@ -132,7 +135,8 @@ $(document).ready(function () {
             data: dataString,
             //on success it will call this function
             success: function (data) {
-    
+
+                    //Append the choices dynamically 
                     var multichocies = $('#advice');
                     data = JSON.parse(JSON.stringify(data));
                     $.each(data, function (key, value) {
@@ -150,6 +154,7 @@ $(document).ready(function () {
         });
         
     }
+    // On submit send the answer to DB
     $('#submit').on('click', function (e) {
         e.preventDefault()
         var advice;
@@ -170,7 +175,7 @@ $(document).ready(function () {
         }
 
         var dataString = "Question_ID=" + Question_ID + "&advice=" + advice;
-
+        //Send answer to DB
         $.ajax({
             url: "http://10.0.2.2/api/Advice/giveAdvice.php",
             type: "POST",
@@ -234,7 +239,7 @@ function updateLikes() {
                             <div class="post-body">
                                     <div class="description">${value.advice}</div>
                             </div>
-                            <div class="post-footer">
+                            <div class="post-footer" style="font-size: 1.2rem;">
                                 <div>
                                 <i class="far fa-heart" onclick="likeButton(${value.advice_id})"></i>${value.likes}
                                 </div>

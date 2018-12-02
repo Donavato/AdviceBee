@@ -3,27 +3,18 @@
 <head>
 <!--initialize jquery from js folder-->
 <script src="js/jquery-3.3.1.min.js"></script>
-<!--reference style sheet-->
-<link rel="stylesheet" href="style.css">
 <!--Popup style sheet-->
 <link rel="stylesheet" type="text/css" href="css/popup.css"/>
+<link rel="stylesheet" type="text/css" href="css/delete.css"/>
+<link rel="stylesheet" type="text/css" href="css/dashboard.css"/>
 </head>
 
 <body>
-
-    <div id="DOM">
+    <div class="scroll">
+        <div id="DOM">
     
+        </div>
     </div>
-    <br>
-    <nav class="nav">
-        <a href="insert.html" class="link">Insert</a> |
-        <a href="delete.html" class="link">Delete</a> |
-        <a href="index.html" class="link">Show Data</a> |
-        <a href="login.html" class="link">Login</a> |
-        <a href="register.html" class="link">Register</a> |
-        <a href="changepw.html" class="link">Change PW</a> |
-        <a href="pwreset.html" class="link">Password Reset</a>
-    </nav>
 
      <div class="hover-bkgr-fricc">      <!--Add this div to page for pop up-->
         <span class="helper"></span>
@@ -32,6 +23,7 @@
         </div>
     </div>
 
+    <!-- Load mu questions from DB -->
     <script type="text/javascript">
         $(document).ready(function () {
             $.ajax({
@@ -42,12 +34,27 @@
                 //on success it will call this function
                 success: function (data) {
                     var DOM = $('#DOM');
+
                     //GET DATA AND PARSE IT
-                    $.each(data, function (key, value) {    
+                    $.each(data, function (key, value) {  
+                        value.dImage = (value.dImage === "<img src = >") ? '' :  value.dImage;  
                         //APPEND DATA AND DISPLAY IT
-                        DOM.append("<div class='usercontainer'>" + "<div class='profileimage'>" + value.pImage + "</div><div class='username'>" + value.name + "</div>" + "</div>" + "<div class='question'>" +
-                            "<p class='sub'>" + value.Subject + "</p><br>" + "<div class='content'>" + value.dImage + "<br>" + "<div class='desc'>" + value.Description + "</div>" + "</div><br>" + "<br>" +
-                            "<button onclick='DeleteButton("+ value.Question_ID +")'>Delete</button><hr>");
+                        DOM.append(
+                            "<div class='post'>"+ value.pImage+
+                                "<div class='main-body'>"+ 
+                                    "<div class='post-header'>"+
+                                        "<span>"+value.name+"</span>"+
+                                        "<div class='subject'>"+value.Subject+"</div>"+
+                                    "</div>"+
+
+                                    "<div class='post-body'>"+
+                                    value.dImage+
+                                        "<div class='description'>"+value.Description+"</div>"+
+                                        "<div class='post-footer'>"+"<button onclick='DeleteButton("+ value.Question_ID +")'>Delete</button>"+
+                                            "</div>"+
+                                    "</div>"
+                                +"</div>"
+                            +"</div>");
                     });
                     
                     //if fail it will give this error
@@ -62,6 +69,7 @@
                 e.preventDefault();
                 return false;
             }
+            // Send Question ID and Delete.
             var dataString = "Question_ID=" + Question_id;
             $.ajax({
                 url: "http://localhost/api/Question/delete.php",
@@ -74,6 +82,7 @@
                 }
             });
         }
+        // Update the list of questions after delete
         function updatelist(){
             $.ajax({
                 url: "http://localhost/api/Question/myQuestions.php",
@@ -85,9 +94,25 @@
                     var DOM = $('#DOM');
                     //GET DATA AND PARSE IT
                     document.getElementById("DOM").innerHTML = "";
-                    $.each(data, function (key, value) {    
+                    $.each(data, function (key, value) {  
+                        value.dImage = (value.dImage === "<img src = >") ? '' :  value.dImage;  
                         //APPEND DATA AND DISPLAY IT
-                        DOM.append("<h3>" + value.Subject + "</h3><p>" + value.Description + "</p>" +  "<button onclick='DeleteButton("+ value.Question_ID +")'>Delete</button></a>");
+                        DOM.append(
+                            "<div class='post'>"+ value.pImage+
+                                "<div class='main-body'>"+ 
+                                    "<div class='post-header'>"+
+                                        "<span>"+value.name+"</span>"+
+                                        "<div class='subject'>"+value.Subject+"</div>"+
+                                    "</div>"+
+
+                                    "<div class='post-body'>"+
+                                    value.dImage+
+                                        "<div class='description'>"+value.Description+"</div>"+
+                                        "<div class='post-footer'>"+"<button onclick='DeleteButton("+ value.Question_ID +")'>Delete</button>"+
+                                            "</div>"+
+                                    "</div>"
+                                +"</div>"
+                            +"</div>");
                     });
                     //if fail it will give this error
                 }, error: function (e) {

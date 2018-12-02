@@ -139,7 +139,7 @@
                         //PULL ALL TOPICS AND STORE THEM INTO A DROP DOWN FOR topics_list
                         $.ajax({
                             type: "POST",
-                            url: "http://localhost/api/topics.php",
+                            url: "http://10.0.2.2/api/topics.php",
                             success: function (response) {
                                 var data = JSON.parse(JSON.stringify(response));
                                 var text = "";
@@ -159,7 +159,7 @@
                         var topic = $('#topics_list').val();
                         if ($.trim(Description).length > 0 & $.trim(Subject).length > 0) {
                             $.ajax({
-                            url: "http://localhost/api/createGroup.php",
+                            url: "http://10.0.2.2/api/createGroup.php",
                             type: "POST",
                             data: {
                                 base64: image_Content,

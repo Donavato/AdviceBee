@@ -46,7 +46,7 @@
 </script>
 
 <script type="text/javascript">
-
+    
     function displayQuestions(obj, tID) {
         var topic_name = obj;
         sessionStorage.setItem('topic_obj', obj);
@@ -85,7 +85,7 @@
                                             ${value.dImage}
                                             <div class="description">${value.Description}</div>
                                     </div>
-                                    <div class="post-footer"> 
+                                    <div class="post-footer" style="font-size: 1.2rem;"> 
                                         <div>
                                             <i class="far fa-comment" onclick="sendButton(${value.Question_ID})"></i>
                                             ${value.c_count}
