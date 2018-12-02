@@ -24,7 +24,48 @@
         if($uID != $userID){
             mysqli_query($con,"INSERT INTO `notification` (`question_id`,`user_id`, `user_id2`, `name`) VALUES ('$Question_ID','$userID', '$uID', '$Name')");
         }
-       
+        //get points from database
+        $result=mysqli_query($con, "SELECT * FROM users WHERE user_ID=$uID");
+        while($row=mysqli_fetch_object($result))
+        {
+            $points=$row->points;
+            $accumulatedpoints=$row->accumulated_points;
+            $level=$row->level;
+        }
+        //check if user has passed the requirement for next level
+        $accumulatedpoints=$accumulatedpoints+2;
+        if($level == "Bronze" && $accumulatedpoints >= 1000)
+        {
+            $newlevel= "Silver";
+        }
+        else if($level == "Silver" && $accumulatedpoints >= 2000)
+        {
+            $newlevel= "Gold";
+        }
+        else
+        {
+            $newlevel = $level;
+        }
+        //update accumulated points
+        mysqli_query($con, "UPDATE users SET accumulated_points=$accumulatedpoints WHERE user_ID=$uID");
+        //update level
+        mysqli_query($con, "UPDATE users SET level='$newlevel' WHERE user_ID=19");
+
+        //check if user has too many points
+        if($points == 99)
+        {
+            //add to points
+            $points=$points + 1;
+            //update points
+            mysqli_query($con, "UPDATE users SET points=$points WHERE user_ID=$uID");
+        }
+        else if($points < 99)
+        {
+            //add to points
+            $points=$points + 2;
+            //update points
+            mysqli_query($con, "UPDATE users SET points=$points WHERE user_ID=$uID");
+        }
         $dataquery = mysqli_query($con,"INSERT INTO `advice` (`advice`,`question_id`, `user_id`) VALUES ('$advice','$Question_ID', '$uID')");
         
         if($dataquery){

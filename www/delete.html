@@ -3,16 +3,17 @@
 <head>
 <!--initialize jquery from js folder-->
 <script src="js/jquery-3.3.1.min.js"></script>
-<!--reference style sheet-->
-<link rel="stylesheet" href="style.css">
 <!--Popup style sheet-->
 <link rel="stylesheet" type="text/css" href="css/popup.css"/>
+<link rel="stylesheet" type="text/css" href="css/delete.css"/>
+<link rel="stylesheet" type="text/css" href="css/dashboard.css"/>
 </head>
 
 <body>
-
-    <div id="DOM">
+    <div class="scroll">
+        <div id="DOM">
     
+        </div>
     </div>
 
      <div class="hover-bkgr-fricc">      <!--Add this div to page for pop up-->
@@ -33,12 +34,27 @@
                 //on success it will call this function
                 success: function (data) {
                     var DOM = $('#DOM');
+
                     //GET DATA AND PARSE IT
-                    $.each(data, function (key, value) {    
+                    $.each(data, function (key, value) {  
+                        value.dImage = (value.dImage === "<img src = >") ? '' :  value.dImage;  
                         //APPEND DATA AND DISPLAY IT
-                        DOM.append("<div class='usercontainer'>" + "<div class='profileimage'>" + value.pImage + "</div><div class='username'>" + value.name + "</div>" + "</div>" + "<div class='question'>" +
-                            "<p class='sub'>" + value.Subject + "</p><br>" + "<div class='content'>" + value.dImage + "<br>" + "<div class='desc'>" + value.Description + "</div>" + "</div><br>" + "<br>" +
-                            "<button onclick='DeleteButton("+ value.Question_ID +")'>Delete</button><hr>");
+                        DOM.append(
+                            "<div class='post'>"+ value.pImage+
+                                "<div class='main-body'>"+ 
+                                    "<div class='post-header'>"+
+                                        "<span>"+value.name+"</span>"+
+                                        "<div class='subject'>"+value.Subject+"</div>"+
+                                    "</div>"+
+
+                                    "<div class='post-body'>"+
+                                    value.dImage+
+                                        "<div class='description'>"+value.Description+"</div>"+
+                                        "<div class='post-footer'>"+"<button onclick='DeleteButton("+ value.Question_ID +")'>Delete</button>"+
+                                            "</div>"+
+                                    "</div>"
+                                +"</div>"
+                            +"</div>");
                     });
                     
                     //if fail it will give this error
@@ -78,9 +94,25 @@
                     var DOM = $('#DOM');
                     //GET DATA AND PARSE IT
                     document.getElementById("DOM").innerHTML = "";
-                    $.each(data, function (key, value) {    
+                    $.each(data, function (key, value) {  
+                        value.dImage = (value.dImage === "<img src = >") ? '' :  value.dImage;  
                         //APPEND DATA AND DISPLAY IT
-                        DOM.append("<h3>" + value.Subject + "</h3><p>" + value.Description + "</p>" +  "<button onclick='DeleteButton("+ value.Question_ID +")'>Delete</button></a>");
+                        DOM.append(
+                            "<div class='post'>"+ value.pImage+
+                                "<div class='main-body'>"+ 
+                                    "<div class='post-header'>"+
+                                        "<span>"+value.name+"</span>"+
+                                        "<div class='subject'>"+value.Subject+"</div>"+
+                                    "</div>"+
+
+                                    "<div class='post-body'>"+
+                                    value.dImage+
+                                        "<div class='description'>"+value.Description+"</div>"+
+                                        "<div class='post-footer'>"+"<button onclick='DeleteButton("+ value.Question_ID +")'>Delete</button>"+
+                                            "</div>"+
+                                    "</div>"
+                                +"</div>"
+                            +"</div>");
                     });
                     //if fail it will give this error
                 }, error: function (e) {

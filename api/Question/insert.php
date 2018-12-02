@@ -43,9 +43,32 @@
                 }
                 echo json_encode("success");
                 die();
+            //get points from database
+            $result=mysqli_query($con, "SELECT * FROM users WHERE user_ID=$uID");
+            while($row=mysqli_fetch_object($result))
+            {
+                $points=$row->points; 
             }
-            else{
-                echo json_encode("error");
+            //check if user has enough points
+            if($points > 9)
+            {
+                $q=mysqli_query($con,"INSERT INTO `Questions` (`user_id` ,`Description`,`Subject`,`topic`,`question_type`, `anonymous`, `hide`, `image`) VALUES ('$uID','$Description','$Subject','$topic','$type', '$anonymous', '$hide', '$image')");
+                //subtract the points
+                $points=$points - 10;
+                //update points
+                mysqli_query($con, "UPDATE users SET points=$points WHERE user_ID=$uID");
+                if($q){
+                    echo json_encode("success");
+                    die();
+                }
+                else{
+                    echo json_encode("error");
+                    die();
+                }
+            }
+            else
+            {
+                echo json_encode("Insufficient points");
                 die();
             }
 
