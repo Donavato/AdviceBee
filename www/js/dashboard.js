@@ -119,9 +119,14 @@ $(document).ready(function () {
     });
 
 });
-function sendButton(questionID) {
+function sendButton(questionID, uID2) {
     sessionStorage.questionID = questionID;
-    console.log(questionID);
+    //views functionality
+    $.ajax({
+        url: "http://10.0.2.2/api/Question/addViews.php",
+        type: "POST",
+        data: {question_id: questionID, userID2: uID2}
+        });
     window.location.replace("advice.html");
 }
 ///LIKE QUESTION FUNCTIONALITY
@@ -186,6 +191,28 @@ function followButton(qID, user_ID2) {
 
     });
 
+    $.ajax({
+        url: "http://10.0.2.2/api/Question/checkfollow.php",
+        type: "POST",
+        data: {uID2: uID2, qID: qID},
+        //on success it will call this function
+        success: function (data) {
+            //change button color
+            var follow = document.getElementById("follow(" +qID+ ")");
+            if(data == 1)
+            {
+                follow.style.color = "green";
+                //location.reload();
+            }
+            else
+            {
+                follow.style.color = "black";
+            }
+        }
+    });
+
+    
+
 }
 ///REPORT QUESTION FUNCTIONALITY
 function reportButton(questionID) {
@@ -210,6 +237,8 @@ $(document).ready(function () {
     //intial loadup on page
     $("#dashboardTopics").load("dashboardTopics.html");
 });
+
+
 //add this function to for pop up functionality
 function CreatePost(jElement, key, value)
 {
@@ -232,19 +261,59 @@ function CreatePost(jElement, key, value)
                     ${value.c_count}
                 </div>
                 <i class="fas fa-exclamation" onclick="reportButton(${value.Question_ID})"></i>
-                <i class="far fa-user" onclick="followButton(${value.Question_ID} , ${value.user_ID2})"></i>
+                <i class="far fa-user" id="follow(${value.Question_ID})" onclick="followButton(${value.Question_ID} , ${value.user_ID2})"></i>
                 
                 <div id="u_Heart">
-                <i class="far fa-heart" onclick="likeButton(${value.Question_ID})"></i>${value.likes}<!-- unfilled -->
+                <i class="far fa-heart" id="heart(${value.Question_ID})" onclick="likeButton(${value.Question_ID})"></i>${value.likes}<!-- unfilled -->
                 </div>
 
                 <!--<i class="far fa-heart" onclick="reportButton(${value.Question_ID})"></i> filled -->
-                <i class="far fa-share-square" onclick="sendButton(${value.Question_ID})"></i>
+                <i class="far fa-share-square" id='addView' onclick="sendButton(${value.Question_ID} , ${value.user_ID2})"></i>
 
             </div>
         </div>
     </div>
     `)
+    var Question_ID = value.Question_ID;
+
+    $.ajax({
+        url: "http://10.0.2.2/api/Question/checkquestion.php",
+        type: "POST",
+        data: {Question_ID, Question_ID},
+        //on success it will call this function
+        success: function (data) {
+            //change button color
+            var heart = document.getElementById("heart(" + value.Question_ID +")");
+            if(data == 1)
+            {
+                heart.style.color = "red";
+            }
+            else
+            {
+                heart.style.color = "black";
+            }
+        }
+    });
+
+    var User_ID = value.user_ID2;
+    $.ajax({
+        url: "http://10.0.2.2/api/Question/checkfollow.php",
+        type: "POST",
+        data: {uID2: User_ID, qID: Question_ID},
+        //on success it will call this function
+        success: function (data) {
+            //change button color
+            var follow = document.getElementById("follow(" + value.Question_ID +")");
+            if(data == 1)
+            {
+                follow.style.color = "green";
+            }
+            else
+            {
+                follow.style.color = "black";
+            }
+        }
+    });
 }
 
 function clearTopicID() 

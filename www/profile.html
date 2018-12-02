@@ -3,10 +3,10 @@
 
     <head>
         <title>Profile</title>
-        <link rel="stylesheet" href="style.css"/>
         <link rel="stylesheet" type="text/css" href="css/profile.css"/>
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
         <!--Popup style sheet-->
-    <link rel="stylesheet" type="text/css" href="css/popup.css"/>
+        <link rel="stylesheet" type="text/css" href="css/popup.css"/>
         <script type="text/javascript" src="js/jquery-3.3.1.min.js"></script>
         <script src="js/popup.js"></script>
         <script type="text/javascript">
@@ -45,6 +45,7 @@
         </div>
         <br><br>
         <table class="userdatainfo">
+                <i class='fas fa-medal' id='fas fa-medal'></i>
             <tbody id="getpublicinfo"> <!-- data will be displayed here -->
         
             </tbody>
@@ -58,17 +59,7 @@
         <div id="content">
             
         </div>
-        <br>
-        <nav class="nav">
-            <a href="insert.html" class="link">Insert</a> |
-            <a href="delete.html" class="link">Delete</a> |
-            <a href="index.html" class="link">Show Data</a> |
-            <a href="login.html" class="link">Login</a> |
-            <a href="register.html" class="link">Register</a> |
-            <a href="changepw.html" class="link">Change PW</a> |
-            <a href="pwreset.html" class="link">Password Reset</a> |
-            <a href="profile.html" class="link">Profile</a>
-        </nav>
+        <br></br>
 
         <div class="icon-location">
             <div class="icon-bar">
@@ -134,19 +125,19 @@
                 var age = datareturned[0].age;
                 var level = datareturned[0].level;
 
-                var img = document.createElement("img");
-                if (level == "Bronze")
-                {
-                    img.src = "images/Bronze.png";
-                }
-                else if(level == "Silver")
-                {
-                    img.src = "images/Silver.png";
-                }
-                else if (level == "Gold")
-                {
-                    img.src = "images/Gold.png";
-                }
+                var medal = document.getElementById('fas fa-medal');
+                    if (level == "Bronze")
+                    {
+                        medal.style.color = "#cd7f32";
+                    }
+                    else if(level == "Silver")
+                    {
+                        medal.style.color = "silver";
+                    }
+                    else if (level == "Gold")
+                    {
+                        medal.style.color = "gold";
+                    }
 
     
                 //combining first name and last name with a space between them
@@ -159,9 +150,7 @@
                 html += "</tr>";
                 html += "<div class='userdata'>";
                         html += "<input type='text' name = username value="+ fullName +" onchange='editName(this)'>";
-                        html += "<br>";
                         html += "<input type='text' name = userTitle value="+ title +" onchange='editTitle(this)'>";
-                        html += "<br>";
                         html += "<input type='text' name = userLocation value="+ location +" onchange='editLocation(this)'>";
                 html += "</div>";
 
@@ -169,7 +158,7 @@
                 document.getElementById("getpublicinfo").innerHTML = html;
             
             var src = document.getElementById("level");
-            $(document).ready(src.appendChild(img));
+            //$(document).ready(src.appendChild(img));
             }
         });
 
@@ -203,21 +192,30 @@
                         var title = datareturned[0].title;
                         var points = datareturned[0].points;
                         var location = datareturned[0].location;
+                        var bio = datareturned[0].Bio;
                         var age = datareturned[0].age;
                         var level = datareturned[0].level;
+                        var following = datareturned[1].following;
+                        var followers = datareturned[2].followers;
+                        var posts = datareturned[3].posts;
 
-                        var img = document.createElement("img");
+                        if(bio === "")
+                        {
+                            bio = "Bio:N/A";
+                        }
+
+                        var medal = document.getElementById('fas fa-medal');
                         if (level == "Bronze")
                         {
-                            img.src = "images/Bronze.png";
+                            medal.style.color = "#cd7f32";
                         }
                         else if(level == "Silver")
                         {
-                            img.src = "images/Silver.png";
+                            medal.style.color = "silver";
                         }
                         else if (level == "Gold")
                         {
-                            img.src = "images/Gold.png";
+                            medal.style.color = "gold";
                         }
 
             
@@ -230,18 +228,20 @@
                             html += "<div id='level' align=right><td></td></div>";
                         html += "</tr>";
                         html += "<div class='userdata'>";
+                                html += "<div class='onebox'>";
                                 html += "<input type='text' name = username value="+ fullName +" onchange='editName(this)'>";
-                                html += "<br>";
                                 html += "<input type='text' name = userTitle value="+ title +" onchange='editTitle(this)'>";
-                                html += "<br>";
                                 html += "<input type='text' name = userLocation value="+ location +" onchange='editLocation(this)'>";
+                                html += "</div>";
+                                html += "<p class= 'userconnections'>" + followers + " Followers | " + following +" Following | " + posts + " posts</p>";
+                                html += "<textarea class='bio' name = bio value="+ bio +" onchange='editBio(this)'>"+bio+"</textarea>";
                         html += "</div>";
 
                         //replace <tbody> of table in html
                         document.getElementById("getpublicinfo").innerHTML = html;
                     
                     var src = document.getElementById("level");
-                    $(document).ready(src.appendChild(img));
+                    //$(document).ready(src.appendChild(img));
                     }
                 });
             }
@@ -361,6 +361,42 @@
 
             }
         });
+    }
+
+    function editBio(obj) 
+	{
+        //store the names into variables
+		var storeBio = obj.value;
+       
+       //call to get userID of the person logged in
+        $.ajax({
+            url: "http://10.0.2.2/api/Profile/getuserID.php",
+            type: "POST",
+            data: "param=no",
+            //on success it will call this function
+            success: function (yourID) {
+
+                var uID = JSON.parse(yourID);
+
+                //if session storage is undefined or if the session storage is holding the same user id as the profile's user id
+                if(sessionStorage.getItem("user_ID") === null || sessionStorage.getItem("user_ID") == uID)
+                {
+                    $.ajax({
+                        method: "POST",
+                        url: "http://10.0.2.2/api/Profile/updatebio.php",
+                        data: {storeBio, storeBio},
+                        success: function (data) {
+                            popup(JSON.parse(data));
+                        }
+                    });
+                }
+                else
+                {
+                    popup("Error: This is not your profile.");
+                }
+
+            }
+        });   
     }
 </script>
 
