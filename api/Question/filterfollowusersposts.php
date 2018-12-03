@@ -5,7 +5,10 @@ header('Content-type: application/json');
 $uID = $_SESSION['user_ID'];
 
 //FETCH ALL USERS THAT ARE BEING FOLLOWED BY SESSION USER
-$fquery = mysqli_query($con, "SELECT * FROM follow_user WHERE user_id1='$uID'");
+$fquery = mysqli_query($con, "SELECT * FROM follow_user WHERE user_id1='$uID' AND u_follow='1'");
+$match = mysqli_num_rows($fquery);
+
+if($match > 0){
 
 //STORE DATA INTO VARIABLE
 while($f = mysqli_fetch_object($fquery)){
@@ -91,8 +94,11 @@ while($f = mysqli_fetch_object($fquery)){
 
 }
 
+}else{
 
+    echo json_encode("no followed users");
+    die();
 
-
-   
+}
+ 
 ?>

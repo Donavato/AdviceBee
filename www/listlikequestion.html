@@ -121,7 +121,7 @@
                 data: dataString,
                 //on success it will call this function
                 success: function (data) {
-                    popup(data);
+                    // popup(data);
                     updatelist();
                 }
             });
@@ -161,7 +161,7 @@
                                         ${value.c_count}
                                     </div>
                                     <div id="u_Heart">
-                                    <i class="far fa-heart" onclick="likeButton(${value.Question_ID})"></i>
+                                    <i class="far fa-heart" onclick="unlikeButton(${value.Question_ID})"></i>
                                     </div>
                                     <i class="far fa-share-square" onclick="sendButton(${value.Question_ID})"></i>
 

@@ -94,15 +94,21 @@ function filterFollowUsersPosts() {
     $.ajax({
         url: "http://10.0.2.2/api/Question/filterfollowusersposts.php",
         type: "POST",
+        dataType: "json",
         data: "param=no",
         //on success it will call this function
         success: function (data) {
-            var DOM = $('#DOM');
-            document.getElementById("DOM").innerHTML = "";
-            //GET DATA AND PARSE IT
-            $.each(data, function (key, value) {
-                CreatePostFollowUsersPosts(DOM, key, value);
-            });
+
+            if (data == "no followed users"){
+                popup("No Followed Users");
+            }else{
+                var DOM = $('#DOM');
+                document.getElementById("DOM").innerHTML = "";
+                //GET DATA AND PARSE IT
+                $.each(data, function (key, value) {
+                    CreatePostFollowUsersPosts(DOM, key, value);
+                });
+            }
 
             //if fail it will give this error
         }, error: function (e) {
@@ -162,7 +168,6 @@ function likeButton(questionID) {
         data: dataString,
         //on success it will call this function
         success: function (data) {
-            popup(data);
             updatelikes();
         }
 
@@ -183,7 +188,6 @@ function likeButtonMostRecent(questionID) {
         data: dataString,
         //on success it will call this function
         success: function (data) {
-            popup(data);
             updatelikesMostRecent();
         }
 
@@ -203,7 +207,6 @@ function likeButtonMostViewed(questionID) {
         data: dataString,
         //on success it will call this function
         success: function (data) {
-            popup(data);
             updatelikesMostViewed();
         }
 
@@ -223,7 +226,6 @@ function likeButtonMostLikes(questionID) {
         data: dataString,
         //on success it will call this function
         success: function (data) {
-            popup(data);
             updateMostLikes();
         }
 
@@ -243,7 +245,6 @@ function likeButtonFollowUsersPosts(questionID) {
         data: dataString,
         //on success it will call this function
         success: function (data) {
-            popup(data);
             updatelikesFollowUsersPosts();
         }
 
@@ -353,12 +354,18 @@ function updatelikesFollowUsersPosts() {
         data: { tID: tID },
         //on success it will call this function
         success: function (data) {
-            var DOM = $('#DOM');
-            document.getElementById("DOM").innerHTML = "";
-            //GET DATA AND PARSE IT
-            $.each(data, function (key, value) {
-                CreatePostFollowUsersPosts(DOM, key, value);
-            });
+
+            if (data == "no followed users"){
+                document.getElementById("DOM").innerHTML = "";
+                popup("No Followed Users");
+            }else{
+                var DOM = $('#DOM');
+                document.getElementById("DOM").innerHTML = "";
+                //GET DATA AND PARSE IT
+                $.each(data, function (key, value) {
+                    CreatePostFollowUsersPosts(DOM, key, value);
+                });
+            }
 
             //if fail it will give this error
         }, error: function (e) {
@@ -382,33 +389,93 @@ function followButton(qID, user_ID2) {
         //on success it will call this function
         success: function (data) {
             popup(data);
+            updatelikes();
         }
 
     });
-
-    $.ajax({
-        url: "http://10.0.2.2/api/Question/checkfollow.php",
-        type: "POST",
-        data: {uID2: uID2, qID: qID},
-        //on success it will call this function
-        success: function (data) {
-            //change button color
-            var follow = document.getElementById("follow(" +qID+ ")");
-            if(data == 1)
-            {
-                follow.style.color = "green";
-                //location.reload();
-            }
-            else
-            {
-                follow.style.color = "black";
-            }
-        }
-    });
-
-    
 
 }
+
+function followButtonMostRecent(qID, user_ID2) {
+    var qID = qID;
+    var uID2 = user_ID2;
+    var dataString = "qID=" + qID + "&uID2=" + uID2;
+
+    $.ajax({
+        url: "http://10.0.2.2/api/Question/followuser.php",
+        type: "POST",
+        dataType: "json",
+        data: dataString,
+        //on success it will call this function
+        success: function (data) {
+            popup(data);
+            updatelikesMostRecent();
+        }
+
+    });
+
+}
+
+function followButtonMostViewed(qID, user_ID2) {
+    var qID = qID;
+    var uID2 = user_ID2;
+    var dataString = "qID=" + qID + "&uID2=" + uID2;
+
+    $.ajax({
+        url: "http://10.0.2.2/api/Question/followuser.php",
+        type: "POST",
+        dataType: "json",
+        data: dataString,
+        //on success it will call this function
+        success: function (data) {
+            popup(data);
+            updatelikesMostViewed();
+        }
+
+    });
+
+}
+
+function followButtonMostLikes(qID, user_ID2) {
+    var qID = qID;
+    var uID2 = user_ID2;
+    var dataString = "qID=" + qID + "&uID2=" + uID2;
+
+    $.ajax({
+        url: "http://10.0.2.2/api/Question/followuser.php",
+        type: "POST",
+        dataType: "json",
+        data: dataString,
+        //on success it will call this function
+        success: function (data) {
+            popup(data);
+            updateMostLikes();
+        }
+
+    });
+
+}
+
+function followButtonFollowUserPosts(qID, user_ID2) {
+    var qID = qID;
+    var uID2 = user_ID2;
+    var dataString = "qID=" + qID + "&uID2=" + uID2;
+
+    $.ajax({
+        url: "http://10.0.2.2/api/Question/followuser.php",
+        type: "POST",
+        dataType: "json",
+        data: dataString,
+        //on success it will call this function
+        success: function (data) {
+            popup(data);
+            updatelikesFollowUsersPosts();
+        }
+
+    });
+
+}
+
 ///REPORT QUESTION FUNCTIONALITY
 function reportButton(questionID) {
     var Question_ID = questionID;
@@ -524,7 +591,7 @@ function clearTopicID() {
 
 
 
-//ADDED DIFFERENT CREATE POSTS FUCNTIONS FOR EACH FILTER
+//ADDED DIFFERENT CREATE POSTS FUNCTIONS FOR EACH FILTER
 //
 //MostRecent
 function CreatePostMostRecent(jElement, key, value) {
@@ -547,10 +614,10 @@ function CreatePostMostRecent(jElement, key, value) {
                     ${value.c_count}
                 </div>
                 <i class="fas fa-exclamation" onclick="reportButton(${value.Question_ID})"></i>
-                <i class="far fa-user" onclick="followButton(${value.Question_ID} , ${value.user_ID2})"></i>
+                <i class="far fa-user" id="follow(${value.Question_ID})" onclick="followButtonMostRecent(${value.Question_ID} , ${value.user_ID2})"></i>
                 
                 <div id="u_Heart">
-                <i class="far fa-heart" onclick="likeButtonMostRecent(${value.Question_ID})"></i>${value.likes}<!-- unfilled -->
+                <i class="far fa-heart" id="heart(${value.Question_ID})" onclick="likeButtonMostRecent(${value.Question_ID})"></i>${value.likes}<!-- unfilled -->
                 </div>
 
                 <!--<i class="far fa-heart" onclick="reportButton(${value.Question_ID})"></i> filled -->
@@ -560,6 +627,46 @@ function CreatePostMostRecent(jElement, key, value) {
         </div>
     </div>
     `)
+    var Question_ID = value.Question_ID;
+
+    $.ajax({
+        url: "http://10.0.2.2/api/Question/checkquestion.php",
+        type: "POST",
+        data: {Question_ID, Question_ID},
+        //on success it will call this function
+        success: function (data) {
+            //change button color
+            var heart = document.getElementById("heart(" + value.Question_ID +")");
+            if(data == 1)
+            {
+                heart.style.color = "red";
+            }
+            else
+            {
+                heart.style.color = "black";
+            }
+        }
+    });
+
+    var User_ID = value.user_ID2;
+    $.ajax({
+        url: "http://10.0.2.2/api/Question/checkfollow.php",
+        type: "POST",
+        data: {uID2: User_ID, qID: Question_ID},
+        //on success it will call this function
+        success: function (data) {
+            //change button color
+            var follow = document.getElementById("follow(" + value.Question_ID +")");
+            if(data == 1)
+            {
+                follow.style.color = "green";
+            }
+            else
+            {
+                follow.style.color = "black";
+            }
+        }
+    });
 }
 
 //MostViewed
@@ -583,10 +690,10 @@ function CreatePostMostViewed(jElement, key, value) {
                     ${value.c_count}
                 </div>
                 <i class="fas fa-exclamation" onclick="reportButton(${value.Question_ID})"></i>
-                <i class="far fa-user" onclick="followButton(${value.Question_ID} , ${value.user_ID2})"></i>
+                <i class="far fa-user" id="follow(${value.Question_ID})" onclick="followButtonMostViewed(${value.Question_ID} , ${value.user_ID2})"></i>
                 
                 <div id="u_Heart">
-                <i class="far fa-heart" onclick="likeButtonMostViewed(${value.Question_ID})"></i>${value.likes}<!-- unfilled -->
+                <i class="far fa-heart" id="heart(${value.Question_ID})" onclick="likeButtonMostViewed(${value.Question_ID})"></i>${value.likes}<!-- unfilled -->
                 </div>
 
                 <!--<i class="far fa-heart" onclick="reportButton(${value.Question_ID})"></i> filled -->
@@ -596,6 +703,46 @@ function CreatePostMostViewed(jElement, key, value) {
         </div>
     </div>
     `)
+    var Question_ID = value.Question_ID;
+
+    $.ajax({
+        url: "http://10.0.2.2/api/Question/checkquestion.php",
+        type: "POST",
+        data: {Question_ID, Question_ID},
+        //on success it will call this function
+        success: function (data) {
+            //change button color
+            var heart = document.getElementById("heart(" + value.Question_ID +")");
+            if(data == 1)
+            {
+                heart.style.color = "red";
+            }
+            else
+            {
+                heart.style.color = "black";
+            }
+        }
+    });
+
+    var User_ID = value.user_ID2;
+    $.ajax({
+        url: "http://10.0.2.2/api/Question/checkfollow.php",
+        type: "POST",
+        data: {uID2: User_ID, qID: Question_ID},
+        //on success it will call this function
+        success: function (data) {
+            //change button color
+            var follow = document.getElementById("follow(" + value.Question_ID +")");
+            if(data == 1)
+            {
+                follow.style.color = "green";
+            }
+            else
+            {
+                follow.style.color = "black";
+            }
+        }
+    });
 }
 
 //MostLikes
@@ -619,10 +766,10 @@ function CreatePostMostLikes(jElement, key, value) {
                     ${value.c_count}
                 </div>
                 <i class="fas fa-exclamation" onclick="reportButton(${value.Question_ID})"></i>
-                <i class="far fa-user" onclick="followButton(${value.Question_ID} , ${value.user_ID2})"></i>
+                <i class="far fa-user" id="follow(${value.Question_ID})" onclick="followButtonMostLikes(${value.Question_ID} , ${value.user_ID2})"></i>
                 
                 <div id="u_Heart">
-                <i class="far fa-heart" onclick="likeButtonMostLikes(${value.Question_ID})"></i>${value.likes}<!-- unfilled -->
+                <i class="far fa-heart" id="heart(${value.Question_ID})" onclick="likeButtonMostLikes(${value.Question_ID})"></i>${value.likes}<!-- unfilled -->
                 </div>
 
                 <!--<i class="far fa-heart" onclick="reportButton(${value.Question_ID})"></i> filled -->
@@ -632,6 +779,46 @@ function CreatePostMostLikes(jElement, key, value) {
         </div>
     </div>
     `)
+    var Question_ID = value.Question_ID;
+
+    $.ajax({
+        url: "http://10.0.2.2/api/Question/checkquestion.php",
+        type: "POST",
+        data: {Question_ID, Question_ID},
+        //on success it will call this function
+        success: function (data) {
+            //change button color
+            var heart = document.getElementById("heart(" + value.Question_ID +")");
+            if(data == 1)
+            {
+                heart.style.color = "red";
+            }
+            else
+            {
+                heart.style.color = "black";
+            }
+        }
+    });
+
+    var User_ID = value.user_ID2;
+    $.ajax({
+        url: "http://10.0.2.2/api/Question/checkfollow.php",
+        type: "POST",
+        data: {uID2: User_ID, qID: Question_ID},
+        //on success it will call this function
+        success: function (data) {
+            //change button color
+            var follow = document.getElementById("follow(" + value.Question_ID +")");
+            if(data == 1)
+            {
+                follow.style.color = "green";
+            }
+            else
+            {
+                follow.style.color = "black";
+            }
+        }
+    });
 }
 
 //FollowUsersPosts
@@ -655,10 +842,10 @@ function CreatePostFollowUsersPosts(jElement, key, value) {
                     ${value.c_count}
                 </div>
                 <i class="fas fa-exclamation" onclick="reportButton(${value.Question_ID})"></i>
-                <i class="far fa-user" onclick="followButton(${value.Question_ID} , ${value.user_ID2})"></i>
+                <i class="far fa-user" id="follow(${value.Question_ID})" onclick="followButtonFollowUserPosts(${value.Question_ID} , ${value.user_ID2})"></i>
                 
                 <div id="u_Heart">
-                <i class="far fa-heart" onclick="likeButtonFollowUsersPosts(${value.Question_ID})"></i>${value.likes}<!-- unfilled -->
+                <i class="far fa-heart" id="heart(${value.Question_ID})" onclick="likeButtonFollowUsersPosts(${value.Question_ID})"></i>${value.likes}<!-- unfilled -->
                 </div>
 
                 <!--<i class="far fa-heart" onclick="reportButton(${value.Question_ID})"></i> filled -->
@@ -668,4 +855,44 @@ function CreatePostFollowUsersPosts(jElement, key, value) {
         </div>
     </div>
     `)
+    var Question_ID = value.Question_ID;
+
+    $.ajax({
+        url: "http://10.0.2.2/api/Question/checkquestion.php",
+        type: "POST",
+        data: {Question_ID, Question_ID},
+        //on success it will call this function
+        success: function (data) {
+            //change button color
+            var heart = document.getElementById("heart(" + value.Question_ID +")");
+            if(data == 1)
+            {
+                heart.style.color = "red";
+            }
+            else
+            {
+                heart.style.color = "black";
+            }
+        }
+    });
+
+    var User_ID = value.user_ID2;
+    $.ajax({
+        url: "http://10.0.2.2/api/Question/checkfollow.php",
+        type: "POST",
+        data: {uID2: User_ID, qID: Question_ID},
+        //on success it will call this function
+        success: function (data) {
+            //change button color
+            var follow = document.getElementById("follow(" + value.Question_ID +")");
+            if(data == 1)
+            {
+                follow.style.color = "green";
+            }
+            else
+            {
+                follow.style.color = "black";
+            }
+        }
+    });
 }
