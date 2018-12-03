@@ -11,7 +11,7 @@
     //call ajax
     var ajax = new XMLHttpRequest();
     var method = "GET";
-    var url = "http://10.0.2.2/api/Profile/dashboardTopics.php";
+    var url = "http://localhost/api/Profile/dashboardTopics.php";
     var asynchronous = true;
 
     ajax.open(method, url, asynchronous);
@@ -58,7 +58,7 @@
             sessionStorage.setItem('topic_id', topic_ID);
             $.ajax({
                 method: "POST",
-                url: "http://10.0.2.2/api/Profile/displaytopicquestions.php",
+                url: "http://localhost/api/Profile/displaytopicquestions.php",
                 data: { Topic_Name: topic_name },
                 //on success it will call this function
                 success: function (data) {
@@ -159,7 +159,7 @@
         var dataString = "Question_ID=" + Question_ID;
 
         $.ajax({
-            url: "http://10.0.2.2/api/Question/likequestion.php",
+            url: "http://localhost/api/Question/likequestion.php",
             type: "POST",
             dataType: "json",
             data: dataString,

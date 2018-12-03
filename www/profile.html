@@ -66,7 +66,7 @@
 
         <div class="icon-location">
             <div class="icon-bar">
-                <a href="index.html"><img src="images/NavBar/list.png" onclick="clearStorageUser()"></a>
+                <a href="index.html"><img src="images/NavBar/home.png" onclick="clearStorageUser()"></a>
                 <a href="groups.html"><img src="images/NavBar/groups.png" onclick="clearStorageUser()"></a>
                 <a href="notification.html" class="badge1" data-badge=""><img src="images/NavBar/notification.png" onclick="clearStorageUser()"></a>
                 <a href="search.html"><img src="images/NavBar/search.png" onclick="clearStorageUser()"></a>
@@ -89,7 +89,7 @@
     if(sessionStorage.getItem("user_ID") === null)
     {
         $.ajax({
-            url: "http://10.0.2.2/api/Profile/getuserID.php",
+            url: "http://localhost/api/Profile/getuserID.php",
             type: "POST",
             data: "param=no",
             //on success it will call this function
@@ -109,7 +109,7 @@
         var uID = sessionStorage.getItem("user_ID");
         $.ajax({
             method: "POST",
-            url: "http://10.0.2.2/api/Profile/getinfo.php",
+            url: "http://localhost/api/Profile/getinfo.php",
             data: {profileID: uID},
             success: function (data) {
 
@@ -169,7 +169,7 @@
     else
     {
         $.ajax({
-            url: "http://10.0.2.2/api/Profile/getuserID.php",
+            url: "http://localhost/api/Profile/getuserID.php",
             type: "POST",
             data: "param=no",
             //on success it will call this function
@@ -179,7 +179,7 @@
 
                 $.ajax({
                     method: "POST",
-                    url: "http://10.0.2.2/api/Profile/getinfo.php",
+                    url: "http://localhost/api/Profile/getinfo.php",
                     data: {profileID: uID},
                     success: function (data) {
 
@@ -264,7 +264,7 @@
        
        //call to get userID of the person logged in
         $.ajax({
-            url: "http://10.0.2.2/api/Profile/getuserID.php",
+            url: "http://localhost/api/Profile/getuserID.php",
             type: "POST",
             data: "param=no",
             //on success it will call this function
@@ -277,7 +277,7 @@
                 {
                     $.ajax({
                         method: "POST",
-                        url: "http://10.0.2.2/api/Profile/updatename.php",
+                        url: "http://localhost/api/Profile/updatename.php",
                         data: {userfirstName: firstName, userlastName: lastName},
                         success: function (data) {
                             //popup(JSON.parse(data));
@@ -301,7 +301,7 @@
 
         //call to get userID of the person logged in
         $.ajax({
-            url: "http://10.0.2.2/api/Profile/getuserID.php",
+            url: "http://localhost/api/Profile/getuserID.php",
             type: "POST",
             data: "param=no",
             //on success it will call this function
@@ -314,7 +314,7 @@
                 {
                     $.ajax({
                         method: "POST",
-                        url: "http://10.0.2.2/api/Profile/updatetitle.php",
+                        url: "http://localhost/api/Profile/updatetitle.php",
                         data: {userTitle: storeTitle},
                         success: function (data) {
                             popup(JSON.parse(data));
@@ -337,7 +337,7 @@
 
         //call to get userID of the person logged in
         $.ajax({
-            url: "http://10.0.2.2/api/Profile/getuserID.php",
+            url: "http://localhost/api/Profile/getuserID.php",
             type: "POST",
             data: "param=no",
             //on success it will call this function
@@ -350,7 +350,7 @@
                 {
                     $.ajax({
                         method: "POST",
-                        url: "http://10.0.2.2/api/Profile/updatelocation.php",
+                        url: "http://localhost/api/Profile/updatelocation.php",
                         data: {userLocation: storeLocation},
                         success: function (data) {
                             popup(JSON.parse(data));
