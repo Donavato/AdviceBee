@@ -4,15 +4,18 @@
 <head>
     <!--initialize jquery from js folder-->
     <script src="js/jquery-3.3.1.min.js"></script>
-    <link href="https://fonts.googleapis.com/css?family=Roboto:400,500,900" rel="stylesheet">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+    <!-- <link href="https://fonts.googleapis.com/css?family=Roboto:400,500,900" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous"> -->
     <!--reference style sheet-->
     <link rel="stylesheet" href="css/main.css">
     <!--Popup style sheet-->
     <link rel="stylesheet" type="text/css" href="css/popup.css"/>
     <link rel="stylesheet" href="css/dashboard.css">
     <!--dashboardTopics stylesheet-->
-	<link rel="stylesheet" type="text/css" href="css/dashboardTopics.css"/>
+    <link rel="stylesheet" type="text/css" href="css/dashboardTopics.css"/>
+    <!--notification stylesheet-->
+    <link rel="stylesheet" type="text/css" href="css/notification.css"/>
+    <link rel="stylesheet" href="font-awesome/css/all.min.css">
 </head>
 
 
@@ -30,20 +33,6 @@
 
     </div><br>
 
-    <nav>
-        <a href="insert.html" class="link">Insert</a>
-        <a href="delete.html" class="link">Delete</a>
-        <a href="index.html" class="link">Show Data</a>
-        <a href="login.html" class="link">Login</a>
-        <a href="register.html" class="link">Register</a>
-        <a href="changepw.html" class="link">Change PW</a>
-        <a href="pwreset.html" class="link">Password Reset</a>
-        <a href="imageOption.html" class="link">Profile Images</a>
-        <a href="profile.html" class="link">Profile</a>
-        <a href="logout.html" class="link">Logout</a>
-    </nav>
-
-
     <!-- FILTER BUTTON LOCATION AND CONTENT -->
     <div class="filterButtonLoc">
         <div class="dropdown">
@@ -51,6 +40,8 @@
             <div id="filter" class="dropdown-content">
                 <a href="javascript:filterMostRecent();">Most Recent</a>
                 <a href="javascript:filterMostView();">Most Viewed</a>
+                <a href="javascript:filterMostLikes();">Most Likes</a>
+                <a href="javascript:filterFollowUsersPosts();">Follow Users</a>
             </div>
         </div>
     </div>
@@ -65,11 +56,9 @@
     <!--Need to update page links. Ran into issues with img src links when in folders-->
     <div class="icon-location">
         <div class="icon-bar">
-            <a href="index.html"><img src="images/NavBar/list.png" onclick="clearTopicID()"></a>
-            <a href="groups.html"><img src="images/NavBar/groups.png" onclick="clearTopicID()"></a>
-
-            <a href="notification.html" class="badge1" data-badge=""><img src="images/NavBar/notification.png" onclick="clearStorageTopicID()"></a>
-
+            <a href="index.html"><img src="images/NavBar/home.png" onclick="clearTopicID()"></a>
+            <a href="groupinfo.html"><img src="images/NavBar/groups.png" onclick="clearTopicID()"></a>
+            <a href="notification.html" class="badge1" data-badge=""><img src="images/NavBar/notification.png" onclick="clearTopicID()"></a>
             <a href="search.html"><img src="images/NavBar/search.png" onclick="clearTopicID()"></a>
             <a href="listfolloweduser.html"><img src="images/NavBar/users.png" onclick="clearTopicID()"></a>
             <a href="listlikequestion.html"><img src="images/NavBar/favorite.png" onclick="clearTopicID()"></a>
@@ -86,7 +75,7 @@
     <script src="js/popup.js"></script>
     <script src="js/dashboard.js"></script>
     <script src="js/logout.js"></script>
-
+    <script src="js/notification.js"></script>
 </body>
 
 </html>

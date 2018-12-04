@@ -1,0 +1,14 @@
+.question {
+    font-weight: bold;
+}
+
+.post {
+    display: flex;
+    flex-direction: column;
+    
+    box-shadow: 1px 1px 1px 1px rgba(0,0,0,.11),-1px 1px 1px 1px rgba(0,0,0,.11);
+    border-radius: 3px;
+    padding: 10px;
+    grid-gap: 10px;
+    background: white;
+}
