@@ -15,7 +15,7 @@
 <script type="text/javascript">
 	//call to get userID of the person logged in
 	$.ajax({
-		url: "http://localhost/api/Profile/getuserID.php",
+		url: "http://10.0.2.2/api/Profile/getuserID.php",
 		type: "POST",
 		data: "param=no",
 		//on success it will call this function
@@ -29,7 +29,7 @@
 				//call ajax
 				var ajax = new XMLHttpRequest();
 				var method = "GET";
-				var url = "http://localhost/api/Profile/getusertopicinfo.php";
+				var url = "http://10.0.2.2/api/Profile/getusertopicinfo.php";
 				var asynchronous = true;
 				
 				ajax.open(method, url, asynchronous);
@@ -57,7 +57,7 @@
 						//call ajax
 						var ajax = new XMLHttpRequest();
 						var method = "GET";
-						var url = "http://localhost/api/Profile/gettopicinfo.php";
+						var url = "http://10.0.2.2/api/Profile/gettopicinfo.php";
 						var asynchronous = true;
 				
 						ajax.open(method, url, asynchronous);
@@ -139,7 +139,7 @@
 				//call ajax
 				var ajax = new XMLHttpRequest();
 				var method = "GET";
-				var url = "http://localhost/api/Profile/getusertopicinfo.php";
+				var url = "http://10.0.2.2/api/Profile/getusertopicinfo.php";
 				var asynchronous = true;
 				
 				ajax.open(method, url, asynchronous);
@@ -167,7 +167,7 @@
 						//call ajax
 						var ajax = new XMLHttpRequest();
 						var method = "GET";
-						var url = "http://localhost/api/Profile/gettopicinfo.php";
+						var url = "http://10.0.2.2/api/Profile/gettopicinfo.php";
 						var asynchronous = true;
 				
 						ajax.open(method, url, asynchronous);
@@ -237,7 +237,7 @@
 			//call ajax
 			$.ajax({
 				method: "POST",
-				url: "http://localhost/api/Profile/addusertopic.php",
+				url: "http://10.0.2.2/api/Profile/addusertopic.php",
 				data: {topicStoreID: storeID}
 			});
 		}
@@ -246,7 +246,7 @@
 			//call ajax
 			$.ajax({
 				method: "POST",
-				url: "http://localhost/api/Profile/deletefromusertopic.php",
+				url: "http://10.0.2.2/api/Profile/deletefromusertopic.php",
 				data: {topicStoreID: storeID}
   			});
 		}
