@@ -5,7 +5,7 @@ $uID = $_SESSION['user_ID'];
 
 if(isset($_POST['view'])){
     
-    //CHECK
+    //IF VALUE PASSED IS 'READ' SET N_READ TO 0
     if($_POST["view"] == "read")
     {
         mysqli_query($con, "UPDATE `notification` SET n_read='1' WHERE user_id=$uID AND n_read='0'");

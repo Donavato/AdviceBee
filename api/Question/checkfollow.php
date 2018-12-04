@@ -23,18 +23,22 @@ while($f = mysqli_fetch_object($a_data))
         $query=mysqli_query($con, "SELECT * FROM follow_user WHERE user_ID1='$uID' AND user_ID2='$uID2'");
         $match  = mysqli_num_rows($query);
         
-        if($match > 0 && $anonymous == 1){
-            echo json_encode(0);
-            die();
+        while($a = mysqli_fetch_object($query)){
+            $u_follow = $a->u_follow;
         }
-        else if($match > 0)
-        {
-            echo json_encode(1);
-            die();
-        }
-        else
-        {
-            echo json_encode(0);
-        }
+
+            if($match > 0 && $anonymous == 1){
+                echo json_encode(0);
+                die();
+            }
+            else if($match > 0 && $u_follow==1)
+            {
+                echo json_encode(1);
+                die();
+            }
+            else
+            {
+                echo json_encode(0);
+            }
     }
 }

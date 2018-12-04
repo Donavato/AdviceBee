@@ -4,25 +4,31 @@ include "../Account/db.php";
 $uID = $_SESSION['user_ID'];
 $qID=$_POST['Question_ID'];
 
+//SELECT ALL QUESTION FROM LIKE_QUESTIONS TABLE
 $query=mysqli_query($con, "SELECT * FROM like_questions WHERE user_ID='$uID' AND question_ID='$qID'");
 $match  = mysqli_num_rows($query);
 
+    //STORE Q_LIKE INTO A VARIABLE
     while($g = mysqli_fetch_object($query)){
         $q_like = $g->question_like;
     }
 
-
+    //IF MATCH AND Q_LIKE = 0 PROCEED
     if($match > 0 && $q_like == 0){
         mysqli_query($con, "UPDATE like_questions SET question_like='1' WHERE user_ID='$uID' AND question_ID='$qID'");
         echo json_encode("Question Liked!");
         die();
 
-    }else if($match > 0){
+    }
+    //IF MATCH AND Q_LIKE = 1 PROCEED
+    else if($match > 0){
         mysqli_query($con, "UPDATE like_questions SET question_like='0' WHERE user_ID='$uID' AND question_ID='$qID'");
         echo json_encode("Question unliked!");
         die();
 
-    }else{
+    }
+    //IF NO MATCH, INSERT INTO LIKE QUESTIONS WITH DATA
+    else{
         //INSERT INTO LIKE QUESTIONS TABLE
         mysqli_query($con,"INSERT INTO `like_questions` (`user_ID`,`question_ID`,`question_like`) VALUES ('$uID','$qID','1')");
         

@@ -3,27 +3,33 @@
 
 if(isset($_POST['reg']))
 {
+   //STORE VALUES FROM THE FORM INTO VARIABLES
    $fname=$_POST['fname'];
    $lname=$_POST['lname'];
    $email=$_POST['email'];
    $email=strtolower($email);
    $password=$_POST['password'];
-   //hash password
+
+   //HASH PASSWORD
    $hashed_password = password_hash($password, PASSWORD_DEFAULT);
-   //hash for email verification
+
+   //CREATE RANDOM HASH FOR EMAIL VERIFICATION
    $hash = md5(rand(0,1000));
 
    //CHECK IF EMAIL ALREADY EXISTS
    $check=mysqli_query($con, "SELECT * FROM `users` WHERE email='$email'");
    $match = mysqli_num_rows($check);
 
+   //IF EMAIL EXIST SEND MESSAGE 'EMAIL EXIST' ELSE PROCEED WITH REGISTRATION
    if($match > 0){
       echo json_encode("email exist");
+      die();
    }else{
 
+      //INSERT INTO TABLE USERS ALL THE DATA GIVEN
       $query=mysqli_query($con,"INSERT INTO `users` (`f_name`,`l_name`,`email`,`passwrd`,`ehash`) VALUES ('$fname','$lname','$email','$hashed_password','$hash')");
 
-      //EMAIL VERIFICATION
+      //SEND EMAIL VERIFICATION EMAIL
       $to = $email; // Send email to our user
       $subject = 'AdviceBee | Email Verification'; // Give the email a subject 
    
