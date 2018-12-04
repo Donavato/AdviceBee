@@ -9,7 +9,7 @@
 
     //call to get userID of the person logged in
     $.ajax({
-        url: "http://10.0.2.2/api/Profile/getuserID.php",
+        url: "http://localhost/api/Profile/getuserID.php",
         type: "POST",
         data: "param=no",
         //on success it will call this function
@@ -32,7 +32,7 @@
         {
             $.ajax({
                 method: "POST",
-                url: "http://10.0.2.2/api/Profile/getinfo.php",
+                url: "http://localhost/api/Profile/getinfo.php",
                 data: {profileID: uID},
                 success: function (data) {
 
@@ -49,9 +49,9 @@
                     html += "<tr>";
                         html += "<td>" + "Email: " + Email + "</td>";
                     html += "</tr>";
-                    html += "<tr>";
-                        html += "<td>" + "Age: " + age + "</td>";
-                    html += "</tr>";
+                    html +="<tr>";
+                        html += "<p id='age'>Age: <input type='number' name = age value="+ age +" onchange='editAge(this)'></p>";
+                    html +="</tr>";
                     
                     //replace <tbody> of table in html
                     document.getElementById("getinfo").innerHTML = html;
@@ -60,45 +60,42 @@
             }
         }
     });
-            
-        
-        /*//call ajax
-        var ajax = new XMLHttpRequest();
-        var method = "GET";
-        var url = "http://10.0.2.2/api/Profile/getinfo.php";
-        var asynchronous = true;
-        
-        ajax.open(method, url, asynchronous);
-        
-        //sending ajax
-        ajax.send();
-        
-        //recieve response from getinfo.php
-        ajax.onreadystatechange = function()
-        {
-            if(this.readyState == 4 && this.status == 200)
-            {
-                //converting JSON taken from getinfo.php to array
-                var data = JSON.parse(this.responseText);
-                console.log(data); 
-                
-                //html value for <tbody>
-                var html = "";
-                
-                var Email = data[0].email;
-                var age = data[0].age;
-                
-                
-                //tie into html
-                html += "<tr>";
-                    html += "<td>" + "Email: " + Email + "</td>";
-                html += "</tr>";
-                html += "<tr>";
-                    html += "<td>" + "Age: " + age + "</td>";
-                html += "</tr>";
-                
-                //replace <tbody> of table in html
-                document.getElementById("getinfo").innerHTML = html;
+    </script>
+
+    <script type="text/javascript">
+        function editAge(obj) 
+	{
+        //store the names into variables
+		var storeAge = obj.value;
+       
+       //call to get userID of the person logged in
+        $.ajax({
+            url: "http://localhost/api/Profile/getuserID.php",
+            type: "POST",
+            data: "param=no",
+            //on success it will call this function
+            success: function (yourID) {
+
+                var uID = JSON.parse(yourID);
+
+                //if session storage is undefined or if the session storage is holding the same user id as the profile's user id
+                if(sessionStorage.getItem("user_ID") === null || sessionStorage.getItem("user_ID") == uID)
+                {
+                    $.ajax({
+                        method: "POST",
+                        url: "http://localhost/api/Profile/updateage.php",
+                        data: {storeAge, storeAge},
+                        success: function (data) {
+                            popup(JSON.parse(data));
+                        }
+                    });
+                }
+                else
+                {
+                    popup("Error: This is not your profile.");
+                }
+
             }
-        }*/
+        });   
+    }
     </script>

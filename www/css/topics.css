@@ -1,8 +1,8 @@
 .switch {
     position: relative;
     display: inline-block;
-    width: 80px;
-    height: 54px;
+    width: 155px;
+    height: 57px;
     text-align: center;
     line-height: 54px
   }
@@ -15,7 +15,6 @@
   
   .slider {
     position: absolute;
-    cursor: pointer;
     top: 0;
     left: 0;
     right: 0;

@@ -4,7 +4,7 @@
 	//store user id from session into variable
 	$user_ID=$_SESSION['user_ID'];
 	
-	$location = $_POST['userLocation'];
+	$location = mysqli_real_escape_string($con, $_POST['userLocation']);
 	
 	//query table to update it with new location
 	mysqli_query($con,

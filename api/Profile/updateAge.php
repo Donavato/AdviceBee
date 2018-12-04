@@ -4,14 +4,14 @@
 	//store user id from session into variable
 	$user_ID=$_SESSION['user_ID'];
 	
-	$title = mysqli_real_escape_string($con, $_POST["userTitle"]);
+	$age = mysqli_real_escape_string($con, $_POST['storeAge'];
 	
-	//query table to update it with new title
+	//query table to update it with new location
 	mysqli_query($con,
 	"UPDATE `users` 
-	SET `title` = '$title' 
+	SET `age` = '$age' 
 	WHERE `users`.`user_ID` = $user_ID");
 
-	echo json_encode("Title successfully changed");
+	echo json_encode("Age successfully changed");
 	die();
 ?>
