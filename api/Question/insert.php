@@ -82,7 +82,6 @@
         echo json_encode("No account");
         die();
     }
-    
-}
+
     
 ?>
