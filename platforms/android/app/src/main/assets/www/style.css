@@ -45,7 +45,7 @@ p {
 }
 
 /* Style for input forms */
-.input {
+.inputbox {
     width: 285px;
     height: 41px;
     padding: 15px 10px;
@@ -242,6 +242,9 @@ h3 {
     right: 20px;
     font-size: 20px;
     font-weight: bold;
+    text-decoration: none;
+    font-family: "Segoe UI";
+    color: #707070;
 }
 
 /* Generic class for center elements */
@@ -606,6 +609,15 @@ padding: 5px 0px;
     display: flex;
     flex-direction: row;
     justify-content: center;
+}
+
+.charactercount {
+    font-family: "Segoe UI";
+    font-size: 10pt;
+    color: #707070;
+    display: flex;
+    justify-content: flex-end;
+    padding-right: 30px;
 }
 
 /* --------------------------------------------- */
