@@ -669,3 +669,13 @@ function CreatePostFollowUsersPosts(jElement, key, value) {
     </div>
     `)
 }
+
+//Open right side menu
+function openNav() {
+    document.getElementById("rightSidenav").style.width = "250px";
+}
+
+//Close right side menu
+function closeNav() {
+    document.getElementById("rightSidenav").style.width = "0";
+}

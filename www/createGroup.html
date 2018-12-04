@@ -30,23 +30,22 @@
                     
                         <input type="text" id="Subject" maxlength="30" value="" placeholder="Group name" /><br>
                         <textarea id="Description" placeholder="Group description"></textarea>
-                        <p>
+                        <p class="charactercount">
                             <span id="wordCount">250</span>/250 characters
                         </p>
                     
-            
-                    <div class="insertbox">
-                        <div class="optionbox">
-                            <label class="label">Topic: </label>
+                    <div class="optionbox">
+                        <div class="insertbox">
+                            <label class="label">Topic: </label><br>
                             <select id="topics_list" class="select"></select>
             
-                        <div class="imageupload">
-                            <img id="photo" />
-                            <input type="button" id="btn" value="Take" class="uploadbutton" />
-                            <input type="button" id="btn2" value="Upload" class="uploadbutton" />
-                        </div>
-                    </div> 
-                
+                            <div class="imageupload">
+                                <img id="photo" />
+                                <input type="button" id="btn" value="Take" class="uploadbutton" />
+                                <input type="button" id="btn2" value="Upload" class="uploadbutton" />
+                            </div>
+                        </div> 
+                    </div>
                     <br>
                     <div class="item">
                         <input type="button" id="cancel" value="Cancel" class="cancel" />
@@ -56,16 +55,16 @@
                 </div>
                 <br>
             
-                <!--Need to update page links. Ran into issues with img src links when in folders-->
+                <!--Nav bar at the bottom of the page-->
                 <div class="icon-location">
                     <div class="icon-bar">
-                        <a href="index.html"><img src="list.png"></a>
-                        <a href="groupinfo.html"><img src="groups.png"></a>
-                        <a href="notification.html"><img src="notification.png"></a>
-                        <a href="search.html"><img src="search.png"></a>
-                        <a href="listfolloweduser.html"><img src="users.png"></a>
-                        <a href="favorite.html"><img src="favorite.png"></a>
-                        <a href="profile.html"><img src="profile.png"></a>
+                        <a href="index.html"><img src="images/NavBar/home.png" onclick="clearTopicID()"></a>
+                        <a href="groupinfo.html"><img src="images/NavBar/groups.png" onclick="clearTopicID()"></a>
+                        <a href="notification.html" class="badge1" data-badge=""><img src="images/NavBar/notification.png" onclick="clearTopicID()"></a>
+                        <a href="search.html"><img src="images/NavBar/search.png" onclick="clearTopicID()"></a>
+                        <a href="listfolloweduser.html"><img src="images/NavBar/users.png" onclick="clearTopicID()"></a>
+                        <a href="listlikequestion.html"><img src="images/NavBar/favorite.png" onclick="clearTopicID()"></a>
+                        <a href="profile.html"><img src="images/NavBar/profile.png" onclick="clearTopicID()"></a>
                     </div>
                 </div>
             

@@ -41,15 +41,6 @@
 
     </form>
 
-    <nav>
-        <a href="insert.html" class="link">Insert</a>
-        <a href="delete.html" class="link">Delete</a>
-        <a href="index.html" class="link">Show Data</a>
-        <a href="login.html" class="link">Login</a>
-        <a href="register.html" class="link">Register</a>
-        <a href="changepw.html" class="link">Change PW</a>
-        <a href="pwreset.html" class="link">Password Reset</a>
-    </nav>
      <div class="hover-bkgr-fricc">      <!--Add this div to page for pop up-->
         <span class="helper"></span>
         <div>
@@ -103,7 +94,7 @@
 
                     $.ajax({
                         type: "POST",
-                        url: "http://localhost/api/Account/register.php",
+                        url: "http://10.0.2.2/api/Account/register.php",
                         dataType: "json",
                         data: dataString,
                         success: function(data) {

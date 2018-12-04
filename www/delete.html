@@ -27,7 +27,7 @@
     <script type="text/javascript">
         $(document).ready(function () {
             $.ajax({
-                url: "http://localhost/api/Question/myQuestions.php",
+                url: "http://10.0.2.2/api/Question/myQuestions.php",
                 type: "POST",
                 dataType: "json",
                 data: "param=no",
@@ -72,7 +72,7 @@
             // Send Question ID and Delete.
             var dataString = "Question_ID=" + Question_id;
             $.ajax({
-                url: "http://localhost/api/Question/delete.php",
+                url: "http://10.0.2.2/api/Question/delete.php",
                 type: "POST",
                 dataType: "json",
                 data: dataString,
@@ -85,7 +85,7 @@
         // Update the list of questions after delete
         function updatelist(){
             $.ajax({
-                url: "http://localhost/api/Question/myQuestions.php",
+                url: "http://10.0.2.2/api/Question/myQuestions.php",
                 type: "POST",
                 dataType: "json",
                 data: "param=no",
