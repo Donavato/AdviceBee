@@ -32,13 +32,8 @@
     <div class="icon-location">
         <div class="icon-bar">
             <a href="index.html"><img src="images/NavBar/home.png"></a>
-            <a href="groups.html"><img src="images/NavBar/groups.png"></a>
-
-            <!--    //////////////         TEST HERE        /////////////              -->
-
+            <a href="groupinfo.html"><img src="images/NavBar/groups.png"></a>
             <a href="notification.html" class="badge1" data-badge=""><img src="images/NavBar/notification.png"></a>
-
-
             <a href="search.html"><img src="images/NavBar/search.png"></a>
             <a href="listfolloweduser.html"><img src="images/NavBar/users.png"></a>
             <a href="listlikequestion.html"><img src="images/NavBar/favorite.png"></a>
@@ -53,7 +48,7 @@
         $(document).ready(function () {
             // LIST NOTIFICATIONS
             $.ajax({
-                url: "http://localhost/api/notification/listnotifcontent.php",
+                url: "http://10.0.2.2/api/notification/listnotifcontent.php",
                 type: "POST",
                 dataType: "json",
                 data: "param=no",
