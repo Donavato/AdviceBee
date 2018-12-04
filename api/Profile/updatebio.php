@@ -4,7 +4,7 @@
 	//store user id from session into variable
 	$user_ID=$_SESSION['user_ID'];
 	
-	$bio = $_POST['storeBio'];
+	$bio = mysqli_real_escape_string($con, $_POST['storeBio']);
 	
 	//query table to update it with new location
 	mysqli_query($con,

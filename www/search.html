@@ -164,6 +164,7 @@
             window.location.replace("advice.html");
         }
         function sendUser(uID) {
+            sessionStorage.setItem('user_ID', uID);
             sessionStorage.user_id = uID;
             window.location.replace("profile.html");
         }

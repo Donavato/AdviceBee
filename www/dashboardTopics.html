@@ -46,7 +46,7 @@
 </script>
 
 <script type="text/javascript">
-    
+
     function displayQuestions(obj, tID) {
         var topic_name = obj;
         sessionStorage.setItem('topic_obj', obj);
@@ -71,7 +71,7 @@
                     $.each(arrayQuestions, function (key, value) {
 
                         //APPEND DATA AND DISPLAY IT
-                        
+
                         value.dImage = (value.dImage === "<img src = >") ? '' : value.dImage;
                         topicsButtons.append(`
                             <div class="post">
@@ -91,19 +91,57 @@
                                             ${value.c_count}
                                         </div>
                                         <i class="fas fa-exclamation" onclick="reportButton(${value.Question_ID})"></i>
-                                        <i class="far fa-user" onclick="followButton(${value.Question_ID} , ${value.user_ID2})"></i>
+                                        <i class="far fa-user" id="follow(${value.Question_ID})" onclick="followButtonTopics(${value.Question_ID} , ${value.user_ID2})"></i>
                                         
                                         <div id="u_Heart">
-                                        <i class="far fa-heart" onclick="likeButtonTopics(${value.Question_ID})"></i>${value.likes}<!-- unfilled -->
+                                        <i class="far fa-heart" id="heart(${value.Question_ID})" onclick="likeButtonTopics(${value.Question_ID})"></i>${value.likes}<!-- unfilled -->
                                         </div>
 
                                         <!--<i class="far fa-heart" onclick="reportButton(${value.Question_ID})"></i> filled -->
                                         <i class="far fa-share-square" onclick="sendButton(${value.Question_ID})"></i>
+                                        <a class="twitter-share-button"
+                                        href="https://twitter.com/intent/tweet?text=${value.Description}"><i class="fab fa-twitter" style="color:black" ></i></a>
 
                                     </div>
                                 </div>
                             </div>
                             `)
+                        var Question_ID = value.Question_ID;
+
+                        $.ajax({
+                            url: "http://10.0.2.2/api/Question/checkquestion.php",
+                            type: "POST",
+                            data: { Question_ID, Question_ID },
+                            //on success it will call this function
+                            success: function (data) {
+                                //change button color
+                                var heart = document.getElementById("heart(" + value.Question_ID + ")");
+                                if (data == 1) {
+                                    heart.style.color = "red";
+                                }
+                                else {
+                                    heart.style.color = "black";
+                                }
+                            }
+                        });
+
+                        var User_ID = value.user_ID2;
+                        $.ajax({
+                            url: "http://10.0.2.2/api/Question/checkfollow.php",
+                            type: "POST",
+                            data: { uID2: User_ID, qID: Question_ID },
+                            //on success it will call this function
+                            success: function (data) {
+                                //change button color
+                                var follow = document.getElementById("follow(" + value.Question_ID + ")");
+                                if (data == 1) {
+                                    follow.style.color = "green";
+                                }
+                                else {
+                                    follow.style.color = "black";
+                                }
+                            }
+                        });
 
                     });
                     //if fail it will give this error
@@ -119,8 +157,8 @@
 
     function likeButtonTopics(questionID) {
 
-    var Question_ID = questionID;
-    var dataString = "Question_ID=" + Question_ID;
+        var Question_ID = questionID;
+        var dataString = "Question_ID=" + Question_ID;
 
         $.ajax({
             url: "http://10.0.2.2/api/Question/likequestion.php",
@@ -131,14 +169,34 @@
             success: function (data) {
                 var topic_obj = sessionStorage.getItem("topic_obj");
                 var tID = sessionStorage.getItem("topic_id");
-                popup(data);
                 displayQuestions(topic_obj, tID);
-                
+
             }
 
         });
     }
 
+    function followButtonTopics(qID, user_ID2) {
+    var qID = qID;
+    var uID2 = user_ID2;
+    var dataString = "qID=" + qID + "&uID2=" + uID2;
+
+    $.ajax({
+        url: "http://10.0.2.2/api/Question/followuser.php",
+        type: "POST",
+        dataType: "json",
+        data: dataString,
+        //on success it will call this function
+        success: function (data) {
+            var topic_obj = sessionStorage.getItem("topic_obj");
+            var tID = sessionStorage.getItem("topic_id");
+            popup(data);
+            displayQuestions(topic_obj, tID);
+        }
+
+    });
+
+}
+
 
 </script>
-

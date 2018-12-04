@@ -7,7 +7,8 @@
         <!--notification stylesheet-->
         <link rel="stylesheet" type="text/css" href="css/notification.css"/>
         <link rel="stylesheet" type="text/css" href="css/profile.css"/>
-        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+        <!-- <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous"> -->
+        <link rel="stylesheet" href="font-awesome/css/all.min.css">
         <!--Popup style sheet-->
         <link rel="stylesheet" type="text/css" href="css/popup.css"/>
         <script type="text/javascript" src="js/jquery-3.3.1.min.js"></script>
@@ -46,18 +47,14 @@
         <div id="profile_picture">
 
         </div>
-        <br><br>
-        <table class="userdatainfo">
-                <i class='fas fa-medal' id='fas fa-medal'></i>
-            <tbody id="getpublicinfo"> <!-- data will be displayed here -->
-        
-            </tbody>
-        </table>
+        <div id="userinfo">
+
+        </div>
 
         <ul id="nav">
             <li class="tablinks"><a href="info">Info</a></li>
             <li class="tablinks"><a href="topicinfo">Topics</a></li>
-            <li class="tablinks"><a href="changepw">Account</a></li>
+            <li class="tablinks"><a href="delete">Posts</a></li>
         </ul>
         <div id="content">
             
@@ -125,40 +122,49 @@
                 var title = datareturned[0].title;
                 var points = datareturned[0].points;
                 var location = datareturned[0].location;
+                var bio = datareturned[0].Bio;
                 var age = datareturned[0].age;
                 var level = datareturned[0].level;
+                var following = datareturned[1].following;
+                var followers = datareturned[2].followers;
+                var posts = datareturned[3].posts;
 
-                var medal = document.getElementById('fas fa-medal');
-                    if (level == "Bronze")
-                    {
-                        medal.style.color = "#cd7f32";
-                    }
-                    else if(level == "Silver")
-                    {
-                        medal.style.color = "silver";
-                    }
-                    else if (level == "Gold")
-                    {
-                        medal.style.color = "gold";
-                    }
+                if(bio === "")
+                {
+                    bio = "Bio:N/A";
+                }
+
+                if (level == "Bronze")
+                {
+                    var medal = "<i class='fas fa-medal' id='fas fa-medal' style='color:#cd7f32'></i>";
+                }
+                else if(level == "Silver")
+                {
+                    var medal = "<i class='fas fa-medal' id='fas fa-medal' style='color:silver'></i>";
+                }
+                else if (level == "Gold")
+                {
+                    var medal = "<i class='fas fa-medal' id='fas fa-medal' style='color:gold'></i>";
+                }
 
     
                 //combining first name and last name with a space between them
                 var fullName= f_name + '\xa0' + l_name;
 
                 //tie into html
-                html += "<tr>";
-                    html += "<td align=left>Credit: " + points + " pts</td>";
-                    html += "<div id='level' align=right><td></td></div>";
-                html += "</tr>";
+                html += "<div id='points'><p>Credit: " + points + " pts"+ medal +"</p></div>";;
                 html += "<div class='userdata'>";
+                        html += "<div class='onebox'>";
                         html += "<input type='text' name = username value="+ fullName +" onchange='editName(this)'>";
                         html += "<input type='text' name = userTitle value="+ title +" onchange='editTitle(this)'>";
                         html += "<input type='text' name = userLocation value="+ location +" onchange='editLocation(this)'>";
+                        html += "</div>";
+                        html += "<p class= 'userconnections'>" + followers + " Followers | " + following +" Following | " + posts + " posts</p>";
+                        html += "<textarea class='bio' name = bio value="+ bio +" onchange='editBio(this)'>"+bio+"</textarea>";
                 html += "</div>";
 
                 //replace <tbody> of table in html
-                document.getElementById("getpublicinfo").innerHTML = html;
+                document.getElementById("userinfo").innerHTML = html;
             
             var src = document.getElementById("level");
             //$(document).ready(src.appendChild(img));
@@ -207,18 +213,17 @@
                             bio = "Bio:N/A";
                         }
 
-                        var medal = document.getElementById('fas fa-medal');
                         if (level == "Bronze")
                         {
-                            medal.style.color = "#cd7f32";
+                            var medal = "<i class='fas fa-medal' id='fas fa-medal' style='color:#cd7f32'></i>";
                         }
                         else if(level == "Silver")
                         {
-                            medal.style.color = "silver";
+                            var medal = "<i class='fas fa-medal' id='fas fa-medal' style='color:silver'></i>";
                         }
                         else if (level == "Gold")
                         {
-                            medal.style.color = "gold";
+                            var medal = "<i class='fas fa-medal' id='fas fa-medal' style='color:gold'></i>";
                         }
 
             
@@ -226,22 +231,19 @@
                         var fullName= f_name + '\xa0' + l_name;
 
                         //tie into html
-                        html += "<tr>";
-                            html += "<td align=left>Credit: " + points + " pts</td>";
-                            html += "<div id='level' align=right><td></td></div>";
-                        html += "</tr>";
+                        html += "<div id='points'><p>Credit: " + points + " pts"+ medal +"</p></div>";;
                         html += "<div class='userdata'>";
                                 html += "<div class='onebox'>";
-                                html += "<input type='text' name = username value="+ fullName +" onchange='editName(this)'>";
-                                html += "<input type='text' name = userTitle value="+ title +" onchange='editTitle(this)'>";
-                                html += "<input type='text' name = userLocation value="+ location +" onchange='editLocation(this)'>";
+                                html += "<input type='text' name = username value='"+ fullName +"' onchange='editName(this)'>";
+                                html += "<input type='text' name = userTitle value='"+ title +"' onchange='editTitle(this)'>";
+                                html += "<input type='text' name = userLocation value='"+ location +"' onchange='editLocation(this)'>";
                                 html += "</div>";
                                 html += "<p class= 'userconnections'>" + followers + " Followers | " + following +" Following | " + posts + " posts</p>";
                                 html += "<textarea class='bio' name = bio value="+ bio +" onchange='editBio(this)'>"+bio+"</textarea>";
                         html += "</div>";
 
                         //replace <tbody> of table in html
-                        document.getElementById("getpublicinfo").innerHTML = html;
+                        document.getElementById("userinfo").innerHTML = html;
                     
                     var src = document.getElementById("level");
                     //$(document).ready(src.appendChild(img));
@@ -256,11 +258,13 @@
 
 	function editName(obj) 
 	{
+        var storeName= StringReplace(obj.value);
         //store the names into variables
-		var storeName = obj.value.split(/[' ''\xa0']/);
+		var storeName = storeName.split(/[' ''\xa0']/);
         var firstName = storeName[0];
         storeName.shift();
         var lastName = storeName.join(' ');
+        console.log(lastName);
        
        //call to get userID of the person logged in
         $.ajax({
@@ -296,8 +300,7 @@
 
     function editTitle(obj)
     {
-        //store the title into variable
-		var storeTitle = obj.value;
+        var storeTitle= StringReplace(obj.value);
 
         //call to get userID of the person logged in
         $.ajax({
@@ -332,8 +335,7 @@
 
     function editLocation(obj)
     {
-        //store the location into variable
-		var storeLocation = obj.value;
+        var storeLocation= StringReplace(obj.value);
 
         //call to get userID of the person logged in
         $.ajax({
@@ -401,10 +403,21 @@
             }
         });   
     }
+
+    //function to check and replace all apostrophes before inserting into database
+    function StringReplace(obj)
+    {
+        var input = obj;
+        while(input.search("'")>-1)
+        {
+            input = input.replace("'", "&#39;");
+        }
+        return(input);
+    }
 </script>
 
 <script type="text/javascript">
-
+    //clear the current stored user in the session storage
 	function clearStorageUser() 
 	{
         sessionStorage.removeItem("user_ID");

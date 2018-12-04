@@ -5,9 +5,9 @@
     <!--initialize jquery from js folder-->
     <script src="js/jquery-3.3.1.min.js"></script>
 
-    <link href="https://fonts.googleapis.com/css?family=Roboto:400,500,900" rel="stylesheet">
-<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
-
+    <!-- <link href="https://fonts.googleapis.com/css?family=Roboto:400,500,900" rel="stylesheet">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous"> -->
+<link rel="stylesheet" href="font-awesome/css/all.min.css">
     <!--reference style sheet-->
     <link rel="stylesheet" href="css/main.css">
     <!--notification stylesheet-->
@@ -18,8 +18,7 @@
 
     <link rel="stylesheet" type="text/css" href="css/navigation.css"/>
     
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
-</head>
+    </head>
 
 <body>
     <h1 class="generalTitle">Liked Questions</h1>
@@ -117,7 +116,7 @@
                 data: dataString,
                 //on success it will call this function
                 success: function (data) {
-                    popup(data);
+                    // popup(data);
                     updatelist();
                 }
             });
@@ -156,7 +155,7 @@
                                         ${value.c_count}
                                     </div>
                                     <div id="u_Heart">
-                                    <i class="far fa-heart" onclick="likeButton(${value.Question_ID})"></i>
+                                    <i class="far fa-heart" onclick="unlikeButton(${value.Question_ID})"></i>
                                     </div>
                                     <i class="far fa-share-square" onclick="sendButton(${value.Question_ID})"></i>
 

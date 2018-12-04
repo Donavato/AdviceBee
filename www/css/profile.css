@@ -13,7 +13,7 @@ body {
 
 ul#nav li{
     display: inline-block;
-    width: 30%;
+    width: 33%;
     text-align: center;
     border: 1px solid black;
 }
@@ -31,8 +31,10 @@ input{
     align-content: center;
 }
 
-input[type="text"]{
-    border: none;
+
+
+.onebox input[type="text"]{
+    width: 306px;
 }
 
 button.active {
@@ -42,13 +44,17 @@ button.active {
 .bio input[type="text"], textarea{
     background-color: rgb(246, 246, 246);
     text-align: center;
-    display: grid;
+    /*display: grid;*/
     box-shadow: 1px 1px 1px 1px rgba(0,0,0,.11), -1px 1px 1px 1px rgba(0,0,0,.11);
     border-radius: 3px;
     padding: 4px;
     grid-gap: 10px;
-    width: 270px;
+    width: 306px;
     height: 100px;
+}
+
+.bio{
+    align-content: center;
 }
 
 #content{
@@ -68,7 +74,7 @@ table{
 #nav li {
     background-color: inherit;
     float: left;
-    border: none;
+    border: 8px;
     outline: none;
     cursor: pointer;
     padding: 14px 16px;
@@ -76,7 +82,6 @@ table{
     font-size: 17px;
     width: 33%;
     font-weight: bold; 
-    color: rgb(121, 121, 121);
 }
 
 #nav li:active {
@@ -86,13 +91,18 @@ table{
 #profile_picture img{
     border-radius: 50%;
     position: relative;
-    top: -50px;
+    /*top: -50px;*/
     left: 37%;
+}
+
+#profile_picture{
+    position: relative;
+    top:-50px;
 }
 
 #getpublicinfo td{
     position: relative;
-    top: -110px;
+    /*top: -110px;*/
     background-color: rgb(246, 246, 246);
     display: grid;
     box-shadow: 1px 1px 1px 1px rgba(0,0,0,.11), -1px 1px 1px 1px rgba(0,0,0,.11);
@@ -103,7 +113,7 @@ table{
 
 #getpublicinfo #level{
     position: relative;
-    top: -100px;
+    /*top: -100px;*/
 }
 
 #getpublicinfo{
@@ -129,7 +139,7 @@ table{
 .userdata{
     padding: 38px;
     position: relative;
-    top: -120px;
+    /*top: -120px;*/
 }
 
 #wallpaper img{
@@ -152,14 +162,14 @@ table{
 
 div #content{
     position: relative;
-    top: -50px;
+    /* top: -50px; */
 }
 
 .fa, .fab, .fal, .far, .fas{
     float: right;
     font-size: 35px;
     position: relative;
-    top: -60px;
+    /*top: -60px;*/
     display: grid;
     box-shadow: 1px 1px 1px 1px rgba(0,0,0,.11),-1px 1px 1px 1px rgba(0,0,0,.11);
     border-radius: 3px;
@@ -167,7 +177,7 @@ div #content{
     grid-gap: 10px;
 }
 
-/* Search buttons */
+/* Link buttons */
 .tab button {
     background-color: inherit;
     float: left;
@@ -234,4 +244,18 @@ padding: 5px 0px;
     grid-gap: 10px;
     width: 270px;
     background-color: rgb(246, 246, 246);
+}
+
+#points{
+    position: relative;
+    top: -50px;
+}
+
+p#age{
+    text-align: center;
+}
+
+a{
+    text-decoration: none;
+    font-family: 'Roboto', sans-serif;
 }

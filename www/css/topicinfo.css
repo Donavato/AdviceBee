@@ -4,7 +4,7 @@
     width: 155px;
     height: 57px;
     text-align: center;
-    line-height: 54px
+    line-height: 54px;
   }
   
   .switch input { 
@@ -15,7 +15,6 @@
   
   .slider {
     position: absolute;
-    cursor: pointer;
     top: 0;
     left: 0;
     right: 0;
@@ -52,4 +51,8 @@
     display: block;
     height: 220px;
     overflow-y: scroll;
+  }
+
+  p.listTopics{
+    text-align: center;
   }
