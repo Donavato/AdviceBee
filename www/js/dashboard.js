@@ -539,7 +539,7 @@ function CreatePost(jElement, key, value) {
                 <!--<i class="far fa-heart" onclick="reportButton(${value.Question_ID})"></i> filled -->
                 <i class="far fa-share-square" id='addView' onclick="sendButton(${value.Question_ID} , ${value.user_ID2})"></i>
                 <a class="twitter-share-button"
-        href="https://twitter.com/intent/tweet?text=${value.Description}"><i class="fab fa-twitter" style="color:black" ></i></a>
+                href="https://twitter.com/intent/tweet?text=${value.Description}"><i class="fab fa-twitter" style="color:black" ></i></a>
             </div>
         </div>
     </div>
@@ -855,7 +855,7 @@ function CreatePostFollowUsersPosts(jElement, key, value) {
                 <!--<i class="far fa-heart" onclick="reportButton(${value.Question_ID})"></i> filled -->
                 <i class="far fa-share-square" onclick="sendButton(${value.Question_ID})"></i>
                 <a class="twitter-share-button"
-        href="https://twitter.com/intent/tweet?text=${value.Description}"><i class="fab fa-twitter" style="color:black" ></i></a>
+                href="https://twitter.com/intent/tweet?text=${value.Description}"><i class="fab fa-twitter" style="color:black" ></i></a>
             </div>
         </div>
     </div>
