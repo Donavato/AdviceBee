@@ -75,14 +75,14 @@
             // Specify validation error messages
             messages: {
                 old_password:{
-                    required: "*Please provide a password"
+                    required: "<div id='error'>*Please provide a password</div>"
                 },
                 new_password: {
-                    required: "*Please provide a password",
-                    minlength: "*Your password must be at least 5 characters long"
+                    required: "<div id='error'>*Please provide a password</div>",
+                    minlength: "<div id='error'>*Your password must be at least 5 characters long</div>"
                 },
                 confirm_password: {
-                    equalTo: "*Please enter the same password"
+                    equalTo: "<div id='error'>*Please enter the same password</div>"
                 }
 
             },

@@ -72,16 +72,16 @@
             },
             // Specify validation error messages
             messages: {
-                firstname: "*Please provide a firstname",
-                lastname: "*Please provide a lastname",
+                firstname: "<div id='error'>*Please provide a firstname</div>",
+                lastname: "<div id='error'>*Please provide a lastname</div>",
                 password: {
-                    required: "*Please provide a password",
-                    minlength: "*Your password must be at least 5 characters long"
+                    required: "<div id='error'>*Please provide a password</div>",
+                    minlength: "<div id='error'>*Your password must be at least 5 characters long</div>"
                 },
                 confirm_password: {
-                    equalTo: "*Please enter the same password"
+                    equalTo: "<div id='error'>*Please enter the same password</div>"
                 },
-                email: "*Please enter a valid email address"
+                email: "<div id='error'>*Please enter a valid email address</div>"
             },
             submitHandler: function (form) {
 
