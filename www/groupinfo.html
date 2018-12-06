@@ -68,7 +68,6 @@
 			<a href="index.html"><img src="images/NavBar/home.png" onclick="clearGroupID()"></a>
 			<a href="groupinfo.html"><img src="images/NavBar/groups.png" onclick="clearGroupID()"></a>
 			<a href="notification.html" class="badge1" data-badge=""><img src="images/NavBar/notification.png" onclick="clearGroupID()"></a>
-
 			<a href="search.html"><img src="images/NavBar/search.png" onclick="clearGroupID()"></a>
 			<a href="listfolloweduser.html"><img src="images/NavBar/users.png" onclick="clearGroupID()"></a>
 			<a href="listlikequestion.html"><img src="images/NavBar/favorite.png" onclick="clearGroupID()"></a>
@@ -337,7 +336,7 @@
 
 	<!-- LIKES -->
 	<script type="text/javascript">
-		function likeButtonGroup(questionID) {
+		function likeButton(questionID) {
 			var Question_ID = questionID;
 			var dataString = "Question_ID=" + Question_ID;
 
@@ -414,8 +413,6 @@
 			$.ajax({
 				url: "http://10.0.2.2/api/Question/fetchdatagroup.php",
 				type: "POST",
-				contentType: "application/json; charset=utf-8",
-				dataType: "json",
 				data: "param=no",
 				//on success it will call this function
 				success: function (data) {
@@ -515,8 +512,13 @@
 				data: dataString,
 				//on success it will call this function
 				success: function (data) {
-					popup(data);
-					updatelikesGroup();
+
+					if (data == "Cannot follow user!") {
+						popup(data);
+					} else {
+						updatelikesGroup();
+					}
+					
 				}
 
 			});
@@ -534,8 +536,13 @@
 				data: dataString,
 				//on success it will call this function
 				success: function (data) {
-					popup(data);
-					updatelikesMostRecentGroup();
+
+					if (data == "Cannot follow user!") {
+						popup(data);
+					} else {
+						updatelikesMostRecentGroup();
+					}
+					
 				}
 
 			});
@@ -553,8 +560,13 @@
 				data: dataString,
 				//on success it will call this function
 				success: function (data) {
-					popup(data);
-					updatelikesMostViewGroup();
+
+					if (data == "Cannot follow user!") {
+						popup(data);
+					} else {
+						updatelikesMostViewGroup();
+					}
+					
 				}
 
 			});
@@ -572,8 +584,13 @@
 				data: dataString,
 				//on success it will call this function
 				success: function (data) {
-					popup(data);
-					updatelikesMostLikesGroup();
+
+					if (data == "Cannot follow user!") {
+						popup(data);
+					} else {
+						updatelikesMostLikesGroup();
+					}
+					
 				}
 
 			});
@@ -605,7 +622,7 @@
 								<i class="far fa-user" id="follow(${value.Question_ID})" onclick="followButton(${value.Question_ID} , ${value.user_ID2})"></i>
                 
 								<div id="u_Heart">
-									<i class="far fa-heart" id="heart(${value.Question_ID})" onclick="likeButtonGroup(${value.Question_ID})"></i>${value.likes}<!-- unfilled -->
+									<i class="far fa-heart" id="heart(${value.Question_ID})" onclick="likeButton(${value.Question_ID})"></i>${value.likes}<!-- unfilled -->
 								</div>
 
 								<!--<i class="far fa-heart" onclick="reportButton(${value.Question_ID})"></i> filled -->

@@ -190,8 +190,13 @@
         success: function (data) {
             var topic_obj = sessionStorage.getItem("topic_obj");
             var tID = sessionStorage.getItem("topic_id");
-            popup(data);
-            displayQuestions(topic_obj, tID);
+            
+            if (data == "Cannot follow user!") {
+                popup(data);
+            } else {
+                displayQuestions(topic_obj, tID);
+            }
+            
         }
 
     });

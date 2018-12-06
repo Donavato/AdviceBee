@@ -388,8 +388,13 @@ function followButton(qID, user_ID2) {
         data: dataString,
         //on success it will call this function
         success: function (data) {
-            popup(data);
-            updatelikes();
+
+            if (data == "Cannot follow user!") {
+                popup(data);
+            } else {
+                updatelikes();
+            }
+            
         }
 
     });
@@ -408,8 +413,13 @@ function followButtonMostRecent(qID, user_ID2) {
         data: dataString,
         //on success it will call this function
         success: function (data) {
-            popup(data);
-            updatelikesMostRecent();
+
+            if (data == "Cannot follow user!") {
+                popup(data);
+            } else {
+                updatelikesMostRecent();
+            }
+            
         }
 
     });
@@ -428,8 +438,13 @@ function followButtonMostViewed(qID, user_ID2) {
         data: dataString,
         //on success it will call this function
         success: function (data) {
-            popup(data);
-            updatelikesMostViewed();
+
+            if (data == "Cannot follow user!") {
+                popup(data);
+            } else {
+                updatelikesMostViewed();
+            }
+            
         }
 
     });
@@ -448,8 +463,13 @@ function followButtonMostLikes(qID, user_ID2) {
         data: dataString,
         //on success it will call this function
         success: function (data) {
-            popup(data);
-            updateMostLikes();
+
+            if (data == "Cannot follow user!") {
+                popup(data);
+            } else {
+                updateMostLikes();
+            }
+            
         }
 
     });
@@ -468,8 +488,13 @@ function followButtonFollowUserPosts(qID, user_ID2) {
         data: dataString,
         //on success it will call this function
         success: function (data) {
-            popup(data);
-            updatelikesFollowUsersPosts();
+            
+            if (data == "Cannot follow user!") {
+                popup(data);
+            } else {
+                updatelikesFollowUsersPosts();
+            }
+            
         }
 
     });
