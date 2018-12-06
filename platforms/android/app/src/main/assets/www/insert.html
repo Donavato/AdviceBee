@@ -56,6 +56,11 @@
             <div class="optionbox">
                 <label class="label">Topic: </label>
                 <select id="topics_list" class="select"></select>
+
+                <label class="label">Groups: </label>
+                <select id="groups_list" class="select">
+                    
+                </select>
       
                 <label class="label">Type: </label>
                 <select id="question_type" class="select"></select><br>
@@ -178,7 +183,7 @@
             { 
                 multipleInputs.append(`
                     <div id='mcInputs'>
-                        <input type="text" class='myinputs' id="${i}" maxlength="10" placeholder="Choice ${i}"/>
+                        <input type="text" class='myinputs' id="${i}" maxlength="20" placeholder="Choice ${i}"/>
                     </div>
                 `)   
             }
@@ -213,6 +218,21 @@
                     document.getElementById("topics_list").innerHTML = text;
                 }
             })
+            
+            //PULL ALL GROUPS AND STORE THEM INTO A DROP DOWN FOR groups_list
+            $.ajax({
+                type: "POST",
+                url: "http://10.0.2.2/api/groups.php",
+                success: function (response) {
+                    var data = JSON.parse(JSON.stringify(response));
+                    var text = "";
+                    text = data.reduce((acc, item) => "<option value='" + item + "'>" + item + "</option>" + acc, '')
+                    document.getElementById("groups_list").innerHTML = text;
+                    text="<option value='No Group'>No Group</option>";
+                    var noSelect = $('#groups_list');
+                    noSelect.append(text);
+                }
+            })
             //PULL ALL QUESTION TYPES AND PUT THEM INTO A DROPDOWN question_type
             $.ajax({
                 type: "POST",
@@ -235,9 +255,16 @@
                 var Description = $("#Description").val();
                 var Subject = $("#Subject").val();
                 var topic = $('#topics_list').val();
+                var group = $('#groups_list').val();
                 var type = $("#question_type").val();
                 var anonymous;
                 var hide;
+                Description=StringReplace(Description);
+                Subject=StringReplace(Subject);
+                if(group == "No Group")
+                {
+                    group="";
+                }
                 if(multipleChoice == "Multiple"){
                     var inputs = document.getElementsByClassName("myinputs");
                     var inputArr = new Array();
@@ -261,6 +288,7 @@
                         Description: Description,
                         Subject: Subject,
                         topic: topic,
+                        group: group,
                         question_type: type,
                         anonymous: anonymous,
                         image: image_Content,
@@ -309,6 +337,19 @@
             wordCount.innerText = wordCounts;
         });
     </script>
+
+    <script type="text/javascript">
+        //function to check and replace all apostrophes before inserting into database
+        function StringReplace(obj)
+        {
+            var input = obj;
+            while(input.search("'")>-1)
+            {
+                input = input.replace("'", "&#39;");
+            }
+            return(input);
+        }
+</script>
 <script src="js/popup.js"></script>
 <script src="js/notification.js"></script>
 </body>
