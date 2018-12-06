@@ -23,10 +23,13 @@
             $like_count = mysqli_num_rows($likequery);
         }
 
-        if($d_Image == NULL ||$d_Image == "None"){
-            $d_Image = NULL;
+        //UPDATE LIKES IN QUESTIONS TABLE WITH WITH ROW COUNTS
+        if($like_count == 0){
+            $like_count = " ";
+            mysqli_query($con,"UPDATE `questions` SET likes='$like_count' WHERE Question_ID=$Question_ID");
         }else{
-            $d_Image = $r->image;
+            $like_count = mysqli_num_rows($likequery);
+            mysqli_query($con,"UPDATE `questions` SET likes='$like_count' WHERE Question_ID=$Question_ID");
         }
 
         $query = mysqli_query($con, "SELECT f_name, l_name FROM users WHERE user_ID='$user_ID2'"); 

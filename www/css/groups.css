@@ -34,10 +34,20 @@ input:focus + .slider {
 }
 
 /* Rounded sliders */
-.slider.round {
-  border-radius: 34px;
-}
 
 .slider.round:before {
   border-radius: 50%;
 }
+  .slider.round {
+    width: 200px;
+    border-style: solid;
+    border-width: 2px;
+    border-radius: 34px;
+    font-family: "Segoe UI";
+    color: #707070;
+    font-weight: bold;
+  }
+  .tbody {
+    display: inline;
+    padding: 25%;
+  }

@@ -19,29 +19,31 @@
     <form action="" id="change" method="POST">
 
         <label for="old_password"></label>
-        <input type="password" name="old_password" id="old_password" placeholder="Current Password"><br>
+        <input type="password" class="inputbox" name="old_password" id="old_password" placeholder="Current Password"><br>
      
         <label for="new_password"></label>
-        <input type="password" name="new_password" id="new_password" placeholder="New Password"><br>
+        <input type="password" class="inputbox" name="new_password" id="new_password" placeholder="New Password"><br>
  
         <label for="confirm_password"></label>
-        <input type="password" name="confirm_password" id="confirm_password" placeholder="Confirm Password"><br>
+        <input type="password" class="inputbox" name="confirm_password" id="confirm_password" placeholder="Confirm Password"><br>
 
         <button type="submit" name="submit" id="submit" class="submit">Done</button><br>
         <br>
 
     </form>
 
+    <div class="icon-location">
+        <div class="icon-bar">
+            <a href="index.html"><img src="images/NavBar/home.png"></a>
+            <a href="groups.html"><img src="images/NavBar/groups.png"></a>
+            <a href="notification.html" class="badge1" data-badge=""><img src="images/NavBar/notification.png"></a>
+            <a href="search.html"><img src="images/NavBar/search.png"></a>
+            <a href="listfolloweduser.html"><img src="images/NavBar/users.png"></a>
+            <a href="listlikequestion.html"><img src="images/NavBar/favorite.png"></a>
+            <a href="profile.html"><img src="images/NavBar/profile.png"></a>
+        </div>
+    </div>
 
-    <nav class="nav">
-        <a href="insert.html" class="link">Insert</a> |
-        <a href="delete.html" class="link">Delete</a> |
-        <a href="index.html" class="link">Show Data</a> |
-        <a href="login.html" class="link">Login</a> |
-        <a href="register.html" class="link">Register</a> |
-        <a href="changepw.html" class="link">Change PW</a> |
-        <a href="pwreset.html" class="link">Password Reset</a>
-    </nav>
 
     <div class="hover-bkgr-fricc">      <!--Add this div to page for pop up-->
         <span class="helper"></span>
@@ -73,14 +75,14 @@
             // Specify validation error messages
             messages: {
                 old_password:{
-                    required: "*Please provide a password"
+                    required: "<div id='error'>*Please provide a password</div>"
                 },
                 new_password: {
-                    required: "*Please provide a password",
-                    minlength: "*Your password must be at least 5 characters long"
+                    required: "<div id='error'>*Please provide a password</div>",
+                    minlength: "<div id='error'>*Your password must be at least 5 characters long</div>"
                 },
                 confirm_password: {
-                    equalTo: "*Please enter the same password"
+                    equalTo: "<div id='error'>*Please enter the same password</div>"
                 }
 
             },
