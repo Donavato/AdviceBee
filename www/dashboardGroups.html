@@ -11,7 +11,7 @@
         //call ajax
         var ajax = new XMLHttpRequest();
         var method = "GET";
-        var url = "http://10.0.2.2/api/Profile/dashboardGroups.php";
+        var url = "http://localhost/api/Profile/dashboardGroups.php";
         var asynchronous = true;
     
         ajax.open(method, url, asynchronous);
@@ -57,7 +57,7 @@
                 sessionStorage.setItem('group_id', group_ID);
                 $.ajax({
                     method: "POST",
-                    url: "http://10.0.2.2/api/Profile/displaygroupquestions.php",
+                    url: "http://localhost/api/Profile/displaygroupquestions.php",
                     data: { Group_Name: group_name },
                     //on success it will call this function
                     success: function (data) {
@@ -107,7 +107,7 @@
                                 var Question_ID = value.Question_ID;
 
                                 $.ajax({
-                                    url: "http://10.0.2.2/api/Question/checkquestion.php",
+                                    url: "http://localhost/api/Question/checkquestion.php",
                                     type: "POST",
                                     data: {Question_ID, Question_ID},
                                     //on success it will call this function
@@ -127,7 +127,7 @@
 
                                 var User_ID = value.user_ID2;
                                 $.ajax({
-                                    url: "http://10.0.2.2/api/Question/checkfollow.php",
+                                    url: "http://localhost/api/Question/checkfollow.php",
                                     type: "POST",
                                     data: {uID2: User_ID, qID: Question_ID},
                                     //on success it will call this function

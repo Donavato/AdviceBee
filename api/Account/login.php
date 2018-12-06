@@ -24,6 +24,32 @@
             $_SESSION['email']= $user['email'];              //user email
             $_SESSION['user_ID'] = $user['user_ID'];         //user ID
             $_SESSION['active'] = $user['active'];           //has user verified their email
+            $_SESSION['level'] = $user['level'];
+            //store date
+            $today = date("Y-m-d");
+            $uID=$_SESSION['user_ID'];
+            $result2 = $con->query("SELECT * FROM `points` WHERE `user_id`=$uID AND `date`='$today'");
+
+            //check to see if the user was not given any points on this day
+            if($result2->num_rows == 0)
+            {
+                if($_SESSION['level']=="Bronze")
+                {
+                    mysqli_query($con,"INSERT INTO `points`(`user_id`, `points`, `date`) VALUES ($uID, '50', '$today')");
+                }
+                else if($_SESSION['level']=="Silver")
+                {
+                    mysqli_query($con,"INSERT INTO `points`(`user_id`, `points`, `date`) VALUES ($uID, '100', '$today')");
+                }
+                else
+                {
+                    mysqli_query($con,"INSERT INTO `points`(`user_id`, `points`, `date`) VALUES ($uID, '200', '$today')");
+                }
+            }
+            $result3 = $con->query("SELECT * FROM `points` WHERE `user_id`=$uID AND `date`='$today'");
+            //set the points the user has
+            $points = $result3->fetch_assoc();
+            $_SESSION['points'] = intval($points['points']);
             
             //Will be used to check if users session is logged in/allowed to do things
             $_SESSION['logged_in'] = true;  
