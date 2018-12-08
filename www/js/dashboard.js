@@ -634,7 +634,7 @@ function CreatePostMostRecent(jElement, key, value) {
                     ${value.dImage}
                     <div class="description">${value.Description}</div>
             </div>
-            <div class="post-footer" style="font-size: 1.2rem;"> 
+            <div class="post-footer" style="font-size: 1.3rem;"> 
                 <div>
                     <i class="far fa-comment" onclick="sendButton(${value.Question_ID})"></i>
                     ${value.c_count}
@@ -711,7 +711,7 @@ function CreatePostMostViewed(jElement, key, value) {
                     ${value.dImage}
                     <div class="description">${value.Description}</div>
             </div>
-            <div class="post-footer" style="font-size: 1.2rem;"> 
+            <div class="post-footer" style="font-size: 1.3rem;"> 
                 <div>
                     <i class="far fa-comment" onclick="sendButton(${value.Question_ID})"></i>
                     ${value.c_count}
@@ -788,7 +788,7 @@ function CreatePostMostLikes(jElement, key, value) {
                     ${value.dImage}
                     <div class="description">${value.Description}</div>
             </div>
-            <div class="post-footer" style="font-size: 1.2rem;"> 
+            <div class="post-footer" style="font-size: 1.3rem;"> 
                 <div>
                     <i class="far fa-comment" onclick="sendButton(${value.Question_ID})"></i>
                     ${value.c_count}
@@ -865,7 +865,7 @@ function CreatePostFollowUsersPosts(jElement, key, value) {
                     ${value.dImage}
                     <div class="description">${value.Description}</div>
             </div>
-            <div class="post-footer" style="font-size: 1.2rem;"> 
+            <div class="post-footer" style="font-size: 1.3rem;"> 
                 <div>
                     <i class="far fa-comment" onclick="sendButton(${value.Question_ID})"></i>
                     ${value.c_count}

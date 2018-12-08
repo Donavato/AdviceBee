@@ -9,6 +9,8 @@
 		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous"> -->
 	<!--reference style sheet-->
 	<link rel="stylesheet" href="css/main.css">
+	<!--notification stylesheet-->
+    <link rel="stylesheet" type="text/css" href="css/notification.css"/>
 	<!--Popup style sheet-->
 	<link rel="stylesheet" type="text/css" href="css/popup.css" />
 	<link rel="stylesheet" href="css/dashboard.css">
@@ -613,7 +615,7 @@
 									${value.dImage}
 									<div class="description">${value.Description}</div>
 							</div>
-							<div class="post-footer" style="font-size: 1.2rem;"> 
+							<div class="post-footer" style="font-size: 1.3rem;"> 
 								<div>
 									<i class="far fa-comment" onclick="sendButton(${value.Question_ID})"></i>
 									${value.c_count}
@@ -687,7 +689,7 @@
 									${value.dImage}
 									<div class="description">${value.Description}</div>
 							</div>
-							<div class="post-footer" style="font-size: 1.2rem;"> 
+							<div class="post-footer" style="font-size: 1.3rem;"> 
 								<div>
 									<i class="far fa-comment" onclick="sendButton(${value.Question_ID})"></i>
 									${value.c_count}
@@ -761,7 +763,7 @@
 									${value.dImage}
 									<div class="description">${value.Description}</div>
 							</div>
-							<div class="post-footer" style="font-size: 1.2rem;"> 
+							<div class="post-footer" style="font-size: 1.3rem;"> 
 								<div>
 									<i class="far fa-comment" onclick="sendButton(${value.Question_ID})"></i>
 									${value.c_count}
@@ -835,7 +837,7 @@
 									${value.dImage}
 									<div class="description">${value.Description}</div>
 							</div>
-							<div class="post-footer" style="font-size: 1.2rem;"> 
+							<div class="post-footer" style="font-size: 1.3rem;"> 
 								<div>
 									<i class="far fa-comment" onclick="sendButton(${value.Question_ID})"></i>
 									${value.c_count}
@@ -927,6 +929,7 @@
 			sessionStorage.removeItem("group_id");
 		}
 	</script>
+	<script src="js/notification.js"></script>
 </body>
 
 </html>
