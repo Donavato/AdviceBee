@@ -114,7 +114,7 @@ who created a post, share a post on twitter, or report a post.
 		//call ajax
 		var ajax = new XMLHttpRequest();
 		var method = "GET";
-		var url = "http://localhost/api/Profile/getusergroupinfo.php";
+		var url = "http://10.0.2.2/api/Profile/getusergroupinfo.php";
 		var asynchronous = true;
 
 		ajax.open(method, url, asynchronous);
@@ -139,7 +139,7 @@ who created a post, share a post on twitter, or report a post.
 				//call ajax
 				var ajax = new XMLHttpRequest();
 				var method = "GET";
-				var url = "http://localhost/api/Profile/getgroupinfo.php";
+				var url = "http://10.0.2.2/api/Profile/getgroupinfo.php";
 				var asynchronous = true;
 
 				ajax.open(method, url, asynchronous);
@@ -221,7 +221,7 @@ who created a post, share a post on twitter, or report a post.
 				//call ajax
 				$.ajax({
 					method: "POST",
-					url: "http://localhost/api/Profile/addusergroup.php",
+					url: "http://10.0.2.2/api/Profile/addusergroup.php",
 					data: { groupStoreID: storeID }
 				});
 			}
@@ -229,7 +229,7 @@ who created a post, share a post on twitter, or report a post.
 				//call ajax
 				$.ajax({
 					method: "POST",
-					url: "http://localhost/api/Profile/deletefromusergroup.php",
+					url: "http://10.0.2.2/api/Profile/deletefromusergroup.php",
 					data: { groupStoreID: storeID }
 				});
 			}
@@ -267,7 +267,7 @@ who created a post, share a post on twitter, or report a post.
 		function filterMostRecentGroup() {
 			var gID = sessionStorage.getItem('group_id');
 			$.ajax({
-				url: "http://localhost/api/Question/filtermostrecentgroup.php",
+				url: "http://10.0.2.2/api/Question/filtermostrecentgroup.php",
 				type: "POST",
 				data: { gID: gID },
 				//on success it will call this function
@@ -293,7 +293,7 @@ who created a post, share a post on twitter, or report a post.
 		function filterMostViewGroup() {
 			var gID = sessionStorage.getItem('group_id');
 			$.ajax({
-				url: "http://localhost/api/Question/filtermostviewgroup.php",
+				url: "http://10.0.2.2/api/Question/filtermostviewgroup.php",
 				type: "POST",
 				data: { gID: gID },
 				//on success it will call this function
@@ -319,7 +319,7 @@ who created a post, share a post on twitter, or report a post.
 		function filterMostLikesGroup() {
 			var gID = sessionStorage.getItem('group_id');
 			$.ajax({
-				url: "http://localhost/api/Question/filtermostlikesgroup.php",
+				url: "http://10.0.2.2/api/Question/filtermostlikesgroup.php",
 				type: "POST",
 				data: { gID: gID },
 				//on success it will call this function
@@ -348,7 +348,7 @@ who created a post, share a post on twitter, or report a post.
 			var dataString = "Question_ID=" + Question_ID;
 
 			$.ajax({
-				url: "http://localhost/api/Question/likequestion.php",
+				url: "http://10.0.2.2/api/Question/likequestion.php",
 				type: "POST",
 				dataType: "json",
 				data: dataString,
@@ -366,7 +366,7 @@ who created a post, share a post on twitter, or report a post.
 			var dataString = "Question_ID=" + Question_ID;
 
 			$.ajax({
-				url: "http://localhost/api/Question/likequestion.php",
+				url: "http://10.0.2.2/api/Question/likequestion.php",
 				type: "POST",
 				dataType: "json",
 				data: dataString,
@@ -384,7 +384,7 @@ who created a post, share a post on twitter, or report a post.
 			var dataString = "Question_ID=" + Question_ID;
 
 			$.ajax({
-				url: "http://localhost/api/Question/likequestion.php",
+				url: "http://10.0.2.2/api/Question/likequestion.php",
 				type: "POST",
 				dataType: "json",
 				data: dataString,
@@ -402,7 +402,7 @@ who created a post, share a post on twitter, or report a post.
 			var dataString = "Question_ID=" + Question_ID;
 
 			$.ajax({
-				url: "http://localhost/api/Question/likequestion.php",
+				url: "http://10.0.2.2/api/Question/likequestion.php",
 				type: "POST",
 				dataType: "json",
 				data: dataString,
@@ -418,7 +418,7 @@ who created a post, share a post on twitter, or report a post.
 		//UPDATES
 		function updatelikesGroup() {
 			$.ajax({
-				url: "http://localhost/api/Question/fetchdatagroup.php",
+				url: "http://10.0.2.2/api/Question/fetchdatagroup.php",
 				type: "POST",
 				data: "param=no",
 				//on success it will call this function
@@ -441,7 +441,7 @@ who created a post, share a post on twitter, or report a post.
 		function updatelikesMostRecentGroup() {
 			var gID = sessionStorage.getItem('group_id');
 			$.ajax({
-				url: "http://localhost/api/Question/filtermostrecentgroup.php",
+				url: "http://10.0.2.2/api/Question/filtermostrecentgroup.php",
 				type: "POST",
 				data: { gID: gID },
 				//on success it will call this function
@@ -464,7 +464,7 @@ who created a post, share a post on twitter, or report a post.
 		function updatelikesMostViewGroup() {
 			var gID = sessionStorage.getItem('group_id');
 			$.ajax({
-				url: "http://localhost/api/Question/filtermostviewgroup.php",
+				url: "http://10.0.2.2/api/Question/filtermostviewgroup.php",
 				type: "POST",
 				data: { gID: gID },
 				//on success it will call this function
@@ -487,7 +487,7 @@ who created a post, share a post on twitter, or report a post.
 		function updatelikesMostLikesGroup() {
 			var gID = sessionStorage.getItem('group_id');
 			$.ajax({
-				url: "http://localhost/api/Question/filtermostlikesgroup.php",
+				url: "http://10.0.2.2/api/Question/filtermostlikesgroup.php",
 				type: "POST",
 				data: { gID: gID },
 				//on success it will call this function
@@ -513,7 +513,7 @@ who created a post, share a post on twitter, or report a post.
 			var dataString = "qID=" + qID + "&uID2=" + uID2;
 
 			$.ajax({
-				url: "http://localhost/api/Question/followuser.php",
+				url: "http://10.0.2.2/api/Question/followuser.php",
 				type: "POST",
 				dataType: "json",
 				data: dataString,
@@ -537,7 +537,7 @@ who created a post, share a post on twitter, or report a post.
 			var dataString = "qID=" + qID + "&uID2=" + uID2;
 
 			$.ajax({
-				url: "http://localhost/api/Question/followuser.php",
+				url: "http://10.0.2.2/api/Question/followuser.php",
 				type: "POST",
 				dataType: "json",
 				data: dataString,
@@ -561,7 +561,7 @@ who created a post, share a post on twitter, or report a post.
 			var dataString = "qID=" + qID + "&uID2=" + uID2;
 
 			$.ajax({
-				url: "http://localhost/api/Question/followuser.php",
+				url: "http://10.0.2.2/api/Question/followuser.php",
 				type: "POST",
 				dataType: "json",
 				data: dataString,
@@ -585,7 +585,7 @@ who created a post, share a post on twitter, or report a post.
 			var dataString = "qID=" + qID + "&uID2=" + uID2;
 
 			$.ajax({
-				url: "http://localhost/api/Question/followuser.php",
+				url: "http://10.0.2.2/api/Question/followuser.php",
 				type: "POST",
 				dataType: "json",
 				data: dataString,
@@ -644,7 +644,7 @@ who created a post, share a post on twitter, or report a post.
 			var Question_ID = value.Question_ID;
 
 			$.ajax({
-				url: "http://localhost/api/Question/checkquestion.php",
+				url: "http://10.0.2.2/api/Question/checkquestion.php",
 				type: "POST",
 				data: { Question_ID, Question_ID },
 				//on success it will call this function
@@ -662,7 +662,7 @@ who created a post, share a post on twitter, or report a post.
 
 			var User_ID = value.user_ID2;
 			$.ajax({
-				url: "http://localhost/api/Question/checkfollow.php",
+				url: "http://10.0.2.2/api/Question/checkfollow.php",
 				type: "POST",
 				data: { uID2: User_ID, qID: Question_ID },
 				//on success it will call this function
@@ -718,7 +718,7 @@ who created a post, share a post on twitter, or report a post.
 			var Question_ID = value.Question_ID;
 
 			$.ajax({
-				url: "http://localhost/api/Question/checkquestion.php",
+				url: "http://10.0.2.2/api/Question/checkquestion.php",
 				type: "POST",
 				data: { Question_ID, Question_ID },
 				//on success it will call this function
@@ -736,7 +736,7 @@ who created a post, share a post on twitter, or report a post.
 
 			var User_ID = value.user_ID2;
 			$.ajax({
-				url: "http://localhost/api/Question/checkfollow.php",
+				url: "http://10.0.2.2/api/Question/checkfollow.php",
 				type: "POST",
 				data: { uID2: User_ID, qID: Question_ID },
 				//on success it will call this function
@@ -792,7 +792,7 @@ who created a post, share a post on twitter, or report a post.
 			var Question_ID = value.Question_ID;
 
 			$.ajax({
-				url: "http://localhost/api/Question/checkquestion.php",
+				url: "http://10.0.2.2/api/Question/checkquestion.php",
 				type: "POST",
 				data: { Question_ID, Question_ID },
 				//on success it will call this function
@@ -810,7 +810,7 @@ who created a post, share a post on twitter, or report a post.
 
 			var User_ID = value.user_ID2;
 			$.ajax({
-				url: "http://localhost/api/Question/checkfollow.php",
+				url: "http://10.0.2.2/api/Question/checkfollow.php",
 				type: "POST",
 				data: { uID2: User_ID, qID: Question_ID },
 				//on success it will call this function
@@ -866,7 +866,7 @@ who created a post, share a post on twitter, or report a post.
 			var Question_ID = value.Question_ID;
 
 			$.ajax({
-				url: "http://localhost/api/Question/checkquestion.php",
+				url: "http://10.0.2.2/api/Question/checkquestion.php",
 				type: "POST",
 				data: { Question_ID, Question_ID },
 				//on success it will call this function
@@ -884,7 +884,7 @@ who created a post, share a post on twitter, or report a post.
 
 			var User_ID = value.user_ID2;
 			$.ajax({
-				url: "http://localhost/api/Question/checkfollow.php",
+				url: "http://10.0.2.2/api/Question/checkfollow.php",
 				type: "POST",
 				data: { uID2: User_ID, qID: Question_ID },
 				//on success it will call this function
@@ -906,7 +906,7 @@ who created a post, share a post on twitter, or report a post.
 		$(document).ready(function () {
 			// LIST QUESTIONS
 			$.ajax({
-				url: "http://localhost/api/Question/fetchdatagroup.php",
+				url: "http://10.0.2.2/api/Question/fetchdatagroup.php",
 				type: "POST",
 				contentType: "application/json; charset=utf-8",
 				dataType: "json",
