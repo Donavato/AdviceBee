@@ -13,6 +13,7 @@ and submitting a new image.
     <!--Popup style sheet-->
     <link rel="stylesheet" type="text/css" href="css/popup.css"/>
     <link rel="stylesheet" type="text/css" href="css/notification.css"/>
+    <link rel="stylesheet" type="text/css" href="css/profileImage.css"/>
     <link rel="stylesheet" href="style.css"/>
 
     <meta http-equiv="Content-Security-Policy" content=" style-src 'self' 'unsafe-inline'; 
@@ -46,12 +47,18 @@ and submitting a new image.
             </div>
         </div>
     <div class="page">
-        <p><img alt="image" id="photo"/></p>
+        <h1 class="generalTitle">Change Profile Image</h1>
+
+        <div class="imageContainer">
+            <img id="photo" class="profileImage"/>
+        </div>
         <br>
         <!-- <p><img alt="image" id="photo2" /></p> -->
-        <p><button id="btn">TAKE</button></p>
-        <br>
-        <p><button id="btn2">UPLOAD</button></p>
+        <div class="buttonContainer">
+            <button id="btn" class="imageButton" style="background: url(images/take.png)"></button>
+            <br>
+            <button id="btn2" class="imageButton" style="background: url(images/upload.png)"></button>
+        </div>
         <!-- <p id="msg"></p> -->
         <br>
         <button id="submit" class="submit">Submit</button>
@@ -126,7 +133,7 @@ and submitting a new image.
             $("#submit").click(function () {
                 
                 $.ajax({
-                    url: "http://10.0.2.2/api/profile_image/profile.php",
+                    url: "http://localhost/api/profile_image/profile.php",
                     type: "POST",
                     data: {
                         base64: image_Content                             //Base64 data type send to API

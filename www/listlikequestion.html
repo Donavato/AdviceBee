@@ -57,7 +57,7 @@ and unlike the question if they choose to.
     <script type="text/javascript">
         $(document).ready(function () {
             $.ajax({
-                url: "http://10.0.2.2/api/Question/listlikequestion.php",
+                url: "http://localhost/api/Question/listlikequestion.php",
                 type: "POST",
                 dataType: "json",
                 data: "param=no",
@@ -115,7 +115,7 @@ and unlike the question if they choose to.
 
             var dataString = "Question_ID=" + Question_ID;
             $.ajax({
-                url: "http://10.0.2.2/api/Question/unlikequestion.php",
+                url: "http://localhost/api/Question/unlikequestion.php",
                 type: "POST",
                 dataType: "json",
                 data: dataString,
@@ -129,7 +129,7 @@ and unlike the question if they choose to.
         //UPDATES THE LIST IF A QUESTION IS UNLIKED
         function updatelist(){
             $.ajax({
-                url: "http://10.0.2.2/api/Question/listlikequestion.php",
+                url: "http://localhost/api/Question/listlikequestion.php",
                 type: "POST",
                 dataType: "json",
                 data: "param=no",

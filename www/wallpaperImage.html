@@ -11,6 +11,7 @@ and submitting a new image.
     <!--Popup style sheet-->
     <link rel="stylesheet" type="text/css" href="css/popup.css"/>
     <link rel="stylesheet" type="text/css" href="css/notification.css"/>
+    <link rel="stylesheet" type="text/css" href="css/profileImage.css"/>
     <link rel="stylesheet" href="style.css"/>
 
     <meta http-equiv="Content-Security-Policy" content=" style-src 'self' 'unsafe-inline'; 
@@ -31,17 +32,21 @@ and submitting a new image.
 </head>
 
 <body>
+    <h1 class="generalTitle">Change Wallpaper</h1>
     <div class="page">
-        <p><img alt="image" id="photo" /></p>
+        <div class="imageContainer">
+            <img id="photo" class="wallpaperImage"/>
+        </div>
         <br>
         <!-- <p><img alt="image" id="photo2" /></p> -->
-        
-        <p><button id="btn">TAKE</button></p>
-        <br>
-        <p><button id="btn2">UPLOAD</button></p>
+        <div class="buttonContainer">
+            <button id="btn" class="imageButton" style="background: url(images/take.png)"></button>
+            <br>
+            <button id="btn2" class="imageButton" style="background: url(images/upload.png)"></button>
+        </div>
         <!-- <p id="msg"></p> -->
         <br>
-        <button id="submit">Submit</button>
+        <button id="submit" class="submit">Submit</button>
     </div>
      <div class="hover-bkgr-fricc">      <!--Add this div to page for pop up-->
         <span class="helper"></span>
@@ -50,17 +55,20 @@ and submitting a new image.
             <p id="popuptext" class="popupText"></p>          <!--Append popup here-->
         </div>
     </div>
-    <nav class="nav">
-        <a href="insert.html" class="link">Insert</a> |
-        <a href="delete.html" class="link">Delete</a> |
-        <a href="index.html" class="link">Show Data</a> |
-        <a href="login.html" class="link">Login</a> |
-        <a href="register.html" class="link">Register</a> |
-        <a href="changepw.html" class="link">Change PW</a> |
-        <a href="pwreset.html" class="link">Password Reset</a> |
-        <a href="imageOption.html" class="link">Profile Images</a> |
-        <a href="logout.html" class="link">Logout</a>
-    </nav>
+
+    <!--Nav bar at the bottom of the page-->
+    <div class="icon-location">
+        <div class="icon-bar">
+            <a href="index.html"><img src="images/NavBar/home.png" onclick="clearStorageUser()"></a>
+            <a href="groupinfo.html"><img src="images/NavBar/groups.png" onclick="clearStorageUser()"></a>
+            <a href="notification.html" class="badge1" data-badge=""><img src="images/NavBar/notification.png" onclick="clearStorageUser()"></a>
+            <a href="search.html"><img src="images/NavBar/search.png" onclick="clearStorageUser()"></a>
+            <a href="listfolloweduser.html"><img src="images/NavBar/users.png" onclick="clearStorageUser()"></a>
+            <a href="listlikequestion.html"><img src="images/NavBar/favorite.png" onclick="clearStorageUser()"></a>
+            <a href="profile.html"><img src="images/NavBar/profile.png" onclick="clearStorageUser()"></a>
+        </div>
+    </div>
+    
     <script type="text/javascript" src="cordova.js"></script>
     <script>
         var image_Content;
@@ -124,7 +132,7 @@ and submitting a new image.
             $("#submit").click(function () {
                 
                 $.ajax({
-                    url: "http://10.0.2.2/api/profile_image/wallpaper.php",
+                    url: "http://localhost/api/profile_image/wallpaper.php",
                     type: "POST",
                     data: {
                         base64: image_Content                             //Base64 data type send to API

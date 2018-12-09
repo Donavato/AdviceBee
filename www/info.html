@@ -14,7 +14,7 @@ access to this information.
 
     //call to get userID of the person logged in
     $.ajax({
-        url: "http://10.0.2.2/api/Profile/getuserID.php",
+        url: "http://localhost/api/Profile/getuserID.php",
         type: "POST",
         data: "param=no",
         //on success it will call this function
@@ -37,7 +37,7 @@ access to this information.
         {
             $.ajax({
                 method: "POST",
-                url: "http://10.0.2.2/api/Profile/getinfo.php",
+                url: "http://localhost/api/Profile/getinfo.php",
                 data: {profileID: uID},
                 success: function (data) {
 
@@ -75,7 +75,7 @@ access to this information.
        
        //call to get userID of the person logged in
         $.ajax({
-            url: "http://10.0.2.2/api/Profile/getuserID.php",
+            url: "http://localhost/api/Profile/getuserID.php",
             type: "POST",
             data: "param=no",
             //on success it will call this function
@@ -88,7 +88,7 @@ access to this information.
                 {
                     $.ajax({
                         method: "POST",
-                        url: "http://10.0.2.2/api/Profile/updateage.php",
+                        url: "http://localhost/api/Profile/updateage.php",
                         data: {storeAge, storeAge},
                         success: function (data) {
                             popup(data);

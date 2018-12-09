@@ -26,7 +26,7 @@ process.
         //call ajax
         var ajax = new XMLHttpRequest();
         var method = "GET";
-        var url = "http://10.0.2.2/api/Profile/getgroupinfo.php";
+        var url = "http://localhost/api/Profile/getgroupinfo.php";
         var asynchronous = true;
         
         ajax.open(method, url, asynchronous);
@@ -79,7 +79,7 @@ process.
                 //call ajax
                 $.ajax({
                     method: "POST",
-                    url: "http://10.0.2.2/api/Profile/addusergroup.php",
+                    url: "http://localhost/api/Profile/addusergroup.php",
                     data: {groupStoreID: storeID}
                   });
             }
@@ -88,7 +88,7 @@ process.
                 //call ajax
                 $.ajax({
                     method: "POST",
-                    url: "http://10.0.2.2/api/Profile/deletefromusergroup.php",
+                    url: "http://localhost/api/Profile/deletefromusergroup.php",
                     data: {groupStoreID: storeID}
                   });
             }
@@ -100,7 +100,7 @@ process.
         //call ajax
         var ajax = new XMLHttpRequest();
         var method = "GET";
-        var url = "http://10.0.2.2/api/Account/updatefts.php";
+        var url = "http://localhost/api/Account/updatefts.php";
         var asynchronous = true;
         
         ajax.open(method, url, asynchronous);
