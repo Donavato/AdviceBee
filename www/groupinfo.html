@@ -361,6 +361,17 @@ who created a post, share a post on twitter, or report a post.
 
 		}
 
+		function sendButton(questionID, uID2) {
+			sessionStorage.questionID = questionID;
+			//views functionality
+			$.ajax({
+				url: "http://10.0.2.2/api/Question/addViews.php",
+				type: "POST",
+				data: {question_id: questionID, userID2: uID2}
+				});
+			window.location.replace("advice.html");
+		}
+
 		function likeButtonMostRecentGroup(questionID) {
 			var Question_ID = questionID;
 			var dataString = "Question_ID=" + Question_ID;
