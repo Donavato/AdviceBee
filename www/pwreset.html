@@ -1,3 +1,6 @@
+<!--
+Used to reset if the user forgot their password, accessed from the login page.
+-->
 <html>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -43,7 +46,7 @@
             },
             // Specify validation error messages
             messages: {
-            email: "*Please enter a valid Email address."
+            email: "<div id='error'>*Please enter a valid Email address.</div>"
             },
             submitHandler: function(form) {
             

@@ -1,78 +1,82 @@
+<!--
+All of the user's followed groups are displayed and they can sort the posts they see by clicking on a group.
+-->
 <head>
-        <link rel="stylesheet" href="style.css">
-        <!--dashboardTopics stylesheet-->
-        <link rel="stylesheet" type="text/css" href="css/dashboardTopics.css" />
-    </head>
-    <div id="groupButtons">
-    
-    </div>
-    
-    <script type="text/javascript">
-        //call ajax
-        var ajax = new XMLHttpRequest();
-        var method = "GET";
-        var url = "http://localhost/api/Profile/dashboardGroups.php";
-        var asynchronous = true;
-    
-        ajax.open(method, url, asynchronous);
-    
-        //sending ajax
-        ajax.send();
-    
-        //recieve response
-        ajax.onreadystatechange = function () {
-            if (this.readyState == 4 && this.status == 200) {
-                //converting JSON to array
-                var data = JSON.parse(this.responseText);
-    
-                //append to html
-                var html = "";
-    
-                for (var a = 0; a < data.length; a++) {
-                    //set array information for current groups in variables
-                    var id = data[a].group_id;
-                    var name = data[a].group_name;
-                    var imageURL = data[a].GroupImage;
-    
-                    //create button for each topic to display questions
-                    html += "<li><button class='makeCircleButton' id=" + id + " value=" + name + " onclick='displayQuestions(this.value, this.id)'><img src='" + imageURL + "' class='makeCircle'></button>";
-                    html += "<p class='textsize'>" + name + "</p></li>";
-    
-                    //replace in html
-                    document.getElementById("groupButtons").innerHTML = html;
-                }
+    <link rel="stylesheet" href="style.css">
+    <!--dashboardTopics stylesheet-->
+    <link rel="stylesheet" type="text/css" href="css/dashboardTopics.css" />
+</head>
+<div id="groupButtons">
+
+</div>
+
+<script type="text/javascript">
+    //call ajax
+    var ajax = new XMLHttpRequest();
+    var method = "GET";
+    var url = "http://10.0.2.2/api/Profile/dashboardGroups.php";
+    var asynchronous = true;
+
+    ajax.open(method, url, asynchronous);
+
+    //sending ajax
+    ajax.send();
+
+    //recieve response
+    ajax.onreadystatechange = function () {
+        if (this.readyState == 4 && this.status == 200) {
+            //converting JSON to array
+            var data = JSON.parse(this.responseText);
+
+            //append to html
+            var html = "";
+
+            for (var a = 0; a < data.length; a++) {
+                //set array information for current groups in variables
+                var id = data[a].group_id;
+                var name = data[a].group_name;
+                var imageURL = data[a].GroupImage;
+
+                //create button for each topic to display questions
+                html += "<li><button class='makeCircleButton' id=" + id + " value=" + name + " onclick='displayQuestions(this.value, this.id)'><img src='" + imageURL + "' class='makeCircle'></button>";
+                html += "<p class='textsize'>" + name + "</p></li>";
+
+                //replace in html
+                document.getElementById("groupButtons").innerHTML = html;
             }
         }
-    </script>
-    
-    <script type="text/javascript">
-    
-        function displayQuestions(obj, gID) {
-            var group_name = obj;
-            var group_ID = gID;
-    
-            //call ajax
-            $(document).ready(function () {
-                sessionStorage.removeItem('group_id');
-                sessionStorage.setItem('group_id', group_ID);
-                $.ajax({
-                    method: "POST",
-                    url: "http://localhost/api/Profile/displaygroupquestions.php",
-                    data: { Group_Name: group_name },
-                    //on success it will call this function
-                    success: function (data) {
-                        var topicsButtons = $('#GroupDOM');
-                        var arrayQuestions = data;
-    
-                        //empty the current div from questions to post the new questions from the topic selected
-                        topicsButtons.empty();
-                        //GET DATA AND PARSE IT
-                        $.each(arrayQuestions, function (key, value) {
-    
-                            //APPEND DATA AND DISPLAY IT
-                            
-                            value.dImage = (value.dImage === "<img src = >") ? '' : value.dImage;
-                            topicsButtons.append(`
+    }
+</script>
+
+<script type="text/javascript">
+
+    function displayQuestions(obj, gID) {
+        var group_name = obj;
+        sessionStorage.setItem('group_obj', obj);
+        var group_ID = gID;
+
+        //call ajax
+        $(document).ready(function () {
+            sessionStorage.removeItem('group_id');
+            sessionStorage.setItem('group_id', group_ID);
+            $.ajax({
+                method: "POST",
+                url: "http://10.0.2.2/api/Profile/displaygroupquestions.php",
+                data: { Group_Name: group_name },
+                //on success it will call this function
+                success: function (data) {
+                    var topicsButtons = $('#GroupDOM');
+                    var arrayQuestions = data;
+
+                    //empty the current div from questions to post the new questions from the topic selected
+                    topicsButtons.empty();
+                    //GET DATA AND PARSE IT
+                    $.each(arrayQuestions, function (key, value) {
+
+                        //APPEND DATA AND DISPLAY IT
+
+                        value.dImage = (value.dImage === "<img src = >") ? '' : value.dImage;
+                        topicsButtons.append(`
                                 <div class="post">
                                     ${value.pImage}
                                     <div class="main-body">
@@ -84,13 +88,13 @@
                                                 ${value.dImage}
                                                 <div class="description">${value.Description}</div>
                                         </div>
-                                        <div class="post-footer" style="font-size: 1.2rem;"> 
+                                        <div class="post-footer" style="font-size: 1.3rem;"> 
                                             <div>
                                                 <i class="far fa-comment" onclick="sendButton(${value.Question_ID})"></i>
                                                 ${value.c_count}
                                             </div>
                                             <i class="fas fa-exclamation" onclick="reportButton(${value.Question_ID})"></i>
-                                            <i class="far fa-user" id="follow(${value.Question_ID})" onclick="followButton(${value.Question_ID} , ${value.user_ID2})"></i>
+                                            <i class="far fa-user" id="follow(${value.Question_ID})" onclick="followButtonGroup(${value.Question_ID} , ${value.user_ID2})"></i>
                 
                                             <div id="u_Heart">
                                                 <i class="far fa-heart" id="heart(${value.Question_ID})" onclick="likeButtonGroup(${value.Question_ID})"></i>${value.likes}<!-- unfilled -->
@@ -104,55 +108,99 @@
                                     </div>
                                 </div>
                                 `)
-                                var Question_ID = value.Question_ID;
+                        var Question_ID = value.Question_ID;
 
-                                $.ajax({
-                                    url: "http://localhost/api/Question/checkquestion.php",
-                                    type: "POST",
-                                    data: {Question_ID, Question_ID},
-                                    //on success it will call this function
-                                    success: function (data) {
-                                        //change button color
-                                        var heart = document.getElementById("heart(" + value.Question_ID +")");
-                                        if(data == 1)
-                                        {
-                                            heart.style.color = "red";
-                                        }
-                                        else
-                                        {
-                                            heart.style.color = "black";
-                                        }
-                                    }
-                                });
-
-                                var User_ID = value.user_ID2;
-                                $.ajax({
-                                    url: "http://localhost/api/Question/checkfollow.php",
-                                    type: "POST",
-                                    data: {uID2: User_ID, qID: Question_ID},
-                                    //on success it will call this function
-                                    success: function (data) {
-                                        //change button color
-                                        var follow = document.getElementById("follow(" + value.Question_ID +")");
-                                        if(data == 1)
-                                        {
-                                            follow.style.color = "green";
-                                        }
-                                        else
-                                        {
-                                            follow.style.color = "black";
-                                        }
-                                    }
-                                });
-    
+                        $.ajax({
+                            url: "http://10.0.2.2/api/Question/checkquestion.php",
+                            type: "POST",
+                            data: { Question_ID, Question_ID },
+                            //on success it will call this function
+                            success: function (data) {
+                                //change button color
+                                var heart = document.getElementById("heart(" + value.Question_ID + ")");
+                                if (data == 1) {
+                                    heart.style.color = "red";
+                                }
+                                else {
+                                    heart.style.color = "black";
+                                }
+                            }
                         });
-                        //if fail it will give this error
-                    }, error: function (e) {
-                        popup("failed to work");
-                    }
-    
-                });
-    
+
+                        var User_ID = value.user_ID2;
+                        $.ajax({
+                            url: "http://10.0.2.2/api/Question/checkfollow.php",
+                            type: "POST",
+                            data: { uID2: User_ID, qID: Question_ID },
+                            //on success it will call this function
+                            success: function (data) {
+                                //change button color
+                                var follow = document.getElementById("follow(" + value.Question_ID + ")");
+                                if (data == 1) {
+                                    follow.style.color = "green";
+                                }
+                                else {
+                                    follow.style.color = "black";
+                                }
+                            }
+                        });
+
+                    });
+                    //if fail it will give this error
+                }, error: function (e) {
+                    popup("failed to work");
+                }
+
             });
-        }
-    </script>
+
+        });
+    }
+
+    function likeButtonGroup(questionID) {
+
+        var Question_ID = questionID;
+        var dataString = "Question_ID=" + Question_ID;
+
+        $.ajax({
+            url: "http://10.0.2.2/api/Question/likequestion.php",
+            type: "POST",
+            dataType: "json",
+            data: dataString,
+            //on success it will call this function
+            success: function (data) {
+                var topic_obj = sessionStorage.getItem("group_obj");
+                var tID = sessionStorage.getItem("group_id");
+                displayQuestions(topic_obj, tID);
+
+            }
+
+        });
+    }
+
+    function followButtonGroup(qID, user_ID2) {
+        var qID = qID;
+        var uID2 = user_ID2;
+        var dataString = "qID=" + qID + "&uID2=" + uID2;
+
+        $.ajax({
+            url: "http://10.0.2.2/api/Question/followuser.php",
+            type: "POST",
+            dataType: "json",
+            data: dataString,
+            //on success it will call this function
+            success: function (data) {
+                var topic_obj = sessionStorage.getItem("group_obj");
+                var tID = sessionStorage.getItem("group_id");
+       
+                if(data == "Cannot follow user!"){
+                    popup(data);
+                }else{
+                    displayQuestions(topic_obj, tID);
+                }
+                
+            }
+
+        });
+
+    }
+</script>

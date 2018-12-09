@@ -1,3 +1,8 @@
+<!--
+The first tab on the profile page, if the user is looking at their profile they'll be able to see their registered email
+and their age if they inputted one or change their age from here. If they're on a different user's profile they won't have
+access to this information.
+-->
 <table>
             <tbody id="getinfo"> <!-- data will be displayed here -->
             
@@ -86,7 +91,7 @@
                         url: "http://localhost/api/Profile/updateage.php",
                         data: {storeAge, storeAge},
                         success: function (data) {
-                            popup(JSON.parse(data));
+                            popup(data);
                         }
                     });
                 }

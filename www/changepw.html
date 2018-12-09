@@ -1,3 +1,6 @@
+<!--
+Allows the user to change their password, can be accessed from the dashboard menu.
+-->
 <html>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -7,7 +10,8 @@
 
     <!--INITIALIZE J.VALIDATION PLUGIN-->
     <script src="js/jquery.validate.js"></script>
-
+    <!--notification stylesheet-->
+    <link rel="stylesheet" type="text/css" href="css/notification.css"/>
     <!--reference style sheet-->
     <link rel="stylesheet" href="style.css">
     <!--Popup style sheet-->
@@ -76,14 +80,14 @@
             // Specify validation error messages
             messages: {
                 old_password:{
-                    required: "*Please provide a password"
+                    required: "<div id='error'>*Please provide a password</div>"
                 },
                 new_password: {
-                    required: "*Please provide a password",
-                    minlength: "*Your password must be at least 5 characters long"
+                    required: "<div id='error'>*Please provide a password</div>",
+                    minlength: "<div id='error'>*Your password must be at least 5 characters long</div>"
                 },
                 confirm_password: {
-                    equalTo: "*Please enter the same password"
+                    equalTo: "<div id='error'>*Please enter the same password</div>"
                 }
 
             },
@@ -113,13 +117,15 @@
                         }
 
                     }, error: function(){
-                    //popup(JSON.stringify(data));
+                    popup(JSON.stringify(data));
                 }
                 });
             }
         });
     });
 </script>
+
+<script src="js/notification.js"></script>
 
 
 </html>

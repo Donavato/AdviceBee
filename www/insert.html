@@ -1,3 +1,8 @@
+<!--
+Allows the user to ask for advice, taking a subject, description, the topic, group(if the user chooses to select one),
+and select if they want to show this question as anonymous and have responses hidden as well as upload an image with the
+description of the advice.
+-->
 <!DOCTYPE html>
 <html>
 <head>
@@ -86,7 +91,7 @@
         </div>
         <br>
         <div class="item">
-            <input type="button" id="cancel" value="Cancel" class="cancel" />
+            <input onClick="window.location.replace('index.html');" type="button" id="cancel" value="Cancel" class="cancel" />
             <input type="button" id="insert" value="Insert" class="create" />
         </div>
         
@@ -183,7 +188,7 @@
             { 
                 multipleInputs.append(`
                     <div id='mcInputs'>
-                        <input type="text" class='myinputs' id="${i}" maxlength="10" placeholder="Choice ${i}"/>
+                        <input type="text" class='myinputs' id="${i}" maxlength="20" placeholder="Choice ${i}"/>
                     </div>
                 `)   
             }

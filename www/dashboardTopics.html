@@ -1,3 +1,6 @@
+<!--
+All of the user's followed topics are displayed and they can sort the posts they see by clicking on a topic.
+-->
 <head>
     <link rel="stylesheet" href="style.css">
     <!--dashboardTopics stylesheet-->
@@ -85,7 +88,7 @@
                                             ${value.dImage}
                                             <div class="description">${value.Description}</div>
                                     </div>
-                                    <div class="post-footer" style="font-size: 1.2rem;"> 
+                                    <div class="post-footer" style="font-size: 1.3rem;"> 
                                         <div>
                                             <i class="far fa-comment" onclick="sendButton(${value.Question_ID})"></i>
                                             ${value.c_count}
@@ -190,8 +193,13 @@
         success: function (data) {
             var topic_obj = sessionStorage.getItem("topic_obj");
             var tID = sessionStorage.getItem("topic_id");
-            popup(data);
-            displayQuestions(topic_obj, tID);
+            
+            if (data == "Cannot follow user!") {
+                popup(data);
+            } else {
+                displayQuestions(topic_obj, tID);
+            }
+            
         }
 
     });

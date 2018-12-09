@@ -18,6 +18,7 @@
 	$followers = mysqli_query($con, "SELECT * FROM `follow_user` WHERE user_id2 = '$profileID'");
 	$adviceposts = mysqli_query($con, "SELECT * FROM advice WHERE user_id = '$profileID'");
 	$questionposts = mysqli_query($con, "SELECT * FROM questions WHERE user_id = '$profileID'");
+	$points = $_SESSION['points'];
 	$following = mysqli_num_rows($following);
 	$followers = mysqli_num_rows($followers);
 	$adviceposts = mysqli_num_rows($adviceposts);
@@ -32,6 +33,7 @@
 		array_push($data, array("following" => $following));
 		array_push($data, array("followers" => $followers));
 		array_push($data, array("posts" => $posts));
+		array_push($data, array("points" => $points));
 	}
 
 	//returning response in JSON format

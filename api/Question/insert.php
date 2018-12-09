@@ -19,14 +19,10 @@
         $anonymous = $_POST['anonymous'];
         $hide = $_POST['hide'];
         $image = $_POST['image'];
-        //get points from database
-        $result=mysqli_query($con, "SELECT * FROM users WHERE user_ID=$uID");
-        while($row=mysqli_fetch_object($result))
-        {
-            $points=$row->points; 
-        }
+        //get points
+        $points=$_SESSION['points'];
+
         //has user verified email
-    
         if($active == 1){
         //check if user has enough points
         if($points > 9)
@@ -35,7 +31,7 @@
             //subtract the points
             $points=$points - 10;
             //update points
-            mysqli_query($con, "UPDATE users SET points=$points WHERE user_ID=$uID");
+            $_SESSION['points']=$points;
             if($q){
 
 
@@ -82,7 +78,6 @@
         echo json_encode("No account");
         die();
     }
-    
 
     
 ?>

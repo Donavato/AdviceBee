@@ -8,7 +8,7 @@
         Apache Cordova Team
     </author>
     <content src="login.html" />
-    <icon src="www/images/Bee.png" platform="android" width="57" height="57" density="mdpi" />
+    <icon density="mdpi" height="57" platform="android" src="www/images/Bee.png" width="57" />
     <access origin="*" />
     <allow-intent href="http://*/*" />
     <allow-intent href="https://*/*" />

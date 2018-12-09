@@ -1,6 +1,6 @@
 <?php
 	include "../Account/db.php";
-	$User_ID = $_SESSION['user_ID'];
+	$User_ID = $_POST['profileID'];
 
 	$q=mysqli_query($con, "SELECT * FROM profile_pics WHERE user_ID='$User_ID'");
     

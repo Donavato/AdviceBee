@@ -29,9 +29,9 @@
         }
         //get points from database
         $result=mysqli_query($con, "SELECT * FROM users WHERE user_ID=$uID");
+        $points=$_SESSION['points'];
         while($row=mysqli_fetch_object($result))
         {
-            $points=$row->points;
             $accumulatedpoints=$row->accumulated_points;
             $level=$row->level;
         }
@@ -59,16 +59,14 @@
         {
             //add to points
             $points=$points + 1;
-            //update points
-            mysqli_query($con, "UPDATE users SET points=$points WHERE user_ID=$uID");
         }
         else if($points < 99)
         {
             //add to points
             $points=$points + 2;
-            //update points
-            mysqli_query($con, "UPDATE users SET points=$points WHERE user_ID=$uID");
         }
+        //update points
+        $_SESSION['points']=$points;
         $dataquery = mysqli_query($con,"INSERT INTO `advice` (`advice`,`question_id`, `user_id`) VALUES ('$advice','$Question_ID', '$uID')");
         
         //ERROR CHECK IN CASE INSERT QUERY FAILS
