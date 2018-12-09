@@ -44,17 +44,18 @@ button.active {
 .bio input[type="text"], textarea{
     background-color: rgb(246, 246, 246);
     text-align: center;
-    /*display: grid;*/
     box-shadow: 1px 1px 1px 1px rgba(0,0,0,.11), -1px 1px 1px 1px rgba(0,0,0,.11);
     border-radius: 3px;
     padding: 4px;
     grid-gap: 10px;
     width: 306px;
     height: 100px;
+    font-family: "Segoe UI";
 }
 
 .bio{
     align-content: center;
+    font-family: "Segoe UI";
 }
 
 #content{
@@ -120,6 +121,7 @@ table{
     font-size: 17px;
     background-color: rgb(246, 246, 246);
     text-align: center;
+    font-family: "Segoe UI";
 }
 
 .userdata .userconnections{
