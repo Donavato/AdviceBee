@@ -14,7 +14,7 @@ All of the user's followed topics are displayed and they can sort the posts they
     //call ajax
     var ajax = new XMLHttpRequest();
     var method = "GET";
-    var url = "http://localhost/api/Profile/dashboardTopics.php";
+    var url = "http://10.0.2.2/api/Profile/dashboardTopics.php";
     var asynchronous = true;
 
     ajax.open(method, url, asynchronous);
@@ -61,7 +61,7 @@ All of the user's followed topics are displayed and they can sort the posts they
             sessionStorage.setItem('topic_id', topic_ID);
             $.ajax({
                 method: "POST",
-                url: "http://localhost/api/Profile/displaytopicquestions.php",
+                url: "http://10.0.2.2/api/Profile/displaytopicquestions.php",
                 data: { Topic_Name: topic_name },
                 //on success it will call this function
                 success: function (data) {
@@ -112,7 +112,7 @@ All of the user's followed topics are displayed and they can sort the posts they
                         var Question_ID = value.Question_ID;
 
                         $.ajax({
-                            url: "http://localhost/api/Question/checkquestion.php",
+                            url: "http://10.0.2.2/api/Question/checkquestion.php",
                             type: "POST",
                             data: { Question_ID, Question_ID },
                             //on success it will call this function
@@ -130,7 +130,7 @@ All of the user's followed topics are displayed and they can sort the posts they
 
                         var User_ID = value.user_ID2;
                         $.ajax({
-                            url: "http://localhost/api/Question/checkfollow.php",
+                            url: "http://10.0.2.2/api/Question/checkfollow.php",
                             type: "POST",
                             data: { uID2: User_ID, qID: Question_ID },
                             //on success it will call this function
@@ -164,7 +164,7 @@ All of the user's followed topics are displayed and they can sort the posts they
         var dataString = "Question_ID=" + Question_ID;
 
         $.ajax({
-            url: "http://localhost/api/Question/likequestion.php",
+            url: "http://10.0.2.2/api/Question/likequestion.php",
             type: "POST",
             dataType: "json",
             data: dataString,
@@ -185,7 +185,7 @@ All of the user's followed topics are displayed and they can sort the posts they
     var dataString = "qID=" + qID + "&uID2=" + uID2;
 
     $.ajax({
-        url: "http://localhost/api/Question/followuser.php",
+        url: "http://10.0.2.2/api/Question/followuser.php",
         type: "POST",
         dataType: "json",
         data: dataString,

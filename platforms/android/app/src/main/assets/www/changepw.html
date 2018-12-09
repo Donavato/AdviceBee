@@ -1,3 +1,6 @@
+<!--
+Allows the user to change their password, can be accessed from the dashboard menu.
+-->
 <html>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -7,7 +10,8 @@
 
     <!--INITIALIZE J.VALIDATION PLUGIN-->
     <script src="js/jquery.validate.js"></script>
-
+    <!--notification stylesheet-->
+    <link rel="stylesheet" type="text/css" href="css/notification.css"/>
     <!--reference style sheet-->
     <link rel="stylesheet" href="style.css">
     <!--Popup style sheet-->
@@ -32,10 +36,11 @@
 
     </form>
 
+    <!--Nav bar at the bottom of the page-->
     <div class="icon-location">
         <div class="icon-bar">
             <a href="index.html"><img src="images/NavBar/home.png"></a>
-            <a href="groups.html"><img src="images/NavBar/groups.png"></a>
+            <a href="groupinfo.html"><img src="images/NavBar/groups.png"></a>
             <a href="notification.html" class="badge1" data-badge=""><img src="images/NavBar/notification.png"></a>
             <a href="search.html"><img src="images/NavBar/search.png"></a>
             <a href="listfolloweduser.html"><img src="images/NavBar/users.png"></a>
@@ -112,13 +117,15 @@
                         }
 
                     }, error: function(){
-                    //popup(JSON.stringify(data));
+                    popup(JSON.stringify(data));
                 }
                 });
             }
         });
     });
 </script>
+
+<script src="js/notification.js"></script>
 
 
 </html>

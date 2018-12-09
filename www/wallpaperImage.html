@@ -10,6 +10,8 @@ and submitting a new image.
     <script src="js/jquery-3.3.1.min.js"></script>
     <!--Popup style sheet-->
     <link rel="stylesheet" type="text/css" href="css/popup.css"/>
+    <link rel="stylesheet" type="text/css" href="css/notification.css"/>
+    <link rel="stylesheet" href="style.css"/>
 
     <meta http-equiv="Content-Security-Policy" content=" style-src 'self' 'unsafe-inline'; 
             media-src *; 
@@ -32,12 +34,12 @@ and submitting a new image.
     <div class="page">
         <p><img alt="image" id="photo" /></p>
         <br>
-        <p><img alt="image" id="photo2" /></p>
         <!-- <p><img alt="image" id="photo2" /></p> -->
+        
         <p><button id="btn">TAKE</button></p>
         <br>
         <p><button id="btn2">UPLOAD</button></p>
-        <p id="msg"></p>
+        <!-- <p id="msg"></p> -->
         <br>
         <button id="submit">Submit</button>
     </div>
@@ -103,13 +105,14 @@ and submitting a new image.
             success: function (imageData) {
                 var image = document.getElementById('photo');             //Take html of photo and put it in "image"
                 image.src = "data:image/jpeg;base64," + imageData;        //Make the src element of the image html tag and change it
-                document.getElementById('msg').textContent = imageData;   //display the string form of the imageData
+                // document.getElementById('msg').textContent = imageData;   //display the string form of the imageData
                 image_Content = "data:image/jpeg;base64," + imageData;    //package the imagedata and string needed into the global variable
                 
             },
             //FUNCTION FAILED
             fail: function (response) {
-                document.getElementById('msg').textContent = response;    //why did it fail, display it
+                alert("Error has occured, please try again later.");
+                // document.getElementById('msg').textContent = response;    //why did it fail, display it
             }
         };
 
@@ -121,17 +124,18 @@ and submitting a new image.
             $("#submit").click(function () {
                 
                 $.ajax({
-                    url: "http://localhost/api/profile_image/wallpaper.php",
+                    url: "http://10.0.2.2/api/profile_image/wallpaper.php",
                     type: "POST",
                     data: {
                         base64: image_Content                             //Base64 data type send to API
                     },
                     success: function (data) {
+                        window.location.replace("profile.html");
                         //Recieve Image from API, display on "photo2" image section.
-                        var imageURL = JSON.parse(data);                  //Parse the string so remove JSON extra strings
-                        var image = document.getElementById('photo2');    //take html "photo2" and put it into image
+                        // var imageURL = JSON.parse(data);                  //Parse the string so remove JSON extra strings
+                        // var image = document.getElementById('photo2');    //take html "photo2" and put it into image
                         
-                        image.src = imageURL;                             //Change photo2 image src element to the image we parsed
+                        // image.src = imageURL;                             //Change photo2 image src element to the image we parsed
                     }, error: function (e) {
                         popup("ERROR");
                     }
@@ -140,6 +144,7 @@ and submitting a new image.
         });
     </script>
 <script src="js/popup.js"></script>
+<script src="js/notification.js"></script>
 </body>
 
 </html>

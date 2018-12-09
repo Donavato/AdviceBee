@@ -91,8 +91,10 @@ table{
 #profile_picture img{
     border-radius: 50%;
     position: relative;
-    /*top: -50px;*/
     left: 37%;
+    height: 85px; 
+	width: 100px; 
+    overflow: hidden;
 }
 
 #profile_picture{
@@ -102,18 +104,12 @@ table{
 
 #getpublicinfo td{
     position: relative;
-    /*top: -110px;*/
     background-color: rgb(246, 246, 246);
     display: grid;
     box-shadow: 1px 1px 1px 1px rgba(0,0,0,.11), -1px 1px 1px 1px rgba(0,0,0,.11);
     border-radius: 3px;
     width: 70px;
     padding-left: 10px;
-}
-
-#getpublicinfo #level{
-    position: relative;
-    /*top: -100px;*/
 }
 
 #getpublicinfo{
@@ -139,7 +135,6 @@ table{
 .userdata{
     padding: 38px;
     position: relative;
-    /*top: -120px;*/
 }
 
 #wallpaper img{
@@ -162,14 +157,12 @@ table{
 
 div #content{
     position: relative;
-    /* top: -50px; */
 }
 
 .fa, .fab, .fal, .far, .fas{
     float: right;
     font-size: 35px;
     position: relative;
-    /*top: -60px;*/
     display: grid;
     box-shadow: 1px 1px 1px 1px rgba(0,0,0,.11),-1px 1px 1px 1px rgba(0,0,0,.11);
     border-radius: 3px;

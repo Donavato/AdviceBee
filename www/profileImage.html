@@ -12,6 +12,8 @@ and submitting a new image.
     <link rel="stylesheet" href="style.css">
     <!--Popup style sheet-->
     <link rel="stylesheet" type="text/css" href="css/popup.css"/>
+    <link rel="stylesheet" type="text/css" href="css/notification.css"/>
+    <link rel="stylesheet" href="style.css"/>
 
     <meta http-equiv="Content-Security-Policy" content=" style-src 'self' 'unsafe-inline'; 
             media-src *; 
@@ -31,29 +33,29 @@ and submitting a new image.
 </head>
 
 <body>
+    <!--Nav bar at the bottom of the page-->
+    <div class="icon-location">
+            <div class="icon-bar">
+                <a href="index.html"><img src="images/NavBar/home.png" onclick="clearStorageUser()"></a>
+                <a href="groupinfo.html"><img src="images/NavBar/groups.png" onclick="clearStorageUser()"></a>
+                <a href="notification.html" class="badge1" data-badge=""><img src="images/NavBar/notification.png" onclick="clearStorageUser()"></a>
+                <a href="search.html"><img src="images/NavBar/search.png" onclick="clearStorageUser()"></a>
+                <a href="listfolloweduser.html"><img src="images/NavBar/users.png" onclick="clearStorageUser()"></a>
+                <a href="listlikequestion.html"><img src="images/NavBar/favorite.png" onclick="clearStorageUser()"></a>
+                <a href="profile.html"><img src="images/NavBar/profile.png" onclick="clearStorageUser()"></a>
+            </div>
+        </div>
     <div class="page">
         <p><img alt="image" id="photo"/></p>
         <br>
-        <p><img alt="image" id="photo2" /></p>
         <!-- <p><img alt="image" id="photo2" /></p> -->
         <p><button id="btn">TAKE</button></p>
         <br>
         <p><button id="btn2">UPLOAD</button></p>
-        <p id="msg"></p>
+        <!-- <p id="msg"></p> -->
         <br>
         <button id="submit" class="submit">Submit</button>
     </div><br>
-    <nav class="nav">
-        <a href="insert.html" class="link">Insert</a> |
-        <a href="delete.html" class="link">Delete</a> |
-        <a href="index.html" class="link">Show Data</a> |
-        <a href="login.html" class="link">Login</a> |
-        <a href="register.html" class="link">Register</a> |
-        <a href="changepw.html" class="link">Change PW</a> |
-        <a href="pwreset.html" class="link">Password Reset</a> |
-        <a href="imageOption.html" class="link">Profile Images</a> |
-        <a href="logout.html" class="link">Logout</a>
-    </nav>
      <div class="hover-bkgr-fricc">      <!--Add this div to page for pop up-->
         <span class="helper"></span>
         <div>
@@ -105,13 +107,14 @@ and submitting a new image.
             success: function (imageData) {
                 var image = document.getElementById('photo');             //Take html of photo and put it in "image"
                 image.src = "data:image/jpeg;base64," + imageData;        //Make the src element of the image html tag and change it
-                document.getElementById('msg').textContent = imageData;   //display the string form of the imageData
+                // document.getElementById('msg').textContent = imageData;   //display the string form of the imageData
                 image_Content = "data:image/jpeg;base64," + imageData;    //package the imagedata and string needed into the global variable
                 
             },
             //FUNCTION FAILED
             fail: function (response) {
-                document.getElementById('msg').textContent = response;    //why did it fail, display it
+                alert("Error has occured, please try again later.");
+                // document.getElementById('msg').textContent = response;    //why did it fail, display it
             }
         };
 
@@ -123,17 +126,18 @@ and submitting a new image.
             $("#submit").click(function () {
                 
                 $.ajax({
-                    url: "http://localhost/api/profile_image/profile.php",
+                    url: "http://10.0.2.2/api/profile_image/profile.php",
                     type: "POST",
                     data: {
                         base64: image_Content                             //Base64 data type send to API
                     },
                     success: function (data) {
+                        window.location.replace("profile.html");
                         //Recieve Image from API, display on "photo2" image section.
-                        var imageURL = JSON.parse(data);                  //Parse the string so remove JSON extra strings
-                        var image = document.getElementById('photo2');    //take html "photo2" and put it into image
+                        // var imageURL = JSON.parse(data);                  //Parse the string so remove JSON extra strings
+                        // var image = document.getElementById('photo2');    //take html "photo2" and put it into image
                         
-                        image.src = imageURL;                             //Change photo2 image src element to the image we parsed
+                        // image.src = imageURL;                             //Change photo2 image src element to the image we parsed
                     }, error: function (e) {
                         popup("ERROR");
                     }
@@ -142,6 +146,7 @@ and submitting a new image.
         });
     </script>
 <script src="js/popup.js"></script>
+<script src="js/notification.js"></script>
 </body>
 
 </html>
