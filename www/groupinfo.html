@@ -14,6 +14,8 @@ who created a post, share a post on twitter, or report a post.
 		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous"> -->
 	<!--reference style sheet-->
 	<link rel="stylesheet" href="css/main.css">
+	<!--notification stylesheet-->
+    <link rel="stylesheet" type="text/css" href="css/notification.css"/>
 	<!--Popup style sheet-->
 	<link rel="stylesheet" type="text/css" href="css/popup.css" />
 	<link rel="stylesheet" href="css/dashboard.css">
@@ -73,7 +75,6 @@ who created a post, share a post on twitter, or report a post.
 			<a href="index.html"><img src="images/NavBar/home.png" onclick="clearGroupID()"></a>
 			<a href="groupinfo.html"><img src="images/NavBar/groups.png" onclick="clearGroupID()"></a>
 			<a href="notification.html" class="badge1" data-badge=""><img src="images/NavBar/notification.png" onclick="clearGroupID()"></a>
-
 			<a href="search.html"><img src="images/NavBar/search.png" onclick="clearGroupID()"></a>
 			<a href="listfolloweduser.html"><img src="images/NavBar/users.png" onclick="clearGroupID()"></a>
 			<a href="listlikequestion.html"><img src="images/NavBar/favorite.png" onclick="clearGroupID()"></a>
@@ -342,7 +343,7 @@ who created a post, share a post on twitter, or report a post.
 
 	<!-- LIKES -->
 	<script type="text/javascript">
-		function likeButtonGroup(questionID) {
+		function likeButton(questionID) {
 			var Question_ID = questionID;
 			var dataString = "Question_ID=" + Question_ID;
 
@@ -419,8 +420,6 @@ who created a post, share a post on twitter, or report a post.
 			$.ajax({
 				url: "http://localhost/api/Question/fetchdatagroup.php",
 				type: "POST",
-				contentType: "application/json; charset=utf-8",
-				dataType: "json",
 				data: "param=no",
 				//on success it will call this function
 				success: function (data) {
@@ -520,8 +519,13 @@ who created a post, share a post on twitter, or report a post.
 				data: dataString,
 				//on success it will call this function
 				success: function (data) {
-					popup(data);
-					updatelikesGroup();
+
+					if (data == "Cannot follow user!") {
+						popup(data);
+					} else {
+						updatelikesGroup();
+					}
+					
 				}
 
 			});
@@ -539,8 +543,13 @@ who created a post, share a post on twitter, or report a post.
 				data: dataString,
 				//on success it will call this function
 				success: function (data) {
-					popup(data);
-					updatelikesMostRecentGroup();
+
+					if (data == "Cannot follow user!") {
+						popup(data);
+					} else {
+						updatelikesMostRecentGroup();
+					}
+					
 				}
 
 			});
@@ -558,8 +567,13 @@ who created a post, share a post on twitter, or report a post.
 				data: dataString,
 				//on success it will call this function
 				success: function (data) {
-					popup(data);
-					updatelikesMostViewGroup();
+
+					if (data == "Cannot follow user!") {
+						popup(data);
+					} else {
+						updatelikesMostViewGroup();
+					}
+					
 				}
 
 			});
@@ -577,8 +591,13 @@ who created a post, share a post on twitter, or report a post.
 				data: dataString,
 				//on success it will call this function
 				success: function (data) {
-					popup(data);
-					updatelikesMostLikesGroup();
+
+					if (data == "Cannot follow user!") {
+						popup(data);
+					} else {
+						updatelikesMostLikesGroup();
+					}
+					
 				}
 
 			});
@@ -601,7 +620,7 @@ who created a post, share a post on twitter, or report a post.
 									${value.dImage}
 									<div class="description">${value.Description}</div>
 							</div>
-							<div class="post-footer" style="font-size: 1.2rem;"> 
+							<div class="post-footer" style="font-size: 1.3rem;"> 
 								<div>
 									<i class="far fa-comment" onclick="sendButton(${value.Question_ID})"></i>
 									${value.c_count}
@@ -610,7 +629,7 @@ who created a post, share a post on twitter, or report a post.
 								<i class="far fa-user" id="follow(${value.Question_ID})" onclick="followButton(${value.Question_ID} , ${value.user_ID2})"></i>
                 
 								<div id="u_Heart">
-									<i class="far fa-heart" id="heart(${value.Question_ID})" onclick="likeButtonGroup(${value.Question_ID})"></i>${value.likes}<!-- unfilled -->
+									<i class="far fa-heart" id="heart(${value.Question_ID})" onclick="likeButton(${value.Question_ID})"></i>${value.likes}<!-- unfilled -->
 								</div>
 
 								<!--<i class="far fa-heart" onclick="reportButton(${value.Question_ID})"></i> filled -->
@@ -675,7 +694,7 @@ who created a post, share a post on twitter, or report a post.
 									${value.dImage}
 									<div class="description">${value.Description}</div>
 							</div>
-							<div class="post-footer" style="font-size: 1.2rem;"> 
+							<div class="post-footer" style="font-size: 1.3rem;"> 
 								<div>
 									<i class="far fa-comment" onclick="sendButton(${value.Question_ID})"></i>
 									${value.c_count}
@@ -749,7 +768,7 @@ who created a post, share a post on twitter, or report a post.
 									${value.dImage}
 									<div class="description">${value.Description}</div>
 							</div>
-							<div class="post-footer" style="font-size: 1.2rem;"> 
+							<div class="post-footer" style="font-size: 1.3rem;"> 
 								<div>
 									<i class="far fa-comment" onclick="sendButton(${value.Question_ID})"></i>
 									${value.c_count}
@@ -823,7 +842,7 @@ who created a post, share a post on twitter, or report a post.
 									${value.dImage}
 									<div class="description">${value.Description}</div>
 							</div>
-							<div class="post-footer" style="font-size: 1.2rem;"> 
+							<div class="post-footer" style="font-size: 1.3rem;"> 
 								<div>
 									<i class="far fa-comment" onclick="sendButton(${value.Question_ID})"></i>
 									${value.c_count}
@@ -915,6 +934,7 @@ who created a post, share a post on twitter, or report a post.
 			sessionStorage.removeItem("group_id");
 		}
 	</script>
+	<script src="js/notification.js"></script>
 </body>
 
 </html>

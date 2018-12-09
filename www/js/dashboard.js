@@ -388,8 +388,13 @@ function followButton(qID, user_ID2) {
         data: dataString,
         //on success it will call this function
         success: function (data) {
-            popup(data);
-            updatelikes();
+
+            if (data == "Cannot follow user!") {
+                popup(data);
+            } else {
+                updatelikes();
+            }
+            
         }
 
     });
@@ -408,8 +413,13 @@ function followButtonMostRecent(qID, user_ID2) {
         data: dataString,
         //on success it will call this function
         success: function (data) {
-            popup(data);
-            updatelikesMostRecent();
+
+            if (data == "Cannot follow user!") {
+                popup(data);
+            } else {
+                updatelikesMostRecent();
+            }
+            
         }
 
     });
@@ -428,8 +438,13 @@ function followButtonMostViewed(qID, user_ID2) {
         data: dataString,
         //on success it will call this function
         success: function (data) {
-            popup(data);
-            updatelikesMostViewed();
+
+            if (data == "Cannot follow user!") {
+                popup(data);
+            } else {
+                updatelikesMostViewed();
+            }
+            
         }
 
     });
@@ -448,8 +463,13 @@ function followButtonMostLikes(qID, user_ID2) {
         data: dataString,
         //on success it will call this function
         success: function (data) {
-            popup(data);
-            updateMostLikes();
+
+            if (data == "Cannot follow user!") {
+                popup(data);
+            } else {
+                updateMostLikes();
+            }
+            
         }
 
     });
@@ -468,8 +488,13 @@ function followButtonFollowUserPosts(qID, user_ID2) {
         data: dataString,
         //on success it will call this function
         success: function (data) {
-            popup(data);
-            updatelikesFollowUsersPosts();
+            
+            if (data == "Cannot follow user!") {
+                popup(data);
+            } else {
+                updatelikesFollowUsersPosts();
+            }
+            
         }
 
     });
@@ -609,7 +634,7 @@ function CreatePostMostRecent(jElement, key, value) {
                     ${value.dImage}
                     <div class="description">${value.Description}</div>
             </div>
-            <div class="post-footer" style="font-size: 1.2rem;"> 
+            <div class="post-footer" style="font-size: 1.3rem;"> 
                 <div>
                     <i class="far fa-comment" onclick="sendButton(${value.Question_ID})"></i>
                     ${value.c_count}
@@ -686,7 +711,7 @@ function CreatePostMostViewed(jElement, key, value) {
                     ${value.dImage}
                     <div class="description">${value.Description}</div>
             </div>
-            <div class="post-footer" style="font-size: 1.2rem;"> 
+            <div class="post-footer" style="font-size: 1.3rem;"> 
                 <div>
                     <i class="far fa-comment" onclick="sendButton(${value.Question_ID})"></i>
                     ${value.c_count}
@@ -763,7 +788,7 @@ function CreatePostMostLikes(jElement, key, value) {
                     ${value.dImage}
                     <div class="description">${value.Description}</div>
             </div>
-            <div class="post-footer" style="font-size: 1.2rem;"> 
+            <div class="post-footer" style="font-size: 1.3rem;"> 
                 <div>
                     <i class="far fa-comment" onclick="sendButton(${value.Question_ID})"></i>
                     ${value.c_count}
@@ -840,7 +865,7 @@ function CreatePostFollowUsersPosts(jElement, key, value) {
                     ${value.dImage}
                     <div class="description">${value.Description}</div>
             </div>
-            <div class="post-footer" style="font-size: 1.2rem;"> 
+            <div class="post-footer" style="font-size: 1.3rem;"> 
                 <div>
                     <i class="far fa-comment" onclick="sendButton(${value.Question_ID})"></i>
                     ${value.c_count}

@@ -31,7 +31,7 @@ $(document).ready(function () {
                             <div class="post-body">
                                     <div class="description">${value.advice}</div>
                             </div>
-                            <div class="post-footer" style="font-size: 1.2rem;">
+                            <div class="post-footer" style="font-size: 1.3rem;">
                                 <div>
                                 <i class="far fa-heart" onclick="likeButton(${value.advice_id})"></i>${value.likes}
                                 </div>
@@ -239,7 +239,7 @@ function updateLikes() {
                             <div class="post-body">
                                     <div class="description">${value.advice}</div>
                             </div>
-                            <div class="post-footer" style="font-size: 1.2rem;">
+                            <div class="post-footer" style="font-size: 1.3rem;">
                                 <div>
                                 <i class="far fa-heart" onclick="likeButton(${value.advice_id})"></i>${value.likes}
                                 </div>

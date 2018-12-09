@@ -1,187 +1,182 @@
 <html>
-		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<head>
-		<link rel="stylesheet" href="css/groupinfo.css"/>
-		<!--initialize jquery from js folder-->
-		<script src="js/jquery-3.3.1.min.js"></script>
-		<!-- <link href="https://fonts.googleapis.com/css?family=Roboto:400,500,900" rel="stylesheet">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<head>
+	<link rel="stylesheet" href="css/groupinfo.css" />
+	<!--initialize jquery from js folder-->
+	<script src="js/jquery-3.3.1.min.js"></script>
+	<!-- <link href="https://fonts.googleapis.com/css?family=Roboto:400,500,900" rel="stylesheet">
 		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous"> -->
-		<!--reference style sheet-->
-		<link rel="stylesheet" href="css/main.css">
-		<!--Popup style sheet-->
-		<link rel="stylesheet" type="text/css" href="css/popup.css"/>
-		<link rel="stylesheet" href="css/dashboard.css">
-		<!--dashboardTopics stylesheet-->
-		<link rel="stylesheet" type="text/css" href="css/dashboardTopics.css"/>
-		<link rel="stylesheet" type="text/css" href="style.css"/>
-		<link rel="stylesheet" href="font-awesome/css/all.min.css">
-	</head>
-	<body>
-			<span style="font-size:30px;cursor:pointer" onclick="openNav()">&#8801;</span>
-			<div id="mySidenav" class="sidenav">
-				<a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-				<table>
-					<tr>
-						<th>Group Names</th>
-					<tr>
-						<tbody id="getgroupinfo">
-						</tbody>
-				</table>
+	<!--reference style sheet-->
+	<link rel="stylesheet" href="css/main.css">
+	<!--Popup style sheet-->
+	<link rel="stylesheet" type="text/css" href="css/popup.css" />
+	<link rel="stylesheet" href="css/dashboard.css">
+	<!--dashboardTopics stylesheet-->
+	<link rel="stylesheet" type="text/css" href="css/dashboardTopics.css" />
+	<link rel="stylesheet" type="text/css" href="style.css" />
+	<link rel="stylesheet" href="font-awesome/css/all.min.css">
+</head>
+
+<body>
+	<img class="grouplistbuttonLoc" onclick="openNav()" src="images/grouplist.png"></img>
+	<div id="mySidenav" class="sidenav">
+		<a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+		<table>
+			<tr>
+				<th>Group Names</th>
+			<tr>
+				<tbody id="getgroupinfo">
+				</tbody>
+		</table>
+	</div>
+
+	<div id="dashboardGroups">
+	</div>
+	<!--output of the json-->
+	<div>
+		<!--set the id to DOM to show output-->
+		<!-- <img alt="image" id="photo2" /> -->
+		<div id="GroupDOM">
+
+		</div>
+
+	</div><br>
+
+	<!-- FILTER BUTTON LOCATION AND CONTENT -->
+	<div class="filterButtonLoc">
+		<div class="dropdown">
+			<img onclick="filterFunctionGroup()" class="dropbtn" src="images/filter.png"></img>
+			<div id="filter" class="dropdown-content">
+				<a href="javascript:filterMostRecentGroup();">Most Recent</a>
+				<a href="javascript:filterMostViewGroup();">Most Viewed</a>
+				<a href="javascript:filterMostLikesGroup();">Most Likes</a>
 			</div>
-			
-			<div id="dashboardGroups">
-				</div>
-				<!--output of the json-->
-				<div>
-					<!--set the id to DOM to show output-->
-					<!-- <img alt="image" id="photo2" /> -->
-					<div id="GroupDOM">
-			
-					</div>
-			
-				</div><br>
-			
-				<!-- FILTER BUTTON LOCATION AND CONTENT -->
-				<div class="filterButtonLoc">
-					<div class="dropdown">
-						<img onclick="filterFunctionGroup()" class="dropbtn" src="images/filter.png"></img>
-						<div id="filter" class="dropdown-content">
-							<a href="javascript:filterMostRecentGroup();">Most Recent</a>
-							<a href="javascript:filterMostViewGroup();">Most Viewed</a>
-						</div>
-					</div>
-				</div>
-			
-				<!-- CREATE BUTTON LOCATION -->
-				<div class="postButtonLoc">
-					<div class="postbutton">
-						<span style="font-size:30px;cursor:pointer" onclick="createGroup()">&#43;</span>
-					</div>
-				</div>
-				
-				<!--Need to update page links. Ran into issues with img src links when in folders-->
-				<div class="icon-location">
-					<div class="icon-bar">
-						<a href="index.html"><img src="images/NavBar/home.png" onclick="clearGroupID()"></a>
-						<a href="groupinfo.html"><img src="images/NavBar/groups.png" onclick="clearGroupID()"></a>
-						<a href="notification.html" class="badge1" data-badge=""><img src="images/NavBar/notification.png" onclick="clearGroupID()"></a>
-						<a href="search.html"><img src="images/NavBar/search.png" onclick="clearGroupID()"></a>
-						<a href="listfolloweduser.html"><img src="images/NavBar/users.png" onclick="clearGroupID()"></a>
-						<a href="listlikequestion.html"><img src="images/NavBar/favorite.png" onclick="clearGroupID()"></a>
-						<a href="profile.html"><img src="images/NavBar/profile.png" onclick="clearGroupID()"></a>
-					</div>
-				</div>
-			
-				<div class="hover-bkgr-fricc">      <!--Add this div to page for pop up-->
-					<span class="helper"></span>
-					<div>
-						<p id="popuptext" class="popupText"></p>          <!--Append popup here-->
-					</div>
-				</div>
-				<script src="js/popup.js"></script>
-				
-				<script src="js/logout.js"></script>
+		</div>
+	</div>
 
-		<script type="text/javascript">
+	<!-- CREATE BUTTON LOCATION -->
+	<div class="postButtonLoc">
+		<div class="postbutton">
+			<img onclick="createGroup()" src="images/creategroup.png"></img>
+		</div>
+	</div>
 
-			function openNav() {
-				document.getElementById("mySidenav").style.width = "250px";
-			}
+	<!--Need to update page links. Ran into issues with img src links when in folders-->
+	<div class="icon-location">
+		<div class="icon-bar">
+			<a href="index.html"><img src="images/NavBar/home.png" onclick="clearGroupID()"></a>
+			<a href="groupinfo.html"><img src="images/NavBar/groups.png" onclick="clearGroupID()"></a>
+			<a href="notification.html" class="badge1" data-badge=""><img src="images/NavBar/notification.png" onclick="clearGroupID()"></a>
+			<a href="search.html"><img src="images/NavBar/search.png" onclick="clearGroupID()"></a>
+			<a href="listfolloweduser.html"><img src="images/NavBar/users.png" onclick="clearGroupID()"></a>
+			<a href="listlikequestion.html"><img src="images/NavBar/favorite.png" onclick="clearGroupID()"></a>
+			<a href="profile.html"><img src="images/NavBar/profile.png" onclick="clearGroupID()"></a>
+		</div>
+	</div>
 
-			function closeNav() {
-				document.getElementById("mySidenav").style.width = "0";
-			}
+	<div class="hover-bkgr-fricc">
+		<!--Add this div to page for pop up-->
+		<span class="helper"></span>
+		<div>
+			<p id="popuptext" class="popupText"></p>
+			<!--Append popup here-->
+		</div>
+	</div>
+	<script src="js/popup.js"></script>
 
-			function createGroup(){
-				window.location.replace("createGroup.html");
-			}
+	<script src="js/logout.js"></script>
 
-		</script>
+	<script type="text/javascript">
 
-		<script type="text/javascript">
-			//call ajax
-			var ajax = new XMLHttpRequest();
-			var method = "GET";
-			var url = "http://10.0.2.2/api/Profile/getusergroupinfo.php";
-			var asynchronous = true;
-			
-			ajax.open(method, url, asynchronous);
-			
-			//sending ajax request
-			ajax.send();
-			
-			//recieve response from getgroupinfo.php
-			ajax.onreadystatechange = function()
-			{
-				if(this.readyState == 4 && this.status == 200)
-				{
-					//converting json back to array
-					var userdata = JSON.parse(this.responseText);
-					
-					//html value for <tbody>
-					var html = "";
-					
-					//loop through array for the different groups
-					for(var a = 0; a < userdata.length; a++)
-					{
-						var userGroups = userdata[a].group_name;
-					}
+		function openNav() {
+			document.getElementById("mySidenav").style.width = "250px";
+		}
 
-					//call ajax
-					var ajax = new XMLHttpRequest();
-					var method = "GET";
-					var url = "http://10.0.2.2/api/Profile/getgroupinfo.php";
-					var asynchronous = true;
-			
-					ajax.open(method, url, asynchronous);
-			
-					//sending ajax request
-					ajax.send();
-			
-					//recieve response from getgroupinfo.php
-					ajax.onreadystatechange = function()
-					{
-						if(this.readyState == 4 && this.status == 200)
-						{
-							//converting json back to array
-							var data = JSON.parse(this.responseText);
-					
-							//html value for <tbody>
-							var html = "";
-							
-							//cycle through all groups
-							for(var c = 0; c < data.length; c++)
-							{
-								//store group name in variable to call on later
-								var groupName = data[c].group_name;
-								//store group id in value to use later
-								var groupID = data[c].group_id;
+		function closeNav() {
+			document.getElementById("mySidenav").style.width = "0";
+		}
 
-								//if user topic array is empty
-								if(userdata.length>0)
-								{
-								
+		function createGroup() {
+			window.location.replace("createGroup.html");
+		}
+
+	</script>
+
+	<script type="text/javascript">
+		//call ajax
+		var ajax = new XMLHttpRequest();
+		var method = "GET";
+		var url = "http://10.0.2.2/api/Profile/getusergroupinfo.php";
+		var asynchronous = true;
+
+		ajax.open(method, url, asynchronous);
+
+		//sending ajax request
+		ajax.send();
+
+		//recieve response from getgroupinfo.php
+		ajax.onreadystatechange = function () {
+			if (this.readyState == 4 && this.status == 200) {
+				//converting json back to array
+				var userdata = JSON.parse(this.responseText);
+
+				//html value for <tbody>
+				var html = "";
+
+				//loop through array for the different groups
+				for (var a = 0; a < userdata.length; a++) {
+					var userGroups = userdata[a].group_name;
+				}
+
+				//call ajax
+				var ajax = new XMLHttpRequest();
+				var method = "GET";
+				var url = "http://10.0.2.2/api/Profile/getgroupinfo.php";
+				var asynchronous = true;
+
+				ajax.open(method, url, asynchronous);
+
+				//sending ajax request
+				ajax.send();
+
+				//recieve response from getgroupinfo.php
+				ajax.onreadystatechange = function () {
+					if (this.readyState == 4 && this.status == 200) {
+						//converting json back to array
+						var data = JSON.parse(this.responseText);
+
+						//html value for <tbody>
+						var html = "";
+
+						//cycle through all groups
+						for (var c = 0; c < data.length; c++) {
+							//store group name in variable to call on later
+							var groupName = data[c].group_name;
+							//store group id in value to use later
+							var groupID = data[c].group_id;
+
+							//if user topic array is empty
+							if (userdata.length > 0) {
+
 								//cycle through users followed groups
-								for(var d = 0; d < userdata.length ; d++)
-								{
+								for (var d = 0; d < userdata.length; d++) {
 									//if group id is present in both tables select the button
-									if(data[c].group_id == userdata[d].group_id)
-									{
+									if (data[c].group_id == userdata[d].group_id) {
 										html += "<br>";
 										html += "<label class='switch'>";
-											html += "<input type='checkbox' name = groupid id= groupID value="+ groupID +" onchange='editGroup(this)' checked>";
-											html += "<span class='slider round'>" + groupName + "</span>";
+										html += "<input type='checkbox' name = groupid id= groupID value=" + groupID + " onchange='editGroup(this)' checked>";
+										html += "<span class='slider round'>" + groupName + "</span>";
 										html += "</label>";
 										html += "</br>";
 										break;
 									}
 									//if ran through entire user data array and no match output as unselected
-									else if ((d+1)== userdata.length) 
-									{
+									else if ((d + 1) == userdata.length) {
 										html += "<br>";
 										html += "<label class='switch'>";
-											html += "<input type='checkbox' name = groupid id= groupID value="+ groupID +" onchange='editGroup(this)'>";
-											html += "<span class='slider round'>" + groupName + "</span>";
+										html += "<input type='checkbox' name = groupid id= groupID value=" + groupID + " onchange='editGroup(this)'>";
+										html += "<span class='slider round'>" + groupName + "</span>";
 										html += "</label>";
 										html += "</br>";
 									}
@@ -189,227 +184,424 @@
 							}
 
 							//output all buttons as unselected 
-							else
-							{
+							else {
 								html += "<br>";
 								html += "<label class='switch'>";
-									html += "<input type='checkbox' name = groupid id= groupID value="+ groupID +" onchange='editGroup(this)'>";
-									html += "<span class='slider round'>" + groupName + "</span>";
+								html += "<input type='checkbox' name = groupid id= groupID value=" + groupID + " onchange='editGroup(this)'>";
+								html += "<span class='slider round'>" + groupName + "</span>";
 								html += "</label>";
 								html += "</br>";
 							}
-					
-							}
-							//replacing the tbody of table
-							document.getElementById("getgroupinfo").innerHTML = html;
-							
+
 						}
+						//replacing the tbody of table
+						document.getElementById("getgroupinfo").innerHTML = html;
+
 					}
 				}
 			}
-		</script>
+		}
+	</script>
 
 
-		<script type="text/javascript">
+	<script type="text/javascript">
 
-			function editGroup(obj) 
-			{
-				//store the clicks id into variable
-				var storeID = obj.value;
+		function editGroup(obj) {
+			//store the clicks id into variable
+			var storeID = obj.value;
 
-				if($(obj).is(":checked"))
-				{
-					//call ajax
-					$.ajax({
-						method: "POST",
-						url: "http://10.0.2.2/api/Profile/addusergroup.php",
-						data: {groupStoreID: storeID}
-					});
-				}
-				else
-				{
-					//call ajax
-					$.ajax({
-						method: "POST",
-						url: "http://10.0.2.2/api/Profile/deletefromusergroup.php",
-						data: {groupStoreID: storeID}
-					});
+			if ($(obj).is(":checked")) {
+				//call ajax
+				$.ajax({
+					method: "POST",
+					url: "http://10.0.2.2/api/Profile/addusergroup.php",
+					data: { groupStoreID: storeID }
+				});
+			}
+			else {
+				//call ajax
+				$.ajax({
+					method: "POST",
+					url: "http://10.0.2.2/api/Profile/deletefromusergroup.php",
+					data: { groupStoreID: storeID }
+				});
+			}
+		}
+	</script>
+	<script type="text/javascript">
+		$(document).ready(function () {
+			//intial loadup on page
+			$("#dashboardGroups").load("dashboardGroups.html");
+		});
+	</script>
+
+	<script type="text/javascript">
+		function filterFunctionGroup() {
+			document.getElementById("filter").classList.toggle("show");
+		}
+
+		// Close the dropdown if the user clicks outside of it
+		window.onclick = function (event) {
+			if (!event.target.matches('.dropbtn')) {
+
+				var dropdowns = document.getElementsByClassName("dropdown-content");
+				var i;
+				for (i = 0; i < dropdowns.length; i++) {
+					var openDropdown = dropdowns[i];
+					if (openDropdown.classList.contains('show')) {
+						openDropdown.classList.remove('show');
+					}
 				}
 			}
-		</script>
-		<script type="text/javascript">
-			$(document).ready(function () {
-				//intial loadup on page
-				$("#dashboardGroups").load("dashboardGroups.html");
+		}
+	</script>
+
+	<script type="text/javascript">
+		function filterMostRecentGroup() {
+			var gID = sessionStorage.getItem('group_id');
+			$.ajax({
+				url: "http://10.0.2.2/api/Question/filtermostrecentgroup.php",
+				type: "POST",
+				data: { gID: gID },
+				//on success it will call this function
+				success: function (data) {
+					var DOM = $('#GroupDOM');
+					document.getElementById("GroupDOM").innerHTML = "";
+					//GET DATA AND PARSE IT
+					$.each(data, function (key, value) {
+						CreatePostMostRecentGroup(DOM, key, value);
+					});
+
+					//if fail it will give this error
+				}, error: function (e) {
+					popup("failed to work");
+				}
+
 			});
-		</script>
 
-		<script type="text/javascript">
-			function filterFunctionGroup() {
-				document.getElementById("filter").classList.toggle("show");
-			}
+		}
+	</script>
 
-			// Close the dropdown if the user clicks outside of it
-			window.onclick = function (event) {
-				if (!event.target.matches('.dropbtn')) {
+	<script type="text/javascript">
+		function filterMostViewGroup() {
+			var gID = sessionStorage.getItem('group_id');
+			$.ajax({
+				url: "http://10.0.2.2/api/Question/filtermostviewgroup.php",
+				type: "POST",
+				data: { gID: gID },
+				//on success it will call this function
+				success: function (data) {
+					var DOM = $('#GroupDOM');
+					document.getElementById("GroupDOM").innerHTML = "";
+					//GET DATA AND PARSE IT
+					$.each(data, function (key, value) {
+						CreatePostMostViewGroup(DOM, key, value);
+					});
 
-					var dropdowns = document.getElementsByClassName("dropdown-content");
-					var i;
-					for (i = 0; i < dropdowns.length; i++) {
-						var openDropdown = dropdowns[i];
-						if (openDropdown.classList.contains('show')) {
-							openDropdown.classList.remove('show');
-						}
+					//if fail it will give this error
+				}, error: function (e) {
+					popup("failed to work");
+				}
+
+			});
+
+		}
+	</script>
+
+	<script type="text/javascript">
+		function filterMostLikesGroup() {
+			var gID = sessionStorage.getItem('group_id');
+			$.ajax({
+				url: "http://10.0.2.2/api/Question/filtermostlikesgroup.php",
+				type: "POST",
+				data: { gID: gID },
+				//on success it will call this function
+				success: function (data) {
+					var DOM = $('#GroupDOM');
+					document.getElementById("GroupDOM").innerHTML = "";
+					//GET DATA AND PARSE IT
+					$.each(data, function (key, value) {
+						CreatePostMostLikesGroup(DOM, key, value);
+					});
+
+					//if fail it will give this error
+				}, error: function (e) {
+					popup("failed to work");
+				}
+
+			});
+
+		}
+	</script>
+
+	<!-- LIKES -->
+	<script type="text/javascript">
+		function likeButton(questionID) {
+			var Question_ID = questionID;
+			var dataString = "Question_ID=" + Question_ID;
+
+			$.ajax({
+				url: "http://10.0.2.2/api/Question/likequestion.php",
+				type: "POST",
+				dataType: "json",
+				data: dataString,
+				//on success it will call this function
+				success: function (data) {
+					updatelikesGroup();
+				}
+
+			});
+
+		}
+
+		function likeButtonMostRecentGroup(questionID) {
+			var Question_ID = questionID;
+			var dataString = "Question_ID=" + Question_ID;
+
+			$.ajax({
+				url: "http://10.0.2.2/api/Question/likequestion.php",
+				type: "POST",
+				dataType: "json",
+				data: dataString,
+				//on success it will call this function
+				success: function (data) {
+					updatelikesMostRecentGroup();
+				}
+
+			});
+
+		}
+
+		function likeButtonMostViewGroup(questionID) {
+			var Question_ID = questionID;
+			var dataString = "Question_ID=" + Question_ID;
+
+			$.ajax({
+				url: "http://10.0.2.2/api/Question/likequestion.php",
+				type: "POST",
+				dataType: "json",
+				data: dataString,
+				//on success it will call this function
+				success: function (data) {
+					updatelikesMostViewGroup();
+				}
+
+			});
+
+		}
+
+		function likeButtonMostLikesGroup(questionID) {
+			var Question_ID = questionID;
+			var dataString = "Question_ID=" + Question_ID;
+
+			$.ajax({
+				url: "http://10.0.2.2/api/Question/likequestion.php",
+				type: "POST",
+				dataType: "json",
+				data: dataString,
+				//on success it will call this function
+				success: function (data) {
+					updatelikesMostLikesGroup();
+				}
+
+			});
+
+		}
+
+		//UPDATES
+		function updatelikesGroup() {
+			$.ajax({
+				url: "http://10.0.2.2/api/Question/fetchdatagroup.php",
+				type: "POST",
+				data: "param=no",
+				//on success it will call this function
+				success: function (data) {
+					var DOM = $('#GroupDOM');
+					document.getElementById("GroupDOM").innerHTML = "";
+					//GET DATA AND PARSE IT
+					$.each(data, function (key, value) {
+						CreatePostGroup(DOM, key, value);
+					});
+
+					//if fail it will give this error
+				}, error: function (e) {
+					popup("failed to work");
+				}
+
+			});
+		}
+
+		function updatelikesMostRecentGroup() {
+			var gID = sessionStorage.getItem('group_id');
+			$.ajax({
+				url: "http://10.0.2.2/api/Question/filtermostrecentgroup.php",
+				type: "POST",
+				data: { gID: gID },
+				//on success it will call this function
+				success: function (data) {
+					var DOM = $('#GroupDOM');
+					document.getElementById("GroupDOM").innerHTML = "";
+					//GET DATA AND PARSE IT
+					$.each(data, function (key, value) {
+						CreatePostMostRecentGroup(DOM, key, value);
+					});
+
+					//if fail it will give this error
+				}, error: function (e) {
+					popup("failed to work");
+				}
+
+			});
+		}
+
+		function updatelikesMostViewGroup() {
+			var gID = sessionStorage.getItem('group_id');
+			$.ajax({
+				url: "http://10.0.2.2/api/Question/filtermostviewgroup.php",
+				type: "POST",
+				data: { gID: gID },
+				//on success it will call this function
+				success: function (data) {
+					var DOM = $('#GroupDOM');
+					document.getElementById("GroupDOM").innerHTML = "";
+					//GET DATA AND PARSE IT
+					$.each(data, function (key, value) {
+						CreatePostMostViewGroup(DOM, key, value);
+					});
+
+					//if fail it will give this error
+				}, error: function (e) {
+					popup("failed to work");
+				}
+
+			});
+		}
+
+		function updatelikesMostLikesGroup() {
+			var gID = sessionStorage.getItem('group_id');
+			$.ajax({
+				url: "http://10.0.2.2/api/Question/filtermostlikesgroup.php",
+				type: "POST",
+				data: { gID: gID },
+				//on success it will call this function
+				success: function (data) {
+					var DOM = $('#GroupDOM');
+					document.getElementById("GroupDOM").innerHTML = "";
+					//GET DATA AND PARSE IT
+					$.each(data, function (key, value) {
+						CreatePostMostLikesGroup(DOM, key, value);
+					});
+
+					//if fail it will give this error
+				}, error: function (e) {
+					popup("failed to work");
+				}
+
+			});
+		}
+
+		function followButton(qID, user_ID2) {
+			var qID = qID;
+			var uID2 = user_ID2;
+			var dataString = "qID=" + qID + "&uID2=" + uID2;
+
+			$.ajax({
+				url: "http://10.0.2.2/api/Question/followuser.php",
+				type: "POST",
+				dataType: "json",
+				data: dataString,
+				//on success it will call this function
+				success: function (data) {
+
+					if (data == "Cannot follow user!") {
+						popup(data);
+					} else {
+						updatelikesGroup();
 					}
-				}
-			}
-		</script>
-
-			<script type="text/javascript">
-				function filterMostRecentGroup() {
-					var gID = sessionStorage.getItem('group_id');
-					$.ajax({
-						url: "http://10.0.2.2/api/Question/filtermostrecentgroup.php",
-						type: "POST",
-						data: {gID: gID},
-						//on success it will call this function
-						success: function (data) {
-							var DOM = $('#GroupDOM');
-							document.getElementById("GroupDOM").innerHTML = "";
-							//GET DATA AND PARSE IT
-							$.each(data, function (key, value) {
-								CreatePostGroup(DOM,key,value);
-							});
-
-							//if fail it will give this error
-						}, error: function (e) {
-							popup("failed to work");
-						}
-
-					});
-
-				}
-			</script>
-
-			<script type="text/javascript">
-				function likeButtonGroup(questionID) {
-					var Question_ID = questionID;
-					var dataString = "Question_ID=" + Question_ID;
-
-					$.ajax({
-						url: "http://10.0.2.2/api/Question/likequestion.php",
-						type: "POST",
-						dataType: "json",
-						data: dataString,
-						//on success it will call this function
-						success: function (data) {
-							popup(data);
-							updatelikesGroup();
-						}
-
-					});
-
-				}
-
-				function updatelikesGroup(){
-					$.ajax({
-						url: "http://10.0.2.2/api/Question/fetchdatagroup.php",
-						type: "POST",
-						contentType: "application/json; charset=utf-8",
-						dataType: "json",
-						data: "param=no",
-						//on success it will call this function
-						success: function (data) {
-							var DOM = $('#GroupDOM');
-							document.getElementById("GroupDOM").innerHTML = "";
-							//GET DATA AND PARSE IT
-							$.each(data, function (key, value) {
-								CreatePostGroup(DOM,key,value);
-							});
-
-							//if fail it will give this error
-						}, error: function (e) {
-							popup("failed to work");
-						}
-
-					});
-				}
-
-				function followButton(qID, user_ID2) {
-					var qID = qID;
-					var uID2 = user_ID2;
-					var dataString = "qID=" + qID + "&uID2=" + uID2;
-
-					$.ajax({
-						url: "http://10.0.2.2/api/Question/followuser.php",
-						type: "POST",
-						dataType: "json",
-						data: dataString,
-						//on success it will call this function
-						success: function (data) {
-							popup(data);
-						}
-
-					});
-
-					$.ajax({
-						url: "http://10.0.2.2/api/Question/checkfollow.php",
-						type: "POST",
-						data: {uID2: uID2, qID: qID},
-						//on success it will call this function
-						success: function (data) {
-							//change button color
-							var follow = document.getElementById("follow(" +qID+ ")");
-							if(data == 1)
-							{
-								follow.style.color = "green";
-								//IF WE DONT WANT THE USER TO HAVE LOSE HIS SPOT ON THE PAGE WHEN FOLLOWING A USER
-								//location.reload();
-							}
-							else
-							{
-								follow.style.color = "black";
-							}
-						}
-					});
-
 					
-
 				}
-			</script>
 
-			<script type="text/javascript">
-				function filterMostViewGroup() {
-					var gID = sessionStorage.getItem('group_id');
-					$.ajax({
-						url: "http://10.0.2.2/api/Question/filtermostviewgroup.php",
-						type: "POST",
-						data: {gID: gID},
-						//on success it will call this function
-						success: function (data) {
-							var DOM = $('#GroupDOM');
-							document.getElementById("GroupDOM").innerHTML = "";
-							//GET DATA AND PARSE IT
-							$.each(data, function (key, value) {
-								CreatePostGroup(DOM,key,value);
-							});
+			});
+		}
 
-							//if fail it will give this error
-						}, error: function (e) {
-							popup("failed to work");
-						}
+		function followButtonMostRecent(qID, user_ID2) {
+			var qID = qID;
+			var uID2 = user_ID2;
+			var dataString = "qID=" + qID + "&uID2=" + uID2;
 
-					});
+			$.ajax({
+				url: "http://10.0.2.2/api/Question/followuser.php",
+				type: "POST",
+				dataType: "json",
+				data: dataString,
+				//on success it will call this function
+				success: function (data) {
 
+					if (data == "Cannot follow user!") {
+						popup(data);
+					} else {
+						updatelikesMostRecentGroup();
+					}
+					
 				}
-			</script>
 
-			<script type="text/javascript">
-				//add this function to for pop up functionality
-				function CreatePostGroup(jElement, key, value)
-				{
-					value.dImage = (value.dImage === "<img src = >") ? '' :  value.dImage;
-					jElement.append(`
+			});
+		}
+
+		function followButtonMostView(qID, user_ID2) {
+			var qID = qID;
+			var uID2 = user_ID2;
+			var dataString = "qID=" + qID + "&uID2=" + uID2;
+
+			$.ajax({
+				url: "http://10.0.2.2/api/Question/followuser.php",
+				type: "POST",
+				dataType: "json",
+				data: dataString,
+				//on success it will call this function
+				success: function (data) {
+
+					if (data == "Cannot follow user!") {
+						popup(data);
+					} else {
+						updatelikesMostViewGroup();
+					}
+					
+				}
+
+			});
+		}
+
+		function followButtonMostLikes(qID, user_ID2) {
+			var qID = qID;
+			var uID2 = user_ID2;
+			var dataString = "qID=" + qID + "&uID2=" + uID2;
+
+			$.ajax({
+				url: "http://10.0.2.2/api/Question/followuser.php",
+				type: "POST",
+				dataType: "json",
+				data: dataString,
+				//on success it will call this function
+				success: function (data) {
+
+					if (data == "Cannot follow user!") {
+						popup(data);
+					} else {
+						updatelikesMostLikesGroup();
+					}
+					
+				}
+
+			});
+		}
+	</script>
+
+	<script type="text/javascript">
+		//For listing Group Questions
+		function CreatePostGroup(jElement, key, value) {
+			value.dImage = (value.dImage === "<img src = >") ? '' : value.dImage;
+			jElement.append(`
 					<div class="post">
 						${value.pImage}
 						<div class="main-body">
@@ -421,7 +613,7 @@
 									${value.dImage}
 									<div class="description">${value.Description}</div>
 							</div>
-							<div class="post-footer"> 
+							<div class="post-footer" style="font-size: 1.2rem;"> 
 								<div>
 									<i class="far fa-comment" onclick="sendButton(${value.Question_ID})"></i>
 									${value.c_count}
@@ -430,92 +622,311 @@
 								<i class="far fa-user" id="follow(${value.Question_ID})" onclick="followButton(${value.Question_ID} , ${value.user_ID2})"></i>
                 
 								<div id="u_Heart">
-									<i class="far fa-heart" id="heart(${value.Question_ID})" onclick="likeButtonGroup(${value.Question_ID})"></i>${value.likes}<!-- unfilled -->
+									<i class="far fa-heart" id="heart(${value.Question_ID})" onclick="likeButton(${value.Question_ID})"></i>${value.likes}<!-- unfilled -->
 								</div>
 
 								<!--<i class="far fa-heart" onclick="reportButton(${value.Question_ID})"></i> filled -->
 								<i class="far fa-share-square" onclick="sendButton(${value.Question_ID})"></i>
-
+								<a class="twitter-share-button"
+        						href="https://twitter.com/intent/tweet?text=${value.Description}"><i class="fab fa-twitter" style="color:black" ></i></a>
 							</div>
 						</div>
 					</div>
 					`)
 
-					var Question_ID = value.Question_ID;
+			var Question_ID = value.Question_ID;
 
-					$.ajax({
-						url: "http://10.0.2.2/api/Question/checkquestion.php",
-						type: "POST",
-						data: {Question_ID, Question_ID},
-						//on success it will call this function
-						success: function (data) {
-							//change button color
-							var heart = document.getElementById("heart(" + value.Question_ID +")");
-							if(data == 1)
-							{
-								heart.style.color = "red";
-							}
-							else
-							{
-								heart.style.color = "black";
-							}
-						}
-					});
-
-					var User_ID = value.user_ID2;
-					$.ajax({
-						url: "http://10.0.2.2/api/Question/checkfollow.php",
-						type: "POST",
-						data: {uID2: User_ID, qID: Question_ID},
-						//on success it will call this function
-						success: function (data) {
-							//change button color
-							var follow = document.getElementById("follow(" + value.Question_ID +")");
-							if(data == 1)
-							{
-								follow.style.color = "green";
-							}
-							else
-							{
-								follow.style.color = "black";
-							}
-						}
-					});
+			$.ajax({
+				url: "http://10.0.2.2/api/Question/checkquestion.php",
+				type: "POST",
+				data: { Question_ID, Question_ID },
+				//on success it will call this function
+				success: function (data) {
+					//change button color
+					var heart = document.getElementById("heart(" + value.Question_ID + ")");
+					if (data == 1) {
+						heart.style.color = "red";
+					}
+					else {
+						heart.style.color = "black";
+					}
 				}
-			</script>
+			});
 
-			<script type="text/javascript">
-				$(document).ready(function () {
-					// LIST QUESTIONS
-					$.ajax({
-						url: "http://10.0.2.2/api/Question/fetchdatagroup.php",
-						type: "POST",
-						contentType: "application/json; charset=utf-8",
-						dataType: "json",
-						data: "param=no",
-						//on success it will call this function
-						success: function (data) {
-							var DOM = $('#GroupDOM');
-
-							//GET DATA AND PARSE IT
-							$.each(data, function (key, value) {
-								CreatePostGroup(DOM,key,value);
-							});
-
-							//if fail it will give this error
-						}, error: function (e) {
-							popup("failed to work");
-						}
-
-					});
-				})
-			</script>
-
-			<script type="text/javascript">
-				function clearGroupID() 
-				{
-					sessionStorage.removeItem("group_id");
+			var User_ID = value.user_ID2;
+			$.ajax({
+				url: "http://10.0.2.2/api/Question/checkfollow.php",
+				type: "POST",
+				data: { uID2: User_ID, qID: Question_ID },
+				//on success it will call this function
+				success: function (data) {
+					//change button color
+					var follow = document.getElementById("follow(" + value.Question_ID + ")");
+					if (data == 1) {
+						follow.style.color = "green";
+					}
+					else {
+						follow.style.color = "black";
+					}
 				}
-			</script>
-	</body>
+			});
+		}
+
+		//Most Recent Filter
+		function CreatePostMostRecentGroup(jElement, key, value) {
+			value.dImage = (value.dImage === "<img src = >") ? '' : value.dImage;
+			jElement.append(`
+					<div class="post">
+						${value.pImage}
+						<div class="main-body">
+							<div class="post-header">
+								<span>${value.name}</span>
+								<div class="subject">${value.Subject}</div>
+							</div>
+							<div class="post-body">
+									${value.dImage}
+									<div class="description">${value.Description}</div>
+							</div>
+							<div class="post-footer" style="font-size: 1.2rem;"> 
+								<div>
+									<i class="far fa-comment" onclick="sendButton(${value.Question_ID})"></i>
+									${value.c_count}
+								</div>
+								<i class="fas fa-exclamation" onclick="reportButton(${value.Question_ID})"></i>
+								<i class="far fa-user" id="follow(${value.Question_ID})" onclick="followButtonMostRecent(${value.Question_ID} , ${value.user_ID2})"></i>
+                
+								<div id="u_Heart">
+									<i class="far fa-heart" id="heart(${value.Question_ID})" onclick="likeButtonMostRecentGroup(${value.Question_ID})"></i>${value.likes}<!-- unfilled -->
+								</div>
+
+								<!--<i class="far fa-heart" onclick="reportButton(${value.Question_ID})"></i> filled -->
+								<i class="far fa-share-square" onclick="sendButton(${value.Question_ID})"></i>
+								<a class="twitter-share-button"
+        						href="https://twitter.com/intent/tweet?text=${value.Description}"><i class="fab fa-twitter" style="color:black" ></i></a>
+							</div>
+						</div>
+					</div>
+					`)
+
+			var Question_ID = value.Question_ID;
+
+			$.ajax({
+				url: "http://10.0.2.2/api/Question/checkquestion.php",
+				type: "POST",
+				data: { Question_ID, Question_ID },
+				//on success it will call this function
+				success: function (data) {
+					//change button color
+					var heart = document.getElementById("heart(" + value.Question_ID + ")");
+					if (data == 1) {
+						heart.style.color = "red";
+					}
+					else {
+						heart.style.color = "black";
+					}
+				}
+			});
+
+			var User_ID = value.user_ID2;
+			$.ajax({
+				url: "http://10.0.2.2/api/Question/checkfollow.php",
+				type: "POST",
+				data: { uID2: User_ID, qID: Question_ID },
+				//on success it will call this function
+				success: function (data) {
+					//change button color
+					var follow = document.getElementById("follow(" + value.Question_ID + ")");
+					if (data == 1) {
+						follow.style.color = "green";
+					}
+					else {
+						follow.style.color = "black";
+					}
+				}
+			});
+		}
+		
+		//Most Viewed Filter
+		function CreatePostMostViewGroup(jElement, key, value) {
+			value.dImage = (value.dImage === "<img src = >") ? '' : value.dImage;
+			jElement.append(`
+					<div class="post">
+						${value.pImage}
+						<div class="main-body">
+							<div class="post-header">
+								<span>${value.name}</span>
+								<div class="subject">${value.Subject}</div>
+							</div>
+							<div class="post-body">
+									${value.dImage}
+									<div class="description">${value.Description}</div>
+							</div>
+							<div class="post-footer" style="font-size: 1.2rem;"> 
+								<div>
+									<i class="far fa-comment" onclick="sendButton(${value.Question_ID})"></i>
+									${value.c_count}
+								</div>
+								<i class="fas fa-exclamation" onclick="reportButton(${value.Question_ID})"></i>
+								<i class="far fa-user" id="follow(${value.Question_ID})" onclick="followButtonMostView(${value.Question_ID} , ${value.user_ID2})"></i>
+                
+								<div id="u_Heart">
+									<i class="far fa-heart" id="heart(${value.Question_ID})" onclick="likeButtonMostViewGroup(${value.Question_ID})"></i>${value.likes}<!-- unfilled -->
+								</div>
+
+								<!--<i class="far fa-heart" onclick="reportButton(${value.Question_ID})"></i> filled -->
+								<i class="far fa-share-square" onclick="sendButton(${value.Question_ID})"></i>
+								<a class="twitter-share-button"
+        						href="https://twitter.com/intent/tweet?text=${value.Description}"><i class="fab fa-twitter" style="color:black" ></i></a>
+							</div>
+						</div>
+					</div>
+					`)
+
+			var Question_ID = value.Question_ID;
+
+			$.ajax({
+				url: "http://10.0.2.2/api/Question/checkquestion.php",
+				type: "POST",
+				data: { Question_ID, Question_ID },
+				//on success it will call this function
+				success: function (data) {
+					//change button color
+					var heart = document.getElementById("heart(" + value.Question_ID + ")");
+					if (data == 1) {
+						heart.style.color = "red";
+					}
+					else {
+						heart.style.color = "black";
+					}
+				}
+			});
+
+			var User_ID = value.user_ID2;
+			$.ajax({
+				url: "http://10.0.2.2/api/Question/checkfollow.php",
+				type: "POST",
+				data: { uID2: User_ID, qID: Question_ID },
+				//on success it will call this function
+				success: function (data) {
+					//change button color
+					var follow = document.getElementById("follow(" + value.Question_ID + ")");
+					if (data == 1) {
+						follow.style.color = "green";
+					}
+					else {
+						follow.style.color = "black";
+					}
+				}
+			});
+		}
+
+		//Most Likes Filter
+		function CreatePostMostLikesGroup(jElement, key, value) {
+			value.dImage = (value.dImage === "<img src = >") ? '' : value.dImage;
+			jElement.append(`
+					<div class="post">
+						${value.pImage}
+						<div class="main-body">
+							<div class="post-header">
+								<span>${value.name}</span>
+								<div class="subject">${value.Subject}</div>
+							</div>
+							<div class="post-body">
+									${value.dImage}
+									<div class="description">${value.Description}</div>
+							</div>
+							<div class="post-footer" style="font-size: 1.2rem;"> 
+								<div>
+									<i class="far fa-comment" onclick="sendButton(${value.Question_ID})"></i>
+									${value.c_count}
+								</div>
+								<i class="fas fa-exclamation" onclick="reportButton(${value.Question_ID})"></i>
+								<i class="far fa-user" id="follow(${value.Question_ID})" onclick="followButtonMostLikes(${value.Question_ID} , ${value.user_ID2})"></i>
+                
+								<div id="u_Heart">
+									<i class="far fa-heart" id="heart(${value.Question_ID})" onclick="likeButtonMostLikesGroup(${value.Question_ID})"></i>${value.likes}<!-- unfilled -->
+								</div>
+
+								<!--<i class="far fa-heart" onclick="reportButton(${value.Question_ID})"></i> filled -->
+								<i class="far fa-share-square" onclick="sendButton(${value.Question_ID})"></i>
+								<a class="twitter-share-button"
+        						href="https://twitter.com/intent/tweet?text=${value.Description}"><i class="fab fa-twitter" style="color:black" ></i></a>
+							</div>
+						</div>
+					</div>
+					`)
+
+			var Question_ID = value.Question_ID;
+
+			$.ajax({
+				url: "http://10.0.2.2/api/Question/checkquestion.php",
+				type: "POST",
+				data: { Question_ID, Question_ID },
+				//on success it will call this function
+				success: function (data) {
+					//change button color
+					var heart = document.getElementById("heart(" + value.Question_ID + ")");
+					if (data == 1) {
+						heart.style.color = "red";
+					}
+					else {
+						heart.style.color = "black";
+					}
+				}
+			});
+
+			var User_ID = value.user_ID2;
+			$.ajax({
+				url: "http://10.0.2.2/api/Question/checkfollow.php",
+				type: "POST",
+				data: { uID2: User_ID, qID: Question_ID },
+				//on success it will call this function
+				success: function (data) {
+					//change button color
+					var follow = document.getElementById("follow(" + value.Question_ID + ")");
+					if (data == 1) {
+						follow.style.color = "green";
+					}
+					else {
+						follow.style.color = "black";
+					}
+				}
+			});
+		}
+	</script>
+
+	<script type="text/javascript">
+		$(document).ready(function () {
+			// LIST QUESTIONS
+			$.ajax({
+				url: "http://10.0.2.2/api/Question/fetchdatagroup.php",
+				type: "POST",
+				contentType: "application/json; charset=utf-8",
+				dataType: "json",
+				data: "param=no",
+				//on success it will call this function
+				success: function (data) {
+					var DOM = $('#GroupDOM');
+
+					//GET DATA AND PARSE IT
+					$.each(data, function (key, value) {
+						CreatePostGroup(DOM, key, value);
+					});
+
+					//if fail it will give this error
+				}, error: function (e) {
+					popup("failed to work");
+				}
+
+			});
+		})
+	</script>
+
+	<script type="text/javascript">
+		function clearGroupID() {
+			sessionStorage.removeItem("group_id");
+		}
+	</script>
+</body>
+
 </html>

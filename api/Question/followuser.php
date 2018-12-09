@@ -15,7 +15,7 @@ while($f = mysqli_fetch_object($a_data)){
     //IF QUESTION IS ANONYMOUS CANT FOLLOW USER
     if($anonymous == 1){
 
-        echo json_encode("Cannot follow user");
+        echo json_encode("Cannot follow user!");
 
     }
     //IF QUESTION NOT ANONYMOUS PROCEED

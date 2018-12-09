@@ -19,6 +19,7 @@
         Apache Cordova Team
     </author>
     <content src="login.html" />
+    <icon density="mdpi" height="57" platform="android" src="www/images/Bee.png" width="57" />
     <access origin="*" />
     <allow-intent href="http://*/*" />
     <allow-intent href="https://*/*" />
