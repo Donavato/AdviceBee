@@ -30,6 +30,7 @@
         
     </div><br>
 
+    <!--Nav bar at the bottom of the page-->
     <div class="icon-location">
         <div class="icon-bar">
             <a href="index.html"><img src="images/NavBar/home.png"></a>
@@ -52,7 +53,7 @@
     <script type="text/javascript">
         $(document).ready(function () {
             $.ajax({
-                url: "http://10.0.2.2/api/Question/listlikequestion.php",
+                url: "http://localhost/api/Question/listlikequestion.php",
                 type: "POST",
                 dataType: "json",
                 data: "param=no",
@@ -110,7 +111,7 @@
 
             var dataString = "Question_ID=" + Question_ID;
             $.ajax({
-                url: "http://10.0.2.2/api/Question/unlikequestion.php",
+                url: "http://localhost/api/Question/unlikequestion.php",
                 type: "POST",
                 dataType: "json",
                 data: dataString,
@@ -124,7 +125,7 @@
         //UPDATES THE LIST IF A QUESTION IS UNLIKED
         function updatelist(){
             $.ajax({
-                url: "http://10.0.2.2/api/Question/listlikequestion.php",
+                url: "http://localhost/api/Question/listlikequestion.php",
                 type: "POST",
                 dataType: "json",
                 data: "param=no",

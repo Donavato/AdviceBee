@@ -29,6 +29,7 @@
 
     </div><br>
 
+    <!--Nav bar at the bottom of the page-->
     <div class="icon-location">
         <div class="icon-bar">
             <a href="index.html"><img src="images/NavBar/home.png"></a>
@@ -48,7 +49,7 @@
         $(document).ready(function () {
             // LIST NOTIFICATIONS
             $.ajax({
-                url: "http://10.0.2.2/api/notification/listnotifcontent.php",
+                url: "http://localhost/api/notification/listnotifcontent.php",
                 type: "POST",
                 dataType: "json",
                 data: "param=no",

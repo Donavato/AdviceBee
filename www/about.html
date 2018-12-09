@@ -11,6 +11,8 @@
     <link rel="stylesheet" type="text/css" href="css/navigation.css"/>
     <!--notification stylesheet-->
     <link rel="stylesheet" type="text/css" href="css/notification.css"/>
+    <!-- side menu stylesheet -->
+    <link rel="stylesheet" type="text/css" href="css/sidemenu.css"/>
 </head>
 
 <body>
@@ -23,6 +25,17 @@
         life's questions.
     </p>
 
+    <!-- Side menu for FAQ, About, Terms of Service and Change Password -->
+    <img class="appInfoMenuButtonLocation" onclick="openNav()" src="images/grouplist.png"></img>
+    <div id="appInfoNav" class="appInfoMenu">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+        <a href="about.html">About</a>
+        <a href="faq.html">FAQ</a>
+        <a href="termsOfService.html">Terms of Service</a>
+        <a href="changepw.html">Change Password</a>
+    </div>
+
+    <!--Nav bar at the bottom of the page-->
     <div class="icon-location">
         <div class="icon-bar">
             <a href="index.html"><img src="images/NavBar/home.png"></a>
@@ -34,7 +47,8 @@
             <a href="profile.html"><img src="images/NavBar/profile.png"></a>
         </div>
     </div>
-
+    
+    <script src="js/appinfo.js"></script>
 </body>
 
 </html>

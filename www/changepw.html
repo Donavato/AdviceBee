@@ -32,10 +32,11 @@
 
     </form>
 
+    <!--Nav bar at the bottom of the page-->
     <div class="icon-location">
         <div class="icon-bar">
             <a href="index.html"><img src="images/NavBar/home.png"></a>
-            <a href="groups.html"><img src="images/NavBar/groups.png"></a>
+            <a href="groupinfo.html"><img src="images/NavBar/groups.png"></a>
             <a href="notification.html" class="badge1" data-badge=""><img src="images/NavBar/notification.png"></a>
             <a href="search.html"><img src="images/NavBar/search.png"></a>
             <a href="listfolloweduser.html"><img src="images/NavBar/users.png"></a>
@@ -95,7 +96,7 @@
 
                 $.ajax({
                     type: "POST",
-                    url: "http://10.0.2.2/api/Account/changepw.php",
+                    url: "http://localhost/api/Account/changepw.php",
                     dataType: "json",
                     data: dataString,
                     success: function (data) {

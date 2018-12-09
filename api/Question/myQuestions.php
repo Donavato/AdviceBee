@@ -2,8 +2,14 @@
     include "../Account/db.php";
     header('Content-Type: application/json');
     //Pull all questions the current logged in user has made
-    $user_ID = $_SESSION['user_ID'];
     
+    $user_ID = $_SESSION['user_ID'];
+
+    if(isset($_POST['currentID']))
+	{
+		$user_ID = $_POST['currentID'];
+    }
+
     $dataquery = mysqli_query($con, "SELECT * FROM Questions WHERE user_ID='$user_ID'");
     $arr = array();
 
@@ -47,7 +53,7 @@
                         }
     
                         array_push($arr, array("Question_ID" => $Question_ID, "Description" => $Description, 
-                        "Subject" => $Subject, "anonymous" => $anonymous, "hide" => $hide, "user_ID2" => $user_ID2, 
+                        "Subject" => $Subject, "anonymous" => $anonymous, "hide" => $hide, "user_ID2" => $user_ID2,
                         "name" => $Name, "pImage" => "<img src = $p_Image>", "dImage" => "<img src = $d_Image>"));
     
                     }
