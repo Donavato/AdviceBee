@@ -8,45 +8,100 @@ a static image.
 </div>
 
 <script type="text/javascript">
+    if(sessionStorage.getItem("user_ID") === null)
+    {
+        $.ajax({
+            url: "http://10.0.2.2/api/Profile/getuserID.php",
+            type: "POST",
+            data: "param=no",
+            //on success it will call this function
+            success: function (yourID) {
 
-    $.ajax({
-        url: "http://10.0.2.2/api/profile_image/wallpaperimage.php",
-        type: "POST",
-        contentType: "application/json; charset=utf-8",
-        dataType: "json",
-        data: "param=no",
-        //on success it will call this function
-        success: function (data) {
-            var DOM = $('#getwallpaper');
+                var uID = JSON.parse(yourID);
+                $.ajax({
+                    url: "http://10.0.2.2/api/profile_image/wallpaperimage.php",
+                    type: "POST",
+                    dataType: "json",
+                    data: {profileID: uID},
+                    //on success it will call this function
+                    success: function (data) {
+                        var DOM = $('#getwallpaper');
 
-            //GET DATA AND PARSE IT
-            var imageURL = data[0].pImage;
+                        //GET DATA AND PARSE IT
+                        var imageURL = data[0].pImage;
 
-            //call to get userID of the person logged in
-            $.ajax({
-                url: "http://10.0.2.2/api/Profile/getuserID.php",
-                type: "POST",
-                data: "param=no",
-                //on success it will call this function
-                success: function (yourID) {
+                        //call to get userID of the person logged in
+                        $.ajax({
+                            url: "http://10.0.2.2/api/Profile/getuserID.php",
+                            type: "POST",
+                            data: "param=no",
+                            //on success it will call this function
+                            success: function (yourID) {
 
-                    var uID = JSON.parse(yourID);
+                                var uID = JSON.parse(yourID);
 
-                    //if session storage is undefined or if the session storage is holding the same user id as the profile's user id
-                    if(sessionStorage.getItem("user_ID") === null || sessionStorage.getItem("user_ID") == uID)
-                    {
-                        //APPEND DATA AND DISPLAY IT
-                        DOM.append("<a href='wallpaperImage.html'>"+ imageURL +"</a>");
+                                //if session storage is undefined or if the session storage is holding the same user id as the profile's user id
+                                if(sessionStorage.getItem("user_ID") === null || sessionStorage.getItem("user_ID") == uID)
+                                {
+                                    //APPEND DATA AND DISPLAY IT
+                                    DOM.append("<a href='wallpaperImage.html'>"+ imageURL +"</a>");
+                                }
+                                else
+                                {
+                                    //APPEND DATA AND DISPLAY IT
+                                    DOM.append(imageURL);
+                                }
+
+                                    var image = document.getElementById('getwallpaper');
+                            }
+                        });
                     }
-                    else
-                    {
-                        //APPEND DATA AND DISPLAY IT
-                        DOM.append(imageURL);
-                    }
+                });
+            }
+        });
+        
+    }
+    else
+    {
+        var uID = sessionStorage.getItem('user_ID');
+        $.ajax({
+            url: "http://10.0.2.2/api/profile_image/wallpaperimage.php",
+            type: "POST",
+            dataType: "json",
+            data: {profileID: uID},
+            //on success it will call this function
+            success: function (data) {
+                var DOM = $('#getwallpaper');
 
-                        var image = document.getElementById('getwallpaper');
-                }
-            });
-        }
-    });
+                //GET DATA AND PARSE IT
+                var imageURL = data[0].pImage;
+
+                //call to get userID of the person logged in
+                $.ajax({
+                    url: "http://10.0.2.2/api/Profile/getuserID.php",
+                    type: "POST",
+                    data: "param=no",
+                    //on success it will call this function
+                    success: function (yourID) {
+
+                        var uID = JSON.parse(yourID);
+
+                        //if session storage is undefined or if the session storage is holding the same user id as the profile's user id
+                        if(sessionStorage.getItem("user_ID") === null || sessionStorage.getItem("user_ID") == uID)
+                        {
+                            //APPEND DATA AND DISPLAY IT
+                            DOM.append("<a href='wallpaperImage.html'>"+ imageURL +"</a>");
+                        }
+                        else
+                        {
+                            //APPEND DATA AND DISPLAY IT
+                            DOM.append(imageURL);
+                        }
+
+                            var image = document.getElementById('getwallpaper');
+                    }
+                });
+            }
+        });
+    }
 </script>
