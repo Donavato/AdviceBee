@@ -24,7 +24,7 @@ Clicking next will take the user to the groups page. Accessed right after loggin
     //call ajax
 	var ajax = new XMLHttpRequest();
 	var method = "GET";
-	var url = "http://10.0.2.2/api/Profile/gettopicinfo.php";
+	var url = "http://localhost/api/Profile/gettopicinfo.php";
 	var asynchronous = true;
 	
 	ajax.open(method, url, asynchronous);
@@ -77,7 +77,7 @@ Clicking next will take the user to the groups page. Accessed right after loggin
 			//call ajax
 			$.ajax({
 				method: "POST",
-				url: "http://10.0.2.2/api/Profile/addusertopic.php",
+				url: "http://localhost/api/Profile/addusertopic.php",
 				data: {topicStoreID: storeID}
 			});
 		}
@@ -86,7 +86,7 @@ Clicking next will take the user to the groups page. Accessed right after loggin
 			//call ajax
 			$.ajax({
 				method: "POST",
-				url: "http://10.0.2.2/api/Profile/deletefromusertopic.php",
+				url: "http://localhost/api/Profile/deletefromusertopic.php",
 				data: {topicStoreID: storeID}
   			});
 		}
