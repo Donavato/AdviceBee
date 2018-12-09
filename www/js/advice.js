@@ -163,7 +163,6 @@ $(document).ready(function () {
 
         } else if (questionType == "True or False") {
             advice = $("input[type=radio][name=advice]:checked").val();
-
         } else if (questionType == "Description") {
             advice = $("#Description1").val();
 
@@ -174,20 +173,29 @@ $(document).ready(function () {
             popup("No Question Type Selected");
         }
 
-        var dataString = "Question_ID=" + Question_ID + "&advice=" + advice;
-        //Send answer to DB
-        $.ajax({
-            url: "http://localhost/api/Advice/giveAdvice.php",
-            type: "POST",
-            dataType: "json",
-            data: dataString,
-            success: function (data) {
-                popup("Thank you for the advice!");
-                window.location.replace("index.html");
-            }, error: function (e) {
-                popup(JSON.stringify(e));
-            }
-        });
+        //if no answer is inserted
+        if(typeof advice == 'undefined')
+        {
+            popup('You must make a choice');
+            setTimeout(() => window.location.replace("advice.html"), 500);
+        }
+        else
+        {
+            var dataString = "Question_ID=" + Question_ID + "&advice=" + advice;
+            //Send answer to DB
+            $.ajax({
+                url: "http://10.0.2.2/api/Advice/giveAdvice.php",
+                type: "POST",
+                dataType: "json",
+                data: dataString,
+                success: function (data) {
+                    popup("Thank you for the advice!");
+                    window.location.replace("index.html");
+                }, error: function (e) {
+                    popup(JSON.stringify(e));
+                }
+            });
+        }
     });
 });
 
