@@ -12,6 +12,7 @@ body {
     background-color: rgb(246, 246, 246);
 }
 
+/* Old navigation styling - No longer used*/
 .nav {
     position: relative;
     bottom: 10px;
@@ -25,6 +26,7 @@ body {
     font-weight: bold;
 }
 
+/* hyperlink styling */
 .hyperlink {
     position: relative;
     left: 30px;
@@ -32,6 +34,7 @@ body {
     font-family: "Segoe UI";
 }
 
+/* link for user registration */
 .reglink {
     text-decoration: none;
     font-family: "Segoe UI";
@@ -43,6 +46,7 @@ body {
     font-size: 11px;
 }
 
+/* p tag styling */
 p {
     font-family: "Segoe UI";
     text-align: left;
@@ -63,6 +67,7 @@ p {
     font-family: "Segoe UI";
 }
 
+/* old styling for submit buttons */
 .submit {
     width: 158;
     height: 54px;
@@ -77,6 +82,7 @@ p {
     font-family: "Segoe UI";
 }
 
+/* old submit button for search */
 .submitsearch {
     width: 100px;
     height: 30px;
@@ -91,6 +97,7 @@ p {
     font-family: "Segoe UI";
 }
 
+/* style for question subjects */
 #Subject {
     width: 230px;
     height: 26px;
@@ -103,6 +110,7 @@ p {
     font-family: "Segoe UI";
 }
 
+/* insert button styling */
 .insert {
     width: 158;
     height: 54px;
@@ -117,6 +125,7 @@ p {
     font-family: "Segoe UI";
 }
 
+/* old delete button */
 #delete {
     width: 100%;
     background-color: #00e600;
@@ -166,6 +175,7 @@ p {
     font-family: "Segoe UI";
 }
 
+/* line under page titles */
 hr {
     border-color: rgb(80, 141, 220);
     width: 100%;
@@ -194,6 +204,7 @@ h3 {
     font-family: "Segoe UI";
 }
 
+/* input form titles */
 .label {
     color: rgb(121, 121, 121);
     font-family: "Segoe UI";
@@ -259,7 +270,7 @@ h3 {
     padding: 10px;
 }
 
-/*  */
+/* centers elements */
 .centerButton {
     margin: auto;
     width: 75%;
@@ -305,7 +316,6 @@ padding: 5px 0px;
 .likebox a {
     float: center;
     width: 50%;
-    /* top right bottom left */
     padding: 0 0 0 10px;
 }
 
@@ -391,8 +401,6 @@ padding: 5px 0px;
 }
 /* --------------------------------------------- */
 
-
-
 /* Facebook and Google signin buttons */
 .fb {
     background-color: #3B5998;
@@ -416,7 +424,9 @@ padding: 5px 0px;
     display: block;
     margin: 0 auto;
 }
+/* --------------------------------------------- */
 
+/* photo size for image uploads */
 #photo {
     height: 100px;
     width: 100px;
@@ -473,6 +483,7 @@ padding: 5px 0px;
     display: inline-block;
 }
 
+/* comment count styling */
 .comment {
     font-weight: bold;
     font-family: "Segoe UI";
@@ -623,6 +634,7 @@ padding: 5px 0px;
     justify-content: center;
 }
 
+/* character count for text areas */
 .charactercount {
     font-family: "Segoe UI";
     font-size: 10pt;

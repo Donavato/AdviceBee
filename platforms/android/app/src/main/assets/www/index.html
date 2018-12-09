@@ -1,3 +1,9 @@
+<!--
+Main dashboard/ topics dashboard. This is the page the user is directed to once they log in successfully and have already
+done the first time sign in process. Here the user can view all posts and sort them under specific topics. The user can
+click to be forwarded to create a question, like questions, follow users, report questions, or give advice to questions.
+The user also has access to the FAQ, about us, terms of service and change password pages from the side menu.
+-->
 <html>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -22,7 +28,6 @@
 
 
 <body>
-    <a onclick="logout()" class="logout">Logout</a>
     <div id="dashboardTopics">
     </div>
     <!--output of the json-->
@@ -56,8 +61,8 @@
     </div>
 
     <!-- Side menu for FAQ, About, Terms of Service and Change Password -->
-    <span class="rightSideMenuButtonLocation" onclick="openNav()">&#8801;</span>
-    <div id="rightSidenav" class="rightSideMenu">
+    <img class="appInfoMenuButtonLocation" onclick="openNav()" src="images/grouplist.png"></img>
+    <div id="appInfoNav" class="appInfoMenu">
         <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
         <a href="about.html">About</a>
         <a href="faq.html">FAQ</a>
@@ -86,8 +91,8 @@
     </div>
     <script src="js/popup.js"></script>
     <script src="js/dashboard.js"></script>
-    <script src="js/logout.js"></script>
     <script src="js/notification.js"></script>
+    <script src="js/appinfo.js"></script>
 </body>
 
 </html>

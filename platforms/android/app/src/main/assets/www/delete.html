@@ -1,3 +1,7 @@
+<!--
+Will be accessible on the profile page 3rd tab, on user's own profile they can view and delete their posts, while on a 
+different user's profile they can view their posts except for the anonymous ones.
+-->
 <html>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <head>
@@ -26,40 +30,56 @@
     <!-- Load mu questions from DB -->
     <script type="text/javascript">
         $(document).ready(function () {
+
+            //get current user ID
+            var sessionUser = sessionStorage.getItem('user_ID'); 
+            if(sessionUser == null)
+                sessionUser = undefined;
+            
             $.ajax({
                 url: "http://10.0.2.2/api/Question/myQuestions.php",
                 type: "POST",
                 dataType: "json",
-                data: "param=no",
+                data: {currentID : sessionUser},
                 //on success it will call this function
                 success: function (data) {
-                    var DOM = $('#DOM');
+                    //variable to hide delete button if other users post
+                    var hideButton = "visible";
 
+                    var DOM = $('#DOM');
                     //GET DATA AND PARSE IT
                     $.each(data, function (key, value) {  
+                        //hide delete button on posts if other user
+                        if (sessionStorage.getItem('user_ID') == value.user_ID2)
+                            hideButton = "hidden";
+
                         value.dImage = (value.dImage === "<img src = >") ? '' :  value.dImage;  
                         //APPEND DATA AND DISPLAY IT
-                        DOM.append(
-                            "<div class='post'>"+ value.pImage+
-                                "<div class='main-body'>"+ 
-                                    "<div class='post-header'>"+
-                                        "<span>"+value.name+"</span>"+
-                                        "<div class='subject'>"+value.Subject+"</div>"+
-                                    "</div>"+
+                        if(!(value.name === "Anonymous" && hideButton === "hidden"))
+                        {
+                            DOM.append(
+                                "<div class='post'>"+ value.pImage+
+                                    "<div class='main-body'>"+ 
+                                        "<div class='post-header'>"+
+                                            "<span>"+value.name+"</span>"+
+                                            "<div class='subject'>"+value.Subject+"</div>"+
+                                        "</div>"+
 
-                                    "<div class='post-body'>"+
-                                    value.dImage+
-                                        "<div class='description'>"+value.Description+"</div>"+
-                                        "<div class='post-footer'>"+"<button onclick='DeleteButton("+ value.Question_ID +")'>Delete</button>"+
-                                            "</div>"+
-                                    "</div>"
-                                +"</div>"
-                            +"</div>");
+                                        "<div class='post-body'>"+
+                                        value.dImage+
+                                            "<div class='description'>"+value.Description+"</div>"+
+                                            "<div class='post-footer'>"+"<button style='visibility:" + hideButton + "' onclick='DeleteButton("+ value.Question_ID +")'>Delete</button>"+
+                                                "</div>"+
+                                        "</div>"
+                                    +"</div>"
+                                +"</div>");
+                        }   
                     });
                     
                     //if fail it will give this error
                 }, error: function (e) {
                     popup("failed to work");
+                    alert('failed');
                 }
             });
         });

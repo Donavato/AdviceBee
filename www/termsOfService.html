@@ -14,6 +14,8 @@ Terms of service for the application. Can be accessed from the topics dashboard'
     <link rel="stylesheet" type="text/css" href="css/navigation.css"/>
     <!--notification stylesheet-->
     <link rel="stylesheet" type="text/css" href="css/notification.css"/>
+    <!-- side menu stylesheet -->
+    <link rel="stylesheet" type="text/css" href="css/sidemenu.css"/>
 </head>
 
 <body>
@@ -34,10 +36,22 @@ Terms of service for the application. Can be accessed from the topics dashboard'
 
 
     </div><br>
+
+    <!-- Side menu for FAQ, About, Terms of Service and Change Password -->
+    <img class="appInfoMenuButtonLocation" onclick="openNav()" src="images/grouplist.png"></img>
+    <div id="appInfoNav" class="appInfoMenu">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+        <a href="about.html">About</a>
+        <a href="faq.html">FAQ</a>
+        <a href="termsOfService.html">Terms of Service</a>
+        <a href="changepw.html">Change Password</a>
+    </div>
+
+    <!--Nav bar at the bottom of the page-->
     <div class="icon-location">
         <div class="icon-bar">
             <a href="index.html"><img src="images/NavBar/home.png"></a>
-            <a href="groups.html"><img src="images/NavBar/groups.png"></a>
+            <a href="groupinfo.html"><img src="images/NavBar/groups.png"></a>
             <a href="notification.html" class="badge1" data-badge=""><img src="images/NavBar/notification.png"></a>
             <a href="search.html"><img src="images/NavBar/search.png"></a>
             <a href="listfolloweduser.html"><img src="images/NavBar/users.png"></a>
@@ -46,6 +60,7 @@ Terms of service for the application. Can be accessed from the topics dashboard'
         </div>
     </div>
 
+    <script src="js/appinfo.js"></script>
 </body>
 
 </html>
