@@ -365,7 +365,7 @@ who created a post, share a post on twitter, or report a post.
 			sessionStorage.questionID = questionID;
 			//views functionality
 			$.ajax({
-				url: "http://10.0.2.2/api/Question/addViews.php",
+				url: "http://localhost/api/Question/addViews.php",
 				type: "POST",
 				data: {question_id: questionID, userID2: uID2}
 				});

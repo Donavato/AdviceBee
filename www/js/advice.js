@@ -174,7 +174,7 @@ $(document).ready(function () {
         }
 
         //if no answer is inserted
-        if(typeof advice == 'undefined')
+        if(typeof advice == 'undefined' || advice == '')
         {
             popup('You must make a choice');
             setTimeout(() => window.location.replace("advice.html"), 500);
@@ -184,7 +184,7 @@ $(document).ready(function () {
             var dataString = "Question_ID=" + Question_ID + "&advice=" + advice;
             //Send answer to DB
             $.ajax({
-                url: "http://10.0.2.2/api/Advice/giveAdvice.php",
+                url: "http://localhost/api/Advice/giveAdvice.php",
                 type: "POST",
                 dataType: "json",
                 data: dataString,
