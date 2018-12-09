@@ -1,3 +1,7 @@
+<!--
+Accessed by clicking on the wallpaper image from the profile page, here the user can update their wallpaper image by taking or uploading
+and submitting a new image.
+-->
 <!DOCTYPE html>
 <html>
 
@@ -117,7 +121,7 @@
             $("#submit").click(function () {
                 
                 $.ajax({
-                    url: "http://10.0.2.2/api/profile_image/wallpaper.php",
+                    url: "http://localhost/api/profile_image/wallpaper.php",
                     type: "POST",
                     data: {
                         base64: image_Content                             //Base64 data type send to API

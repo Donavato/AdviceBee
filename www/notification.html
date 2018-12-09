@@ -1,3 +1,6 @@
+<!--
+Can be accessed from the bottom nav menu, will alert the user of any new updates they have recieved.
+-->
 <html>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -48,7 +51,7 @@
         $(document).ready(function () {
             // LIST NOTIFICATIONS
             $.ajax({
-                url: "http://10.0.2.2/api/notification/listnotifcontent.php",
+                url: "http://localhost/api/notification/listnotifcontent.php",
                 type: "POST",
                 dataType: "json",
                 data: "param=no",

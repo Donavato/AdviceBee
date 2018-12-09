@@ -1,3 +1,8 @@
+<!--
+Loads the profile page's wallpaper image for the user's profile being viewed. If the user is viewing their own profile
+they can click the image to be redirected to a wallpaperImage.html, if they're viewing someone else's profile it'll just be
+a static image.
+-->
 <div id="getwallpaper">
     
 </div>
@@ -5,7 +10,7 @@
 <script type="text/javascript">
 
     $.ajax({
-        url: "http://10.0.2.2/api/profile_image/wallpaperimage.php",
+        url: "http://localhost/api/profile_image/wallpaperimage.php",
         type: "POST",
         contentType: "application/json; charset=utf-8",
         dataType: "json",
@@ -19,7 +24,7 @@
 
             //call to get userID of the person logged in
             $.ajax({
-                url: "http://10.0.2.2/api/Profile/getuserID.php",
+                url: "http://localhost/api/Profile/getuserID.php",
                 type: "POST",
                 data: "param=no",
                 //on success it will call this function

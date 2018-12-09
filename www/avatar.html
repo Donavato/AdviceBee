@@ -1,10 +1,15 @@
+<!--
+This file will display the profile picture of the profile page the user is on, if the user is on his own page this 
+profile picture can be clicked to take the user to the profileImage where they can upload a profile, if the user is not
+on his own profile, then the image will be displayed without the click functionality.
+-->
 <div id="getavatar">
 </div>
 
 <script type="text/javascript">
 
     $.ajax({
-        url: "http://10.0.2.2/api/profile_image/avatar.php",
+        url: "http://localhost/api/profile_image/avatar.php",
         type: "POST",
         contentType: "application/json; charset=utf-8",
         dataType: "json",
@@ -18,7 +23,7 @@
 
             //call to get userID of the person logged in
             $.ajax({
-                url: "http://10.0.2.2/api/Profile/getuserID.php",
+                url: "http://localhost/api/Profile/getuserID.php",
                 type: "POST",
                 data: "param=no",
                 //on success it will call this function

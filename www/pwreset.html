@@ -1,3 +1,6 @@
+<!--
+Used to reset if the user forgot their password, accessed from the login page.
+-->
 <html>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -52,7 +55,7 @@
 
                 $.ajax({
                     type: "POST",
-                    url: "http://10.0.2.2/api/Account/pwreset.php",
+                    url: "http://localhost/api/Account/pwreset.php",
                     dataType: "json",
                     data: dataString,
                     success: function(data) {

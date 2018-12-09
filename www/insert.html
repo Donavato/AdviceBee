@@ -1,3 +1,8 @@
+<!--
+Allows the user to ask for advice, taking a subject, description, the topic, group(if the user chooses to select one),
+and select if they want to show this question as anonymous and have responses hidden as well as upload an image with the
+description of the advice.
+-->
 <!DOCTYPE html>
 <html>
 <head>
@@ -210,7 +215,7 @@
             //PULL ALL TOPICS AND STORE THEM INTO A DROP DOWN FOR topics_list
             $.ajax({
                 type: "POST",
-                url: "http://10.0.2.2/api/topics.php",
+                url: "http://localhost/api/topics.php",
                 success: function (response) {
                     var data = JSON.parse(JSON.stringify(response));
                     var text = "";
@@ -222,7 +227,7 @@
             //PULL ALL GROUPS AND STORE THEM INTO A DROP DOWN FOR groups_list
             $.ajax({
                 type: "POST",
-                url: "http://10.0.2.2/api/groups.php",
+                url: "http://localhost/api/groups.php",
                 success: function (response) {
                     var data = JSON.parse(JSON.stringify(response));
                     var text = "";
@@ -236,7 +241,7 @@
             //PULL ALL QUESTION TYPES AND PUT THEM INTO A DROPDOWN question_type
             $.ajax({
                 type: "POST",
-                url: "http://10.0.2.2/api/Question/questionType.php",
+                url: "http://localhost/api/Question/questionType.php",
                 success: function (response) {
                     var data = JSON.parse(response);
                     var text = "";
@@ -281,7 +286,7 @@
                 else{hide = 0;}
                 if ($.trim(Description).length > 0 & $.trim(Subject).length > 0) {
                     $.ajax({
-                    url: "http://10.0.2.2/api/Question/insert.php",
+                    url: "http://localhost/api/Question/insert.php",
                     type: "POST",
                     data: {
                         base64: image_Content,

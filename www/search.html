@@ -1,3 +1,7 @@
+<!--
+Can be accessed from bottom nav bar, user can search for keywords to find posts or users and can click on them to redirect 
+them to the post/user clicked on.
+-->
 <!DOCTYPE <!DOCTYPE html>
 <html>
 
@@ -109,7 +113,7 @@
                 var dataString = "Data=" + search_data;
                 $.ajax({
                     type: "POST",
-                    url: "http://10.0.2.2/api/search.php",
+                    url: "http://localhost/api/search.php",
                     dataType: "json",
                     data: dataString,
                     success: function (data) {

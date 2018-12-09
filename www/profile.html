@@ -1,3 +1,11 @@
+<!--
+Profile page, will load the user's profile if they use the nav bar at the bottom and will allow the user to change their
+name, location, title, bio, as well as view the number of posts they have, the number of followers, the number of people
+following them, the number of points they have and their level. They'll also be able to see their wallpaper image and profile image, as well as click them to update them.
+If the profile page is accessed through the search method of a different user the user can still view all of the above but
+will not be able to make any changes to the profile. This page also contains the 3 links to the info tab, topics tab, and 
+posts tab at the bottom of the profile page.
+-->
 <html>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -86,7 +94,7 @@
     if(sessionStorage.getItem("user_ID") === null)
     {
         $.ajax({
-            url: "http://10.0.2.2/api/Profile/getuserID.php",
+            url: "http://localhost/api/Profile/getuserID.php",
             type: "POST",
             data: "param=no",
             //on success it will call this function
@@ -106,7 +114,7 @@
         var uID = sessionStorage.getItem("user_ID");
         $.ajax({
             method: "POST",
-            url: "http://10.0.2.2/api/Profile/getinfo.php",
+            url: "http://localhost/api/Profile/getinfo.php",
             data: {profileID: uID},
             success: function (data) {
 
@@ -175,7 +183,7 @@
     else
     {
         $.ajax({
-            url: "http://10.0.2.2/api/Profile/getuserID.php",
+            url: "http://localhost/api/Profile/getuserID.php",
             type: "POST",
             data: "param=no",
             //on success it will call this function
@@ -185,7 +193,7 @@
 
                 $.ajax({
                     method: "POST",
-                    url: "http://10.0.2.2/api/Profile/getinfo.php",
+                    url: "http://localhost/api/Profile/getinfo.php",
                     data: {profileID: uID},
                     success: function (data) {
 
@@ -207,6 +215,7 @@
                         var following = datareturned[1].following;
                         var followers = datareturned[2].followers;
                         var posts = datareturned[3].posts;
+                        var points = datareturned[4].points;
 
                         if(bio === "")
                         {
@@ -268,7 +277,7 @@
        
        //call to get userID of the person logged in
         $.ajax({
-            url: "http://10.0.2.2/api/Profile/getuserID.php",
+            url: "http://localhost/api/Profile/getuserID.php",
             type: "POST",
             data: "param=no",
             //on success it will call this function
@@ -281,7 +290,7 @@
                 {
                     $.ajax({
                         method: "POST",
-                        url: "http://10.0.2.2/api/Profile/updatename.php",
+                        url: "http://localhost/api/Profile/updatename.php",
                         data: {userfirstName: firstName, userlastName: lastName},
                         success: function (data) {
                             //popup(JSON.parse(data));
@@ -304,7 +313,7 @@
 
         //call to get userID of the person logged in
         $.ajax({
-            url: "http://10.0.2.2/api/Profile/getuserID.php",
+            url: "http://localhost/api/Profile/getuserID.php",
             type: "POST",
             data: "param=no",
             //on success it will call this function
@@ -317,7 +326,7 @@
                 {
                     $.ajax({
                         method: "POST",
-                        url: "http://10.0.2.2/api/Profile/updatetitle.php",
+                        url: "http://localhost/api/Profile/updatetitle.php",
                         data: {userTitle: storeTitle},
                         success: function (data) {
                             popup(JSON.parse(data));
@@ -339,7 +348,7 @@
 
         //call to get userID of the person logged in
         $.ajax({
-            url: "http://10.0.2.2/api/Profile/getuserID.php",
+            url: "http://localhost/api/Profile/getuserID.php",
             type: "POST",
             data: "param=no",
             //on success it will call this function
@@ -352,7 +361,7 @@
                 {
                     $.ajax({
                         method: "POST",
-                        url: "http://10.0.2.2/api/Profile/updatelocation.php",
+                        url: "http://localhost/api/Profile/updatelocation.php",
                         data: {userLocation: storeLocation},
                         success: function (data) {
                             popup(JSON.parse(data));
@@ -375,7 +384,7 @@
        
        //call to get userID of the person logged in
         $.ajax({
-            url: "http://10.0.2.2/api/Profile/getuserID.php",
+            url: "http://localhost/api/Profile/getuserID.php",
             type: "POST",
             data: "param=no",
             //on success it will call this function
@@ -388,7 +397,7 @@
                 {
                     $.ajax({
                         method: "POST",
-                        url: "http://10.0.2.2/api/Profile/updatebio.php",
+                        url: "http://localhost/api/Profile/updatebio.php",
                         data: {storeBio, storeBio},
                         success: function (data) {
                             popup(JSON.parse(data));

@@ -1,3 +1,7 @@
+<!--
+Can be accessed from the nav menu at the bottom, the user can view all the questions they liked
+and unlike the question if they choose to.
+-->
 <html>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -52,7 +56,7 @@
     <script type="text/javascript">
         $(document).ready(function () {
             $.ajax({
-                url: "http://10.0.2.2/api/Question/listlikequestion.php",
+                url: "http://localhost/api/Question/listlikequestion.php",
                 type: "POST",
                 dataType: "json",
                 data: "param=no",
@@ -110,7 +114,7 @@
 
             var dataString = "Question_ID=" + Question_ID;
             $.ajax({
-                url: "http://10.0.2.2/api/Question/unlikequestion.php",
+                url: "http://localhost/api/Question/unlikequestion.php",
                 type: "POST",
                 dataType: "json",
                 data: dataString,
@@ -124,7 +128,7 @@
         //UPDATES THE LIST IF A QUESTION IS UNLIKED
         function updatelist(){
             $.ajax({
-                url: "http://10.0.2.2/api/Question/listlikequestion.php",
+                url: "http://localhost/api/Question/listlikequestion.php",
                 type: "POST",
                 dataType: "json",
                 data: "param=no",

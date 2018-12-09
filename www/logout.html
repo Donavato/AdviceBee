@@ -1,3 +1,7 @@
+<!--
+logout button to log out the user and inform them they are being logged out as well as update any session variables before
+killing the session.
+-->
 <html>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -30,7 +34,7 @@
         $(document).ready(function() {
             $.ajax({
             type: 'POST',
-            url: "http://10.0.2.2/api/Account/logout.php",
+            url: "http://localhost/api/Account/logout.php",
             success: function(data) {
                 popup("works");
                 // console.log(JSON.stringify(data));
