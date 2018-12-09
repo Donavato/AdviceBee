@@ -5,7 +5,7 @@ $(document).ready(function () {
     var dataString = "Question_ID=" + Question_ID;
     /////LIST ADVICES GIVEN FOR EACH PARTICULAR QUESTION/////////////////////////
     $.ajax({
-        url: "http://localhost/api/Advice/listadvices.php",
+        url: "http://10.0.2.2/api/Advice/listadvices.php",
         type: "POST",
         dataType: "json",
         data: dataString,
@@ -53,7 +53,7 @@ $(document).ready(function () {
 
     // Display question
     $.ajax({
-        url: "http://localhost/api/Advice/Advice.php",
+        url: "http://10.0.2.2/api/Advice/Advice.php",
         type: "POST",
         dataType: "json",
         data: dataString,
@@ -129,7 +129,7 @@ $(document).ready(function () {
         var dataString = "Question_ID=" + Question_ID;
         /////LIST ADVICES GIVEN FOR EACH PARTICULAR QUESTION/////////////////////////
         $.ajax({
-            url: "http://localhost/api/Advice/multipleChoices.php",
+            url: "http://10.0.2.2/api/Advice/multipleChoices.php",
             type: "POST",
             dataType: "json",
             data: dataString,
@@ -184,7 +184,7 @@ $(document).ready(function () {
             var dataString = "Question_ID=" + Question_ID + "&advice=" + advice;
             //Send answer to DB
             $.ajax({
-                url: "http://localhost/api/Advice/giveAdvice.php",
+                url: "http://10.0.2.2/api/Advice/giveAdvice.php",
                 type: "POST",
                 dataType: "json",
                 data: dataString,
@@ -205,7 +205,7 @@ function likeButton(advice_id) {
 
     var dataString = "advice_ID=" + advice_ID;
     $.ajax({
-        url: "http://localhost/api/Advice/likeadvice.php",
+        url: "http://10.0.2.2/api/Advice/likeadvice.php",
         type: "POST",
         dataType: "json",
         data: dataString,
@@ -226,7 +226,7 @@ function updateLikes() {
     var dataString = "Question_ID=" + Question_ID;
 
     $.ajax({
-        url: "http://localhost/api/Advice/listadvices.php",
+        url: "http://10.0.2.2/api/Advice/listadvices.php",
         type: "POST",
         dataType: "json",
         data: dataString,

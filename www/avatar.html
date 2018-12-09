@@ -10,7 +10,7 @@ on his own profile, then the image will be displayed without the click functiona
     if(sessionStorage.getItem("user_ID") === null)
     {
         $.ajax({
-            url: "http://localhost/api/Profile/getuserID.php",
+            url: "http://10.0.2.2/api/Profile/getuserID.php",
             type: "POST",
             data: "param=no",
             //on success it will call this function
@@ -18,7 +18,7 @@ on his own profile, then the image will be displayed without the click functiona
 
                 var uID = JSON.parse(yourID);
                 $.ajax({
-                    url: "http://localhost/api/profile_image/avatar.php",
+                    url: "http://10.0.2.2/api/profile_image/avatar.php",
                     type: "POST",
                     dataType: "json",
                     data: {profileID: uID},
@@ -31,7 +31,7 @@ on his own profile, then the image will be displayed without the click functiona
 
                         //call to get userID of the person logged in
                         $.ajax({
-                            url: "http://localhost/api/Profile/getuserID.php",
+                            url: "http://10.0.2.2/api/Profile/getuserID.php",
                             type: "POST",
                             data: "param=no",
                             //on success it will call this function
@@ -64,7 +64,7 @@ on his own profile, then the image will be displayed without the click functiona
     {
         var uID = sessionStorage.getItem('user_ID');
         $.ajax({
-            url: "http://localhost/api/profile_image/avatar.php",
+            url: "http://10.0.2.2/api/profile_image/avatar.php",
             type: "POST",
             dataType: "json",
             data: {profileID: uID},
@@ -77,7 +77,7 @@ on his own profile, then the image will be displayed without the click functiona
 
                 //call to get userID of the person logged in
                 $.ajax({
-                    url: "http://localhost/api/Profile/getuserID.php",
+                    url: "http://10.0.2.2/api/Profile/getuserID.php",
                     type: "POST",
                     data: "param=no",
                     //on success it will call this function
