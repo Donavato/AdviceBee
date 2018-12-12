@@ -1,5 +1,6 @@
 <?php
- include "db.php";
+include "db.php";
+include "../phpmailer/PHPMailerAutoload.php";
 
 if(isset($_POST['reg']))
 {
@@ -24,30 +25,46 @@ if(isset($_POST['reg']))
    if($match > 0){
       echo json_encode("email exist");
       die();
+
    }else{
 
-      //INSERT INTO TABLE USERS ALL THE DATA GIVEN
-      $query=mysqli_query($con,"INSERT INTO `users` (`f_name`,`l_name`,`email`,`passwrd`,`ehash`) VALUES ('$fname','$lname','$email','$hashed_password','$hash')");
+      try {
+         $query=mysqli_query($con,"INSERT INTO `users` (`f_name`,`l_name`,`email`,`passwrd`,`ehash`) VALUES ('$fname','$lname','$email','$hashed_password','$hash')");
+         
+         //Server settings
+         $mail = new PHPMailer();
+         $mail->isSMTP();                                      // Set mailer to use SMTP
+         $mail->Host = 'smtp.gmail.com';                       // Specify main and backup SMTP servers
+         $mail->SMTPAuth = true;                               // Enable SMTP authentication
+         $mail->Username = 'advicebee123@gmail.com';                 // SMTP username
+         $mail->Password = 'Advicebee1';                           // SMTP password
+         $mail->SMTPSecure = 'ssl';                            // Enable TLS encryption, `ssl` also accepted
+         $mail->Port = 465;                                    // TCP port to connect to
+     
+         //Recipients
+         $mail->setFrom('no-reply@advicebee.com', 'AdviceBee');
+         $mail->addAddress($email);     // Add a recipient
+     
+     
+         //Content
+         $mail->isHTML(true);                                  // Set email format to HTML
+         $mail->Subject = 'AdviceBee | Email Verification';
+         $mail->Body    = '
+         Thanks for signing up!<br>
+         Your account has been created, you can create a question after verifying your email by pressing the url below.<br><br>
+         
+         Please click this link to activate your email:<br>
+         http://13.59.122.228/api/Account/emailverify.php?email='.$email.'&hash='.$hash.'<br>
+         
+         ';
+     
+         $mail->send();
+         echo json_encode("success");
 
-      //SEND EMAIL VERIFICATION EMAIL
-      $to = $email; // Send email to our user
-      $subject = 'AdviceBee | Email Verification'; // Give the email a subject 
-   
-      // Our message including a link to verify email
-      $message = '
-      Thanks for signing up!
-      Your account has been created, you can create a question after verifying your email by pressing the url below.
+     } catch (Exception $e) {
+         echo 'Message could not be sent. Mailer Error: ', $mail->ErrorInfo;
+     }
       
-      Please click this link to activate your email:
-      http://localhost/api/Account/emailverify.php?email='.$email.'&hash='.$hash.'
-      
-      ';
-   
-      // PHP MAIL FUNCTION to Send our email
-      $headers = 'From:noreply@AdviceBee.com' . "\r\n"; // Set headers *need headers to send mail
-      mail($to, $subject, $message, $headers);
-
-      echo json_encode("success");
    }
 
 }

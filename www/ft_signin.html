@@ -18,7 +18,7 @@
     $(document).ready(function () {
         $.ajax({
             type: "POST",
-            url: "http://10.0.2.2/api/topics.php",
+            url: "http://13.59.122.228/api/topics.php",
             success: function (response) {
                 var data = JSON.parse(response);
                 var text = "";
@@ -31,7 +31,7 @@
             if ($.trim(Description).length > 0 & $.trim(Subject).length > 0) {
                 $.ajax({
                     type: "POST",
-                    url: "http://10.0.2.2/api/ft_signin.php",
+                    url: "http://13.59.122.228/api/ft_signin.php",
                     data: dataString,
                     success: function (data) {
                         if (data == "success") {

@@ -1,5 +1,6 @@
 <?php
 include "db.php";
+include "../phpmailer/PHPMailerAutoload.php";
 
  if(isset($_POST['pwreset']))
  {
@@ -18,27 +19,45 @@ include "db.php";
 
    //IF FOUND UPDATE users TABLE WITH NEW HASHED PASSWORD
    if($match > 0){
-   mysqli_query($con, "UPDATE users SET passwrd='$h_passwrd' WHERE email='$email'") or die(mysql_error());
-
-      //CREATE EMAIL TO SEND TO USER WITH NEW PASSWORD
-      $to = $email; // Send email to our user
-      $subject = 'Account Password Reset'; // Give the email a subject 
    
-      //Our message in the email
-      $message = "
-      Hello, you recently requested to reset your password!
-      Your account password has been reset, you can login with your new password now.
+   try {
+      mysqli_query($con, "UPDATE users SET passwrd='$h_passwrd' WHERE email='$email'") or die(mysql_error());
+
+      //Server settings
+      $mail = new PHPMailer();
+      $mail->isSMTP();                                      // Set mailer to use SMTP
+      $mail->Host = 'smtp.gmail.com';                       // Specify main and backup SMTP servers
+      $mail->SMTPAuth = true;                               // Enable SMTP authentication
+      $mail->Username = 'advicebee123@gmail.com';                 // SMTP username
+      $mail->Password = 'Advicebee1';                           // SMTP password
+      $mail->SMTPSecure = 'ssl';                            // Enable TLS encryption, `ssl` also accepted
+      $mail->Port = 465;                                    // TCP port to connect to
+  
+      //Recipients
+      $mail->setFrom('no-reply@advicebee.com', 'AdviceBee');
+      $mail->addAddress($email);     // Add a recipient
+  
+  
+      //Content
+      $mail->isHTML(true);                                  // Set email format to HTML
+      $mail->Subject = 'Account Password Reset';
+      $mail->Body    = "
+      Hello, you recently requested to reset your password!<br>
+      Your account password has been reset, you can login with your new password now.<br><br>
       
-      Password: $hash
+      Password: $hash <br>
    
-      "; 
-   
-      // PHP MAIL FUNCTION to Send our email
-      $headers = 'From:noreply@AdviceBee.com' . "\r\n"; // Set headers *need headers to send mail
-      mail($to, $subject, $message, $headers);
+      ";
+  
+      $mail->send();
+      echo json_encode("valid");
 
-   echo json_encode("valid");
-   
+  } catch (Exception $e) {
+
+      echo 'Message could not be sent. Mailer Error: ', $mail->ErrorInfo;
+
+  }
+
    }else{
       echo json_encode("not valid");
       die();

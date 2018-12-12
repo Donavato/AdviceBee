@@ -56,7 +56,7 @@ and unfollow the user if they choose to.
     <script type="text/javascript">
         $(document).ready(function () {
             $.ajax({
-                url: "http://10.0.2.2/api/Question/listfolloweduser.php",
+                url: "http://13.59.122.228/api/Question/listfolloweduser.php",
                 type: "POST",
                 dataType: "json",
                 data: "param=no",
@@ -94,7 +94,7 @@ and unfollow the user if they choose to.
 
             var dataString = "follow_ID=" + follow_ID;
             $.ajax({
-                url: "http://10.0.2.2/api/Question/unfollowuser.php",
+                url: "http://13.59.122.228/api/Question/unfollowuser.php",
                 type: "POST",
                 dataType: "json",
                 data: dataString,
@@ -109,7 +109,7 @@ and unfollow the user if they choose to.
         //UPDATES THE LIST OF FOLLOWED USERS IF A USER IS UNFOLLOWED
         function updatelist() {
             $.ajax({
-                url: "http://10.0.2.2/api/Question/listfolloweduser.php",
+                url: "http://13.59.122.228/api/Question/listfolloweduser.php",
                 type: "POST",
                 dataType: "json",
                 data: "param=no",

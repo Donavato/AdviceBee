@@ -4,7 +4,7 @@ $(document).ready(function () {
 
         //JUST HAVE THIS KEEP TRACK OF NOTIFICATION ON ICON
         $.ajax({
-            url: "http://10.0.2.2/api/notification/loadnotification.php",
+            url: "http://13.59.122.228/api/notification/loadnotification.php",
             method: "POST",
             data: { view: view },
             dataType: "json",

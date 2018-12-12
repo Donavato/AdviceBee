@@ -1,5 +1,6 @@
 <?php
 include "../Account/db.php";
+include "../phpmailer/PHPMailerAutoload.php";
 
 $uID = $_SESSION['user_ID'];
 $qID=$_POST['Question_ID'];
@@ -49,35 +50,53 @@ else{
         }
 
 
-    //EMAIL FOR QUESTION REPORTED
-    $to = $email; // Send email to our MODERATOR OR ADMIN
-    $subject = 'AdviceBee | Question Reported'; // Give the email a subject 
-
-    // THE CONTENT OF THE EMAIL
-    $message = "
-    The Following Question has been reported.
+    try {
+        //Server settings
+        $mail = new PHPMailer();
+        $mail->isSMTP();                                      // Set mailer to use SMTP
+        $mail->Host = 'smtp.gmail.com';                       // Specify main and backup SMTP servers
+        $mail->SMTPAuth = true;                               // Enable SMTP authentication
+        $mail->Username = 'advicebee123@gmail.com';                 // SMTP username
+        $mail->Password = 'Advicebee1';                           // SMTP password
+        $mail->SMTPSecure = 'ssl';                            // Enable TLS encryption, `ssl` also accepted
+        $mail->Port = 465;                                    // TCP port to connect to
     
-    Question ID: $qID
-    Owner: $ownerName
-    Owner Email: $ownerEmail
-
-    Topic: $topic
-    Subject: $q_subject
-    Description:
-    $description
-
-    Reported by: $userName
-    User ID: $uID
-    Email: $userEmail
+        //Recipients
+        $mail->setFrom('no-reply@advicebee.com', 'AdviceBee');
+        $mail->addAddress($email);     // Add a recipient
     
-    ";
+    
+        //Content
+        $mail->isHTML(true);                                  // Set email format to HTML
+        $mail->Subject = 'AdviceBee | Question Reported';
+        $mail->Body    = "
+        The Following Question has been reported.<br><br>
+        
+        Question ID: $qID <br>
+        Owner: $ownerName <br>
+        Owner Email: $ownerEmail <br>
+    
+        Topic: $topic <br>
+        Subject: $q_subject <br>
+        Description: <br>
+        $description <br>
+    
+        Reported by: $userName <br>
+        User ID: $uID <br>
+        Email: $userEmail <br><br>
+        
+        ";
+    
+        $mail->send();
 
-    // PHP MAIL FUNCTION to Send our email
-    $headers = 'From:noreply@AdviceBee.com' . "\r\n"; // Set headers *need headers* to send mail
-    mail($to, $subject, $message, $headers);
-
-    echo json_encode("Question has been reported!");
-    die();
+        echo json_encode("Question has been reported!");
+        die();
+    
+    } catch (Exception $e) {
+    
+        echo 'Message could not be sent. Mailer Error: ', $mail->ErrorInfo;
+    
+    }    
 
 }
  ?>

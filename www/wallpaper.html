@@ -11,7 +11,7 @@ a static image.
     if(sessionStorage.getItem("user_ID") === null)
     {
         $.ajax({
-            url: "http://10.0.2.2/api/Profile/getuserID.php",
+            url: "http://13.59.122.228/api/Profile/getuserID.php",
             type: "POST",
             data: "param=no",
             //on success it will call this function
@@ -19,7 +19,7 @@ a static image.
 
                 var uID = JSON.parse(yourID);
                 $.ajax({
-                    url: "http://10.0.2.2/api/profile_image/wallpaperimage.php",
+                    url: "http://13.59.122.228/api/profile_image/wallpaperimage.php",
                     type: "POST",
                     dataType: "json",
                     data: {profileID: uID},
@@ -32,7 +32,7 @@ a static image.
 
                         //call to get userID of the person logged in
                         $.ajax({
-                            url: "http://10.0.2.2/api/Profile/getuserID.php",
+                            url: "http://13.59.122.228/api/Profile/getuserID.php",
                             type: "POST",
                             data: "param=no",
                             //on success it will call this function
@@ -65,7 +65,7 @@ a static image.
     {
         var uID = sessionStorage.getItem('user_ID');
         $.ajax({
-            url: "http://10.0.2.2/api/profile_image/wallpaperimage.php",
+            url: "http://13.59.122.228/api/profile_image/wallpaperimage.php",
             type: "POST",
             dataType: "json",
             data: {profileID: uID},
@@ -78,7 +78,7 @@ a static image.
 
                 //call to get userID of the person logged in
                 $.ajax({
-                    url: "http://10.0.2.2/api/Profile/getuserID.php",
+                    url: "http://13.59.122.228/api/Profile/getuserID.php",
                     type: "POST",
                     data: "param=no",
                     //on success it will call this function

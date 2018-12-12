@@ -100,7 +100,7 @@ Allows the user to change their password, can be accessed from the dashboard men
 
                 $.ajax({
                     type: "POST",
-                    url: "http://10.0.2.2/api/Account/changepw.php",
+                    url: "http://13.59.122.228/api/Account/changepw.php",
                     dataType: "json",
                     data: dataString,
                     success: function (data) {
@@ -111,7 +111,7 @@ Allows the user to change their password, can be accessed from the dashboard men
                             popup("Password has been changed.");
                             
                             setTimeout(function() {
-                            window.location.replace("profile.html");
+                            window.location.replace("index.html");
                             }, 2000);
                             
                         }

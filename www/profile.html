@@ -97,7 +97,7 @@ posts tab at the bottom of the profile page.
     if(sessionStorage.getItem("user_ID") === null)
     {
         $.ajax({
-            url: "http://10.0.2.2/api/Profile/getuserID.php",
+            url: "http://13.59.122.228/api/Profile/getuserID.php",
             type: "POST",
             data: "param=no",
             //on success it will call this function
@@ -117,7 +117,7 @@ posts tab at the bottom of the profile page.
         var uID = sessionStorage.getItem("user_ID");
         $.ajax({
             method: "POST",
-            url: "http://10.0.2.2/api/Profile/getinfo.php",
+            url: "http://13.59.122.228/api/Profile/getinfo.php",
             data: {profileID: uID},
             success: function (data) {
 
@@ -186,7 +186,7 @@ posts tab at the bottom of the profile page.
     else
     {
         $.ajax({
-            url: "http://10.0.2.2/api/Profile/getuserID.php",
+            url: "http://13.59.122.228/api/Profile/getuserID.php",
             type: "POST",
             data: "param=no",
             //on success it will call this function
@@ -196,7 +196,7 @@ posts tab at the bottom of the profile page.
 
                 $.ajax({
                     method: "POST",
-                    url: "http://10.0.2.2/api/Profile/getinfo.php",
+                    url: "http://13.59.122.228/api/Profile/getinfo.php",
                     data: {profileID: uID},
                     success: function (data) {
 
@@ -280,7 +280,7 @@ posts tab at the bottom of the profile page.
        
        //call to get userID of the person logged in
         $.ajax({
-            url: "http://10.0.2.2/api/Profile/getuserID.php",
+            url: "http://13.59.122.228/api/Profile/getuserID.php",
             type: "POST",
             data: "param=no",
             //on success it will call this function
@@ -293,7 +293,7 @@ posts tab at the bottom of the profile page.
                 {
                     $.ajax({
                         method: "POST",
-                        url: "http://10.0.2.2/api/Profile/updatename.php",
+                        url: "http://13.59.122.228/api/Profile/updatename.php",
                         data: {userfirstName: firstName, userlastName: lastName},
                         success: function (data) {
                             //popup(JSON.parse(data));
@@ -316,7 +316,7 @@ posts tab at the bottom of the profile page.
 
         //call to get userID of the person logged in
         $.ajax({
-            url: "http://10.0.2.2/api/Profile/getuserID.php",
+            url: "http://13.59.122.228/api/Profile/getuserID.php",
             type: "POST",
             data: "param=no",
             //on success it will call this function
@@ -329,7 +329,7 @@ posts tab at the bottom of the profile page.
                 {
                     $.ajax({
                         method: "POST",
-                        url: "http://10.0.2.2/api/Profile/updatetitle.php",
+                        url: "http://13.59.122.228/api/Profile/updatetitle.php",
                         data: {userTitle: storeTitle},
                         success: function (data) {
                             popup(JSON.parse(data));
@@ -351,7 +351,7 @@ posts tab at the bottom of the profile page.
 
         //call to get userID of the person logged in
         $.ajax({
-            url: "http://10.0.2.2/api/Profile/getuserID.php",
+            url: "http://13.59.122.228/api/Profile/getuserID.php",
             type: "POST",
             data: "param=no",
             //on success it will call this function
@@ -364,7 +364,7 @@ posts tab at the bottom of the profile page.
                 {
                     $.ajax({
                         method: "POST",
-                        url: "http://10.0.2.2/api/Profile/updatelocation.php",
+                        url: "http://13.59.122.228/api/Profile/updatelocation.php",
                         data: {userLocation: storeLocation},
                         success: function (data) {
                             popup(JSON.parse(data));
@@ -387,7 +387,7 @@ posts tab at the bottom of the profile page.
        
        //call to get userID of the person logged in
         $.ajax({
-            url: "http://10.0.2.2/api/Profile/getuserID.php",
+            url: "http://13.59.122.228/api/Profile/getuserID.php",
             type: "POST",
             data: "param=no",
             //on success it will call this function
@@ -400,7 +400,7 @@ posts tab at the bottom of the profile page.
                 {
                     $.ajax({
                         method: "POST",
-                        url: "http://10.0.2.2/api/Profile/updatebio.php",
+                        url: "http://13.59.122.228/api/Profile/updatebio.php",
                         data: {storeBio, storeBio},
                         success: function (data) {
                             popup(JSON.parse(data));

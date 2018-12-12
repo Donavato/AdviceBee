@@ -78,7 +78,7 @@ to the first time sign in if that account hasn't completed the process or straig
         var password = $("#passwrd").val();
         var dataString = "email=" + email + "&passwrd=" + password;
         $.ajax({
-            url: "http://10.0.2.2/api/Account/login.php",
+            url: "http://13.59.122.228/api/Account/login.php",
             type: "POST",
             dataType: "json",
             data: dataString, //DATA to be sent
@@ -88,7 +88,7 @@ to the first time sign in if that account hasn't completed the process or straig
                     //call ajax for first time signin
                     var ajax = new XMLHttpRequest();
                     var method = "GET";
-                    var url = "http://10.0.2.2/api/Account/fts.php";
+                    var url = "http://13.59.122.228/api/Account/fts.php";
                     var asynchronous = true;
 
                     ajax.open(method, url, asynchronous);

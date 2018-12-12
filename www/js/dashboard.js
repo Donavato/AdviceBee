@@ -22,7 +22,7 @@ window.onclick = function (event) {
 function filterMostRecent() {
     var tID = sessionStorage.getItem('topic_id');
     $.ajax({
-        url: "http://10.0.2.2/api/Question/filtermostrecent.php",
+        url: "http://13.59.122.228/api/Question/filtermostrecent.php",
         type: "POST",
         data: { tID: tID },
         //on success it will call this function
@@ -44,7 +44,7 @@ function filterMostRecent() {
 function filterMostView() {
     var tID = sessionStorage.getItem('topic_id');
     $.ajax({
-        url: "http://10.0.2.2/api/Question/filtermostview.php",
+        url: "http://13.59.122.228/api/Question/filtermostview.php",
         type: "POST",
         data: { tID: tID },
         //on success it will call this function
@@ -68,7 +68,7 @@ function filterMostView() {
 function filterMostLikes() {
     var tID = sessionStorage.getItem('topic_id');
     $.ajax({
-        url: "http://10.0.2.2/api/Question/filtermostlikes.php",
+        url: "http://13.59.122.228/api/Question/filtermostlikes.php",
         type: "POST",
         data: { tID: tID },
         //on success it will call this function
@@ -92,7 +92,7 @@ function filterMostLikes() {
 function filterFollowUsersPosts() {
 
     $.ajax({
-        url: "http://10.0.2.2/api/Question/filterfollowusersposts.php",
+        url: "http://13.59.122.228/api/Question/filterfollowusersposts.php",
         type: "POST",
         dataType: "json",
         data: "param=no",
@@ -122,7 +122,7 @@ function filterFollowUsersPosts() {
 $(document).ready(function () {
     // LIST QUESTIONS
     $.ajax({
-        url: "http://10.0.2.2/api/Question/fetchdata.php",
+        url: "http://13.59.122.228/api/Question/fetchdata.php",
         type: "POST",
         contentType: "application/json; charset=utf-8",
         dataType: "json",
@@ -148,7 +148,7 @@ function sendButton(questionID, uID2) {
     sessionStorage.questionID = questionID;
     //views functionality
     $.ajax({
-        url: "http://10.0.2.2/api/Question/addViews.php",
+        url: "http://13.59.122.228/api/Question/addViews.php",
         type: "POST",
         data: {question_id: questionID, userID2: uID2}
         });
@@ -162,7 +162,7 @@ function likeButton(questionID) {
     var dataString = "Question_ID=" + Question_ID;
 
     $.ajax({
-        url: "http://10.0.2.2/api/Question/likequestion.php",
+        url: "http://13.59.122.228/api/Question/likequestion.php",
         type: "POST",
         dataType: "json",
         data: dataString,
@@ -182,7 +182,7 @@ function likeButtonMostRecent(questionID) {
     var dataString = "Question_ID=" + Question_ID;
 
     $.ajax({
-        url: "http://10.0.2.2/api/Question/likequestion.php",
+        url: "http://13.59.122.228/api/Question/likequestion.php",
         type: "POST",
         dataType: "json",
         data: dataString,
@@ -201,7 +201,7 @@ function likeButtonMostViewed(questionID) {
     var dataString = "Question_ID=" + Question_ID;
 
     $.ajax({
-        url: "http://10.0.2.2/api/Question/likequestion.php",
+        url: "http://13.59.122.228/api/Question/likequestion.php",
         type: "POST",
         dataType: "json",
         data: dataString,
@@ -220,7 +220,7 @@ function likeButtonMostLikes(questionID) {
     var dataString = "Question_ID=" + Question_ID;
 
     $.ajax({
-        url: "http://10.0.2.2/api/Question/likequestion.php",
+        url: "http://13.59.122.228/api/Question/likequestion.php",
         type: "POST",
         dataType: "json",
         data: dataString,
@@ -239,7 +239,7 @@ function likeButtonFollowUsersPosts(questionID) {
     var dataString = "Question_ID=" + Question_ID;
 
     $.ajax({
-        url: "http://10.0.2.2/api/Question/likequestion.php",
+        url: "http://13.59.122.228/api/Question/likequestion.php",
         type: "POST",
         dataType: "json",
         data: dataString,
@@ -255,7 +255,7 @@ function likeButtonFollowUsersPosts(questionID) {
 //UPDATE FUNCTIONALITY FOR LIKING QUESTIONS
 function updatelikes() {
     $.ajax({
-        url: "http://10.0.2.2/api/Question/fetchdata.php",
+        url: "http://13.59.122.228/api/Question/fetchdata.php",
         type: "POST",
         contentType: "application/json; charset=utf-8",
         dataType: "json",
@@ -280,7 +280,7 @@ function updatelikes() {
 function updatelikesMostRecent() {
     var tID = sessionStorage.getItem('topic_id');
     $.ajax({
-        url: "http://10.0.2.2/api/Question/filtermostrecent.php",
+        url: "http://13.59.122.228/api/Question/filtermostrecent.php",
         type: "POST",
         data: { tID: tID },
         //on success it will call this function
@@ -303,7 +303,7 @@ function updatelikesMostRecent() {
 function updatelikesMostViewed() {
     var tID = sessionStorage.getItem('topic_id');
     $.ajax({
-        url: "http://10.0.2.2/api/Question/filtermostview.php",
+        url: "http://13.59.122.228/api/Question/filtermostview.php",
         type: "POST",
         data: { tID: tID },
         //on success it will call this function
@@ -326,7 +326,7 @@ function updatelikesMostViewed() {
 function updateMostLikes() {
     var tID = sessionStorage.getItem('topic_id');
     $.ajax({
-        url: "http://10.0.2.2/api/Question/filtermostlikes.php",
+        url: "http://13.59.122.228/api/Question/filtermostlikes.php",
         type: "POST",
         data: { tID: tID },
         //on success it will call this function
@@ -349,7 +349,7 @@ function updateMostLikes() {
 function updatelikesFollowUsersPosts() {
     var tID = sessionStorage.getItem('topic_id');
     $.ajax({
-        url: "http://10.0.2.2/api/Question/filterfollowusersposts.php",
+        url: "http://13.59.122.228/api/Question/filterfollowusersposts.php",
         type: "POST",
         data: { tID: tID },
         //on success it will call this function
@@ -382,7 +382,7 @@ function followButton(qID, user_ID2) {
     var dataString = "qID=" + qID + "&uID2=" + uID2;
 
     $.ajax({
-        url: "http://10.0.2.2/api/Question/followuser.php",
+        url: "http://13.59.122.228/api/Question/followuser.php",
         type: "POST",
         dataType: "json",
         data: dataString,
@@ -407,7 +407,7 @@ function followButtonMostRecent(qID, user_ID2) {
     var dataString = "qID=" + qID + "&uID2=" + uID2;
 
     $.ajax({
-        url: "http://10.0.2.2/api/Question/followuser.php",
+        url: "http://13.59.122.228/api/Question/followuser.php",
         type: "POST",
         dataType: "json",
         data: dataString,
@@ -432,7 +432,7 @@ function followButtonMostViewed(qID, user_ID2) {
     var dataString = "qID=" + qID + "&uID2=" + uID2;
 
     $.ajax({
-        url: "http://10.0.2.2/api/Question/followuser.php",
+        url: "http://13.59.122.228/api/Question/followuser.php",
         type: "POST",
         dataType: "json",
         data: dataString,
@@ -457,7 +457,7 @@ function followButtonMostLikes(qID, user_ID2) {
     var dataString = "qID=" + qID + "&uID2=" + uID2;
 
     $.ajax({
-        url: "http://10.0.2.2/api/Question/followuser.php",
+        url: "http://13.59.122.228/api/Question/followuser.php",
         type: "POST",
         dataType: "json",
         data: dataString,
@@ -482,7 +482,7 @@ function followButtonFollowUserPosts(qID, user_ID2) {
     var dataString = "qID=" + qID + "&uID2=" + uID2;
 
     $.ajax({
-        url: "http://10.0.2.2/api/Question/followuser.php",
+        url: "http://13.59.122.228/api/Question/followuser.php",
         type: "POST",
         dataType: "json",
         data: dataString,
@@ -507,7 +507,7 @@ function reportButton(questionID) {
     var dataString = "Question_ID=" + Question_ID;
 
     $.ajax({
-        url: "http://10.0.2.2/api/Question/reportquestion.php",
+        url: "http://13.59.122.228/api/Question/reportquestion.php",
         type: "POST",
         dataType: "json",
         data: dataString,
@@ -572,7 +572,7 @@ function CreatePost(jElement, key, value) {
     var Question_ID = value.Question_ID;
 
     $.ajax({
-        url: "http://10.0.2.2/api/Question/checkquestion.php",
+        url: "http://13.59.122.228/api/Question/checkquestion.php",
         type: "POST",
         data: {Question_ID, Question_ID},
         //on success it will call this function
@@ -592,7 +592,7 @@ function CreatePost(jElement, key, value) {
 
     var User_ID = value.user_ID2;
     $.ajax({
-        url: "http://10.0.2.2/api/Question/checkfollow.php",
+        url: "http://13.59.122.228/api/Question/checkfollow.php",
         type: "POST",
         data: {uID2: User_ID, qID: Question_ID},
         //on success it will call this function
@@ -657,7 +657,7 @@ function CreatePostMostRecent(jElement, key, value) {
     var Question_ID = value.Question_ID;
 
     $.ajax({
-        url: "http://10.0.2.2/api/Question/checkquestion.php",
+        url: "http://13.59.122.228/api/Question/checkquestion.php",
         type: "POST",
         data: {Question_ID, Question_ID},
         //on success it will call this function
@@ -677,7 +677,7 @@ function CreatePostMostRecent(jElement, key, value) {
 
     var User_ID = value.user_ID2;
     $.ajax({
-        url: "http://10.0.2.2/api/Question/checkfollow.php",
+        url: "http://13.59.122.228/api/Question/checkfollow.php",
         type: "POST",
         data: {uID2: User_ID, qID: Question_ID},
         //on success it will call this function
@@ -734,7 +734,7 @@ function CreatePostMostViewed(jElement, key, value) {
     var Question_ID = value.Question_ID;
 
     $.ajax({
-        url: "http://10.0.2.2/api/Question/checkquestion.php",
+        url: "http://13.59.122.228/api/Question/checkquestion.php",
         type: "POST",
         data: {Question_ID, Question_ID},
         //on success it will call this function
@@ -754,7 +754,7 @@ function CreatePostMostViewed(jElement, key, value) {
 
     var User_ID = value.user_ID2;
     $.ajax({
-        url: "http://10.0.2.2/api/Question/checkfollow.php",
+        url: "http://13.59.122.228/api/Question/checkfollow.php",
         type: "POST",
         data: {uID2: User_ID, qID: Question_ID},
         //on success it will call this function
@@ -811,7 +811,7 @@ function CreatePostMostLikes(jElement, key, value) {
     var Question_ID = value.Question_ID;
 
     $.ajax({
-        url: "http://10.0.2.2/api/Question/checkquestion.php",
+        url: "http://13.59.122.228/api/Question/checkquestion.php",
         type: "POST",
         data: {Question_ID, Question_ID},
         //on success it will call this function
@@ -831,7 +831,7 @@ function CreatePostMostLikes(jElement, key, value) {
 
     var User_ID = value.user_ID2;
     $.ajax({
-        url: "http://10.0.2.2/api/Question/checkfollow.php",
+        url: "http://13.59.122.228/api/Question/checkfollow.php",
         type: "POST",
         data: {uID2: User_ID, qID: Question_ID},
         //on success it will call this function
@@ -888,7 +888,7 @@ function CreatePostFollowUsersPosts(jElement, key, value) {
     var Question_ID = value.Question_ID;
 
     $.ajax({
-        url: "http://10.0.2.2/api/Question/checkquestion.php",
+        url: "http://13.59.122.228/api/Question/checkquestion.php",
         type: "POST",
         data: {Question_ID, Question_ID},
         //on success it will call this function
@@ -908,7 +908,7 @@ function CreatePostFollowUsersPosts(jElement, key, value) {
 
     var User_ID = value.user_ID2;
     $.ajax({
-        url: "http://10.0.2.2/api/Question/checkfollow.php",
+        url: "http://13.59.122.228/api/Question/checkfollow.php",
         type: "POST",
         data: {uID2: User_ID, qID: Question_ID},
         //on success it will call this function
